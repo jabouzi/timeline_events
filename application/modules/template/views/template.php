@@ -47,13 +47,6 @@
 	</section><!-- end of secondary bar -->
 	
 	<aside id="sidebar" class="column">
-		<h3><?php echo lang('content.title'); ?></h3>
-		<ul class="toggle">
-			<li class="icn_new_article"><a href="#">New Article</a></li>
-			<li class="icn_edit_article"><a href="#">All structure</a></li>
-			<li class="icn_categories"><?php echo anchor('category', lang('category.title')) ?></li>
-			<li class="icn_tags"><?php echo anchor('language', lang('language.title')) ?></li>
-		</ul>
 		<h3><?php echo lang('user.title'); ?></h3>
 		<ul class="toggle">
 			<li class="icn_add_user"><?php echo anchor('user/newuser', lang('user.new')) ?></li>
@@ -63,9 +56,7 @@
 		</ul>
 		<h3><?php echo lang('admin.title'); ?></h3>
 		<ul class="toggle">
-			<li class="icn_settings"><?php echo anchor('workflow', lang('workflow.title')) ?></li>
 			<li class="icn_security"><?php echo anchor('permission', lang('permission.title')) ?></li>
-			<li class="icn_folder"><a href="#">User Modules</a></li>
 		</ul>
 		
 		<footer>
