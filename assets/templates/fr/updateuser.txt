@@ -1,0 +1,8 @@
+Bonjour %s %s,
+
+Votre compte a été mis à jour.
+Votre identifiant est : %s
+Votre mot de passe est : %s
+Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE.
+
+Merci.

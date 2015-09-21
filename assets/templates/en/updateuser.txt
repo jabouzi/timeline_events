@@ -1,0 +1,8 @@
+Hello %s %s 
+
+Your account has been updated
+Your username is: %s 
+Your password is: %s 
+For any other questions, contact your project manager at YOUR COMPANY NAME. 
+
+Thank you.

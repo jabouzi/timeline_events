@@ -1,0 +1,7 @@
+{
+	"name":"user.title",
+	"version":"0.1",
+	"permissions":["user.add","user.delete","user.update"],
+	"delete":"false",
+	"update":"true"
+}
