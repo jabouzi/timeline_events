@@ -12,7 +12,7 @@ class User extends MX_Controller
 	{
 		$view_data['page_title'] = lang('user.profile');
 		$user_profile = $this->mdl_user->get_id($this->session->userdata('user_id'));
-		$view_data['admin_widgets']['user'] = $this->show('profile', $user_profile->row());
+		$view_data['admin_widgets']['user'] = $this->show('profile', $user_profile);
 		echo modules::run('template', $view_data);
 	}
 	
@@ -36,9 +36,9 @@ class User extends MX_Controller
 		if (!$user_id) redirect('dashboard');
 		$view_data['page_title'] = lang('user.edit');
 		$user_profile = $this->mdl_user->get_id($user_id);
-		if ($user_profile->row()->user_id == $this->session->userdata('user_id'))  redirect('user');
-		if ($user_profile->row()->user_permission <= $this->session->userdata('user_permission')) redirect('dashboard');
-		$view_data['admin_widgets']['user'] = $this->show('edituser', $user_profile->row());
+		if ($user_profile->user_id == $this->session->userdata('user_id'))  redirect('user');
+		if ($user_profile->user_permission <= $this->session->userdata('user_permission')) redirect('dashboard');
+		$view_data['admin_widgets']['user'] = $this->show('edituser', $user_profile);
 		echo modules::run('template', $view_data);
 	}
 	
@@ -81,7 +81,7 @@ class User extends MX_Controller
 	
 	function process_edituser()
 	{
-		$this->load->library('encryption');
+		$this->load->library('encrypt');
 		$user_id = $this->input->post('user_id');
 		$user_data = array(
 			'user_firstname' => $this->input->post('user_firstname'), 
@@ -90,9 +90,9 @@ class User extends MX_Controller
 			'user_permission' => $this->input->post('user_permission'),
 			'user_active' => (int)($this->input->post('user_active'))
 		);
-		if (trim($this->input->post('user_password')) != '') $user_data['user_password'] = $this->encryption->encrypt_str($this->input->post('user_password'), $this->config->item('app_key'));
+		if (trim($this->input->post('user_password')) != '') $user_data['user_password'] = $this->encrypt->encode($this->input->post('user_password'));
 		$this->update_user($user_id, $user_data);
-		$user = $this->mdl_user->get($email)->row();
+		$user = $this->mdl_user->get($email);
 		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $newpassword);
 		$maildata['from'] = 'toolbox@tonikgroupimage.com';
 		$maildata['name'] = 'Toolbox';
@@ -105,17 +105,25 @@ class User extends MX_Controller
 	
 	function process_newuser()
 	{
-		$this->load->library('encryption');
+		$this->load->library('encrypt');
 		$user_data = array(
 			'user_firstname' => $this->input->post('user_firstname'), 
 			'user_lastname' => $this->input->post('user_lastname'), 
 			'user_email' => $this->input->post('user_email'),
 			'user_permission' => $this->input->post('user_permission'),
 			'user_active' => (int)($this->input->post('user_active')),
-			'user_password' => $this->encryption->encrypt_str($this->input->post('user_password'), $this->config->item('app_key')),
+			'user_password' => $this->encrypt->encode($this->input->post('user_password')),
 			'user_created' => date('Y-m-d H:i:s')
 		);
 		$this->add_user($user_data);
+		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $newpassword);
+		$maildata['from'] = 'toolbox@tonikgroupimage.com';
+		$maildata['name'] = 'Toolbox';
+		$maildata['to'] = $user->user_email;
+		$maildata['subject'] = lang('login.retrieve.password');
+		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/retriveemail.txt');
+		$this->maildecorator->sendmail($maildata);
+		$this->password('login.password.send');
 	}
 	
 	function process_profile()
@@ -137,9 +145,9 @@ class User extends MX_Controller
 	{
 		if ($this->input->post('user_id') == $this->session->userdata('user_id'))
 		{
-			$this->load->library('encryption');
+			$this->load->library('encrypt');
 			$user_id = $this->input->post('user_id');
-			$user_data = array('user_password' => $this->encryption->encrypt_str($this->input->post('user_newpassword'), $this->config->item('app_key')));
+			$user_data = array('user_password' => $this->encrypt->encode($this->input->post('user_newpassword')));
 			$this->update_profile($user_id, $user_data);
 		}
 		else

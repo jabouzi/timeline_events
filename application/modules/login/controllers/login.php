@@ -58,11 +58,11 @@ class Login extends MX_Controller
 		$this->islogin();
 
 		$this->load->helper('toolbox_string');
-		$this->load->library('encryption');
+		$this->load->library('encrypt');
 		$this->load->model('mdl_login');
 		
 		$username = $this->security->xss_clean($this->input->post('email'));
-		$password = $this->encryption->encrypt_str($this->security->xss_clean($this->input->post('password')), $this->config->item('app_key'));
+		$password = $this->encrypt->encode($this->security->xss_clean($this->input->post('password')));
 		$result = $this->mdl_login->validate_user($username, $password);
 		if(!$result)
 		{
@@ -98,15 +98,15 @@ class Login extends MX_Controller
 	{
 		$maildata = array();
 		$this->load->helper('toolbox_string');
-		$this->load->library('encryption');
+		$this->load->library('encrypt');
 		$this->load->library('maildecorator');
 		$this->load->model('user/mdl_user');
 		
 		$email = $this->security->xss_clean($this->input->post('email'));
 		$newpassword = generate_random_string(10);
-		$user_data['user_password'] = $this->encryption->encrypt_str($newpassword, $this->config->item('app_key'));
+		$user_data['user_password'] = $this->encrypt->encode($newpassword);
 		$this->mdl_user->update_email($email, $user_data);
-		$user = $this->mdl_user->get_email($email)->row();
+		$user = $this->mdl_user->get_email($email);
 		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $newpassword);
 		$maildata['from'] = 'toolbox@tonikgroupimage.com';
 		$maildata['name'] = 'Toolbox';
@@ -138,7 +138,7 @@ class Login extends MX_Controller
 		else
 		{	
 			$hash = generate_random_string(26);
-			$result = $this->mdl_login->get_where('toolbox_users', 'user_email', $username)->row();
+			$result = $this->mdl_login->get_where('toolbox_users', 'user_email', $username);
 			modules::run('user/save_session_data', $result);
 			modules::run('user/save_user_activity', $result);
 			$this->deletecookie($username, $old_hash);
@@ -179,7 +179,7 @@ class Login extends MX_Controller
 		{
 			$hash = $cookie[1];
 			$result = $this->mdl_login->get_where('toolbox_cookies', 'cookie_hash', $hash);
-			if ($result) return ord($result->row()->cookie_user_active);
+			if ($result) return ord($result->cookie_user_active);
 		}
 		
 		return false;

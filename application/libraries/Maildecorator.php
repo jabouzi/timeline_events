@@ -11,9 +11,9 @@ class Maildecorator
 		$this->api->load->library('email');
 	}
 
-	public function decorate($mesagedata, $message)
+	public function decorate($messagedata, $message)
 	{
-		$this->message = vsprintf($message, $mesagedata);
+		$this->message = vsprintf($message, $messagedata);
 	}
 
 	public function sendmail($maildata)

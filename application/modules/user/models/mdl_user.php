@@ -15,8 +15,8 @@ class Mdl_user extends CI_Model
 		$table = "toolbox_users";
 		$this->db->order_by('user_id');
 		$query = $this->db->get($table);
-		$this->cache->memcached->save('mdl_user_get', $query);
-		return $query;
+		$this->cache->memcached->save('mdl_user_get', $query->row());
+		return $query->row();
 	}
 	
 	function get_order($order_by)
@@ -24,7 +24,7 @@ class Mdl_user extends CI_Model
 		$table = "toolbox_users";
 		$this->db->order_by($order_by);
 		$query = $this->db->get($table);
-		return $query;
+		return $query->row();
 	}
 	
 	function get_with_limit($limit, $offset, $order_by)
@@ -35,7 +35,7 @@ class Mdl_user extends CI_Model
 		$this->db->order_by($order_by);
 		$query = $this->db->get($table);
 		//$this->cache->memcached->save('mdl_user_get_with_limit_'.$limit.'_'.$offset, $query);
-		return $query;
+		return $query->row();
 	}
 	
 	function get_id($id)
@@ -44,8 +44,8 @@ class Mdl_user extends CI_Model
 		$table = "toolbox_users";
 		$this->db->where('user_id', $id);
 		$query = $this->db->get($table);
-		$this->cache->memcached->save('mdl_user_get_'.$id);
-		return $query;
+		$this->cache->memcached->save('mdl_user_get_'.$id, $query->row());
+		return $query->row();
 	}
 	
 	function get_email($email)
@@ -55,14 +55,14 @@ class Mdl_user extends CI_Model
 		$this->db->where('user_email', $email);
 		$query = $this->db->get($table);
 		//$this->cache->memcached->save('mdl_user_get_'.$email);
-		return $query;
+		return $query->row();
 	}
 	
 	function get_where($where)
 	{
 		$table = "toolbox_users";
 		$query = $this->db->get_id($table, $where);
-		return $query;
+		return $query->row();
 	}
 	
 	function insert($data)
@@ -110,7 +110,7 @@ class Mdl_user extends CI_Model
 	function count_where($where)
 	{
 		$table = "toolbox_users";
-		$query = $this->db->get_id($table, $where);
+		$query = $this->db->get_where($table, $where);
 		$num_rows = $query->num_rows();
 		return $num_rows;
 	}
@@ -120,7 +120,7 @@ class Mdl_user extends CI_Model
 		$table	= "toolbox_users";
 		$query	= $this->db->get($table);
 		$num_rows = $query->num_rows();
-		return $num_rows;
+		return $num_rows->row();
 	}
 	
 	function get_max()
