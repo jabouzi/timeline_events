@@ -73,6 +73,9 @@ $lang['user.success'] = "User saved successfully";
 $lang['user.exists'] = "Email already exists";
 $lang['user.error'] = "An error has occured";
 
+$lang['profile.update'] = "Your profile has been updated";
+$lang['profile.password.update'] = "Your password has been updated";
+
 $lang['webpage.title'] = "Webpages";
 $lang['webpage.add'] = "Add Webpage";
 $lang['webpage.delete'] = "Delete Webpage";

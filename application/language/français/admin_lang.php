@@ -73,6 +73,9 @@ $lang['user.success'] = "Usager sauvegardé avec succès";
 $lang['user.exists'] = "Le courriel existe déjà";
 $lang['user.error'] = "Une erreur est survenue";
 
+$lang['profile.update'] = "Votre profile a été mis à jour";
+$lang['profile.password.update'] = "Votre mot de passe a été mis à jour";
+
 $lang['webpage.title'] = "Pages web";
 $lang['webpage.add'] = "Ajouter une pages web";
 $lang['webpage.delete'] = "Supprimer une pages web";

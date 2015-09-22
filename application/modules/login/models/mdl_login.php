@@ -10,14 +10,13 @@ class Mdl_login extends CI_Model
 	
 	function validate_user($username, $password)
 	{
+		$this->load->library('encrypt');
 		$this->db->where('user_email', $username);
-		$this->db->where('user_password', $password);
-		
 		$query = $this->db->get('toolbox_users');
 		if($query->num_rows == 1)
 		{
-			$row = $query->row();			
-			return $row;
+			$row = $query->row();
+			if ($this->encrypt->decode($row->user_password) == $password) return $row;
 		}
 
 		return false;

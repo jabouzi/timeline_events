@@ -58,11 +58,10 @@ class Login extends MX_Controller
 		$this->islogin();
 
 		$this->load->helper('toolbox_string');
-		$this->load->library('encrypt');
 		$this->load->model('mdl_login');
 		
 		$username = $this->security->xss_clean($this->input->post('email'));
-		$password = $this->encrypt->encode($this->security->xss_clean($this->input->post('password')));
+		$password = $this->security->xss_clean($this->input->post('password'));
 		$result = $this->mdl_login->validate_user($username, $password);
 		if(!$result)
 		{
