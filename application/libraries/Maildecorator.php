@@ -13,7 +13,7 @@ class Maildecorator
 
 	public function decorate($messagedata, $message)
 	{
-		$this->message = vsprintf($message, $messagedata);
+		$this->message = vsprintf(file_get_contents(base_url().$message), $messagedata);
 	}
 
 	public function sendmail($maildata)
