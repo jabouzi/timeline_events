@@ -9,47 +9,59 @@ class Mdl_user extends CI_Model
 		$this->cache->memcached->clean();
 	}
 	
-	function get($order_by = 'user_id')
+	function get()
 	{
 		if ($this->cache->memcached->get('mdl_user_get')) return $this->cache->memcached->get('mdl_user_get');
 		$table = "toolbox_users";
-		$this->db->order_by($order_by);
+		$this->db->order_by('user_id');
 		$query = $this->db->get($table);
 		$this->cache->memcached->save('mdl_user_get', $query);
 		return $query;
 	}
 	
+	function get_order($order_by)
+	{
+		$table = "toolbox_users";
+		$this->db->order_by($order_by);
+		$query = $this->db->get($table);
+		return $query;
+	}
+	
 	function get_with_limit($limit, $offset, $order_by)
 	{
-		if ($this->cache->memcached->get('mdl_user_get_with_limit')) return $this->cache->memcached->get('mdl_user_get_with_limit');
+		//if ($this->cache->memcached->get('mdl_user_get_with_limit_'.$limit.'_'.$offset)) return $this->cache->memcached->get('mdl_user_get_with_limit_'.$limit.'_'.$offset);
 		$table = "toolbox_users";
 		$this->db->limit($limit, $offset);
 		$this->db->order_by($order_by);
 		$query = $this->db->get($table);
-		$this->cache->memcached->save('mdl_user_get_with_limit', $query);
+		//$this->cache->memcached->save('mdl_user_get_with_limit_'.$limit.'_'.$offset, $query);
 		return $query;
 	}
 	
-	function get_where($id)
+	function get_id($id)
 	{
+		if ($this->cache->memcached->get('mdl_user_get_'.$id)) return $this->cache->memcached->get('mdl_user_get_'.$id);
 		$table = "toolbox_users";
 		$this->db->where('user_id', $id);
 		$query = $this->db->get($table);
+		$this->cache->memcached->save('mdl_user_get_'.$id);
 		return $query;
 	}
 	
-	function get_where_email($email)
+	function get_email($email)
 	{
+		//if ($this->cache->memcached->get('mdl_user_get_'.$email)) return $this->cache->memcached->get('mdl_user_get_'.$email);
 		$table = "toolbox_users";
 		$this->db->where('user_email', $email);
 		$query = $this->db->get($table);
+		//$this->cache->memcached->save('mdl_user_get_'.$email);
 		return $query;
 	}
 	
-	function get_where_custom($where)
+	function get_where($where)
 	{
 		$table = "toolbox_users";
-		$query = $this->db->get_where($table, $where);
+		$query = $this->db->get_id($table, $where);
 		return $query;
 	}
 	
@@ -57,7 +69,10 @@ class Mdl_user extends CI_Model
 	{
 		$table = "toolbox_users";
 		$this->db->insert($table, $data);
-		return $this->db->insert_id();
+		$last_id = $this->db->insert_id();
+		$this->cache->memcached->delete('mdl_user_get');
+		$this->get();
+		return $last_id;
 	}
 	
 	function insert_activity($data)
@@ -71,9 +86,13 @@ class Mdl_user extends CI_Model
 		$table = "toolbox_users";
 		$this->db->where('user_id', $id);
 		$this->db->update($table, $data);
+		$this->cache->memcached->delete('mdl_user_get');
+		$this->get();
+		$this->cache->memcached->delete('mdl_user_get_'.$id);
+		$this->get_id($id);
 	}
 	
-	function update_by_email($email, $data)
+	function update_email($email, $data)
 	{
 		$table = "toolbox_users";
 		$this->db->where('user_email', $email);
@@ -85,12 +104,13 @@ class Mdl_user extends CI_Model
 		$table = "toolbox_users";
 		$this->db->where('user_id', $id);
 		$this->db->delete($table);
+		$this->cache->memcached->delete('mdl_user_get_'.$id);
 	}
 	
 	function count_where($where)
 	{
 		$table = "toolbox_users";
-		$query = $this->db->get_where($table, $where);
+		$query = $this->db->get_id($table, $where);
 		$num_rows = $query->num_rows();
 		return $num_rows;
 	}
@@ -108,7 +128,7 @@ class Mdl_user extends CI_Model
 		$table = "toolbox_users";
 		$this->db->select_max('id');
 		$query = $this->db->get($table);
-		$row   = $query->row();
+		$row = $query->row();
 		$id	= $row->id;
 		return $id;
 	}

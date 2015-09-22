@@ -105,8 +105,8 @@ class Login extends MX_Controller
 		$email = $this->security->xss_clean($this->input->post('email'));
 		$newpassword = generate_random_string(10);
 		$user_data['user_password'] = $this->encryption->encrypt_str($newpassword, $this->config->item('app_key'));
-		$this->mdl_user->update_by_email($email, $user_data);
-		$user = $this->mdl_user->get_where_email($email)->row();
+		$this->mdl_user->update_email($email, $user_data);
+		$user = $this->mdl_user->get_email($email)->row();
 		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $newpassword);
 		$maildata['from'] = 'toolbox@tonikgroupimage.com';
 		$maildata['name'] = 'Toolbox';
@@ -138,7 +138,7 @@ class Login extends MX_Controller
 		else
 		{	
 			$hash = generate_random_string(26);
-			$result = $this->mdl_login->get_where_custom('toolbox_users', 'user_email', $username)->row();
+			$result = $this->mdl_login->get_where('toolbox_users', 'user_email', $username)->row();
 			modules::run('user/save_session_data', $result);
 			modules::run('user/save_user_activity', $result);
 			$this->deletecookie($username, $old_hash);
@@ -178,7 +178,7 @@ class Login extends MX_Controller
 		if ($cookie)
 		{
 			$hash = $cookie[1];
-			$result = $this->mdl_login->get_where_custom('toolbox_cookies', 'cookie_hash', $hash);
+			$result = $this->mdl_login->get_where('toolbox_cookies', 'cookie_hash', $hash);
 			if ($result) return ord($result->row()->cookie_user_active);
 		}
 		

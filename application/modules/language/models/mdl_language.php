@@ -25,7 +25,7 @@ class Mdl_language extends CI_Model
 		return $query;
 	}
 	
-	function get_where($id)
+	function get_id($id)
 	{
 		$table = "toolbox_languages";
 		$this->db->where('language_id', $id);
@@ -33,10 +33,10 @@ class Mdl_language extends CI_Model
 		return $query;
 	}
 	
-	function get_where_custom($where)
+	function get_where($where)
 	{
 		$table = "toolbox_languages";
-		$query = $this->db->get_where($table, $where);
+		$query = $this->db->get_id($table, $where);
 		return $query;
 	}
 	

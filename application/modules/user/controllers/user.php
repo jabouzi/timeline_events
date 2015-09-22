@@ -11,7 +11,7 @@ class User extends MX_Controller
 	function index()
 	{
 		$view_data['page_title'] = lang('user.profile');
-		$user_profile = $this->mdl_user->get_where($this->session->userdata('user_id'));
+		$user_profile = $this->mdl_user->get_id($this->session->userdata('user_id'));
 		$view_data['admin_widgets']['user'] = $this->show('profile', $user_profile->row());
 		echo modules::run('template', $view_data);
 	}
@@ -19,7 +19,7 @@ class User extends MX_Controller
 	function users()
 	{
 		$view_data['page_title'] = lang('user.users');
-		$users = $this->mdl_user->get_where_custom(array('user_permission > ' => $this->session->userdata('user_permission')));
+		$users = $this->mdl_user->get_where(array('user_permission > ' => $this->session->userdata('user_permission')));
 		$view_data['admin_widgets']['user'] = $this->show('users', $users);
 		echo modules::run('template', $view_data);
 	}
@@ -35,7 +35,7 @@ class User extends MX_Controller
 	{
 		if (!$user_id) redirect('dashboard');
 		$view_data['page_title'] = lang('user.edit');
-		$user_profile = $this->mdl_user->get_where($user_id);
+		$user_profile = $this->mdl_user->get_id($user_id);
 		if ($user_profile->row()->user_id == $this->session->userdata('user_id'))  redirect('user');
 		if ($user_profile->row()->user_permission <= $this->session->userdata('user_permission')) redirect('dashboard');
 		$view_data['admin_widgets']['user'] = $this->show('edituser', $user_profile->row());
@@ -92,6 +92,15 @@ class User extends MX_Controller
 		);
 		if (trim($this->input->post('user_password')) != '') $user_data['user_password'] = $this->encryption->encrypt_str($this->input->post('user_password'), $this->config->item('app_key'));
 		$this->update_user($user_id, $user_data);
+		$user = $this->mdl_user->get($email)->row();
+		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $newpassword);
+		$maildata['from'] = 'toolbox@tonikgroupimage.com';
+		$maildata['name'] = 'Toolbox';
+		$maildata['to'] = $user->user_email;
+		$maildata['subject'] = lang('login.retrieve.password');
+		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/retriveemail.txt');
+		$this->maildecorator->sendmail($maildata);
+		$this->password('login.password.send');
 	}
 	
 	function process_newuser()

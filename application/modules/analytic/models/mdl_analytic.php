@@ -31,7 +31,7 @@ class Mdl_analytic extends CI_Model
 		return $query;
 	}
 	
-	function get_where($id)
+	function get_id($id)
 	{
 		$table = $this->get_table();
 		$this->db->where('id', $id);
@@ -39,7 +39,7 @@ class Mdl_analytic extends CI_Model
 		return $query;
 	}
 	
-	function get_where_custom($col, $value)
+	function get_where($col, $value)
 	{
 		$table = $this->get_table();
 		$this->db->where($col, $value);

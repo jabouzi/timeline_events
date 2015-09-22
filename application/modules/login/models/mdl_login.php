@@ -49,7 +49,7 @@ class Mdl_login extends CI_Model
 		$this->db->delete('toolbox_cookies');
 	}
 	
-	function get_where_custom($table, $col, $value)
+	function get_where($table, $col, $value)
 	{
 		$this->db->where($col, $value);
 		$query = $this->db->get($table);

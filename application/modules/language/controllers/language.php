@@ -63,7 +63,7 @@ class Language extends MX_Controller
 	function get_default_language()
 	{
 		$where = array('language_default = ' => (int)'1');
-		$language = $this->mdl_language->get_where_custom($where)->row();		
+		$language = $this->mdl_language->get_where($where)->row();		
 		return $language->language_id;
 	}
 	

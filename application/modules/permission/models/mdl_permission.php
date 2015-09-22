@@ -25,7 +25,7 @@ class Mdl_permission extends CI_Model
 		return $query;
 	}
 	
-	function get_where($id)
+	function get_id($id)
 	{
 		$table = 'toolbox_permissions';
 		$this->db->where('permission_id', $id);
@@ -42,7 +42,7 @@ class Mdl_permission extends CI_Model
 		return $query;
 	}
 	
-	function get_where_custom($table, $where)
+	function get_where($table, $where)
 	{
 		$this->db->where($where);
 		$query = $this->db->get($table);
