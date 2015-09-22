@@ -113,5 +113,4 @@ class Mdl_user extends CI_Model
 		$query = $this->db->query($mysql_query);
 		return $query;
 	}
-	
 }
