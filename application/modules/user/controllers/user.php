@@ -94,12 +94,12 @@ class User extends MX_Controller
 		if (trim($this->input->post('user_password')) != '') $user_data['user_password'] = $this->encrypt->encode($this->input->post('user_password'));
 		$this->update_user($user_id, $user_data);
 		$user = $this->mdl_user->get($email);
-		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $newpassword);
+		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, , $this->encrypt->decode($user->user_password));
 		$maildata['from'] = 'toolbox@tonikgroupimage.com';
 		$maildata['name'] = 'Toolbox';
 		$maildata['to'] = $user->user_email;
-		$maildata['subject'] = lang('login.retrieve.password');
-		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/retriveemail.txt');
+		$maildata['subject'] = lang('user.update');
+		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/updateuser.txt');
 		$this->maildecorator->sendmail($maildata);
 	}
 	
@@ -117,12 +117,13 @@ class User extends MX_Controller
 			'user_created' => date('Y-m-d H:i:s')
 		);
 		$this->add_user($user_data);
-		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $newpassword);
+		$user = $this->mdl_user->get($email);
+		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $this->encrypt->decode($user->user_password));
 		$maildata['from'] = 'toolbox@tonikgroupimage.com';
 		$maildata['name'] = 'Toolbox';
 		$maildata['to'] = $user->user_email;
-		$maildata['subject'] = lang('login.retrieve.password');
-		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/retriveemail.txt');
+		$maildata['subject'] = lang('user.add');
+		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/createuser.txt');
 		$this->maildecorator->sendmail($maildata);
 	}
 	
