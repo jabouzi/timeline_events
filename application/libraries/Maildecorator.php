@@ -16,7 +16,7 @@ class Maildecorator
 		$this->message = vsprintf($message, $mesagedata);
 	}
 
-	public function sendusermail($maildata)
+	public function sendmail($maildata)
 	{
 		$this->api->email->from($maildata['from'], $maildata['name']);
 		$this->api->email->to($maildata['to']);

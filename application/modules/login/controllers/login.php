@@ -113,7 +113,7 @@ class Login extends MX_Controller
 		$maildata['to'] = $user->user_email;
 		$maildata['subject'] = lang('login.retrieve.password');
 		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/retriveemail.txt');
-		$this->maildecorator->sendusermail($maildata);
+		$this->maildecorator->sendmail($maildata);
 		$this->password('login.password.send');
 	}
 	

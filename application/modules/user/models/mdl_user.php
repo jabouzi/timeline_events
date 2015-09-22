@@ -6,22 +6,27 @@ class Mdl_user extends CI_Model
 	function __construct()
 	{
 		parent::__construct();
+		$this->cache->memcached->clean();
 	}
 	
 	function get($order_by = 'user_id')
 	{
+		if ($this->cache->memcached->get('mdl_user_get')) return $this->cache->memcached->get('mdl_user_get');
 		$table = "toolbox_users";
 		$this->db->order_by($order_by);
 		$query = $this->db->get($table);
+		$this->cache->memcached->save('mdl_user_get', $query);
 		return $query;
 	}
 	
 	function get_with_limit($limit, $offset, $order_by)
 	{
+		if ($this->cache->memcached->get('mdl_user_get_with_limit')) return $this->cache->memcached->get('mdl_user_get_with_limit');
 		$table = "toolbox_users";
 		$this->db->limit($limit, $offset);
 		$this->db->order_by($order_by);
 		$query = $this->db->get($table);
+		$this->cache->memcached->save('mdl_user_get_with_limit', $query);
 		return $query;
 	}
 	
