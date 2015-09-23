@@ -163,10 +163,9 @@ class User extends MX_Controller
 	{
 		if ($this->input->post('user_id') == $this->session->userdata('user_id'))
 		{
-			$user = $this->mdl_user->get($this->session->userdata('user_id'));
+			$user = $this->mdl_user->get_id($this->session->userdata('user_id'));
 			if ($this->encrypt->decode($user->user_password) != $this->input->post('user_newpassword'))
 			{
-				$this->load->library('encrypt');
 				$user_id = $this->input->post('user_id');
 				$user_data = array('user_password' => $this->encrypt->encode($this->input->post('user_newpassword')));
 				$this->update_profile($user_id, $user_data);
@@ -214,7 +213,6 @@ class User extends MX_Controller
 		$messagedata = array($this->session->userdata('user_firstname'), $this->session->userdata('user_lastname'));
 		if (isset($user_data['user_password']))
 		{
-			echo $this->lang->lang();
 			$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/updatepassword.txt');
 			$subject = lang('profile.password.update');
 		}
@@ -243,7 +241,6 @@ class User extends MX_Controller
 		{
 			if ($user_id == $this->session->userdata('user_id'))
 			{
-				$this->load->library('encrypt');
 				$user = $this->mdl_user->get_id($user_id);
 				if ($this->encrypt->decode($user->user_password) == $password) echo 1;
 				else echo lang('user.error');
