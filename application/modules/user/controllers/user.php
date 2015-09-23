@@ -166,7 +166,7 @@ class User extends MX_Controller
 			$user = $this->mdl_user->get_id($this->session->userdata('user_id'));
 			if ($this->encrypt->decode($user->user_password) != $this->input->post('user_newpassword'))
 			{
-				$user_id = $this->input->post('user_id');
+				$user_id = $this->session->userdata('user_id');
 				$user_data = array('user_password' => $this->encrypt->encode($this->input->post('user_newpassword')));
 				$this->update_profile($user_id, $user_data);
 			}
