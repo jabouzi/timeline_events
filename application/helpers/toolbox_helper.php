@@ -38,3 +38,36 @@ function to_boolean($str)
 	if (strtolower($str) == 'false') return false;
 	return true;
 }
+
+function isempty($string)
+{
+	$string = trim($string);
+	return (empty($string)) ? true : false;
+}
+
+function get_item($array, $key)
+{
+	return (isset($array[$key])) ? $array[$key] : false;
+}
+
+function compare_userdata($user1, $user2)
+{
+	if (isempty($user1['password'])) $user2['password'] = '';
+	return array_merge(array_diff_assoc($user1, $user2), array_diff_assoc($user2, $user1));
+}
+
+function compare_profile($user1, $user2)
+{
+	return array_merge(array_diff_assoc($user1, $user2), array_diff_assoc($user2, $user1));
+}
+
+function set_maildata($from, $name, $to, $subject)
+{
+	$maildata = array();
+	$maildata['from'] = $from;
+	$maildata['name'] = $name;
+	$maildata['to'] = $to;
+	$maildata['subject'] = $subject;
+	
+	return $maildata;
+}

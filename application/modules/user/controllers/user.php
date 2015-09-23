@@ -6,6 +6,8 @@ class User extends MX_Controller
 	{
 		parent::__construct();
 		$this->load->model('mdl_user');
+		$this->load->library('encrypt');
+		$this->load->library('maildecorator');
 	}
 	
 	function index()
@@ -81,8 +83,6 @@ class User extends MX_Controller
 	
 	function process_edituser()
 	{
-		$this->load->library('maildecorator');
-		$this->load->library('encrypt');
 		$user_id = $this->input->post('user_id');
 		$user_data = array(
 			'user_firstname' => $this->input->post('user_firstname'), 
@@ -97,8 +97,6 @@ class User extends MX_Controller
 	
 	function process_newuser()
 	{
-		$this->load->library('maildecorator');
-		$this->load->library('encrypt');
 		$user_data = array(
 			'user_firstname' => $this->input->post('user_firstname'), 
 			'user_lastname' => $this->input->post('user_lastname'), 
@@ -113,12 +111,16 @@ class User extends MX_Controller
 	
 	function process_profile()
 	{
-		$this->load->library('maildecorator');
 		if ($this->input->post('user_id') == $this->session->userdata('user_id'))
 		{
 			$user_id = $this->input->post('user_id');
+			$profile_data = array('user_firstname' => $this->session->userdata('user_firstname'), 'user_lastname' => $this->session->userdata('user_lastname'), 'user_email' => $this->session->userdata('user_email'));
 			$user_data = array('user_firstname' => $this->input->post('user_firstname'), 'user_lastname' => $this->input->post('user_lastname'), 'user_email' => $this->input->post('user_email'));
-			$this->update_profile($user_id, $user_data);
+			if (count(compare_profile($profile_data, $user_data)))
+			{
+				$this->update_profile($user_id, $user_data);
+			}
+			redirect('user');
 		}
 		else
 		{
@@ -129,18 +131,22 @@ class User extends MX_Controller
 	
 	function process_password()
 	{
-		$this->load->library('maildecorator');
 		if ($this->input->post('user_id') == $this->session->userdata('user_id'))
 		{
-			$this->load->library('encrypt');
-			$user_id = $this->input->post('user_id');
-			$user_data = array('user_password' => $this->encrypt->encode($this->input->post('user_newpassword')));
-			$this->update_profile($user_id, $user_data);
+			$user = $this->mdl_user->get($this->session->userdata('user_id'));
+			if ($this->encrypt->decode($user->user_password) != $this->input->post('user_newpassword'))
+			{
+				$this->load->library('encrypt');
+				$user_id = $this->input->post('user_id');
+				$user_data = array('user_password' => $this->encrypt->encode($this->input->post('user_newpassword')));
+				$this->update_profile($user_id, $user_data);
+			}
+			redirect('user');
 		}
 		else
 		{
 			$this->session->set_userdata('warning_message', lang('user.error'));
-			redirect('user/profile/');
+			redirect('user');
 		}
 	}
 	
@@ -148,12 +154,9 @@ class User extends MX_Controller
 	{
 		$user_id = $this->mdl_user->insert($user_data);
 		$this->session->set_userdata('success_message', lang('user.success'));
-		$user = $this->mdl_user->get($email);
+		$user = $this->mdl_user->get_id($user_id);
 		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $this->encrypt->decode($user->user_password));
-		$maildata['from'] = 'toolbox@tonikgroupimage.com';
-		$maildata['name'] = 'Toolbox';
-		$maildata['to'] = $user->user_email;
-		$maildata['subject'] = lang('user.add');
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox',$user->user_email, lang('user.add'));
 		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/createuser.txt');
 		$this->maildecorator->sendmail($maildata);
 		redirect('user/edituser/'.$user_id);
@@ -163,12 +166,9 @@ class User extends MX_Controller
 	{
 		$this->mdl_user->update($user_id, $user_data);
 		$this->session->set_userdata('success_message', lang('user.success'));
-		$user = $this->mdl_user->get($email);
+		$user = $this->mdl_user->get_id($user_id);
 		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $this->encrypt->decode($user->user_password));
-		$maildata['from'] = 'toolbox@tonikgroupimage.com';
-		$maildata['name'] = 'Toolbox';
-		$maildata['to'] = $user->user_email;
-		$maildata['subject'] = lang('user.update');
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $user->user_email, lang('user.update'));
 		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/updateuser.txt');
 		$this->maildecorator->sendmail($maildata);
 		redirect('user/edituser/'.$user_id);
@@ -181,21 +181,19 @@ class User extends MX_Controller
 		$user = $this->mdl_user->get_id($user_id);
 		$this->save_session_data($user);
 		$messagedata = array($this->session->userdata('user_firstname'), $this->session->userdata('user_lastname'));
-		$maildata['from'] = 'toolbox@tonikgroupimage.com';
-		$maildata['name'] = 'Toolbox';
-		$maildata['to'] = $this->session->userdata('user_email');
-		$maildata['subject'] = lang('profile.update');
-		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/updateprofile.txt');
+		if (isset($user_data['user_password']))
+		{
+			$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/updatepassword.txt');
+			$subject = lang('profile.password.update');
+		}
+		else
+		{
+			$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/updateprofile.txt');
+			$subject = lang('profile.update');
+		}
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $this->session->userdata('user_email'), $subject);
 		$this->maildecorator->sendmail($maildata);
-		
-		//$messagedata = array($this->session->userdata('user_firstname'), $this->session->userdata('user_lastname'));
-		//$maildata['from'] = 'toolbox@tonikgroupimage.com';
-		//$maildata['name'] = 'Toolbox';
-		//$maildata['to'] = $this->session->userdata('user_email');
-		//$maildata['subject'] = lang('profile.password.update');
-		//$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/updatepassword.txt');
-		//$this->maildecorator->sendmail($maildata);
-		//redirect('user');
+		redirect('user');
 	}
 	
 	private function delete_user($user_id)

@@ -96,7 +96,6 @@ class Login extends MX_Controller
 	function processpwd()
 	{
 		$maildata = array();
-		$this->load->helper('toolbox_string');
 		$this->load->library('encrypt');
 		$this->load->library('maildecorator');
 		$this->load->model('user/mdl_user');
@@ -107,10 +106,7 @@ class Login extends MX_Controller
 		$this->mdl_user->update_email($email, $user_data);
 		$user = $this->mdl_user->get_email($email);
 		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $newpassword);
-		$maildata['from'] = 'toolbox@tonikgroupimage.com';
-		$maildata['name'] = 'Toolbox';
-		$maildata['to'] = $user->user_email;
-		$maildata['subject'] = lang('login.retrieve.password');
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $user->user_email, lang('login.retrieve.password'));
 		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/retriveemail.txt');
 		$this->maildecorator->sendmail($maildata);
 		$this->password('login.password.send');
