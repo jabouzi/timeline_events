@@ -49,7 +49,9 @@
 	<aside id="sidebar" class="column">
 		<h3><?php echo lang('user.title'); ?></h3>
 		<ul class="toggle">
-			<li class="icn_add_user"><?php echo anchor('user/newuser', lang('user.new')) ?></li>
+			<?php if ($this->session->userdata('user_permission') == 1) : ?>
+				<li class="icn_add_user"><?php echo anchor('user/newuser', lang('user.new')) ?></li>
+			<?php endif; ?>
 			<li class="icn_view_users"><?php echo anchor('user/users', lang('user.users')) ?></li>
 			<li class="icn_profile"><?php echo anchor('user', lang('user.profile')) ?></li>
 			<li class="icn_jump_back"><?php echo anchor('login/logout', lang('login.logout')) ?></li>
