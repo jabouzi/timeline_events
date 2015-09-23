@@ -1,8 +1,8 @@
 Hello %s %s 
 
-Login to :%s was created 
-Your username is:%s 
-Your password is:%s 
+Login to: %s was created 
+Your username is: %s 
+Your password is: %s 
 For any other questions, contact your project manager at YOUR COMPANY NAME. 
 
 Thank you.

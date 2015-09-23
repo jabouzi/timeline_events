@@ -183,7 +183,7 @@ class User extends MX_Controller
 		$user_id = $this->mdl_user->insert($user_data);
 		$this->session->set_userdata('success_message', lang('user.success'));
 		$user = $this->mdl_user->get_id($user_id);
-		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $this->encrypt->decode($user->user_password));
+		$messagedata = array($user->user_firstname, $user->user_lastname, site_url(), $user->user_email, $this->encrypt->decode($user->user_password));
 		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox',$user->user_email, lang('user.add'));
 		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/createuser.txt');
 		$this->maildecorator->sendmail($maildata);
