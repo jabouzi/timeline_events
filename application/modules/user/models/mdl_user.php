@@ -16,7 +16,7 @@ class Mdl_user extends CI_Model
 		$this->db->order_by('user_id');
 		$query = $this->db->get($table);
 		$this->cache->memcached->save('mdl_user_get', $query->row());
-		return $query->row();
+		return $query;
 	}
 	
 	function get_order($order_by)
@@ -24,7 +24,7 @@ class Mdl_user extends CI_Model
 		$table = "toolbox_users";
 		$this->db->order_by($order_by);
 		$query = $this->db->get($table);
-		return $query->row();
+		return $query;
 	}
 	
 	function get_with_limit($limit, $offset, $order_by)
@@ -35,7 +35,7 @@ class Mdl_user extends CI_Model
 		$this->db->order_by($order_by);
 		$query = $this->db->get($table);
 		//$this->cache->memcached->save('mdl_user_get_with_limit_'.$limit.'_'.$offset, $query);
-		return $query->row();
+		return $query;
 	}
 	
 	function get_id($id)
@@ -62,7 +62,7 @@ class Mdl_user extends CI_Model
 	{
 		$table = "toolbox_users";
 		$query = $this->db->get_where($table, $where);
-		return $query->row();
+		return $query;
 	}
 	
 	function insert($data)
@@ -120,7 +120,7 @@ class Mdl_user extends CI_Model
 		$table	= "toolbox_users";
 		$query	= $this->db->get($table);
 		$num_rows = $query->num_rows();
-		return $num_rows->row();
+		return $num_rows;
 	}
 	
 	function get_max()
