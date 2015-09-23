@@ -49,7 +49,7 @@ class User extends MX_Controller
 		if (!$user_id) redirect('dashboard');
 		$this->mdl_user->delete($user_id);
 		$this->session->set_userdata('success_message', lang('user.delete.success'));
-		redirect('users/users');
+		redirect('user/users');
 	}
 	
 	private function show($view, $user_data)
