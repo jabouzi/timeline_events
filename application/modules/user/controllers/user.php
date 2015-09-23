@@ -94,7 +94,7 @@ class User extends MX_Controller
 		if (trim($this->input->post('user_password')) != '') $user_data['user_password'] = $this->encrypt->encode($this->input->post('user_password'));
 		$this->update_user($user_id, $user_data);
 		$user = $this->mdl_user->get($email);
-		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, , $this->encrypt->decode($user->user_password));
+		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $this->encrypt->decode($user->user_password));
 		$maildata['from'] = 'toolbox@tonikgroupimage.com';
 		$maildata['name'] = 'Toolbox';
 		$maildata['to'] = $user->user_email;
