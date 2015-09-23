@@ -45,7 +45,7 @@ function isempty($string)
 	return (empty($string)) ? true : false;
 }
 
-function get_item($array, $key)
+function item($array, $key)
 {
 	return (isset($array[$key])) ? $array[$key] : false;
 }
@@ -70,4 +70,9 @@ function set_maildata($from, $name, $to, $subject)
 	$maildata['subject'] = $subject;
 	
 	return $maildata;
+}
+
+function get_status_list()
+{
+	return array('user.inactive', 'user.active');
 }

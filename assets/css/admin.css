@@ -897,3 +897,19 @@ white-space: nowrap;
 .error-input {
 border: 1px solid #C3270D;
 }
+
+.deletebutton {
+	border: 2px solid #333;
+	background-color: #BE1313;
+	color: #fff;
+	cursor: pointer;
+	font-weight: bold;
+	width: auto;
+	float:right;
+	display:none;
+}
+
+.deletebutton:visited
+{
+	color: #fff;
+}

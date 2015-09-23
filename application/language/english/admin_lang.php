@@ -74,6 +74,8 @@ $lang['user.exists'] = "Email already exists";
 $lang['user.error'] = "An error has occured";
 $lang['user.active'] = "Active";
 $lang['user.inactive'] = "Not Active";
+$lang['user.delete.confirm'] = "Confirm deleting user";
+$lang['user.delete.success'] = "User deleted successfully";
 
 $lang['profile.update'] = "Your profile has been updated";
 $lang['profile.password.update'] = "Your password has been updated";

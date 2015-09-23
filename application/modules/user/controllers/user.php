@@ -36,19 +36,27 @@ class User extends MX_Controller
 	function edituser($user_id = 0)
 	{
 		if (!$user_id) redirect('dashboard');
-		$view_data['page_title'] = lang('user.edit');
 		$user_profile = $this->mdl_user->get_id($user_id);
+		$view_data['page_title'] = lang('user.edit');
 		if ($user_profile->user_id == $this->session->userdata('user_id'))  redirect('user');
 		if ($user_profile->user_permission <= $this->session->userdata('user_permission')) redirect('dashboard');
 		$view_data['admin_widgets']['user'] = $this->show('edituser', $user_profile);
 		echo modules::run('template', $view_data);
 	}
 	
+	function delete_user($user_id)
+	{
+		if (!$user_id) redirect('dashboard');
+		$this->mdl_user->delete($user_id);
+		$this->session->set_userdata('success_message', lang('user.delete.success'));
+		redirect('users/users');
+	}
+	
 	private function show($view, $user_data)
 	{
 		$this->load->helper('form');
 		$view_data['user'] = $user_data;
-		$view_data['status'] = array(0 => lang('user.active'), 1 => lang('user.inactive'));
+		$view_data['status'] = array(0 => lang('user.inactive'), 1 => lang('user.active'));
 		$view_data['permissions'] = modules::run('permission/get_permissions_dropdown');
 		return $this->load->view($view.'.php', $view_data, true);
 	}
@@ -91,8 +99,28 @@ class User extends MX_Controller
 			'user_permission' => $this->input->post('user_permission'),
 			'user_active' => (int)($this->input->post('user_active'))
 		);
-		if (trim($this->input->post('user_password')) != '') $user_data['user_password'] = $this->encrypt->encode($this->input->post('user_password'));
-		$this->update_user($user_id, $user_data);
+		$user = $this->mdl_user->get_id($user_id);
+		$user_old_data = array(
+			'user_firstname' => $user->user_firstname, 
+			'user_lastname' => $user->user_lastname, 
+			'user_email' => $user->user_email,
+			'user_permission' => $user->user_permission,
+			'user_active' => (int)(ord($user->user_active))
+		);
+		
+		if (trim($this->input->post('user_password')) != '')
+		{
+			$user_data['user_password'] = $this->input->post('user_password');
+			$user_old_data['user_password'] = $this->encrypt->decode($user->user_password);
+		}
+
+		if (count(compare_profile($user_old_data, $user_data)))
+		{
+			$user_data['user_password'] = $this->encrypt->encode($user_data['user_password']);
+			$this->update_user($user_id, $user_data);
+		}
+		
+		redirect('user/edituser/'.$user_id);
 	}
 	
 	function process_newuser()
@@ -171,6 +199,7 @@ class User extends MX_Controller
 		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $user->user_email, lang('user.update'));
 		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/updateuser.txt');
 		$this->maildecorator->sendmail($maildata);
+		$this->session->unset_userdata('user_'.$user_id);
 		redirect('user/edituser/'.$user_id);
 	}
 	
@@ -194,11 +223,6 @@ class User extends MX_Controller
 		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $this->session->userdata('user_email'), $subject);
 		$this->maildecorator->sendmail($maildata);
 		redirect('user');
-	}
-	
-	private function delete_user($user_id)
-	{
-		
 	}
 	
 	function email_exists($email, $user_id = 0)

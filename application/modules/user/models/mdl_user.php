@@ -29,12 +29,10 @@ class Mdl_user extends CI_Model
 	
 	function get_with_limit($limit, $offset, $order_by)
 	{
-		//if ($this->cache->memcached->get('mdl_user_get_with_limit_'.$limit.'_'.$offset)) return $this->cache->memcached->get('mdl_user_get_with_limit_'.$limit.'_'.$offset);
 		$table = "toolbox_users";
 		$this->db->limit($limit, $offset);
 		$this->db->order_by($order_by);
 		$query = $this->db->get($table);
-		//$this->cache->memcached->save('mdl_user_get_with_limit_'.$limit.'_'.$offset, $query);
 		return $query;
 	}
 	
@@ -50,11 +48,9 @@ class Mdl_user extends CI_Model
 	
 	function get_email($email)
 	{
-		//if ($this->cache->memcached->get('mdl_user_get_'.$email)) return $this->cache->memcached->get('mdl_user_get_'.$email);
 		$table = "toolbox_users";
 		$this->db->where('user_email', $email);
 		$query = $this->db->get($table);
-		//$this->cache->memcached->save('mdl_user_get_'.$email);
 		return $query->row();
 	}
 	

@@ -19,6 +19,14 @@ $(document).ready(function() {
 		return false;
 	});
 
+	$('.trash').bind({
+		click: function() {
+			console.log($(this).attr('data-userid'));
+			var id = $(this).attr('data-userid');
+			$('#delete_'+id).show();
+		}
+	});
+
 	$('.column').equalHeight();
 
 	$('.submit_form').bind({

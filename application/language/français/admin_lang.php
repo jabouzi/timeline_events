@@ -74,6 +74,8 @@ $lang['user.exists'] = "Le courriel existe déjà";
 $lang['user.error'] = "Une erreur est survenue";
 $lang['user.active'] = "Active";
 $lang['user.inactive'] = "Non Active";
+$lang['user.delete.confirm'] = "Confirmer la suppression";
+$lang['user.delete.success'] = "Usager supprimé avec succès";
 
 $lang['profile.update'] = "Votre profile a été mis à jour";
 $lang['profile.password.update'] = "Votre mot de passe a été mis à jour";
