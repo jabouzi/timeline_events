@@ -114,7 +114,6 @@ class Login extends MX_Controller
 	
 	function autologin()
 	{
-		$this->load->helper('toolbox_string');
 		$this->load->model('mdl_login');
 		
 		$result = false;
