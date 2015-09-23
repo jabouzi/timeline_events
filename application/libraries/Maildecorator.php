@@ -14,7 +14,7 @@ class Maildecorator
 	public function decorate($messagedata, $message)
 	{
 		$this->message = vsprintf(file_get_contents(base_url().$message), $messagedata);
-		var_dump($this->message);exit;
+		var_dump($this->message);
 	}
 
 	public function sendmail($maildata)
@@ -27,6 +27,6 @@ class Maildecorator
 		if (isset($maildata['subject'])) $this->api->email->subject($maildata['subject']);
 		$this->api->email->message($this->message);
 
-		$this->api->email->send();
+		var_dump($maildata, $this->api->email->send());
 	}
 }
