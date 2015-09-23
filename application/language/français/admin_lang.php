@@ -72,6 +72,8 @@ $lang['user.nonactive'] = "Ce compte est désctivé";
 $lang['user.success'] = "Usager sauvegardé avec succès";
 $lang['user.exists'] = "Le courriel existe déjà";
 $lang['user.error'] = "Une erreur est survenue";
+$lang['user.active'] = "Active";
+$lang['user.inactive'] = "Non Active";
 
 $lang['profile.update'] = "Votre profile a été mis à jour";
 $lang['profile.password.update'] = "Votre mot de passe a été mis à jour";

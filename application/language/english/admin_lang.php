@@ -72,6 +72,8 @@ $lang['user.nonactive'] = "This account is non active";
 $lang['user.success'] = "User saved successfully";
 $lang['user.exists'] = "Email already exists";
 $lang['user.error'] = "An error has occured";
+$lang['user.active'] = "Active";
+$lang['user.inactive'] = "Not Active";
 
 $lang['profile.update'] = "Your profile has been updated";
 $lang['profile.password.update'] = "Your password has been updated";
