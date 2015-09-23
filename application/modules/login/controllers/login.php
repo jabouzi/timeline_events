@@ -57,7 +57,6 @@ class Login extends MX_Controller
 	{
 		$this->islogin();
 
-		$this->load->helper('toolbox');
 		$this->load->model('mdl_login');
 		
 		$username = $this->security->xss_clean($this->input->post('email'));
