@@ -14,6 +14,7 @@ class Maildecorator
 	public function decorate($messagedata, $message)
 	{
 		$this->message = vsprintf(file_get_contents(base_url().$message), $messagedata);
+		var_dump($this->message);exit;
 	}
 
 	public function sendmail($maildata)
