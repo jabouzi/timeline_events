@@ -1,0 +1,7 @@
+Hello %s %s 
+
+Your profile has been updated
+
+For any other questions, contact your project manager at YOUR COMPANY NAME. 
+
+Thank you.

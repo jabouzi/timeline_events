@@ -1,0 +1,7 @@
+Bonjour %s %s,
+
+Votre profile a été mis à jour.
+
+Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE.
+
+Merci.
