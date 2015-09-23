@@ -61,7 +61,7 @@ class Mdl_user extends CI_Model
 	function get_where($where)
 	{
 		$table = "toolbox_users";
-		$query = $this->db->get_id($table, $where);
+		$query = $this->db->get_where($table, $where);
 		return $query->row();
 	}
 	
