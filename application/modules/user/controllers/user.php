@@ -28,7 +28,7 @@ class User extends MX_Controller
 	
 	function newuser()
 	{
-		if ($this->session->userdata('user_permission') > 1) redirect('dashboard');
+		if ($this->session->userdata('user_permission') <= 2) redirect('dashboard');
 		$view_data['page_title'] = lang('user.new');
 		$view_data['admin_widgets']['user'] = $this->show('newuser', array());
 		echo modules::run('template', $view_data);
@@ -36,7 +36,7 @@ class User extends MX_Controller
 	
 	function edituser($user_id = 0)
 	{
-		if ($this->session->userdata('user_permission') > 1) redirect('dashboard');
+		if ($this->session->userdata('user_permission') <= 2) redirect('dashboard');
 		if (!$user_id) redirect('dashboard');
 		$user_profile = $this->mdl_user->get_id($user_id);
 		$view_data['page_title'] = lang('user.edit');

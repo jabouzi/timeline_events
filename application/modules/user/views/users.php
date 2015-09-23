@@ -8,7 +8,7 @@
 				<th><?php echo lang('user.lastname'); ?></th>
 				<th><?php echo lang('user.email'); ?></th>
 				<th><?php echo lang('user.status'); ?></th>
-				<?php if ($this->session->userdata('user_permission') == 1) : ?>
+				<?php if ($this->session->userdata('user_permission') <= 2) : ?>
 					<th><?php echo lang('admin.action'); ?></th>
 				<?php endif; ?>
 			</tr> 
@@ -20,7 +20,7 @@
 					<td><?php echo $item->user_lastname ?></td>
 					<td><?php echo $item->user_email ?></td>
 					<td><?php echo lang(item(get_status_list(), ord($item->user_active))); ?></td>
-					<?php if ($this->session->userdata('user_permission') == 1) : ?>
+					<?php if ($this->session->userdata('user_permission') <= 2) : ?>
 					<td>
 						<?php echo anchor('user/edituser/'.$item->user_id, '<input type="image" src="'.site_url().'assets/images/icn_edit.png" title="'.lang('user.edit').'">'); ?>
 						<input class="trash" data-userid="<?php echo $item->user_id; ?>" type="image" src="<?php echo site_url(); ?>assets/images/icn_trash.png" title="<?php echo lang('user.delete'); ?>">
