@@ -1,8 +1,8 @@
-Hello %s %s 
+Bonjour %s %s 
 
-You requested your password
-Your username is: %s 
-Your password is: %s 
-For any other questions, contact your project manager at YOUR COMPANY NAME. 
+Vous avez demandez votre mot de passe.
+Votre identifiant est : %s 
+Votre nouveau mot de passe est : %s 
+Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE. 
 
-Thank you.
+Merci.

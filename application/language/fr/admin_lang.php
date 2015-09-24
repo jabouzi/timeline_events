@@ -119,3 +119,47 @@ $lang['language.update'] = "Mettre à jour une langue";
 $lang['language.success'] = "Langue sauvegardée avec succès";
 
 $lang['content.title'] = "Contenu";
+
+$lang['mail.createuser'] = "Bonjour %s %s,
+
+Votre compte pour : %s a été créé
+Votre identifiant est : %s
+Votre mot de passe est : %s
+Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE.
+
+Merci.
+";
+$lang['mail.retrievepassword'] = "Bonjour %s %s 
+
+Vous avez demandez votre mot de passe.
+Votre identifiant est : %s 
+Votre nouveau mot de passe est : %s 
+Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE. 
+
+Merci.
+";
+$lang['mail.updatepassword'] = "Bonjour %s %s,
+
+Votre mot de passe a été mis à jour.
+
+Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE.
+
+Merci.
+";
+$lang['mail.updateprofile'] = "Bonjour %s %s,
+
+Votre profile a été mis à jour.
+
+Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE.
+
+Merci.
+";
+$lang['mail.updateuser'] = "Bonjour %s %s,
+
+Votre compte a été mis à jour.
+Votre identifiant est : %s
+Votre mot de passe est : %s
+Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE.
+
+Merci.
+";

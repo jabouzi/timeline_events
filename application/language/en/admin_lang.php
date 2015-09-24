@@ -121,3 +121,47 @@ $lang['language.update'] = "Update Language";
 $lang['language.success'] = "Language saved successfully";
 
 $lang['content.title'] = "Content";
+
+$lang['mail.createuser'] = "Hello %s %s 
+
+Login to: %s was created 
+Your username is: %s 
+Your password is: %s 
+For any other questions, contact your project manager at YOUR COMPANY NAME. 
+
+Thank you.
+";
+$lang['mail.retrievepassword'] = "Hello %s %s 
+
+You requested your password
+Your username is:%s 
+Your password is:%s 
+For any other questions, contact your project manager at YOUR COMPANY NAME. 
+
+Thank you.
+";
+$lang['mail.updatepassword'] = "Hello %s %s 
+
+Your password has been updated
+
+For any other questions, contact your project manager at YOUR COMPANY NAME. 
+
+Thank you.
+";
+$lang['mail.updateprofile'] = "Hello %s %s 
+
+Your profile has been updated
+
+For any other questions, contact your project manager at YOUR COMPANY NAME. 
+
+Thank you.
+";
+$lang['mail.updateuser'] = "Hello %s %s 
+
+Your account has been updated
+Your username is: %s 
+Your password is: %s 
+For any other questions, contact your project manager at YOUR COMPANY NAME. 
+
+Thank you.
+";

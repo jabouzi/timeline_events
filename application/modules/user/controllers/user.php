@@ -186,7 +186,7 @@ class User extends MX_Controller
 		$user = $this->mdl_user->get_id($user_id);
 		$messagedata = array($user->user_firstname, $user->user_lastname, site_url(), $user->user_email, $this->encrypt->decode($user->user_password));
 		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox',$user->user_email, lang('user.add'));
-		$this->maildecorator->decorate($messagedata, urlencode('/assets/templates/'.$this->lang->lang().'/createuser.txt'));
+		$this->maildecorator->decorate($messagedata, lang('mail.createuser'));
 		$this->maildecorator->sendmail($maildata);
 		redirect('user/edituser/'.$user_id);
 	}
@@ -198,7 +198,7 @@ class User extends MX_Controller
 		$user = $this->mdl_user->get_id($user_id);
 		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $this->encrypt->decode($user->user_password));
 		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $user->user_email, lang('user.update'));
-		$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/updateuser.txt');
+		$this->maildecorator->decorate($messagedata, lang('mail.updateuser'));
 		$this->maildecorator->sendmail($maildata);
 		$this->session->unset_userdata('user_'.$user_id);
 		redirect('user/edituser/'.$user_id);
@@ -213,12 +213,12 @@ class User extends MX_Controller
 		$messagedata = array($this->session->userdata('user_firstname'), $this->session->userdata('user_lastname'));
 		if (isset($user_data['user_password']))
 		{
-			$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/updatepassword.txt');
+			$this->maildecorator->decorate($messagedata, lang('mail.updatepassword'));
 			$subject = lang('profile.password.update');
 		}
 		else
 		{
-			$this->maildecorator->decorate($messagedata, '/assets/templates/'.$this->lang->lang().'/updateprofile.txt');
+			$this->maildecorator->decorate($messagedata, lang('mail.updateprofile'));
 			$subject = lang('profile.update');
 		}
 		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $this->session->userdata('user_email'), $subject);
