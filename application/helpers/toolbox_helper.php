@@ -76,3 +76,9 @@ function get_status_list()
 {
 	return array('user.inactive', 'user.active');
 }
+
+
+function get_langs()
+{
+	return json_decode(file_get_contents(APPPATH.'language/lang.json'), true);
+}
