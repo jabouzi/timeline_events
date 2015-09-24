@@ -22,7 +22,8 @@ class Template extends MX_Controller
 			
 			foreach($this->lang->languages as $key => $value)
 			{
-				$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
+				$_lang = item(get_langs(), $key);
+				$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($_lang));
 			}
 			$view_data['lang'] = site_url().$this->lang->switch_uri($this->lang->lang());
 			$view_data['redirect'] = 'onChange="window.document.location.href=this.options[this.selectedIndex].value;"';

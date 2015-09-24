@@ -80,5 +80,5 @@ function get_status_list()
 
 function get_langs()
 {
-	return json_decode(file_get_contents(APPPATH.'language/lang.json'), true);
+	return array('en' => 'English', 'fr' => 'Français');
 }
