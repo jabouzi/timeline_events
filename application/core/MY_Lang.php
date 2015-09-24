@@ -34,14 +34,7 @@ class MY_Lang extends MX_Lang {
 	{
 		parent::__construct();
 		
-		$_langs = $this->get_langs();
-
-		foreach($_langs as $key => $_lang)
-		{
-			$this->languages[$key] = $key;
-		}
-		
-		//var_dump($this->languages);
+		$this->languages = $this->get_langs();
 		
 		global $CFG;
 		global $URI;
