@@ -76,9 +76,3 @@ function get_status_list()
 {
 	return array('user.inactive', 'user.active');
 }
-
-
-function get_langs()
-{
-	return array('en' => 'English', 'fr' => 'Français');
-}
