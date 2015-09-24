@@ -31,8 +31,7 @@
 
 	<header id="header">
 		<hgroup>
-			<h1 class="site_title"><?php echo anchor('dashboard', lang('dashboard.title2')); ?></h1>
-			<h2 class="section_title"><?php echo lang('dashboard.title3'); ?></h2><div class="btn_view_site"><?php echo anchor('/', lang('dashboard.viewsite')); ?></div>
+			<h1 class="site_title"><?php echo lang('dashboard.title1'); ?></h1>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
