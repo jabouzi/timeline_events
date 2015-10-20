@@ -23,6 +23,7 @@ $lang['login.reset'] = "Cliquer ici pour un nouveau passe";
 $lang['login.failed'] = "L'Authentification a échouée.";
 $lang['login.retrieve.password'] = "Récuprer mot de passe.";
 $lang['login.password.send'] = 'Votre mot de passe a été envoyé à votre courriel';
+$lang['login.back.login'] = 'Retour à la page de connexion';
 
 $lang['dashboard.title1'] = "Panneau d'administration";
 $lang['dashboard.title2'] = "Admin du site";

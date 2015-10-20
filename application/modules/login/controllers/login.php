@@ -100,13 +100,14 @@ class Login extends MX_Controller
 		$this->load->model('user/mdl_user');
 		
 		$email = $this->security->xss_clean($this->input->post('email'));
+		if (isempty($email)) redirect('login');
 		$newpassword = generate_random_string(10);
 		$user_data['user_password'] = $this->encrypt->encode($newpassword);
 		$this->mdl_user->update_email($email, $user_data);
 		$user = $this->mdl_user->get_email($email);
 		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $newpassword);
 		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $user->user_email, lang('login.retrieve.password'));
-		$this->maildecorator->decorate($messagedata, lang('mail.retrivepassword'));
+		$this->maildecorator->decorate($messagedata, lang('mail.retrievepassword'));
 		$this->maildecorator->sendmail($maildata);
 		$this->password('login.password.send');
 	}

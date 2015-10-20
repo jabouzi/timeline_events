@@ -21,12 +21,12 @@
 				<?php echo lang('login.lang'); ?>
 				<?php echo form_dropdown('lang', $languages, $lang, $redirect); ?>
 			</p>
-		<p class="submit"><input type="submit" name="commit" value="<?php echo lang('login.login'); ?>"></p>
+		<p class="submit"><input type="submit" name="commit" value="<?php echo lang('login.retrieve.password'); ?>"></p>
 		</form>
 	</div>
 
 	<div class="login-help">
-		<p><a href="<?php echo site_url('login'); ?>"><?php echo lang('login.login'); ?></a>.</p>
+		<p><a href="<?php echo site_url('login'); ?>"><?php echo lang('login.back.login'); ?></a>.</p>
 	</div>
   </section>
 </body>

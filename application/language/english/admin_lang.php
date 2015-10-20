@@ -23,6 +23,7 @@ $lang['login.reset'] = "Click here to reset it";
 $lang['login.failed'] = "Authentification failded.";
 $lang['login.retrieve.password'] = "Retrieve password.";
 $lang['login.password.send'] = 'Your password has been send to your email';
+$lang['login.back.login'] = 'Back to login page';
 
 $lang['dashboard.title1'] = "Admin Panel";
 $lang['dashboard.title2'] = "Website Admin";
