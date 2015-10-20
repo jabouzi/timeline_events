@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Dashboard extends MX_Controller
+class Campagne extends MX_Controller
 {
 	
 	function __construct()
