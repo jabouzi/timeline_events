@@ -8,6 +8,12 @@
 	<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/bootstrap-3.0.0.min.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/bootstrap-multiselect.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/admin.css" type="text/css" media="screen" />
+	<?php if (isset($stylesheet)) { ?>
+		<?php foreach($stylesheet as $css) { ?>
+			<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/<?php echo $css; ?>" type="text/css" media="screen" />
+		<?php } ?>
+	<?php } ?>
+	
 	<!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,9 +26,18 @@
 	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
 	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-multiselect.js"></script>
 	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/toolbox.js"></script>
-	<script type="text/javascript">
 	
-</script>
+	<?php if (isset($javascript)) { ?>
+		<?php foreach($javascript as $js) { ?>
+			<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/<?php echo $js; ?>"></script>
+		<?php } ?>
+	<?php } ?>
+	
+	<?php if (isset($json)) { ?>
+		<?php foreach($json as $js) { ?>
+			<script type="text/javascript" src="<?php echo site_url(); ?>assets/json/<?php echo $js; ?>"></script>
+		<?php } ?>
+	<?php } ?>
 
 </head>
 

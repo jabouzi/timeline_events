@@ -42,7 +42,7 @@ class User extends MX_Controller
 		$view_data['page_title'] = lang('user.edit');
 		if ($user_profile->user_id == $this->session->userdata('user_id'))  redirect('user');
 		if ($user_profile->user_permission <= $this->session->userdata('user_permission')) redirect('dashboard');
-		$view_data['admin_widgets']['user'] = $this->show('edituser', $user_profile);
+		$view_data['admin_widgets']['user'] = $this->show('campagne', $user_profile);
 		echo modules::run('template', $view_data);
 	}
 	

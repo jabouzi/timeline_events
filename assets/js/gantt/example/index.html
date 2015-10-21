@@ -3,9 +3,9 @@
 
 <html lang="en">
 <head>
-	<link rel="stylesheet" type="text/css" href="<?php echo site_url(); ?>assets/css/jquery-ui-1.8.4.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo site_url(); ?>assets/css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo site_url(); ?>assets/css/jquery.ganttView.css" />
+	<link rel="stylesheet" type="text/css" href="../lib/jquery-ui-1.8.4.css" />
+	<link rel="stylesheet" type="text/css" href="reset.css" />
+	<link rel="stylesheet" type="text/css" href="../jquery.ganttView.css" />
 	<style type="text/css">
 		body {
 			font-family: tahoma, verdana, helvetica;
@@ -21,11 +21,11 @@
 	<br/><br/>
 	<div id="eventMessage"></div>
 
-	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery.min.js"></script>
-	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/date.js"></script>
-	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery.ganttView.js"></script>
-	<script type="text/javascript" src="<?php echo site_url(); ?>assets/json/data.json"></script>
+	<script type="text/javascript" src="../lib/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="../lib/date.js"></script>
+	<script type="text/javascript" src="../lib/jquery-ui-1.8.4.js"></script>
+	<script type="text/javascript" src="../jquery.ganttView.js"></script>
+	<script type="text/javascript" src="data.js"></script>
 	<script type="text/javascript">
 		$(function () {
 			$("#ganttChart").ganttView({ 
@@ -55,4 +55,3 @@
 
 </body>
 </html>
-

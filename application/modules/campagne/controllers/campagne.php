@@ -10,14 +10,14 @@ class Campagne extends MX_Controller
 	
 	function index()
 	{
-		$this->show();
+		$view_data['page_title'] = lang('dashboard.title3');
+		$this->load->view('calendrier.php');
 	}
 	
-	function show()
+	function detail($id = null)
 	{
+		if (!$id) redirect('campagne');
 		$view_data['page_title'] = lang('dashboard.title3');
-		$view_data['admin_widgets']['analytic_preview'] = modules::run('analytic/preview');
-		$view_data['admin_widgets']['structure_preview'] = modules::run('structure/preview');
-		echo modules::run('template', $view_data);
+		$this->load->view('campagne.php');
 	}
 }
