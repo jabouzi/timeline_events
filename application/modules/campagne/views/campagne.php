@@ -37,7 +37,8 @@
 					onClick: function (data) { 
 						var url = window.location.href;
 						console.log(url, data.id);
-						window.location.href = url + '/detail/' + data.id;
+						url += '/detail/' + data.id;
+						window.location.href = url.replace('//', '/');
 						var msg = "You clicked on an event: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
 						$("#eventMessage").text(msg);
 					},
