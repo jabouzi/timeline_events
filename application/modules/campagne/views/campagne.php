@@ -36,9 +36,10 @@
 					resizable: false,
 					onClick: function (data) { 
 						var url = window.location.href;
+						var redirect = 'detail/' + data.id;
+						if (url.substr(id.length - 1) != '/') redirect = '/'+redirect;
 						console.log(url, data.id);
-						url += '/detail/' + data.id;
-						window.location.href = url;
+						window.location.href = url + redirect;
 						var msg = "You clicked on an event: { start: " + data.start.toString("M/d/yyyy") + ", end: " + data.end.toString("M/d/yyyy") + " }";
 						$("#eventMessage").text(msg);
 					},
