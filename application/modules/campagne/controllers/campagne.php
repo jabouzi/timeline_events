@@ -11,13 +11,13 @@ class Campagne extends MX_Controller
 	function index()
 	{
 		$view_data['page_title'] = lang('dashboard.title3');
-		$this->load->view('calendrier.php');
+		$this->load->view('campagne.php');
 	}
 	
 	function detail($id = null)
 	{
 		if (!$id) redirect('campagne');
 		$view_data['page_title'] = lang('dashboard.title3');
-		$this->load->view('campagne.php');
+		$this->load->view('campagne_detail.php');
 	}
 }
