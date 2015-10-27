@@ -60,6 +60,8 @@
 	fontFamilyBold:source_sans_probold;
 	fontsizeReadingTextSmall:13px;
 	fontsizeReadingTextRegular:15px;
+	borderRadius: 5px;
+	inputHeight:42px
 	
 */
 *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
@@ -105,27 +107,16 @@ label {
 	margin-bottom: 10px;
 }
 /*selects*/
-.jqTransformSelectWrapper { position:relative;	float:left;  background-color:#ffffff; border:none; margin-bottom:15px; width:100%!important;  height: 42px;
-  line-height: 42px;
-  padding: 0 15px; border-radius: 5px;}
-.jqTransformSelectWrapper div span { overflow: hidden; cursor:pointer; padding: 0px 0px 6px 10px;float: none; position: absolute; white-space: nowrap;  overflow: hidden; cursor:pointer; width:inherit!important;  color: #3f3f3f; }
-.jqTransformSelectWrapper a.jqTransformSelectOpen {
-    display: block;
-    position: absolute;
-    right: 2px;
-    top: 0px;
-    width: 36px;
-    height: 42px;
-    background: url(images/select-right.png) no-repeat center center;
-    border-left: 3px solid #ebebeb;
-}
-.jqTransformSelectWrapper ul { position: absolute;width: 189px; top: 39px; left: 0px; list-style: none; background-color: #FFF; border: solid 1px #CCC; display: none; margin: 0px; padding: 0px; height: 150px; overflow: auto; overflow-y: auto; z-index:10; width:inherit!important; }
-.jqTransformSelectWrapper ul li { color: #3f3f3f; }
-.jqTransformSelectWrapper ul a { display: block; padding: 10px 5px; text-decoration: none; color:#333; background-color: #FFF;}
-.jqTransformSelectWrapper ul a.selected { background: #EDEDED; color: #333; }
-.jqTransformSelectWrapper ul a:hover, .jqTransformSelectWrapper ul a.selected:hover { background:#EDEDED; color: #333; }
-/* Hidden - used to hide the original form elements */
-.jqTransformHidden {display: none;}
+.jqTransformSelectWrapper{position:relative;float:left;background-color:#fff;border:none;margin-bottom:15px;width:100%!important;height:42px;line-height:42px;padding:0 15px;border-radius:5px}
+.jqTransformSelectWrapper div span{overflow:hidden;cursor:pointer;float:none;position:absolute;white-space:nowrap;overflow:hidden;cursor:pointer;width:inherit!important}
+.jqTransformSelectWrapper a.jqTransformSelectOpen{display:block;position:absolute;right:2px;top:0;width:36px;height:42px;border-left:3px solid #ebebeb;text-align:center}
+.jqTransformSelectWrapper a.jqTransformSelectOpen::before{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid #e41b13;content:" ";position:relative;top:34%}
+.jqTransformSelectWrapper ul{position:absolute;width:189px;top:39px;left:0;list-style:none;background-color:#FFF;border:solid 1px #ebebeb;display:none;margin:0;padding:0;height:150px;overflow:auto;overflow-y:auto;z-index:10;width:inherit!important;border-bottom-left-radius:5px;border-bottom-right-radius:5px}
+.jqTransformSelectWrapper ul a{display:block;padding:10px 5px 10px 15px;text-decoration:none;background-color:#FFF;color:#454545}
+.jqTransformSelectWrapper ul a.selected{background:#EDEDED;color:#e41b13}
+.jqTransformSelectWrapper ul a.selected:hover{background:#ebebeb;color:#e41b13}
+.jqTransformSelectWrapper ul a:hover{background:#ebebeb}
+.jqTransformHidden{display:none}
 /*selects*/
 
 /*forms*/
