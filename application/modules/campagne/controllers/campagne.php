@@ -24,25 +24,27 @@ class Campagne extends MX_Controller
 	
 	function generate_campagne()
 	{
+		$json = array();
 		$campaigns = $this->mdl_campagne->get_where(array('campaign_active' => 1));
-		foreach($campaigns->result() as $campaign)
-		{
-			var_dump($campaign);
-		}
-		$json = utf8_encode(file_get_contents('/home/skander/www/metro.toolbox/assets/json/data.json'));
-		$constants = get_defined_constants(true);
-		$json_errors = array();
-		foreach ($constants["json"] as $name => $value) {
-			if (!strncmp($name, "JSON_ERROR_", 11)) {
-				$json_errors[$value] = $name;
-			}
-		}
 
-		// Show the errors for different depths.
-		foreach (range(4, 3, -1) as $depth) {
-			var_dump(json_decode($json, true, $depth));
-			echo 'Last error: ', $json_errors[json_last_error()], PHP_EOL, PHP_EOL;
+		$colors = array('red', 'blue', 'green', 'orange', 'magenta');
+		foreach($campaigns->result() as $key => $campaign)
+		{
+            $json[] =array(
+					'start' =>  '__'.strtotime($campaign->campaign_date_start),
+					'end' =>  '__'.strtotime($campaign->campaign_date_end),
+					'content' =>  $campaign->campaign_title,
+					'group' =>  $campaign->campaign_title,
+					'id' =>  $campaign->campaign_id,
+					'className' =>  $colors[$key]
+				);
 		}
+		$json_data = json_encode($json);
+		$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+			return 'new Date(' . ($e[1] * 1000) . ')';
+		}, $json_data);
+
+		file_put_contents(FCPATH.'/assets/json/data.json',  'var jsonData = '.$json_data);
 	}
 	
 	function generate_campagne_detail($id)

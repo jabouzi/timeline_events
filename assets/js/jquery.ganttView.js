@@ -170,8 +170,11 @@ behavior: {
 						"css": { "width": (w - 1) + "px" }
 					}).append(monthNames[m] + "/" + y));
 					for (var d in dates[y][m]) {
-						daysDiv.append(jQuery("<div>", { "class": "ganttview-hzheader-day" })
-							.append(dates[y][m][d].getDate()));
+						if ((d % 5) == 0)
+						{
+							daysDiv.append(jQuery("<div>", { "class": "ganttview-hzheader-day" })
+								.append(dates[y][m][d].getDate()));
+						}
 					}
 				}
 			}
