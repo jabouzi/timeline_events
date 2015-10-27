@@ -60,6 +60,6 @@ class Mdl_login extends CI_Model
 	function custom_query($mysql_query)
 	{
 		$query = $this->db->query($mysql_query);
-		return $query->row();
+		return $query;
 	}
 }
