@@ -11,30 +11,10 @@
 			font-family: verdana, sans, arial, sans-serif;
 		}
 
-		div.green {
-			background-color: #90EE90;
-			border-color: #008000;
+		div.default {
+			cursor:pointer;
 		}
-
-		div.red {
-			background-color: #FF0000;
-			border-color: #A52A2A;
-		}
-
-		div.blue {
-			background-color: #1E90FF;
-			border-color: #0000FF;
-		}
-
-		div.orange {
-			background-color: #FFA500;
-			border-color: #FF4600;
-		}
-
-		div.magenta {
-			background-color: #A900FF;
-			border-color: #800080;
-		}
+		
 	</style>
 	<script type="text/javascript">
 		var timeline;

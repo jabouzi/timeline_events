@@ -73,6 +73,7 @@ class Campagne extends MX_Controller
 					'content' =>  $campaign_step->row()->campaign_type_name,
 					'group' =>  $campaign_step->row()->campaign_type_name,
 					'id' =>  $campaign->campaigns_step_id,
+					'className' =>  'default',
 					'editable' => false
 				);
 		}

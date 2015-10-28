@@ -16,26 +16,31 @@
 		div.green {
 			background-color: #90EE90;
 			border-color: #008000;
+			cursor:pointer;
 		}
 
 		div.red {
 			background-color: #FF0000;
 			border-color: #A52A2A;
+			cursor:pointer;
 		}
 
 		div.blue {
 			background-color: #1E90FF;
 			border-color: #0000FF;
+			cursor:pointer;
 		}
 
 		div.orange {
 			background-color: #FFA500;
 			border-color: #FF4600;
+			cursor:pointer;
 		}
 
 		div.magenta {
 			background-color: #A900FF;
 			border-color: #800080;
+			cursor:pointer;
 		}
 	</style>
 	<script type="text/javascript">
