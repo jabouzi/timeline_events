@@ -22,7 +22,11 @@ class Campagne extends MX_Controller
 	{
 		if (!$id) redirect('campagne');
 		$view_data['page_title'] = lang('dashboard.title3');
-		$this->load->view('campagne_detail.php');
+		$view_data['campaign_id'] = $id;
+		$this->mdl_campagne->set_table('campaigns');
+		$campaign = $this->mdl_campagne->get_where(array('campaign_id' => $id));
+		$view_data['campaign_name'] = $campaign->row()->campaign_title;
+		$this->load->view('campagne_detail.php', $view_data);
 	}
 	
 	function generate_campagne()
@@ -41,7 +45,8 @@ class Campagne extends MX_Controller
 					'content' =>  $campaign->campaign_title,
 					'group' =>  $campaign->campaign_title,
 					'id' =>  $campaign->campaign_id,
-					'className' =>  $colors[$key]
+					'className' =>  $colors[$key],
+					'editable' => false
 				);
 		}
 
@@ -55,7 +60,28 @@ class Campagne extends MX_Controller
 	
 	function generate_campagne_detail($id)
 	{
-		$campaigns = $this->mdl_campagne->get_id($id);
-		var_dump($campaigns->row());
+		$json = array();
+		$this->mdl_campagne->set_table('campaigns_steps');
+		$campaigns = $this->mdl_campagne->get_where(array('campaign_id' => $id));
+		foreach($campaigns->result() as $key => $campaign)
+		{
+			$this->mdl_campagne->set_table('campaigns_types');
+			$campaign_step = $this->mdl_campagne->get_where(array('campaign_type_id' => $campaign->campaigns_step_type));
+            $json[] = array(
+					'start' =>  '__'.strtotime($campaign->campaigns_step_date_start),
+					'end' =>  '__'.strtotime($campaign->campaigns_step_date_end),
+					'content' =>  $campaign_step->row()->campaign_type_name,
+					'group' =>  $campaign_step->row()->campaign_type_name,
+					'id' =>  $campaign->campaigns_step_id,
+					'editable' => false
+				);
+		}
+
+		$json_data = json_encode($json);
+		$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+			return 'new Date(' . ($e[1] * 1000) . ')';
+		}, $json_data);
+
+		file_put_contents(FCPATH.'/assets/json/data_'.$id.'.json',  'var jsonData = '.$json_data);
 	}
 }
