@@ -1,7 +1,9 @@
 <html>
 <head>
 	<title>Timeline JSON data</title>
-
+	
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/timeline.js"></script>
 	<script type="text/javascript" src="<?php echo site_url(); ?>assets/json/data.json"></script>
 	<link rel="stylesheet" type="text/css" href="<?php echo site_url(); ?>assets/css/timeline.css">
@@ -37,9 +39,10 @@
 		}
 	</style>
 	<script type="text/javascript">
-		var timeline;
+		var timeline = [];
 		var data;
 
+		// Called when the Visualization API is loaded.
 		function drawVisualization() {
 
 			var options = {
@@ -49,23 +52,34 @@
                 'style': 'box'
 			};
 			
+			function onselect() {
+				
+				for (var campaigns in jsonData)
+				{
+					if (timeline[campaigns].getSelection() != undefined)
+					{ 
+						var sel = timeline[campaigns].getSelection();
+					}
+					
+					for(var i = 0; i < jsonData[campaigns].length; i++)
+					{
+						 if (sel[i] != undefined && sel[i].row != undefined) 
+						 {
+							console.log(sel[i].row);
+							var url = window.location.href;
+							var redirect = 'detail/' + timeline[campaigns].getItem(sel[i].row).id;
+							if (url.substr(url.length - 1) != '/') redirect = '/'+redirect;
+							window.location.href = url + redirect;
+						}
+					}
+				}
+			}
+			
 			for (var campaigns in jsonData)
 			{
-				console.log(jsonData[campaigns])
-
-				timeline = new links.Timeline(document.getElementById(campaigns), options);
-
-				function onselect() {
-					var sel = timeline.getSelection();
-					var url = window.location.href;
-					var redirect = 'detail/' + timeline.getItem(sel[0].row).id;
-					if (url.substr(url.length - 1) != '/') redirect = '/'+redirect;
-					window.location.href = url + redirect;
-				}
-
-				links.events.addListener(timeline, 'select', onselect);
-
-				timeline.draw(jsonData[campaigns]);
+				timeline[campaigns] = new links.Timeline(document.getElementById(campaigns), options);
+				links.events.addListener(timeline[campaigns], 'select', onselect);
+				timeline[campaigns].draw(jsonData[campaigns]);
 			}
 		}
 
