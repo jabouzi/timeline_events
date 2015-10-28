@@ -40,28 +40,33 @@
 		var timeline;
 		var data;
 
-		// Called when the Visualization API is loaded.
 		function drawVisualization() {
 
 			var options = {
-				"axisOnTop": true,
-				"timeChangeable": false
+				'width':  '100%',
+                "axisOnTop": true,
+                "timeChangeable": false,
+                'style': 'box'
 			};
+			
+			for (var campaigns in jsonData)
+			{
+				console.log(jsonData[campaigns])
 
-			// Instantiate our timeline object.
-			timeline = new links.Timeline(document.getElementById('mytimeline'), options);
+				timeline = new links.Timeline(document.getElementById(campaigns), options);
 
-			function onselect() {
-				var sel = timeline.getSelection();
-				var url = window.location.href;
-				var redirect = 'detail/' + timeline.getItem(sel[0].row).id;
-				if (url.substr(url.length - 1) != '/') redirect = '/'+redirect;
-				window.location.href = url + redirect;
+				function onselect() {
+					var sel = timeline.getSelection();
+					var url = window.location.href;
+					var redirect = 'detail/' + timeline.getItem(sel[0].row).id;
+					if (url.substr(url.length - 1) != '/') redirect = '/'+redirect;
+					window.location.href = url + redirect;
+				}
+
+				links.events.addListener(timeline, 'select', onselect);
+
+				timeline.draw(jsonData[campaigns]);
 			}
-
-			links.events.addListener(timeline, 'select', onselect);
-
-			timeline.draw(jsonData);
 		}
 
 	</script>
@@ -70,7 +75,12 @@
 <body onload="drawVisualization();">
 <h1>Campagnes</h1>
 
-<div id="mytimeline"></div>
+<?php 
+	foreach($banners as $banner) {
+		echo '<b>-'.$banner->campaign_banner_name.'</b>';
+		echo '<div id="'.$banner->campaign_banner_name.'"></div><br />';
+	}
+?>
 
 <div id="info"></div>
 

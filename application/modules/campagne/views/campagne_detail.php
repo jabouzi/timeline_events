@@ -60,7 +60,7 @@
 <body onload="drawVisualization();">
 <h1>Campagne detail</h1>
 
-<div id="mytimeline"></div>
+<?php echo '<div id="mytimeline"></div>'; ?>
 
 <div id="info"></div>
 
