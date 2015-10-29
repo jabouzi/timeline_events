@@ -17,11 +17,11 @@
 		<script src="<?php echo site_url(); ?>assets/js/jquery-ui.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			$(function(){
-
+				
 				$.datepicker.setDefaults($.datepicker.regional[($('html').attr('lang') == 'en') ? '' : $('html').attr('lang')]);
 				$('.datechooser').datepicker();
 				
-			
+				
 				
 			});
 		</script>
@@ -118,23 +118,115 @@
 						</div>
 					</div>
 					<div class="col-sm-6">
-						<div class="row">
-						dddd
+						<div class="grayBox">
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="strategie1">Stratégie</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<input class="datechooser" type="text" name="strategie1" id="strategie1" value="15 / 04 / 2015"/>
+								</div>
+								<div class="col-sm-6 etapes-au">
+									<input class="datechooser" type="text" name="strategie2" id="strategie2" value="15 / 04 / 2015"/>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="dev-plan-chiffre1">Développement du plan chiffré</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<input class="datechooser" type="text" name="dev-plan-chiffre1" id="dev-plan-chiffre1" value="15 / 04 / 2015"/>
+								</div>
+								<div class="col-sm-6 etapes-au">
+									<input class="datechooser" type="text" name="dev-plan-chiffre2" id="dev-plan-chiffre2" value="15 / 04 / 2015"/>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="creation1">Création</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<input class="datechooser" type="text" name="creation1" id="creation1" value="15 / 04 / 2015"/>
+								</div>
+								<div class="col-sm-6 etapes-au">
+									<input class="datechooser" type="text" name="creation2" id="creation2" value="15 / 04 / 2015"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="production1">Production</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<input class="datechooser" type="text" name="production1" id="production1" value="15 / 04 / 2015"/>
+								</div>
+								<div class="col-sm-6 etapes-au">
+									<input class="datechooser" type="text" name="production2" id="production2" value="15 / 04 / 2015"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="postproduction1">Postproduction</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<input class="datechooser" type="text" name="postproduction1" id="postproduction1" value="15 / 04 / 2015"/>
+								</div>
+								<div class="col-sm-6 etapes-au">
+									<input class="datechooser" type="text" name="postproduction2" id="postproduction2" value="15 / 04 / 2015"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<label for="campagne1">Campagne</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<input class="datechooser" type="text" name="campagne1" id="campagne1" value="15 / 04 / 2015"/>
+								</div>
+								<div class="col-sm-6 etapes-au">
+									<input class="datechooser" type="text" name="campagne2" id="campagne2" value="15 / 04 / 2015"/>
+								</div>
+								</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<label for="date-event">Date de l’événement</label>
+									<input class="datechooser" type="text" name="date-event" id="date-event" value="15 / 04 / 2015"/>
+								</div>
+								<div class="col-sm-6">
+									<label for="date-medias">Date médias</label>
+									<input class="datechooser" type="text" name="date-medias" id="date-medias" value="15 / 04 / 2015"/>
+								</div>
+							</div>
+							
+							
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
-		
-		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/functions.js"></script>
-		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
-		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery.jqtransform.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$(function(){
-					$('.wrapper-select-top').jqTransform({imgPath:'/images/'});
-				});
+		</div>
+	</section>
+	
+	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/functions.js"></script>
+	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
+	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery.jqtransform.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(function(){
+				$('.wrapper-select-top').jqTransform({imgPath:'/images/'});
 			});
-		</script>
-	</body>
+		});
+	</script>
+</body>
 </html>
