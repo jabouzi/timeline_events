@@ -32,7 +32,7 @@ src:url('../fonts/sans-pro/sourcesanspro-bold-webfont.eot');
 @font-face{
 	font-family:'source_sans_prosemibold';
 	src:url('../fonts/sans-pro/sourcesanspro-semibold-webfont.eot');
-	src:url('../fonts/sans-pro/sourcesanspro-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+src:url('../fonts/sans-pro/sourcesanspro-semibold-webfont.eot?#iefix') format('embedded-opentype'),
 	url('../fonts/sans-pro/sourcesanspro-semibold-webfont.woff') format('woff'),
 	url('../fonts/sans-pro/sourcesanspro-semibold-webfont.ttf') format('truetype'),
 	url('../fonts/sans-pro/sourcesanspro-semibold-webfont.svg#source_sans_prosemibold') format('svg');
@@ -82,14 +82,14 @@ src:url('../fonts/sans-pro/sourcesanspro-bold-webfont.eot');
 @baseInputsHeight: 42px;
 @baseInputsLineHeight: 42px;
 @baseInputsPadding:0 15px;
-@baseInputsMarginBottom:15px;
+@baseInputsMarginBottom:28px;
 
 @baseLabelFontSize:13px;
 @baseLabelLineHeight:17px;
 @baseLabelMarginBottom:10px;
 
 /*****ROUNDED CORNER*****/
-
+@roundedCorners:5px;
 
 
 *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
@@ -109,21 +109,24 @@ ul,ol,ul ul{margin-bottom:15px}
 form{margin:0;padding:0}
 /*forms*/
 
-input[type="text"], input[type="tel"], input[type="password"], select { background: @baseInputsBgColor none repeat scroll 0 0;border: medium none;border-radius: 5px;font-family: "source_sans_prosemibold";  height: @baseInputsHeight;  line-height: @baseInputsLineHeight;  padding: @baseInputsPadding;  width: 100%;  margin-bottom:@baseInputsMarginBottom; }
+input[type="text"], input[type="tel"], input[type="password"], select { background: @baseInputsBgColor none repeat scroll 0 0;border: medium none;border-radius: @roundedCorners;font-family: "source_sans_prosemibold";  height: @baseInputsHeight;  line-height: @baseInputsLineHeight;  padding: @baseInputsPadding;  width: 100%;  margin-bottom:@baseInputsMarginBottom; }
 
 /* select{border:1px solid #ccc!important;background:#fff}
 
 textarea{border:1px solid #ccc;padding:4px 6px; background:#fff; color:#0590d3} */
 
-label{cursor:pointer;display:block;font-size:@baseLabelFontSize;line-height:@baseLabelLineHeight;margin-bottom:@baseLabelMarginBottom}
+label{cursor:pointer;display:block;font-size:@baseLabelFontSize;line-height:@baseLabelLineHeight;margin-bottom:@baseLabelMarginBottom; font-size:15px; font-weight:normal}
+.checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"], .radio input[type="radio"], .radio-inline input[type="radio"] {
+  margin-top: 1px;
+}
 /*selects*/
-.jqTransformSelectWrapper{position:relative;float:left;background-color:@baseInputsBgColor;border:none;margin-bottom:@baseInputsMarginBottom;width:100%!important;height:@baseInputsHeight;line-height:@baseInputsLineHeight;padding:@baseInputsPadding;border-radius:5px}
+.jqTransformSelectWrapper{position:relative;float:left;background-color:@baseInputsBgColor;border:none;margin-bottom:@baseInputsMarginBottom;width:100%!important;height:@baseInputsHeight;line-height:@baseInputsLineHeight;padding:@baseInputsPadding;border-radius:@roundedCorners}
 .jqTransformSelectWrapper div span{overflow:hidden;cursor:pointer;float:none;position:absolute;white-space:nowrap;overflow:hidden;cursor:pointer;width:inherit!important}
 .jqTransformSelectWrapper a.jqTransformSelectOpen{display:block;position:absolute;right:2px;top:0;width:36px;height:@baseInputsHeight;border-left:3px solid @lightBaseColor;text-align:center}
 .jqTransformSelectWrapper a.jqTransformSelectOpen::before{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid @lightBrandColor;content:" ";position:relative;top:34%}
-.jqTransformSelectWrapper ul{position:absolute;width:189px;top:39px;left:0;list-style:none;background-color:@baseInputsBgColor;border:solid 1px @lightBaseColor;display:none;margin:0;padding:0;height:150px;overflow:auto;overflow-y:auto;z-index:10;width:inherit!important;border-bottom-left-radius:5px;border-bottom-right-radius:5px}
+.jqTransformSelectWrapper ul{position:absolute;width:189px;top:39px;left:0;list-style:none;background-color:@baseInputsBgColor;border:solid 1px @lightBaseColor;display:none;margin:0;padding:0;height:150px;overflow:auto;overflow-y:auto;z-index:10;width:inherit!important;border-bottom-left-radius:@roundedCorners;border-bottom-right-radius:@roundedCorners}
 .jqTransformSelectWrapper ul a{display:block;padding:10px 5px 10px 15px;text-decoration:none;background-color:@baseInputsBgColor;color:@darkBaseColor}
-.jqTransformSelectWrapper ul a.selected{background:#EDEDED;color:@lightBrandColor}
+.jqTransformSelectWrapper ul a.selected{background:#ededed ;color:@lightBrandColor}
 .jqTransformSelectWrapper ul a.selected:hover{background:@lightBaseColor;color:@lightBrandColor}
 .jqTransformSelectWrapper ul a:hover{background:@lightBaseColor}
 .jqTransformHidden{display:none}
@@ -154,22 +157,42 @@ h1 + ul.mytabs{padding-top:0}
 .non-wrap{white-space:nowrap}
 #main_wrap{padding-bottom:50px}
 /*general*/
+/*btns*/
+.btn_login_box{height:60px;line-height:60px;padding:0 15px; border:1px solid @lightBrandColor; color:@baseOnBrandColor; text-decoration:none; display:inline-block; border-radius:@roundedCorners;}
 
-
-.container {
-	margin: 80px auto;
-	width: 640px;
+.btn_login_box.btnLogin{background:@lightBrandColor;font-family:'source_sans_probold';text-transform:uppercase;color:@baseOnBrandColor;  }
+/*btns*/
+/*table simulation*/
+.table_wp {display:table; width:100%}
+.table_cell {
+  display: table-cell;
+  vertical-align: middle;
 }
+.table_cell.toolboxLogo{text-align:right; }
+.table_cell.brandLogo{text-align:left; border-left:1px solid @baseOnBrandColor }
+
+
+.login_wp{max-width:455px;margin: 0 auto;}
 
 .login {
+	
 	background:@lightBrandColor;
-	position: relative;
-	margin: 0 auto;
+	
 	padding: 20px 20px 20px;
-	width: 310px;
-	border-radius: 3px;
-	-webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
-	box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+	border-top-left-radius:@roundedCorners;border-top-right-radius:@roundedCorners;
+	
 }
-
+.loginBtnsBox {border-bottom-left-radius:@roundedCorners;border-bottom-right-radius:@roundedCorners;background:@darkBrandColor; padding:30px; text-align:center}
+.loginBox input{margin-bottom:32px}
+.loginBox  .jqTransformSelectWrapper{margin-bottom:10px}
 .remember_me {clear:both}
+.customBg {background:url("/assets/images/toolbox/bgBrand.jpg") no-repeat fixed top center;background-size:cover}
+.customBg::before {
+  background: #fff none repeat scroll 0 0;
+  content: "";
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  opacity:0.8
+}

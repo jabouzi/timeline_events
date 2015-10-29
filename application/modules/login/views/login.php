@@ -17,35 +17,64 @@
 		
 		
 	</head>
-	<body>
+	<body class="customBg">
 		
 		<section class="container">
-			<div class="login">
-				<h1><?php echo lang('login.title'); ?></h1>
-				<p><?php echo lang($message); ?></p>
-				<form method="post" action="<?php echo site_url('login/process'); ?>">
-					<p><input type="text" name="email" value="<?php echo $this->input->post('email'); ?>" placeholder="<?php echo lang('login.email'); ?>"></p>
-					<p><input type="password" name="password" value="<?php echo $this->input->post('password'); ?>" placeholder="<?php echo lang('login.password'); ?>"></p>
-					<div>
-						<?php echo lang('login.lang'); ?>
-						<div class="wrapper-select-top">
+			<form  name="formLogin" method="post" action="<?php echo site_url('login/process'); ?>">
+				<div class="login_wp">
+					<div class="login">
+						<?/*<h1><?php echo lang('login.title'); ?></h1>*/?>
+						<div class="table_wp">
 							
-							<?php echo form_dropdown('lang', $languages, $lang, $redirect); ?>
+							<div class="table_cell toolboxLogo">
+								<img src="/assets/images/toolbox/toolbox.png" alt="" />
+							</div>
+							<div class="table_cell brandLogo">
+								<img src="/assets/images/toolbox/logoBrand.png" alt="" />
+							</div>
+							
+						</div>
+						<p><?php echo lang($message); ?></p>
+						<div class="loginBox">
+							<label for="email"><?php echo lang('login.email'); ?></label>
+							<input type="text" name="email" value="<?php echo $this->input->post('email'); ?>" >
+							<label for="password"><?php echo lang('login.password'); ?></label>
+							<input type="password" name="password" value="<?php echo $this->input->post('password'); ?>" >
+							
+							<label>	<?php echo lang('login.lang'); ?></label>
+							<div class="wrapper-select-top">
+								
+								<?php echo form_dropdown('lang', $languages, $lang, $redirect); ?>
+							</div>
+							
+							<div class="remember_me">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="remember_me" id="remember_me" <?php echo $checked; ?> >
+										<?php echo lang('login.remember'); ?>
+									</label>
+								</div>
+								
+							</div>
+							
+							
 						</div>
 					</div>
-					<p class="remember_me">
-						<label>
-							<input type="checkbox" name="remember_me" id="remember_me" <?php echo $checked; ?> >
-							<?php echo lang('login.remember'); ?>
-						</label>
-					</p>
-					<p class="submit"><input type="submit" name="commit" value="<?php echo lang('login.login'); ?>"></p>
-				</form>
-			</div>
+					<div class="loginBtnsBox">
+						<?/*<p class="submit"><input type="submit" name="commit" value="<?php echo lang('login.login'); ?>"></p>*/?>
+						
+						<a class="btn_login_box" href="<?php echo site_url('login/password'); ?>"><?php echo lang('login.forget'); ?></a>
+						<input class="btn_login_box btnLogin" type="submit" name="commit" value="<?php echo lang('login.login'); ?>">
+					</div>
+					
+				</div>
+			</form>
 			
+			<?/*
 			<div class="login-help">
 				<p><?php echo lang('login.forget'); ?> <a href="<?php echo site_url('login/password'); ?>"><?php echo lang('login.reset'); ?></a>.</p>
 			</div>
+			*/?>
 		</section>
 		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/functions.js"></script>
 		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
@@ -58,4 +87,4 @@
 			});
 		</script>
 	</body>
-</html>
+	</html>
