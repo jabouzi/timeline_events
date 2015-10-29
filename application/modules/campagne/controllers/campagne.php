@@ -18,6 +18,12 @@ class Campagne extends MX_Controller
 		$this->load->view('campagne.php', $view_data);
 	}
 	
+	function edit()
+	{
+		$view_data['page_title'] = lang('dashboard.title3');
+		$this->load->view('campagne_edition.php');
+	}
+	
 	function detail($id = null)
 	{
 		if (!$id) redirect('campagne');
