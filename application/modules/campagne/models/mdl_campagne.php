@@ -56,17 +56,18 @@ class Mdl_campagne extends CI_Model
 	function insert($data)
 	{
 		$this->db->insert($this->get_table(), $data);
+		$last_id = $this->db->insert_id();
 	}
 	
-	function update($id, $data)
+	function update($field_id, $id, $data)
 	{
-		$this->db->where('id', $id);
+		$this->db->where($field_id, $id);
 		$this->db->update($this->get_table(), $data);
 	}
 	
-	function delete($id)
+	function delete($field_id, $id)
 	{
-		$this->db->where('id', $id);
+		$this->db->where($field_id, $id);
 		$this->db->delete($this->get_table());
 	}
 	
@@ -85,9 +86,9 @@ class Mdl_campagne extends CI_Model
 		return $num_rows;
 	}
 	
-	function get_max()
+	function get_max($field_id)
 	{
-		$this->db->select_max('id');
+		$this->db->select_max($field_id);
 		$query = $this->db->get($this->get_table());
 		$row   = $query->row();
 		$id	= $row->id;

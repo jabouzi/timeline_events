@@ -35,6 +35,160 @@ class Campagne extends MX_Controller
 		$this->load->view('campagne_detail.php', $view_data);
 	}
 	
+	function process_add_compaing()
+	{
+		$campaign_data = array(
+			'client_id' => $this->input->post('client_id'),
+			'campaign_project_number' => $this->input->post('campaign_project_number'),
+			'campaign_store_number' => $this->input->post('campaign_store_number'),
+			'campaign_title' => $this->input->post('campaign_title') ,
+			'campaign_date_start' => $this->input->post('campaign_date_start'),
+			'campaign_date_end' => $this->input->post('campaign_date_end'),
+			'campaign_branch' => $this->input->post('campaign_branch'),
+			'campaign_address'=> $this->input->post('campaign_address') ,
+			'campaign_active' => $this->input->post('campaign_active'),
+		);
+		$this->add_campaign($campaign_data);
+	}
+	
+	function process_edit_compaing()
+	{
+		$campaign_id = $this->input->post('campaign_id');
+		$campaign_data = array(
+			'client_id' => $this->input->post('client_id'),
+			'campaign_project_number' => $this->input->post('campaign_project_number'),
+			'campaign_store_number' => $this->input->post('campaign_store_number'),
+			'campaign_title' => $this->input->post('campaign_title') ,
+			'campaign_date_start' => $this->input->post('campaign_date_start'),
+			'campaign_date_end' => $this->input->post('campaign_date_end'),
+			'campaign_branch' => $this->input->post('campaign_branch'),
+			'campaign_address'=> $this->input->post('campaign_address') ,
+			'campaign_active' => $this->input->post('campaign_active'),
+		);
+		$campaign = $this->mdl_campaign->get_id('campaign_id', $campaign_id);
+		$campaign_old_data = array(
+			'client_id' => $campaign->client_id,
+			'campaign_project_number' => $campaign->campaign_project_number,
+			'campaign_store_number' => $campaign->campaign_store_number,
+			'campaign_title' => $campaign->campaign_title ,
+			'campaign_date_start' => $campaign->campaign_date_start,
+			'campaign_date_end' => $campaign->campaign_date_end,
+			'campaign_branch' => $campaign->campaign_branch,
+			'campaign_address'=> $campaign->campaign_address ,
+			'campaign_active' => $campaign->campaign_active,
+		);
+
+		if (count(compare_profile($campaign_old_data, $campaign_data)))
+		{
+			$campaign_data['campaign_password'] = $this->encrypt->encode($campaign_data['campaign_password']);
+			$this->update_campaign($campaign_id, $campaign_data);
+		}
+		
+		redirect('campaign/editcampaign/'.$campaign_id);
+	}
+	
+	function process_add_compaing_steps()
+	{
+		$campaign_data = array(
+			'client_id' => $this->input->post('client_id'),
+			'campaign_project_number' => $this->input->post('campaign_project_number'),
+			'campaign_store_number' => $this->input->post('campaign_store_number'),
+			'campaign_title' => $this->input->post('campaign_title') ,
+			'campaign_date_start' => $this->input->post('campaign_date_start'),
+			'campaign_date_end' => $this->input->post('campaign_date_end'),
+			'campaign_branch' => $this->input->post('campaign_branch'),
+			'campaign_address'=> $this->input->post('campaign_address') ,
+			'campaign_active' => $this->input->post('campaign_active'),
+		);
+		$this->add_campaign($campaign_data);
+	}
+	
+	function process_edit_compaing_steps()
+	{
+		$campaign_id = $this->input->post('campaign_id');
+		$campaign_data = array(
+			'client_id' => $this->input->post('client_id'),
+			'campaign_project_number' => $this->input->post('campaign_project_number'),
+			'campaign_store_number' => $this->input->post('campaign_store_number'),
+			'campaign_title' => $this->input->post('campaign_title') ,
+			'campaign_date_start' => $this->input->post('campaign_date_start'),
+			'campaign_date_end' => $this->input->post('campaign_date_end'),
+			'campaign_branch' => $this->input->post('campaign_branch'),
+			'campaign_address'=> $this->input->post('campaign_address') ,
+			'campaign_active' => $this->input->post('campaign_active'),
+		);
+		$campaign = $this->mdl_campaign->get_id('campaign_id', $campaign_id);
+		$campaign_old_data = array(
+			'client_id' => $campaign->client_id,
+			'campaign_project_number' => $campaign->campaign_project_number,
+			'campaign_store_number' => $campaign->campaign_store_number,
+			'campaign_title' => $campaign->campaign_title ,
+			'campaign_date_start' => $campaign->campaign_date_start,
+			'campaign_date_end' => $campaign->campaign_date_end,
+			'campaign_branch' => $campaign->campaign_branch,
+			'campaign_address'=> $campaign->campaign_address ,
+			'campaign_active' => $campaign->campaign_active,
+		);
+
+		if (count(compare_profile($campaign_old_data, $campaign_data)))
+		{
+			$campaign_data['campaign_password'] = $this->encrypt->encode($campaign_data['campaign_password']);
+			$this->update_campaign($campaign_id, $campaign_data);
+		}
+		
+		redirect('campaign/editcampaign/'.$campaign_id);
+	}
+	
+	private function add_campaign($campaign_data)
+	{
+		$campaign_id = $this->mdl_campaign->insert($campaign_data);
+		$this->session->set_campaigndata('success_message', lang('campaign.success'));
+		$campaign = $this->mdl_campaign->get_id('campaign_id', $campaign_id);
+		$messagedata = array($campaign->campaign_firstname, $campaign->campaign_lastname, site_url(), $campaign->campaign_email, $this->encrypt->decode($campaign->campaign_password));
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox',$campaign->campaign_email, lang('campaign.add'));
+		$this->maildecorator->decorate($messagedata, lang('mail.createcampaign'));
+		$this->maildecorator->sendmail($maildata);
+		redirect('campaign/editcampaign/'.$campaign_id);
+	}
+	
+	private function update_campaign($campaign_id, $campaign_data)
+	{
+		$this->mdl_campaign->update('campaign_id', $campaign_id, $campaign_data);
+		$this->session->set_campaigndata('success_message', lang('campaign.success'));
+		$campaign = $this->mdl_campaign->get_id('campaign_id', $campaign_id);
+		$messagedata = array($campaign->campaign_firstname, $campaign->campaign_lastname, $campaign->campaign_email, $this->encrypt->decode($campaign->campaign_password));
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $campaign->campaign_email, lang('campaign.update'));
+		$this->maildecorator->decorate($messagedata, lang('mail.updatecampaign'));
+		$this->maildecorator->sendmail($maildata);
+		$this->session->unset_campaigndata('campaign_'.$campaign_id);
+		redirect('campaign/editcampaign/'.$campaign_id);
+	}
+	
+	private function add_campaign_step($campaign_data)
+	{
+		$campaign_id = $this->mdl_campaign->insert($campaign_data);
+		$this->session->set_campaigndata('success_message', lang('campaign.success'));
+		$campaign = $this->mdl_campaign->get_id('campaign_id', $campaign_id);
+		$messagedata = array($campaign->campaign_firstname, $campaign->campaign_lastname, site_url(), $campaign->campaign_email, $this->encrypt->decode($campaign->campaign_password));
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox',$campaign->campaign_email, lang('campaign.add'));
+		$this->maildecorator->decorate($messagedata, lang('mail.createcampaign'));
+		$this->maildecorator->sendmail($maildata);
+		redirect('campaign/editcampaign/'.$campaign_id);
+	}
+	
+	private function update_campaign_step($campaign_id, $campaign_data)
+	{
+		$this->mdl_campaign->update('campaign_id', $campaign_id, $campaign_data);
+		$this->session->set_campaigndata('success_message', lang('campaign.success'));
+		$campaign = $this->mdl_campaign->get_id('campaign_id', $campaign_id);
+		$messagedata = array($campaign->campaign_firstname, $campaign->campaign_lastname, $campaign->campaign_email, $this->encrypt->decode($campaign->campaign_password));
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $campaign->campaign_email, lang('campaign.update'));
+		$this->maildecorator->decorate($messagedata, lang('mail.updatecampaign'));
+		$this->maildecorator->sendmail($maildata);
+		$this->session->unset_campaigndata('campaign_'.$campaign_id);
+		redirect('campaign/editcampaign/'.$campaign_id);
+	}
+	
 	function generate_campagne()
 	{
 		$json = array();
