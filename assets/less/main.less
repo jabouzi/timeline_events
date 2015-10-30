@@ -86,7 +86,7 @@ src:url('../fonts/sans-pro/sourcesanspro-semibold-webfont.eot?#iefix') format('e
 
 @baseLabelFontSize:13px;
 @baseLabelLineHeight:17px;
-@baseLabelMarginBottom:10px;
+@baseLabelMarginBottom:6px;
 
 /*****ROUNDED CORNER*****/
 @roundedCorners:5px;
@@ -115,12 +115,12 @@ input[type="text"], input[type="tel"], input[type="password"], select { backgrou
 
 textarea{border:1px solid #ccc;padding:4px 6px; background:#fff; color:#0590d3} */
 
-label{cursor:pointer;display:block;font-size:@baseLabelFontSize;line-height:@baseLabelLineHeight;margin-bottom:@baseLabelMarginBottom; font-size:15px; font-weight:normal}
+label{cursor:pointer;display:block;font-size:@baseLabelFontSize;line-height:@baseLabelLineHeight;margin-bottom:@baseLabelMarginBottom; font-size:13px; font-weight:normal}
 .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"], .radio input[type="radio"], .radio-inline input[type="radio"] {
   margin-top: 1px;
 }
 /*selects*/
-.jqTransformSelectWrapper{position:relative;float:left;background-color:@baseInputsBgColor;border:none;margin-bottom:@baseInputsMarginBottom;width:100%!important;height:@baseInputsHeight;line-height:@baseInputsLineHeight;padding:@baseInputsPadding;border-radius:@roundedCorners}
+.jqTransformSelectWrapper{position:relative;background-color:@baseInputsBgColor;border:none;margin-bottom:@baseInputsMarginBottom;width:100%!important;height:@baseInputsHeight;line-height:@baseInputsLineHeight;padding:@baseInputsPadding;border-radius:@roundedCorners}
 .jqTransformSelectWrapper div span{overflow:hidden;cursor:pointer;float:none;position:absolute;white-space:nowrap;overflow:hidden;cursor:pointer;width:inherit!important}
 .jqTransformSelectWrapper a.jqTransformSelectOpen{display:block;position:absolute;right:2px;top:0;width:36px;height:@baseInputsHeight;border-left:3px solid @lightBaseColor;text-align:center}
 .jqTransformSelectWrapper a.jqTransformSelectOpen::before{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid @lightBrandColor;content:" ";position:relative;top:34%}
@@ -158,9 +158,21 @@ h1 + ul.mytabs{padding-top:0}
 #main_wrap{padding-bottom:50px}
 /*general*/
 /*btns*/
-.btn_login_box{height:60px;line-height:60px;padding:0 15px; border:1px solid @lightBrandColor; color:@baseOnBrandColor; text-decoration:none; display:inline-block; border-radius:@roundedCorners;}
+.btn_login_box{height:60px;line-height:60px;padding:0 15px; border:1px solid @lightBrandColor; color:@baseOnBrandColor; text-decoration:none; display:inline-block; border-radius:@roundedCorners;margin-bottom:15px}
+.btn_login_box:hover{text-decoration:none}
+.btn_login_box.btnLogin{background:@lightBrandColor;font-family:'source_sans_probold';text-transform:uppercase;color:@baseOnBrandColor;margin-left:10px  }
+/*btns svg*/
+a.btn-icon-on-dark{background:@lightBrandColor;border-radius:@roundedCorners;color:#fff;display:inline-block;font-size:15px;height:42px;line-height:42px;margin-bottom:15px;padding:0 20px;text-decoration:none}
+a.btn-icon-on-dark .icon-svg{display:inline-block;margin-right:5px;vertical-align:middle;width:20px; height:20px}
+a.btn-icon-on-dark .icon-svg path {fill:@baseOnBrandColor;}
 
-.btn_login_box.btnLogin{background:@lightBrandColor;font-family:'source_sans_probold';text-transform:uppercase;color:@baseOnBrandColor;  }
+
+a.btn-icon-on-dark-header{color:@baseOnBrandColor;display:inline-block;font-size:15px;height:55px;text-decoration:none;border-bottom:5px solid @lightBrandColor}
+a.btn-icon-on-dark-header:hover {border-bottom:5px solid @baseOnBrandColor}
+a.btn-icon-on-dark-header .icon-svg{display:inline-block;margin-right:5px;vertical-align:middle;width:20px; height:20px;}
+a.btn-icon-on-dark-header .icon-svg path {fill:@baseOnBrandColor;}
+/* .btn-icon-on-dark-header span {display:inline-block; overflow:hidden} */
+/*btns svg*/
 /*btns*/
 /*table simulation*/
 .table_wp {display:table; width:100%}
@@ -172,20 +184,21 @@ h1 + ul.mytabs{padding-top:0}
 .table_cell.brandLogo{text-align:left; border-left:1px solid @baseOnBrandColor }
 
 
-.login_wp{max-width:455px;margin: 0 auto;}
+.login_wp{max-width:455px;margin:10% auto 0;}
 
 .login {
 	
 	background:@lightBrandColor;
 	
-	padding: 20px 20px 20px;
+	padding: 28px 35px 17px 35px;
 	border-top-left-radius:@roundedCorners;border-top-right-radius:@roundedCorners;
 	
 }
-.loginBtnsBox {border-bottom-left-radius:@roundedCorners;border-bottom-right-radius:@roundedCorners;background:@darkBrandColor; padding:30px; text-align:center}
+.loginBtnsBox {border-bottom-left-radius:@roundedCorners;border-bottom-right-radius:@roundedCorners;background:@darkBrandColor; padding:36px 30px 26px; text-align:center}
 .loginBox input{margin-bottom:32px}
 .loginBox  .jqTransformSelectWrapper{margin-bottom:10px}
 .remember_me {clear:both}
+body {background:@bgColor}
 .customBg {background:url("/assets/images/toolbox/bgBrand.jpg") no-repeat fixed top center;background-size:cover}
 .customBg::before {
   background: #fff none repeat scroll 0 0;
@@ -197,6 +210,16 @@ h1 + ul.mytabs{padding-top:0}
   opacity:0.8
 }
 .grayBox {background:@lightBaseColor; padding:25px 22px  0px 22px}
+.header {background:@lightBrandColor; margin-bottom:35px}
+.header .table_wp {float: left;width: auto;margin-top:18px}
+ul.menu-header{float:right;margin-bottom:0;margin-top:35px}
+ul.menu-header li {display:inline-block;list-style:none; margin-left:50px}
+.breadcrumb {background:none;padding:0px; margin-bottom:35px}
+.breadcrumb a{color:@lightBrandColor;font-size:15px;text-decoration:none}
+.breadcrumb span {color:@darkBaseColor}
+.breadcrumb a:hover{color:@darkBaseColor}
+.breadcrumb > li + li:before{color:#48742a;content:"/ ";padding:0 10px;display:inline-block}
+
 /*data picker*/
 /*demo page css*/
 			input.hasDatepicker.open { border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; }
