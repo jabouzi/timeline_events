@@ -105,9 +105,9 @@
 			<section>
 				<div class="container">
 					<div class="collapsious-wrapper">
-						<div class="collapsious">
+						<div class="collapsious opened">
 							<span>Metro</span>
-							<div>
+							<div style="display: block;">
 						<img src="/assets/images/toolbox/calendrier-metro-holder.png" alt="" />
 								
 							</div>
