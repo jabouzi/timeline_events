@@ -45,6 +45,12 @@
 		
 	</head>
 	<body>
+<?php
+echo '<pre>';
+print_r($this->session->userdata);
+echo $this->session->userdata('user_firstname');
+echo '</pre>';
+?>	
 		<div class="header">
 			<div class="container">
 				<div class="row">
