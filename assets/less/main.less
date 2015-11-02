@@ -171,7 +171,7 @@ h1 + ul.mytabs{padding-top:0} */
 
 
 a.btn-icon-on-dark-header{color:@baseOnBrandColor;display:inline-block;font-size:15px;height:55px;text-decoration:none;border-bottom:5px solid @lightBrandColor}
-a.btn-icon-on-dark-header:hover {border-bottom:5px solid @baseOnBrandColor}
+a.btn-icon-on-dark-header:hover,a.btn-icon-on-dark-header.active {border-bottom:5px solid @baseOnBrandColor}
 a.btn-icon-on-dark-header .icon-svg{display:inline-block;margin-right:5px;vertical-align:middle;width:20px; height:20px;}
 a.btn-icon-on-dark-header .icon-svg path {fill:@baseOnBrandColor;}
 
@@ -294,13 +294,33 @@ footer .tgi-logo {float:right; margin-top:20px; padding-bottom:15px}
 		.collapsious > div {
 		margin-top: 15px; }
 /*collapses*/
+.plan-campagne {float:right}
+.plan-campagne a {display:inline-block; height:40px; line-height:40px; padding: 0 33px; color:@darkBaseColor; border-top:1px solid @darkBaseColor;border-botttom:1px solid @darkBaseColor}
+
+.plan-campagne a {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 33px;
+    color: #454545;
+    border-top: 1px solid #ababab;
+    border-bottom: 1px solid #ababab;
+    float: left;
+}
+.plan-campagne a.active {background:#f5f5f5; color:#ababab}
+.plan-campagne a:hover {text-decoration:none;background:#f5f5f5; color:#ababab}
 
 
-
-
-
-
-
+h2 {font-size:22px; line-height:26px; text-transform:uppercase}
+.plan-campagne-wp h2 {
+    float: left;
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+.plan-campagne-wp {
+    overflow: hidden;
+    margin-bottom: 25px;
+}
 /* Large desktop */
 @media (min-width: 1200px) {  }
 
