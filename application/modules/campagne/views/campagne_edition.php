@@ -113,7 +113,7 @@
 							</h2>
 							<div class="grayBox">
 								<div class="row">
-									<div class="col-sm-6">
+									<div class="col-sm-12 col-md-6">
 										<label for="campaign_banner_id">Bannière</label>
 										<div class="wrapper-select-top">
 											<select name="campaign_banner_id" id="campaign_banner_id">
@@ -123,7 +123,7 @@
 											</select>
 										</div>
 									</div>
-									<div class="col-sm-6">
+									<div class="col-sm-12 col-md-6">
 										<label for="campaign_type_id">Type de campagne</label>
 										<div class="wrapper-select-top">
 											<select name="campaign_type_id" id="campaign_type_id">
@@ -151,17 +151,17 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-6">
+									<div class="col-sm-12 col-md-6">
 										<label for="campaign_branch">Nom de la succursale</label>
 										<input type="text" name="campaign_branch" id="campaign_branch" value="Arthur-Sauvé"/>
 									</div>
-									<div class="col-sm-6">
+									<div class="col-sm-12 col-md-6">
 										<label for="adresse-succursale">Adresse de la succursale</label>
 										<input type="text" name="campaign_address" id="campaign_address" value="6155, boulevard Arthur-Sauvé"/>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-6">
+									<div class="col-sm-12 col-md-6">
 										<label for="campaign_manager_tgi">Chargée de projet (Tonik Groupimage)</label>
 										<div class="wrapper-select-top">
 											<select name="campaign_manager_tgi" id="campaign_manager_tgi">
@@ -171,7 +171,7 @@
 											</select>
 										</div>
 									</div>
-									<div class="col-sm-6">
+									<div class="col-sm-12 col-md-6">
 										<label for="campaign_manager_client">Coordonnateur (Metro)</label>
 										<div class="wrapper-select-top">
 											<select name="campaign_manager_client" id="campaign_manager_client">
@@ -183,11 +183,11 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-6">
+									<div class="col-sm-12 col-md-6">
 										<label for="campaign_project_number">Numéro de projet</label>
 										<input type="text" name="campaign_project_number" id="campaign_project_number" value="91339"/>
 									</div>
-									<div class="col-sm-6">
+									<div class="col-sm-12 col-md-6">
 										<label for="campaign_store_number">Numéro de magasin</label>
 										<input type="text" name="campaign_store_number" id="campaign_store_number" value="123456"/>
 									</div>
