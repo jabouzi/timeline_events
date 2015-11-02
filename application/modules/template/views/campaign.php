@@ -46,10 +46,10 @@
 	</head>
 	<body>
 <?php
-/*echo '<pre>';
+echo '<pre>';
 print_r($this->session->userdata);
 echo $this->session->userdata('user_firstname');
-echo '</pre>';*/
+echo '</pre>';
 ?>	
 		<div class="header">
 			<div class="container">
