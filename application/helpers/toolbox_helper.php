@@ -74,7 +74,7 @@ function set_maildata($from, $name, $to, $subject)
 
 function get_status_list()
 {
-	return array('user.inactive', 'user.active');
+	return array(48=>'user.inactive' , 49=>'user.active');
 }
 
 function array_for_dropdown($array, $value, $option = null)
@@ -89,3 +89,10 @@ function array_for_dropdown($array, $value, $option = null)
 	
 	return $dropdown;
 }
+
+
+function get_client_status_list()
+{
+	return array(48=>'client.inactive' , 49=>'client.active');
+}
+
