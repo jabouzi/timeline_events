@@ -92,11 +92,16 @@ class Login extends MX_Controller
 				$hash = generate_random_string(26);
 				$this->setcookie($username, $hash);
 			}
+					
+			if ($result->user_permission == 1){
+				redirect('dashboard');
+			}
+			else
+			{
+				redirect('campaign');
+			}
 			
-			//	var_dump($result);
-			//	exit();
 			
-			redirect('campaign');
 		}
 	}
 	
