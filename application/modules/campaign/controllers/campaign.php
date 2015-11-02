@@ -19,6 +19,34 @@ class Campaign extends MX_Controller
 		$this->load->view('campaign.php', $view_data);
 	}
 	
+	function add()
+	{
+		$this->mdl_campaign->set_table('campaigns_banners');
+		$campaign_banners = $this->mdl_campaign->get()->result();
+		
+		$campaign_types = $this->mdl_campaign->set_table('campaigns_types');
+		$campaign_types = $this->mdl_campaign->get()->result();
+
+		$this->mdl_campaign->set_table('campaigns_steps_types');
+		$campaign_steps_types = $this->mdl_campaign->get()->result();
+		
+		$this->mdl_campaign->set_table('campaigns_project_managers');
+		$campaign_managers_tgi = $this->mdl_campaign->get_where(array('campaign_manager_tgi' => 1))->result();
+		$campaign_managers_client = $this->mdl_campaign->get_where(array('campaign_manager_tgi' => 0))->result();
+		
+		$campaign_data['campaign_banners'] = array_for_dropdown($campaign_banners, 'campaign_banner_id', 'campaign_banner_name');
+		$campaign_data['campaign_types'] = array_for_dropdown($campaign_types, 'campaign_type_id', 'campaign_type_name');
+		
+		$campaign_data['campaign_managers_tgi'] = array_for_dropdown($campaign_managers_tgi, 'campaign_manager_id', 'campaign_manager_name');
+		$campaign_data['campaign_managers_client'] = array_for_dropdown($campaign_managers_client, 'campaign_manager_id', 'campaign_manager_name');
+		
+		$campaign_data['campaign_steps_types'] = array_for_dropdown($campaign_steps_types, 'campaign_step_type_id', 'campaign_step_type_name');
+		
+		//$view_data['page_title'] = lang('dashboard.title3');
+		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_add.php', $campaign_data, true);
+		echo modules::run('template/campaign', $view_data);
+	}
+	
 	function edit($id = null)
 	{
 		if (!$id) redirect('campaign');
