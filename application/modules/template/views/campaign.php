@@ -47,7 +47,8 @@
 	<body>
 <?php
 echo '<pre>';
-print_r($this->session);
+print_r($this->session->userdata);
+echo $this->session->userdata('user_firstname');
 echo '</pre>';
 ?>	
 		<div class="header">
