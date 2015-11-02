@@ -45,6 +45,11 @@
 		
 	</head>
 	<body>
+<?php
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
+?>	
 		<div class="header">
 			<div class="container">
 				<div class="row">
