@@ -62,6 +62,10 @@ class Login extends MX_Controller
 		$username = $this->security->xss_clean($this->input->post('email'));
 		$password = $this->security->xss_clean($this->input->post('password'));
 		$result = $this->mdl_login->validate_user($username, $password);
+		
+		
+		//var_dump($result);
+	
 		if(!$result)
 		{
 			$this->show('login.failed');
@@ -88,7 +92,11 @@ class Login extends MX_Controller
 				$hash = generate_random_string(26);
 				$this->setcookie($username, $hash);
 			}
-			redirect('dashboard');
+			
+			//	var_dump($result);
+			//	exit();
+			
+			redirect('campaign');
 		}
 	}
 	
