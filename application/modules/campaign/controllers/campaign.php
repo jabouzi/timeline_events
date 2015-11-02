@@ -21,8 +21,10 @@ class Campaign extends MX_Controller
 	function edit($id = null)
 	{
 		if (!$id) redirect('campaign');
-		$view_data['page_title'] = lang('dashboard.title3');
-		$this->load->view('campaign_edit.php');
+		$campaign = $this->mdl_campaign->get_id('campaign_id', $id);
+		//$view_data['page_title'] = lang('dashboard.title3');
+		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_edit.php', $campaign, true);
+		echo modules::run('template/campaign', $view_data);
 	}
 	
 	function detail($id = null)

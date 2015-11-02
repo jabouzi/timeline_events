@@ -64,6 +64,11 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('.submit').click(function()
+	{
+		('#'+$(this).attr('data-value')).submit();
+	});
+	
 	var build = function(select, tr) {
 		select.multiselect();
 		
