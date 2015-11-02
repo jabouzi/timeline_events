@@ -46,10 +46,27 @@
 	</head>
 	<body>
 <?php
-echo '<pre>';
+/*echo '<pre>';
 print_r($this->session->userdata);
 echo $this->session->userdata('user_firstname');
-echo '</pre>';
+echo '</pre>';*/
+
+/*
+Array
+(
+    [session_id] => dc05139dd9550ab83672496b7eec6c19
+    [ip_address] => 209.104.115.221
+    [user_agent] => Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko
+    [last_activity] => 1446503907
+    [user_data] => 
+    [user_id] => 12
+    [user_firstname] => Hugo
+    [user_lastname] => Carranza
+    [user_email] => hugo.carranza@tonikgroupimage.com
+    [user_permission] => 2
+    [browser] => Mozilla
+    [validated] => 1
+)*/
 ?>	
 		<div class="header">
 			<div class="container">
