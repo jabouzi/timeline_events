@@ -1,47 +1,39 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Campagne extends MX_Controller
+class Campaign extends MX_Controller
 {
 	
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('mdl_campagne');
+		$this->load->model('mdl_campaign');
 	}
 	
 	function index()
 	{
 		$view_data['page_title'] = lang('dashboard.title3');
-		$this->mdl_campagne->set_table('campaigns_banners');
-		$banners = $this->mdl_campagne->get();
+		$this->mdl_campaign->set_table('campaigns_banners');
+		$banners = $this->mdl_campaign->get();
 		$view_data['banners'] = $banners->result();
-		$this->load->view('campagne.php', $view_data);
+		$this->load->view('campaign.php', $view_data);
 	}
 	
 	function edit($id = null)
 	{
-		if (!$id) redirect('campagne');
+		if (!$id) redirect('campaign');
 		$view_data['page_title'] = lang('dashboard.title3');
-		$this->load->view('campagne_edition.php');
+		$this->load->view('campaign_edit.php');
 	}
-	
-	
-	function btns()
-	{
-		$view_data['page_title'] = lang('dashboard.title3');
-		$this->load->view('btns.php');
-	}
-	
 	
 	function detail($id = null)
 	{
-		if (!$id) redirect('campagne');
+		if (!$id) redirect('campaign');
 		$view_data['page_title'] = lang('dashboard.title3');
 		$view_data['campaign_id'] = $id;
-		$this->mdl_campagne->set_table('campaigns');
-		$campaign = $this->mdl_campagne->get_where(array('campaign_id' => $id));
+		$this->mdl_campaign->set_table('campaigns');
+		$campaign = $this->mdl_campaign->get_where(array('campaign_id' => $id));
 		$view_data['campaign_name'] = $campaign->row()->campaign_title;
-		$this->load->view('campagne_detail.php', $view_data);
+		$this->load->view('campaign_detail.php', $view_data);
 	}
 	
 	function process_add_campaign()
@@ -83,7 +75,7 @@ class Campagne extends MX_Controller
 			'campaign_manager_tgi'=> $this->input->post('campaign_manager_tgi'),
 			'campaign_active' => $this->input->post('campaign_active'),
 		);
-		$campaign = $this->mdl_campagne->get_id('campaign_id', $campaign_id);
+		$campaign = $this->mdl_campaign->get_id('campaign_id', $campaign_id);
 		$campaign_old_data = array(
 			'client_id' => $campaign->client_id,
 			'campaign_banner_id' => $campaign->campaign_banner_id,
@@ -127,7 +119,7 @@ class Campagne extends MX_Controller
 			'campaigns_step_date_start' => $this->input->post('campaigns_step_date_start') ,
 			'campaigns_step_date_end' => $this->input->post('campaigns_step_date_end')
 		);
-		$campaign_step = $this->mdl_campagne->get_id('campaign_step_id', $campaign_step_id);
+		$campaign_step = $this->mdl_campaign->get_id('campaign_step_id', $campaign_step_id);
 		$campaign_step_old_data = array(
 			'client_id' => $campaign->client_id,
 			'campaign_project_number' => $campaign_step->campaign_project_number,
@@ -150,40 +142,40 @@ class Campagne extends MX_Controller
 	
 	private function add_campaign($campaign_data)
 	{
-		$campaign_id = $this->mdl_campagne->insert($campaign_data);
+		$campaign_id = $this->mdl_campaign->insert($campaign_data);
 		$this->session->set_campaigndata('success_message', lang('campaign.success'));
 		redirect('campaign/editcampaign/'.$campaign_id);
 	}
 	
 	private function update_campaign($campaign_id, $campaign_data)
 	{
-		$this->mdl_campagne->update('campaign_id', $campaign_id, $campaign_data);
+		$this->mdl_campaign->update('campaign_id', $campaign_id, $campaign_data);
 		$this->session->set_campaigndata('success_message', lang('campaign.success'));
 		redirect('campaign/editcampaign/'.$campaign_id);
 	}
 	
 	private function add_campaign_step($campaign_step_data)
 	{
-		$campaign_step_id = $this->mdl_campagne->insert($campaign_step_data);
+		$campaign_step_id = $this->mdl_campaign->insert($campaign_step_data);
 		$this->session->set_campaigndata('success_message', lang('campaign.success'));
 	}
 	
 	private function update_campaign_step($campaign_step_id, $campaign_step_data)
 	{
-		$this->mdl_campagne->update('campaign_step_id', $campaign_step_id, $campaign_step_data);
+		$this->mdl_campaign->update('campaign_step_id', $campaign_step_id, $campaign_step_data);
 		$this->session->set_campaigndata('success_message', lang('campaign.success'));
 	}
 	
-	function generate_campagne()
+	function generate_campaign()
 	{
 		$json = array();
-		$this->mdl_campagne->set_table('campaigns');
-		$campaigns = $this->mdl_campagne->get_where(array('campaign_active' => 1));
+		$this->mdl_campaign->set_table('campaigns');
+		$campaigns = $this->mdl_campaign->get_where(array('campaign_active' => 1));
 		$colors = array('red', 'blue', 'green', 'orange', 'magenta','red', 'blue', 'green', 'orange', 'magenta','red', 'blue', 'green', 'orange', 'magenta','red', 'blue', 'green', 'orange', 'magenta');
 		foreach($campaigns->result() as $key => $campaign)
 		{
-			$this->mdl_campagne->set_table('campaigns_banners');
-			$banners = $this->mdl_campagne->get_where(array('campaign_banner_id' => $campaign->campaign_banner_id));
+			$this->mdl_campaign->set_table('campaigns_banners');
+			$banners = $this->mdl_campaign->get_where(array('campaign_banner_id' => $campaign->campaign_banner_id));
             $json[$banners->row()->campaign_banner_name][] = array(
 					'start' =>  '__'.strtotime($campaign->campaign_date_start),
 					'end' =>  '__'.strtotime($campaign->campaign_date_end),
@@ -203,15 +195,15 @@ class Campagne extends MX_Controller
 		file_put_contents(FCPATH.'/assets/json/data.json',  'var jsonData = '.$json_data);
 	}
 	
-	function generate_campagne_detail($id)
+	function generate_campaign_detail($id)
 	{
 		$json = array();
-		$this->mdl_campagne->set_table('campaigns_steps');
-		$campaigns = $this->mdl_campagne->get_where(array('campaign_id' => $id));
+		$this->mdl_campaign->set_table('campaigns_steps');
+		$campaigns = $this->mdl_campaign->get_where(array('campaign_id' => $id));
 		foreach($campaigns->result() as $key => $campaign)
 		{
-			$this->mdl_campagne->set_table('campaigns_types');
-			$campaign_step = $this->mdl_campagne->get_where(array('campaign_type_id' => $campaign->campaigns_step_type));
+			$this->mdl_campaign->set_table('campaigns_types');
+			$campaign_step = $this->mdl_campaign->get_where(array('campaign_type_id' => $campaign->campaigns_step_type));
             $json[] = array(
 					'start' =>  '__'.strtotime($campaign->campaigns_step_date_start),
 					'end' =>  '__'.strtotime($campaign->campaigns_step_date_end),

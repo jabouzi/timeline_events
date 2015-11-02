@@ -103,7 +103,7 @@
 			<section>
 				<div class="container">
 					<div class="row">
-						<form id="campaign" method="post" action="<?php echo site_url('campagne/process_edit_campaign'); ?>">
+						<form id="campaign" method="post" action="<?php echo site_url('campaign/process_edit_campaign'); ?>">
 						<div class="col-sm-6">
 							<h2 class="icon-label">
 								<svg class="icon-svg icon-identificationRouge" width="50" height="32" viewBox="0 0 50 32" x="624">
