@@ -1,107 +1,69 @@
-<html>
-<head>
-	<title>Timeline JSON data</title>
+<div class="container">
+	<div class="title-top">
+		<h1 class="title-icon-on-white">
+			<span>Calendrier annuel des campagnes</span>
+		</h1>
+		<div class="title-top-btns">
+			<a href="" class="btn-icon-on-dark on-white">
+			<svg class="icon-svg icon-imprimerRouge" width="36" height="32" viewBox="0 0 36 32" x="720">
+				<path fill="#e41b13" d="M11.273 18.232H25.09v1.09H11.274v-1.09zm0 4H25.09v1.092H11.274v-1.092zm0 3.998H25.09v1.093H11.274V26.23z"/>
+				<path fill="#e41b13" d="M36.364 7.884h-7.637V.25H7.637v7.634H.002v17.453h7.35v6.413H28.73v-6.413h7.637V7.883zM9.09 1.704h18.183v6.18H9.09v-6.18zm18.205 28.593H9.037V14.762h18.258v15.535z"/>
+			</svg>
+			Imprimer
+			</a>
+			<a href="" class="btn-icon-on-dark">
+			<svg class="icon-svg icon-ajouterBlanc" viewBox="0 0 32 32" x="1008">
+				<path fill="#FFF" d="M16 32c8.837 0 16-7.163 16-16S24.837 0 16 0 0 7.163 0 16s7.163 16 16 16zm0-2.37C8.473 29.63 2.37 23.528 2.37 16S8.472 2.37 16 2.37c7.527 0 13.63 6.102 13.63 13.63S23.528 29.63 16 29.63z"></path>
+				<path fill="#FFF" d="M14.84 21.855h2.56v-4.36h4.17V15.03H17.4v-4.363h-2.56v4.36h-4.173v2.466h4.172v4.36z"></path>
+			</svg>
+			Créer une campagne
+			</a>
+		</div>
+		<div class="legendes">
+			<p class="lendende-text">Légende</p>
+			<div class="legende-colors">
+				<div class="legende-blue"><span></span>Encarts réguliers</div>
+				<div class="legende-green"><span></span>Ouverture</div>
+				<div class="legende-violet"><span></span>Relocalisation</div>
+				<div class="legende-orange"><span></span>Réno. Transformations</div>
+				<div class="legende-red"><span></span>Réno. Majeures</div>
+				<div class="legende-yellow"><span></span>Réno. Mineures</div>
+			</div>
+		</div>
+	</div>
+</div>
+<section>
+	<div class="container">
+		<div class="collapsious-wrapper">
+			<?php foreach($banners as $key => $banner) : ?>
+				<div class="collapsious<?php if ($key == 0) echo ' opened'; ?>">
+					<span data-value="<?php echo $key; ?>"><?php echo $banner->campaign_banner_name; ?></span>
+					<div class="campaign timeline_<?php echo $key; ?>" id="<?php echo $banner->campaign_banner_name; ?>"></div>
+				</div>
+			<?php endforeach; ?>
+<!--
+			<div class="collapsious">
+				<span>Metro Affiliés</span>
+				<div><p>Your content here</p>
+				</div>
+			</div>
+			<div class="collapsious">
+				<span>Super c</span>
+				<div><p>Your content here</p>
+				</div>
+			</div>
+			<div class="collapsious">
+				<span>Marché richelieu</span>
+				<div><p>Your content here</p>
+				</div>
+			</div>
+			<div class="collapsious">
+				<span>Brunet</span>
+				<div><p>Your content here</p>
+				</div>
+			</div>
+-->
+		</div>
+	</div>
 	
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/timeline.js"></script>
-	<script type="text/javascript" src="<?php echo site_url(); ?>assets/json/data.json"></script>
-	<link rel="stylesheet" type="text/css" href="<?php echo site_url(); ?>assets/css/timeline.css">
-	 <style type="text/css">
-		body {
-			font-size: 10pt;
-			font-family: verdana, sans, arial, sans-serif;
-		}
-
-		div.green {
-			background-color: #90EE90;
-			border-color: #008000;
-			cursor:pointer;
-		}
-
-		div.red {
-			background-color: #FF0000;
-			border-color: #A52A2A;
-			cursor:pointer;
-		}
-
-		div.blue {
-			background-color: #1E90FF;
-			border-color: #0000FF;
-			cursor:pointer;
-		}
-
-		div.orange {
-			background-color: #FFA500;
-			border-color: #FF4600;
-			cursor:pointer;
-		}
-
-		div.magenta {
-			background-color: #A900FF;
-			border-color: #800080;
-			cursor:pointer;
-		}
-	</style>
-	<script type="text/javascript">
-		var timeline = [];
-		var data;
-
-		// Called when the Visualization API is loaded.
-		function drawVisualization() {
-
-			var options = {
-				'width':  '100%',
-                "axisOnTop": true,
-                "timeChangeable": false,
-                'style': 'box'
-			};
-			
-			function onselect() {
-				
-				for (var campaigns in jsonData)
-				{
-					if (timeline[campaigns].getSelection() != undefined)
-					{ 
-						var sel = timeline[campaigns].getSelection();
-					}
-					
-					for(var i = 0; i < jsonData[campaigns].length; i++)
-					{
-						 if (sel[i] != undefined && sel[i].row != undefined) 
-						 {
-							console.log(sel[i].row);
-							var url = window.location.href;
-							var redirect = 'detail/' + timeline[campaigns].getItem(sel[i].row).id;
-							if (url.substr(url.length - 1) != '/') redirect = '/'+redirect;
-							window.location.href = url + redirect;
-						}
-					}
-				}
-			}
-			
-			for (var campaigns in jsonData)
-			{
-				timeline[campaigns] = new links.Timeline(document.getElementById(campaigns), options);
-				links.events.addListener(timeline[campaigns], 'select', onselect);
-				timeline[campaigns].draw(jsonData[campaigns]);
-			}
-		}
-
-	</script>
-</head>
-
-<body onload="drawVisualization();">
-<h1>Campagnes</h1>
-
-<?php 
-	foreach($banners as $banner) {
-		echo '<b>-'.$banner->campaign_banner_name.'</b>';
-		echo '<div id="'.$banner->campaign_banner_name.'"></div><br />';
-	}
-?>
-
-<div id="info"></div>
-
-</body>
-</html>
+</section>

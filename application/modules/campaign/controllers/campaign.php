@@ -14,9 +14,14 @@ class Campaign extends MX_Controller
 	{
 		$view_data['page_title'] = lang('dashboard.title3');
 		$this->mdl_campaign->set_table('campaigns_banners');
+
 		$banners = $this->mdl_campaign->get();
-		$view_data['banners'] = $banners->result();
-		$this->load->view('campaign.php', $view_data);
+		$campaign_data['banners'] = $banners->result();
+		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
+		$view_data['javascript'] = array('timeline.js');
+		$view_data['stylesheet'] = array('timeline.css', 'campaign.css');
+		$view_data['json'] = array('data.json');
+		echo modules::run('template/campaign', $view_data);
 	}
 	
 	function add()
