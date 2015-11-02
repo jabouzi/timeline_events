@@ -42,7 +42,7 @@ src:url('../fonts/sans-pro/sourcesanspro-semibold-webfont.eot?#iefix') format('e
 @font-face{
 	font-family:'source_sans_proextralight';
 	src:url('../fonts/sans-pro/sourcesanspro-extralight-webfont.eot');
-	src:url('../fonts/sans-pro/sourcesanspro-extralight-webfont.eot?#iefix') format('embedded-opentype'),
+src:url('../fonts/sans-pro/sourcesanspro-extralight-webfont.eot?#iefix') format('embedded-opentype'),
 	url('../fonts/sans-pro/sourcesanspro-extralight-webfont.woff') format('woff'),
 	url('../fonts/sans-pro/sourcesanspro-extralight-webfont.ttf') format('truetype'),
 	url('../fonts/sans-pro/sourcesanspro-extralight-webfont.svg#source_sans_proextralight') format('svg');
@@ -162,9 +162,7 @@ h1 + ul.mytabs{padding-top:0} */
 .btn_login_box:hover{text-decoration:none}
 .btn_login_box.btnLogin{background:@lightBrandColor;font-family:'source_sans_probold';text-transform:uppercase;color:@baseOnBrandColor;margin-left:10px  }
 /*btns svg*/
-a.btn-icon-on-dark{background:@lightBrandColor;border-radius:@roundedCorners;color:#fff;display:inline-block;font-size:15px;height:42px;line-height:42px;margin-bottom:15px;padding:0 20px;text-decoration:none}
-a.btn-icon-on-dark .icon-svg{display:inline-block;margin-right:5px;vertical-align:middle;width:20px; height:20px}
-a.btn-icon-on-dark .icon-svg path {fill:@baseOnBrandColor;}
+
 
 
 a.btn-icon-on-dark-header{color:@baseOnBrandColor;display:inline-block;font-size:15px;height:55px;text-decoration:none;border-bottom:5px solid @lightBrandColor}
@@ -173,17 +171,28 @@ a.btn-icon-on-dark-header .icon-svg{display:inline-block;margin-right:5px;vertic
 a.btn-icon-on-dark-header .icon-svg path {fill:@baseOnBrandColor;}
 
 
-.btn-icon-label{border-bottom:medium none navy;color:#454545;display:inline-block;font-size:15px;margin:0 0 15px;padding:0;text-decoration:none;text-transform:uppercase}
-.btn-icon-label:hover {}
-.btn-icon-label .icon-svg{display:inline-block;margin-right:5px;vertical-align:middle;width:20px; height:20px;}
-.btn-icon-label .icon-svg path {fill:@lightBrandColor}
-
+.icon-label{border-bottom:medium none navy;color:#454545;display:inline-block;font-size:15px;margin:0 0 15px;padding:0;text-decoration:none;text-transform:uppercase}
+.icon-label:hover {}
+.icon-label .icon-svg{display:inline-block;margin-right:5px;vertical-align:middle;width:20px; height:20px;}
+.icon-label .icon-svg path {fill:@lightBrandColor}
+.icon-label span {position:relative; top:2px}
 
 .title-icon-on-white{border-bottom:medium none navy;color:@lightBrandColor;display:inline-block;font-size:30px; line-height:34px;margin:0 0 15px;padding:0;text-decoration:none;text-transform:uppercase}
 .title-icon-on-white:hover {}
-.title-icon-on-white .icon-svg{display:inline-block;margin-right:5px;vertical-align:middle;width:31x; height:22px;}
+.title-icon-on-white .icon-svg{display:inline-block;margin-right:5px;vertical-align:middle;width:31px; height:22px;}
 .title-icon-on-white .icon-svg path {fill:@lightBrandColor}
+
+
+a.btn-icon-on-dark{background:@lightBrandColor;border-radius:@roundedCorners;color:#fff;display:inline-block;font-size:15px;height:41px;line-height:41px;margin-bottom:15px;padding:0 20px;text-decoration:none;margin-left:10px;border:1px solid @lightBrandColor  }
+a.btn-icon-on-dark .icon-svg{display:inline-block;margin-right:5px;vertical-align:middle;width:20px; height:20px}
+a.btn-icon-on-dark .icon-svg path {fill:@baseOnBrandColor;}
+
+
+a.btn-icon-on-dark.on-white{background:@baseOnBrandColor;color:@lightBrandColor;border:1px solid @lightBrandColor }
+a.btn-icon-on-dark.on-white .icon-svg path {fill:@lightBrandColor;} 
 /*btns svg*/
+h1.title-icon-on-white,h1.title-icon-on-white .icon-editionRouge {position:relative;top:-2px}
+h1.title-icon-on-white{margin-top:5px; padding-right:5px}
 /*btns*/
 /*table simulation*/
 .table_wp {display:table; width:100%}
@@ -220,7 +229,7 @@ body {background:@bgColor}
   z-index: -1;
   opacity:0.8
 }
-.grayBox {background:@lightBaseColor; padding:25px 22px  0px 22px}
+.grayBox {background:@lightBaseColor; padding:25px 22px  0px 22px; margin-bottom:30px}
 .header {background:@lightBrandColor; margin-bottom:35px}
 .header .table_wp {float: left;width: auto;margin-top:18px}
 ul.menu-header{float:right;margin-bottom:0;margin-top:35px}
@@ -229,9 +238,9 @@ ul.menu-header li {display:inline-block;list-style:none; margin-left:50px}
 .breadcrumb a{color:@lightBrandColor;font-size:15px;text-decoration:none}
 .breadcrumb span {color:@darkBaseColor}
 .breadcrumb a:hover{color:@darkBaseColor}
-.breadcrumb > li + li:before{color:#48742a;content:"/ ";padding:0 10px;display:inline-block}
-.title-top-btns {float:right}
-.title-top {padding-bottom:23px; border-bottom:1px solid @lightBaseColor; margin-bottom:30px;overflow:hidden}
+.breadcrumb > li + li:before{color:#48742a;content:"/";padding:0 8px;display:inline-block}
+.title-top-btns {float:right; margin-left:-10px}
+.title-top {padding-bottom:7px; border-bottom:1px solid @lightBaseColor; margin-bottom:27px;overflow:hidden}
 /*data picker*/
 /*demo page css*/
 			input.hasDatepicker.open { border-radius: 4px 4px 0 0; -moz-border-radius: 4px 4px 0 0; }
@@ -254,7 +263,7 @@ ul.menu-header li {display:inline-block;list-style:none; margin-left:50px}
 			.ui-datepicker table {width: 100%; font-size: .9em; border-collapse: collapse; margin:0 0 .4em; }
 			.ui-datepicker th { padding: .7em .3em; text-align: center; font-weight: bold; border: 0;  }
 			.ui-datepicker td { border: 0; padding: 1px; }
-			.ui-datepicker td span, .ui-datepicker td a { display: block; padding: .2em; text-align: right; text-decoration: none; color: #292929; }
+			.ui-datepicker td span, .ui-datepicker td a { display: block; padding: .2em; text-align: right; text-decoration: none; color: #292929; text-align:center}
 			.ui-datepicker td span, .ui-datepicker td a:hover { color: @lightBrandColor; }
 			.ui-datepicker td span, .ui-datepicker td a.ui-state-disabled { color: #959595; }
 /*data picker*/
@@ -266,9 +275,11 @@ ul.menu-header li {display:inline-block;list-style:none; margin-left:50px}
   top: 10px;
   width: 19px;
 } 
-
+.btn-bottom-hr {text-align:center; position:relative;margin-top:20px}
+.btn-bottom-hr hr{background-color:@lightBaseColor;position:absolute;left:0px;top:10px}
+.btn-bottom-hr .btn-icon-on-dark {position:relative;}
 /*footer*/
-footer {background:@darkBaseColor}
+footer {background:@darkBaseColor; margin-top:30px}
 ul.footer-menu  {float:left; margin-left:0px; padding-top:30px; padding-bottom:15px; padding-left:0px}
 ul.footer-menu li {list-style:none; display:inline-block}
 
@@ -283,7 +294,17 @@ footer .tgi-logo {float:right; margin-top:20px; padding-bottom:15px}
 
 
 
-
+/* Large desktop */
+@media (min-width: 1200px) {  }
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {  }
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {  }
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {  }
 
 
 

@@ -88,24 +88,27 @@
 						</svg>
 						<span>Arthur-Sauvé Réno. Mineures </span>
 					</h1>
-					<div class="title-top-btns"><a href="" class="btn-icon-on-dark">
+					<div class="title-top-btns">
+						
+						<a href="" class="btn-icon-on-dark">
 						<svg class="icon-svg icon-sauvegarderBlanc" viewBox="0 0 31 32" x="1920">
 							<path fill="#FFF" d="M22.652.35v8.792H6.1V.352H0V32h30.493V5.95l-4.68-5.6h-3.16zM4.356 13.54h20.91v13.187H4.356v-13.19z"/>
 							<path fill="#FFF" d="M8.712 6.505h11.326V.35H8.712v6.155z"/>
 						</svg>
 						Sauvegarder
-					</a></div>
+						</a>
+					</div>
 				</div>
 			</div>
 			<section>
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-6">
-							<h2 class="btn-icon-label">
+							<h2 class="icon-label">
 								<svg class="icon-svg icon-identificationRouge" width="50" height="32" viewBox="0 0 50 32" x="624">
 									<path fill="#e41b13" d="M0 0l.113 5.814H30.64L30.617 0H0zm.15 18.945l49.358.03V13.06L.15 12.965v5.98zM.15 32h21.756v-5.93H.15V32z"/>
 								</svg>
-								Identification
+								<span>Identification</span>
 							</h2>
 							<div class="grayBox">
 								<div class="row">
@@ -192,12 +195,12 @@
 							</div>
 						</div>
 						<div class="col-sm-6">
-							<h2 class="btn-icon-label">
+							<h2 class="icon-label">
 								
 								<svg class="icon-svg icon-etapesRouge" viewBox="0 0 29 32" x="576">
 									<path fill="#e41b13" d="M0 10.24v19.17C0 30.84 1.148 32 2.564 32H25.64c1.416 0 2.564-1.16 2.564-2.59V10.24H0zm21.153 1.92h5.128v5.12h-5.12v-5.12zm-6.41 0h5.128v5.12h-5.12v-5.12zm-6.41 0h5.128v5.12H8.34v-5.12zm-6.41 0H7.05v5.12H1.924v-5.12zm19.23 6.4h5.128v5.12h-5.12v-5.12zm-6.41 0h5.128v5.12h-5.12v-5.12zm-6.41 0h5.128v5.12H8.34v-5.12zm-6.41 0H7.05v5.12H1.924v-5.12zm19.23 6.4h5.128v5.12h-5.12v-5.12zm-6.41 0h5.128v5.12h-5.12v-5.12zm-6.41 0h5.128v5.12H8.34v-5.12zm-6.41 0H7.05v5.12H1.924v-5.12zM19.55.96v2.88H8.653V.96c0-.53-.43-.96-.96-.96-.532 0-.962.43-.962.96v2.88H2.57C1.15 3.84 0 5 0 6.43v2.53h28.204V6.43c0-1.43-1.148-2.59-2.564-2.59h-4.166V.96c0-.53-.43-.96-.96-.96-.532 0-.962.43-.962.96zm1.923 5.44V4.74c.574.33.96.95.96 1.66 0 1.06-.86 1.92-1.922 1.92-1.06 0-1.92-.86-1.92-1.92 0-.71.39-1.33.96-1.66V6.4c0 .53.43.96.96.96s.96-.43.96-.96zm-12.82.64V5.38c.574.33.96.95.96 1.66 0 1.06-.86 1.92-1.922 1.92-1.06 0-1.92-.86-1.92-1.92 0-.71.39-1.33.96-1.66v1.66c0 .53.43.96.96.96s.96-.43.96-.96z"/>
 								</svg>
-								Étapes
+								<span>Étapes</span>
 							</h2>
 							<div class="grayBox">
 								<div class="row">
@@ -295,37 +298,41 @@
 							</div>
 						</div>
 					</div>
+					<div class="btn-bottom-hr">
+					<hr />
+						<a href="" class="btn-icon-on-dark">
+						<svg class="icon-svg icon-sauvegarderBlanc" viewBox="0 0 31 32" x="1920">
+							<path fill="#FFF" d="M22.652.35v8.792H6.1V.352H0V32h30.493V5.95l-4.68-5.6h-3.16zM4.356 13.54h20.91v13.187H4.356v-13.19z"/>
+							<path fill="#FFF" d="M8.712 6.505h11.326V.35H8.712v6.155z"/>
+						</svg>
+						Sauvegarder
+						</a>
+					</div>
 				</div>
-			</div>
-			<a href="" class="btn-icon-on-dark">
-			<svg class="icon-svg icon-sauvegarderBlanc" viewBox="0 0 31 32" x="1920">
-				<path fill="#FFF" d="M22.652.35v8.792H6.1V.352H0V32h30.493V5.95l-4.68-5.6h-3.16zM4.356 13.54h20.91v13.187H4.356v-13.19z"/>
-				<path fill="#FFF" d="M8.712 6.505h11.326V.35H8.712v6.155z"/>
-			</svg>
-			Sauvegarder
-			</a>
-		</section>
-		<footer>
-			<div class="container">
-				<ul class="footer-menu">
-					<li> <a href="">Calendrier </a> </li>
-					<li> <a href="">Mes paramètres </a></li>
-					<li> <a href="">F.A.Q   </a></li>
-					<li> <a href=""> Déconnexion </a></li>
-					<li> <a href=""> Conditions d’utilisation </a></li>
-				</ul>
-				<div class="tgi-logo"><img src="/assets/images/toolbox/tgi-logo.png" alt="" /></div>
-			</div>
-		</footer>
-		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/functions.js"></script>
-		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
-		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery.jqtransform.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$(function(){
-					$('.wrapper-select-top').jqTransform({imgPath:'/images/'});
+				
+				
+			</section>
+			<footer>
+				<div class="container">
+					<ul class="footer-menu">
+						<li> <a href="">Calendrier </a> </li>
+						<li> <a href="">Mes paramètres </a></li>
+						<li> <a href="">F.A.Q   </a></li>
+						<li> <a href=""> Déconnexion </a></li>
+						<li> <a href=""> Conditions d’utilisation </a></li>
+					</ul>
+					<div class="tgi-logo"><a href="" target="_black"><img src="/assets/images/toolbox/tgi-logo.png" alt="" /></a></div>
+				</div>
+			</footer>
+			<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/functions.js"></script>
+			<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
+			<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery.jqtransform.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$(function(){
+						$('.wrapper-select-top').jqTransform({imgPath:'/images/'});
+					});
 				});
-			});
-		</script>
-	</body>
-</html>
+			</script>
+		</body>
+	</html>
