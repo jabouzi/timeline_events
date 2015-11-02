@@ -37,10 +37,10 @@ class Mdl_user extends CI_Model
 
 	function get_id($id)
 	{
-		if ($this->cache->memcached->get('mdl_user_get_'.$id)) return $this->cache->memcached->get('mdl_user_get_'.$id);
+		//if ($this->cache->memcached->get('mdl_user_get_'.$id)) return $this->cache->memcached->get('mdl_user_get_'.$id);
 		$this->db->where('user_id', $id);
 		$query = $this->db->get($this->table);
-		$this->cache->memcached->save('mdl_user_get_'.$id, $query->row());
+		//$this->cache->memcached->save('mdl_user_get_'.$id, $query->row());
 		return $query->row();
 	}
 

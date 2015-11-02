@@ -26,6 +26,7 @@
 	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
 	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-multiselect.js"></script>
 	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/toolbox.js"></script>
+	<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jscolor/jscolor.js"></script>
 	
 	<?php if (isset($javascript)) { ?>
 		<?php foreach($javascript as $js) { ?>
@@ -53,7 +54,7 @@
 	<section id="secondary_bar">
 		<div class="user">
 			<p><?php echo $this->session->userdata('user_firstname'); ?> <?php echo $this->session->userdata('user_lastname'); ?>
-			&nbsp;&nbsp; <?php echo form_dropdown('lang', $languages, $lang, $redirect); ?></p>
+			&nbsp;&nbsp; <?php echo form_dropdown('lang', $languages, $lang, $redirect); ?>&nbsp;&nbsp; <?php echo anchor('login/logout', lang('login.logout')) ?></p>
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs"><?php echo anchor('dashboard', lang('dashboard.title2')); ?><div class="breadcrumb_divider"></div> <a class="current"><?php echo $page_title; ?></a></article>
@@ -61,6 +62,24 @@
 	</section><!-- end of secondary bar -->
 	
 	<aside id="sidebar" class="column">
+		<h3><?php echo lang('tonik.title'); ?></h3>
+		<ul class="toggle">
+			<li class="icn_view_users"><?php echo anchor('tonik/projectmanagers', lang('tonik.projectmanagers')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('tonik/campaignssteps', lang('tonik.campaignssteps')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('tonik/campaignstype', lang('tonik.campaignstype')) ?></li>
+		</ul>		
+		<h3><?php echo lang('client.title'); ?></h3>
+		<ul class="toggle">
+			<?php if ($this->session->userdata('user_permission') <= 2) : ?>
+				<li class="icn_add_user"><?php echo anchor('client/newclient', lang('client.new')) ?></li>				
+			<?php endif; ?>
+			<li class="icn_view_users"><?php echo anchor('client/clients', lang('client.users')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('client/Banners', lang('client.banners')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('client/projectmanagers', lang('client.projectmanagers')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('client/campaignssteps', lang('client.campaignssteps')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('client/campaignstype', lang('client.campaignstype')) ?></li>
+			<!--<li class="icn_profile"><?php echo anchor('client', lang('client.profile')) ?></li>//-->
+		</ul>	
 		<h3><?php echo lang('user.title'); ?></h3>
 		<ul class="toggle">
 			<?php if ($this->session->userdata('user_permission') <= 2) : ?>
@@ -68,7 +87,7 @@
 			<?php endif; ?>
 			<li class="icn_view_users"><?php echo anchor('user/users', lang('user.users')) ?></li>
 			<li class="icn_profile"><?php echo anchor('user', lang('user.profile')) ?></li>
-			<li class="icn_jump_back"><?php echo anchor('login/logout', lang('login.logout')) ?></li>
+			<?/*<li class="icn_jump_back"><?php echo anchor('login/logout', lang('login.logout')) ?></li>*/?>
 		</ul>
 		<h3><?php echo lang('admin.title'); ?></h3>
 		<ul class="toggle">
@@ -77,8 +96,8 @@
 		
 		<footer>
 			<hr />
-			<p><strong>Copyright &copy; 2011 Website Admin</strong></p>
-			<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
+			<p><strong>Copyright &copy; 2015 Admin Toolbox</strong></p>
+			<p><a href="<?php echo site_url();?>">Pupliflex</a></p>
 		</footer>
 	</aside><!-- end of sidebar -->
 	

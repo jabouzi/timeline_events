@@ -8,7 +8,7 @@
         <article class="stats_overview">
             <div class="overview_today">
                 <p class="overview_day">Today</p>
-                <p class="overview_count">1,876</p>
+                <p class="overview_count">1,876aaaaaaaaa</p>
                 <p class="overview_type">Hits</p>
                 <p class="overview_count">2,103</p>
                 <p class="overview_type">Views</p>

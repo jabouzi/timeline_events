@@ -21,7 +21,7 @@ class User extends MX_Controller
 	function users()
 	{
 		$view_data['page_title'] = lang('user.users');
-		$users = $this->mdl_user->get_where(array('user_permission > ' => $this->session->userdata('user_permission')));
+		$users = $this->mdl_user->get_where(array('user_permission >= ' => $this->session->userdata('user_permission')));
 		$view_data['admin_widgets']['user'] = $this->show('users', $users);
 		echo modules::run('template', $view_data);
 	}
@@ -59,6 +59,7 @@ class User extends MX_Controller
 		$this->load->helper('form');
 		$view_data['user'] = $user_data;
 		$view_data['status'] = array(0 => lang('user.inactive'), 1 => lang('user.active'));
+		$view_data['clients'] = modules::run('client/get_clientlist_dropdown');
 		$view_data['permissions'] = modules::run('permission/get_permissions_dropdown');
 		return $this->load->view($view.'.php', $view_data, true);
 	}
@@ -128,6 +129,7 @@ class User extends MX_Controller
 	function process_newuser()
 	{
 		$user_data = array(
+			'client_id' => $this->input->post('client_id'), 
 			'user_firstname' => $this->input->post('user_firstname'), 
 			'user_lastname' => $this->input->post('user_lastname'), 
 			'user_email' => $this->input->post('user_email'),
@@ -184,7 +186,7 @@ class User extends MX_Controller
 		$user_id = $this->mdl_user->insert($user_data);
 		$this->session->set_userdata('success_message', lang('user.success'));
 		$user = $this->mdl_user->get_id($user_id);
-		$messagedata = array($user->user_firstname, $user->user_lastname, site_url(), $user->user_email, $this->encrypt->decode($user->user_password));
+		$messagedata = array($user->client_id,$user->user_firstname, $user->user_lastname, site_url(), $user->user_email, $this->encrypt->decode($user->user_password));
 		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox',$user->user_email, lang('user.add'));
 		$this->maildecorator->decorate($messagedata, lang('mail.createuser'));
 		$this->maildecorator->sendmail($maildata);

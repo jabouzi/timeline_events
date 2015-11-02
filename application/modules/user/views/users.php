@@ -14,6 +14,11 @@
 			</tr> 
 		</thead> 
 		<tbody id="workflow_list">
+			<?php
+			
+			//var_dump($user);
+			
+			?>
 			<?php foreach ($user->result() as $item) : ?>
 				<tr>
 					<td><?php echo $item->user_firstname ?></td>
