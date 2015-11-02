@@ -237,7 +237,63 @@ ul.footer-menu li {list-style:none; display:inline-block}
 ul.footer-menu li a {color:#fff;diplay:inline-block; margin-right:25px; font-size:13px;margin-bottom:15px}
 ul.footer-menu li a:hover {text-decoration:none; color:@lightBaseColor}
 footer .tgi-logo {float:right; margin-top:20px; padding-bottom:15px}
-
+/*footer*/
+/*legendes*/
+.legendes {overflow:hidden;clear:both;}
+.legende-colors {margin-left:-23px; margin-bottom: 20px;}
+.legende-colors>div {display:inline-block; font-size:15px; margin-left:23px}
+.legende-colors>div>span {position:relative; top:3px;border-radius:5px;width:32px; height:17px; display:inline-block;margin-right:12px}
+.legende-blue>span {background:#3498db;}
+.legende-green>span {background:#1abc9c;}
+.legende-violet>span {background:#9b59b6;}
+.legende-orange>span {background:#e67e22;}
+.legende-red>span {background:#e74c3c;}
+.legende-yellow>span {background:#f1c40f;}
+.lendende-text { margin-bottom: 5px;}
+/*legendes*/
+/*collapses*/
+.collapsious>div {display:none}
+		.collapsious {
+		
+			display: block;
+			padding: 20px 20px 20px 0px;
+			border-bottom: 1px solid @lightBaseColor;
+		 }
+		
+		.collapsious > span {
+			color:@lightBrandColor;
+			font-family:'source_sans_probold';
+			text-transform:uppercase;
+			cursor: pointer;
+			display: block;
+		 }
+		.collapsious > span::before {
+    content: "+";
+    display: inline-block;
+    font-family: arial;
+    font-size: 23px;
+    margin-right: 8px;
+    position: relative;
+    top: 2px;
+    width: 15px;
+}
+		.collapsious.opened> span::before { content:"-";font-size:30px
+		 }
+		.collapsious-wrapper .collapsious:first-child {
+		}
+		
+		.collapsious-wrapper + .collapsious-wrapper{
+			margin-top:0px;
+		}
+		
+		.collapsious.opened {
+		 }
+		
+		
+		
+		.collapsious > div {
+		margin-top: 15px; }
+/*collapses*/
 
 
 
@@ -279,6 +335,10 @@ ul.footer-menu {text-align:center; margin-bottom:0px; padding-bottom:0px}
 .title-top-btns {width:100%; float:none}
 a.btn-icon-on-dark {width:100%; text-align:center}
 .btn-bottom-hr .btn-icon-on-dark { margin-left:0px;}
+/*legendes*/
+.legende-colors>div {width:48%; margin-left:0px; font-size:13px;}
+.legende-colors {margin-left:0px}
+.legende-colors>div>span {margin-right:5px; width:20px}
 }
 
 
