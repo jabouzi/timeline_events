@@ -47,7 +47,7 @@
 	<body>
 <?php
 echo '<pre>';
-print_r($_SESSION);
+print_r($this->session);
 echo '</pre>';
 ?>	
 		<div class="header">
