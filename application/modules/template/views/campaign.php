@@ -69,7 +69,7 @@ Array
 )*/
 
 
-var_dump(islogin());
+//var_dump(islogin());
 ?>	
 		<div class="header">
 			<div class="container">
