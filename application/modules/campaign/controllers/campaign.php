@@ -96,12 +96,18 @@ class Campaign extends MX_Controller
 	function detail($id = null)
 	{
 		if (!$id) redirect('campaign');
-		$view_data['page_title'] = lang('dashboard.title3');
-		$view_data['campaign_id'] = $id;
+		$campaign_data['page_title'] = lang('dashboard.title3');
+		$campaign_data['campaign_id'] = $id;
 		$this->mdl_campaign->set_table('campaigns');
 		$campaign = $this->mdl_campaign->get_where(array('campaign_id' => $id));
-		$view_data['campaign_name'] = $campaign->row()->campaign_title;
-		$this->load->view('campaign_detail.php', $view_data);
+		
+		$campaign_data['campaign_name'] = $campaign->row()->campaign_title;
+		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
+		
+		$view_data['javascript'] = array('timeline.js');
+		$view_data['stylesheet'] = array('timeline.css', 'campaign.css');
+		$view_data['json'] = array('data_'.$id.'.json');
+		echo modules::run('template/campaign', $view_data);
 	}
 	
 	function process_add_campaign()
@@ -271,14 +277,14 @@ class Campaign extends MX_Controller
 		foreach($campaigns->result() as $key => $campaign)
 		{
 			$this->mdl_campaign->set_table('campaigns_types');
-			$campaign_step = $this->mdl_campaign->get_where(array('campaign_type_id' => $campaign->campaigns_step_type));
+			$campaign_step = $this->mdl_campaign->get_where(array('campaign_type_id' => $campaign->campaign_step_type));
             $json[] = array(
-					'start' =>  '__'.strtotime($campaign->campaigns_step_date_start),
-					'end' =>  '__'.strtotime($campaign->campaigns_step_date_end),
-					'content' =>  $campaign_step->row()->campaign_type_name,
+					'start' =>  '__'.strtotime($campaign->campaign_step_date_start),
+					'end' =>  '__'.strtotime($campaign->campaign_step_date_end),
+					'content' =>  ' ',
 					'group' =>  $campaign_step->row()->campaign_type_name,
-					'id' =>  $campaign->campaigns_step_id,
-					'className' =>  'default',
+					'id' =>  $campaign->campaign_step_id,
+					'className' =>  'red',
 					'editable' => false
 				);
 		}

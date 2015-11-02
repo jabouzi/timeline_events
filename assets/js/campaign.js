@@ -4,7 +4,14 @@ $(document).ready(function() {
 		$('#'+$(this).attr('data-value')).submit();
 	});
 	
-	drawVisualization();
+	if ($('#timeline').length)
+	{
+		drawVisualization2();
+	}
+	else
+	{
+		drawVisualization();
+	}
 	
 	$('.campaign').hide();
 	$('.timeline_0').show();
@@ -23,7 +30,7 @@ function drawVisualization() {
 	
 	var timeline = [];
 	var data;
-
+	
 	var options = {
 		'width':  '100%',
 		"axisOnTop": true,
@@ -60,4 +67,22 @@ function drawVisualization() {
 		links.events.addListener(timeline[campaigns], 'select', onselect);
 		timeline[campaigns].draw(jsonData[campaigns]);
 	}
+}
+
+function drawVisualization2() {
+
+	var timeline = [];
+	var data;
+	
+	var options = {
+		'width':  '100%',
+		"axisOnTop": true,
+		"timeChangeable": false,
+		'style': 'box'
+	};
+
+	// Instantiate our timeline object.
+	timeline = new links.Timeline(document.getElementById('timeline'), options);
+
+	timeline.draw(jsonData);
 }
