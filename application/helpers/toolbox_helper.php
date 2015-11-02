@@ -76,3 +76,16 @@ function get_status_list()
 {
 	return array('user.inactive', 'user.active');
 }
+
+function array_for_dropdown($array, $value, $option = null)
+{
+	$dropdown = array();
+	foreach($array as $item)
+	{
+		$temp = (array)$item;
+		if ($option) $dropdown[$temp[$value]] = $temp[$option];
+		else $dropdown[$temp[$value]] = $item;
+	}
+	
+	return $dropdown;
+}

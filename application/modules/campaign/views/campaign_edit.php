@@ -13,80 +13,64 @@
 					<div class="col-sm-6">
 						<label for="campaign_banner_id">Bannière</label>
 						<div class="wrapper-select-top">
-							<select name="campaign_banner_id" id="campaign_banner_id">
-								<option value="">Metro</option>
-								<option value="">Option 2</option>
-								<option value="">Option 3</option>
-							</select>
+							<?php echo form_dropdown('campaign_banner_id', $campaign_banners, $campaign->campaign_banner_id); ?>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<label for="campaign_type_id">Type de campagne</label>
 						<div class="wrapper-select-top">
-							<select name="campaign_type_id" id="campaign_type_id">
-								<option value="">Réno. Mineures</option>
-								<option value="">Option 2</option>
-								<option value="">Option 3</option>
-							</select>
+							<?php echo form_dropdown('campaign_type_id', $campaign_types, $campaign_type->campaign_type_id); ?>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
 						<label for="tcampaign_title">Titre de la campagne</label>
-						<input  type="text" name="campaign_title" id="campaign_title" value="Arthur-Sauvé Réno. Mineures"/>
+						<input  type="text" name="campaign_title" id="campaign_title" value="<?php echo $campaign->campaign_title; ?>"/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
 						<label for="campaign_date_start">Date de début</label>
-						<input class="datechooser" type="text" name="campaign_date_start" id="campaign_date_start" value="06 / 04 / 2015"/>
+						<input class="datechooser" type="text" name="campaign_date_start" id="campaign_date_start" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_start)); ?>"/>
 					</div>
 					<div class="col-sm-6">
 						<label for="campaign_date_end">Date de fin</label>
-						<input class="datechooser" type="text" name="campaign_date_end" id="campaign_date_end" value="15 / 04 / 2015"/>
+						<input class="datechooser" type="text" name="campaign_date_end" id="campaign_date_end" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_end)); ?>"/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
 						<label for="campaign_branch">Nom de la succursale</label>
-						<input type="text" name="campaign_branch" id="campaign_branch" value="Arthur-Sauvé"/>
+						<input type="text" name="campaign_branch" id="campaign_branch" value="<?php echo $campaign->campaign_branch; ?>"/>
 					</div>
 					<div class="col-sm-6">
 						<label for="adresse-succursale">Adresse de la succursale</label>
-						<input type="text" name="campaign_address" id="campaign_address" value="6155, boulevard Arthur-Sauvé"/>
+						<input type="text" name="campaign_address" id="campaign_address" value="<?php echo $campaign->campaign_address; ?>"/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
 						<label for="campaign_manager_tgi">Chargée de projet (Tonik Groupimage)</label>
 						<div class="wrapper-select-top">
-							<select name="campaign_manager_tgi" id="campaign_manager_tgi">
-								<option value="">Anie Lépine</option>
-								<option value="">Option 2</option>
-								<option value="">Option 3</option>
-							</select>
+							<?php echo form_dropdown('campaign_manager_tgi', $campaign_managers_tgi, $campaign->campaign_manager_tgi); ?>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<label for="campaign_manager_client">Coordonnateur (Metro)</label>
 						<div class="wrapper-select-top">
-							<select name="campaign_manager_client" id="campaign_manager_client">
-								<option value="">Dominic Audry</option>
-								<option value="">Option 2</option>
-								<option value="">Option 3</option>
-							</select>
+							<?php echo form_dropdown('campaign_manager_client', $campaign_managers_client, $campaign->campaign_manager_client); ?>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
 						<label for="campaign_project_number">Numéro de projet</label>
-						<input type="text" name="campaign_project_number" id="campaign_project_number" value="91339"/>
+						<input type="text" name="campaign_project_number" id="campaign_project_number" value="<?php echo $campaign->campaign_project_number; ?>"/>
 					</div>
 					<div class="col-sm-6">
 						<label for="campaign_store_number">Numéro de magasin</label>
-						<input type="text" name="campaign_store_number" id="campaign_store_number" value="123456"/>
+						<input type="text" name="campaign_store_number" id="campaign_store_number" value="<?php echo $campaign->campaign_store_number; ?>"/>
 					</div>
 				</div>
 				
@@ -101,94 +85,30 @@
 				<span>Étapes</span>
 			</h2>
 			<div class="grayBox">
-				<div class="row">
-					<div class="col-sm-12">
-						<label for="strategie1">Stratégie</label>
+				<?php foreach($campaign_steps_types as $campaign_step_id => $campaign_step_type) : ?>
+					<div class="row">
+						<div class="col-sm-12">
+							<label for="creation1"><?php echo $campaign_step_type; ?></label>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<input class="datechooser" type="text" name="strategie1" id="strategie1" value="15 / 04 / 2015"/>
-					</div>
-					<div class="col-sm-6 etapes-au">
-						<input class="datechooser" type="text" name="strategie2" id="strategie2" value="15 / 04 / 2015"/>
-					</div>
-				</div>
 				
-				<div class="row">
-					<div class="col-sm-12">
-						<label for="dev-plan-chiffre1">Développement du plan chiffré</label>
+					<div class="row">
+						<div class="col-sm-6">
+							<input class="datechooser" type="text" name="creation1" id="creation1" value="<?php echo date('m/d/Y', strtotime($campaign_steps[$campaign_step_id]->campaign_step_date_start)); ?>"/>
+						</div>
+						<div class="col-sm-6 etapes-au">
+							<input class="datechooser" type="text" name="creation2" id="creation2" value="<?php echo date('m/d/Y', strtotime($campaign_steps[$campaign_step_id]->campaign_step_date_start)); ?>"/>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<input class="datechooser" type="text" name="dev-plan-chiffre1" id="dev-plan-chiffre1" value="15 / 04 / 2015"/>
-					</div>
-					<div class="col-sm-6 etapes-au">
-						<input class="datechooser" type="text" name="dev-plan-chiffre2" id="dev-plan-chiffre2" value="15 / 04 / 2015"/>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-sm-12">
-						<label for="creation1">Création</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<input class="datechooser" type="text" name="creation1" id="creation1" value="15 / 04 / 2015"/>
-					</div>
-					<div class="col-sm-6 etapes-au">
-						<input class="datechooser" type="text" name="creation2" id="creation2" value="15 / 04 / 2015"/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<label for="production1">Production</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<input class="datechooser" type="text" name="production1" id="production1" value="15 / 04 / 2015"/>
-					</div>
-					<div class="col-sm-6 etapes-au">
-						<input class="datechooser" type="text" name="production2" id="production2" value="15 / 04 / 2015"/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<label for="postproduction1">Postproduction</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<input class="datechooser" type="text" name="postproduction1" id="postproduction1" value="15 / 04 / 2015"/>
-					</div>
-					<div class="col-sm-6 etapes-au">
-						<input class="datechooser" type="text" name="postproduction2" id="postproduction2" value="15 / 04 / 2015"/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<label for="campagne1">Campagne</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<input class="datechooser" type="text" name="campagne1" id="campagne1" value="15 / 04 / 2015"/>
-					</div>
-					<div class="col-sm-6 etapes-au">
-						<input class="datechooser" type="text" name="campagne2" id="campagne2" value="15 / 04 / 2015"/>
-					</div>
-				</div>
+				<?php endforeach; ?>
 				<div class="row">
 					<div class="col-sm-6">
 						<label for="date-event">Date de l’événement</label>
-						<input class="datechooser" type="text" name="date-event" id="date-event" value="15 / 04 / 2015"/>
+						<input class="datechooser" type="text" name="date-event" id="date-event" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_evenement)); ?>"/>
 					</div>
 					<div class="col-sm-6">
 						<label for="date-medias">Date médias</label>
-						<input class="datechooser" type="text" name="date-medias" id="date-medias" value="15 / 04 / 2015"/>
+						<input class="datechooser" type="text" name="date-medias" id="date-medias" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_media)); ?>"/>
 					</div>
 				</div>
 				
