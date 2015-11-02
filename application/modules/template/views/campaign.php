@@ -67,6 +67,9 @@ Array
     [browser] => Mozilla
     [validated] => 1
 )*/
+
+
+var_dump(islogin());
 ?>	
 		<div class="header">
 			<div class="container">
