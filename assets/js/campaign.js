@@ -4,11 +4,11 @@ $(document).ready(function() {
 		$('#'+$(this).attr('data-value')).submit();
 	});
 	
-	if ($('#timeline').length)
+	if ($('#campain_calendar').length)
 	{
 		drawVisualization2();
 	}
-	else
+	else if ($('#campain_calendars').length)
 	{
 		drawVisualization();
 	}

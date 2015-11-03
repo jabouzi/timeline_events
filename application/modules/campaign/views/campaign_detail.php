@@ -44,6 +44,7 @@
 </div>
 <section>
 	<div class="container">
+		<input type="hidden" id="campain_calendar" value="0">
 		<div id="timeline"></div>
 	</div>
 </section>
