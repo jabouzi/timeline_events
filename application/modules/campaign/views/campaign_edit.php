@@ -42,13 +42,13 @@
 						<div class="col-sm-12 col-md-6">
 							<label for="campaign_banner_id">Bannière</label>
 							<div class="wrapper-select-top">
-								<?php echo form_dropdown('campaign_banner_id', $campaign_banners, $campaign->campaign_banner_id); ?>
+								<?php echo form_dropdown('campaign_banner_id', $campaign_banners, @$campaign->campaign_banner_id); ?>
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-6">
 							<label for="campaign_type_id">Type de campagne</label>
 							<div class="wrapper-select-top">
-								<?php echo form_dropdown('campaign_type_id', $campaign_types, $campaign_type->campaign_type_id); ?>
+								<?php echo form_dropdown('campaign_type_id', $campaign_types, @$campaign_type->campaign_type_id); ?>
 							</div>
 						</div>
 					</div>
