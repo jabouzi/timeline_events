@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/bootstrap-3.0.0.min.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/bootstrap-multiselect.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/admin.css" type="text/css" media="screen" />
+
 	<?php if (isset($stylesheet)) { ?>
 		<?php foreach($stylesheet as $css) { ?>
 			<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/<?php echo $css; ?>" type="text/css" media="screen" />
