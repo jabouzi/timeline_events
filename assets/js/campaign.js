@@ -4,11 +4,11 @@ $(document).ready(function() {
 		$('#'+$(this).attr('data-value')).submit();
 	});
 	
-	if ($('#campain_calendar').length)
+	if ($('#campaign_calendar').length)
 	{
 		drawVisualization2();
 	}
-	else if ($('#campain_calendars').length)
+	else if ($('#campaign_calendars').length)
 	{
 		drawVisualization();
 	}
@@ -63,6 +63,7 @@ function drawVisualization() {
 	
 	for (var campaigns in jsonData)
 	{
+		console.log(campaigns);
 		timeline[campaigns] = new links.Timeline(document.getElementById(campaigns), options);
 		links.events.addListener(timeline[campaigns], 'select', onselect);
 		timeline[campaigns].draw(jsonData[campaigns]);
