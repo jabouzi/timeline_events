@@ -40,8 +40,8 @@ class Template extends MX_Controller
 	
 	function campaign($view_data = array())
 	{
-		//if ($this->session->userdata('user_email'))
-		//{
+		if ($this->session->userdata('user_email'))
+		{
 			//$this->load->helper('form');
 			//$this->load->helper('array');
 			//
@@ -61,10 +61,10 @@ class Template extends MX_Controller
 			//$this->session->unset_userdata('info_message');
 			//$this->session->unset_userdata('error_message');
 			//$this->session->unset_userdata('success_message');
-		//}
-		//else
-		//{
-			//redirect('login');
-		//}
+		}
+		else
+		{
+			redirect('login');
+		}
 	}
 }

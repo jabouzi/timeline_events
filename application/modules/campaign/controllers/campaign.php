@@ -102,6 +102,7 @@ class Campaign extends MX_Controller
 		$campaign = $this->mdl_campaign->get_where(array('campaign_id' => $id));
 		
 		$campaign_data['campaign_name'] = $campaign->row()->campaign_title;
+		$campaign_data['campaign_id'] = $id;
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
 		
 		$view_data['javascript'] = array('timeline.js');

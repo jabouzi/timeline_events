@@ -24,7 +24,7 @@
 			Documents
 			</a>
 			
-			<a href="" class="btn-icon-on-dark">
+			<a href="<?php echo site_url('campaign/edit/'.$campaign_id); ?>" class="btn-icon-on-dark">
 			<svg class="icon-svg icon-editerBlanc" width="32" height="32" viewBox="0 0 32 32" x="1440">
 				<path fill="#FFF" d="M26.383 11.46v14.39c0 2.208-1.788 3.997-3.997 3.997H6.15c-2.208 0-3.997-1.788-3.997-3.997V9.614c0-2.208 1.788-3.997 3.997-3.997h13.774V3.77H6.15C2.922 3.77.307 6.387.307 9.615V25.85c0 3.228 2.615 5.843 5.843 5.843h16.236c3.228 0 5.843-2.615 5.843-5.843V11.46h-1.85z"/>
 				<path fill="#FFF" d="M27.445 0L5.925 21.202v4.665h4.665l21.15-21.52L27.445 0zM6.772 21.627L27.444.85l.9.953-20.3 20.248 2.544 2.55-.424.43H6.772v-3.4z"/>
