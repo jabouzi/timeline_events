@@ -11,7 +11,7 @@
 			</svg>
 			Imprimer
 			</a>
-			<a href="" class="btn-icon-on-dark">
+			<a href="<?php echo site_url('campaign/add'); ?>" class="btn-icon-on-dark">
 			<svg class="icon-svg icon-ajouterBlanc" viewBox="0 0 32 32" x="1008">
 				<path fill="#FFF" d="M16 32c8.837 0 16-7.163 16-16S24.837 0 16 0 0 7.163 0 16s7.163 16 16 16zm0-2.37C8.473 29.63 2.37 23.528 2.37 16S8.472 2.37 16 2.37c7.527 0 13.63 6.102 13.63 13.63S23.528 29.63 16 29.63z"></path>
 				<path fill="#FFF" d="M14.84 21.855h2.56v-4.36h4.17V15.03H17.4v-4.363h-2.56v4.36h-4.173v2.466h4.172v4.36z"></path>

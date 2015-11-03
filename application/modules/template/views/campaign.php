@@ -45,32 +45,6 @@
 		
 	</head>
 	<body>
-<?php
-/*echo '<pre>';
-print_r($this->session->userdata);
-echo $this->session->userdata('user_firstname');
-echo '</pre>';*/
-
-/*
-Array
-(
-    [session_id] => dc05139dd9550ab83672496b7eec6c19
-    [ip_address] => 209.104.115.221
-    [user_agent] => Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko
-    [last_activity] => 1446503907
-    [user_data] => 
-    [user_id] => 12
-    [user_firstname] => Hugo
-    [user_lastname] => Carranza
-    [user_email] => hugo.carranza@tonikgroupimage.com
-    [user_permission] => 2
-    [browser] => Mozilla
-    [validated] => 1
-)*/
-
-
-//var_dump(islogin());
-?>	
 		<div class="header">
 			<div class="container">
 				<div class="row">
@@ -85,7 +59,7 @@ Array
 						</div>
 						<ul class="menu-header">
 							<li>
-								<a href="" class="btn-icon-on-dark-header">
+								<a href="<?php echo site_url('campaign'); ?>" class="btn-icon-on-dark-header">
 								<svg class="icon-svg calendrierRouge"  viewBox="0 0 32 32" x="48">
 									<path fill="#e41b13" d="M29.223 21.14V0H2.733L0 1.518V32h27.978v-2.72H32s-2.777-2.092-2.777-8.14zm-1.84-4.566h-4.79V11.76h4.79v4.814zM15.66 6.208v4.813h-5.355V6.21h5.356zm.79 0h5.355v4.813H16.45V6.21zm-11.876 0h4.942v4.813H4.574V6.21zm0 5.553h4.942v4.82H4.574v-4.82zm0 5.56h4.942v3.83c0 .35.008.68.022.99H4.574v-4.82zm5.73 3.83v-3.83h5.357v3.83c0 .35.01.68.03.99h-5.36c-.01-.31-.02-.64-.02-.98zm0-4.56v-4.82h5.357v4.82h-5.35zm6.145-4.81h5.35v4.82h-5.35v-4.82zm10.93-.74h-4.79V6.21h4.79v4.813zM9.58 22.87c.205 2.45.85 3.867 1.49 4.686H5.94c-.127-.104-.337-.325-.556-.753-.33-.65-.72-1.843-.794-3.933h4.994zm2.54 4.686c-.62-.534-1.5-1.79-1.757-4.685h5.354c.206 2.45.85 3.87 1.49 4.69h-5.09zm6.14 0c-.618-.534-1.498-1.79-1.75-4.685h5.352c.207 2.45.85 3.87 1.49 4.69h-5.09zm-1.8-5.425c-.015-.31-.024-.64-.024-.98v-3.82h5.36v3.83c0 .35.01.68.02.99h-5.35zm6.12-.98v-3.82h4.79v4.57c0 .09 0 .17.002.25h-4.77c-.015-.31-.023-.64-.023-.98zm3.546 9.14H1.84V2.51l.894-.5v20.12c0 6.666 2.778 7.154 2.778 7.154H26.14v.99zm1.84-2.72h-3.56c-.62-.53-1.5-1.79-1.76-4.68h4.74c.084 1.82.403 3.39.954 4.69h-.38z"/>
 								</svg>
