@@ -48,6 +48,7 @@
 	<header id="header">
 		<hgroup>
 			<h1 class="site_title"><?php echo lang('dashboard.title1'); ?></h1>
+			<h1 class="site_title"><a href="/en/campaign"><?php echo 'Voir le site'; ?></h1>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
@@ -120,6 +121,10 @@
 		<h4 <?php echo $display_success; ?> class="alert_success"><?php echo $success_message; ?></h4>
 		
 		<?php 
+		
+		//var_dump($admin_widgets);
+		
+		
 		foreach($admin_widgets as $widget => $content)
 		{
 			echo $content;

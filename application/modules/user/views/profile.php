@@ -2,6 +2,10 @@
 	<header><h3><?php echo lang('user.profile'); ?></h3></header>
 	<form id="user_profile" method="post" action="<?php echo site_url('user/process_profile'); ?>">
 		<div class="module_content">
+			<fieldset >
+				<label><?php echo lang('user.client'); ?></label>
+				<?php echo form_dropdown('client_id', $clients, $user->client_id, 'style="width:92%;"'); ?>
+			</fieldset>			
 			<fieldset>
 				<label><?php echo lang('user.firstname'); ?></label>
 				<input type="text" name="user_firstname" id="user_firstname" value="<?php echo $user->user_firstname; ?>" data-validate="required" data-type="text" title="<?php echo lang('user.firstname'); ?>">

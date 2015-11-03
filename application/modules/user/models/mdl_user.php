@@ -13,10 +13,10 @@ class Mdl_user extends CI_Model
 
 	function get()
 	{
-		if ($this->cache->memcached->get('mdl_user_get')) return $this->cache->memcached->get('mdl_user_get');
+		//if ($this->cache->memcached->get('mdl_user_get')) return $this->cache->memcached->get('mdl_user_get');
 		$this->db->order_by('user_id');
 		$query = $this->db->get($this->table);
-		$this->cache->memcached->save('mdl_user_get', $query->row());
+		//$this->cache->memcached->save('mdl_user_get', $query->row());
 		return $query->row();
 	}
 
@@ -40,7 +40,8 @@ class Mdl_user extends CI_Model
 		//if ($this->cache->memcached->get('mdl_user_get_'.$id)) return $this->cache->memcached->get('mdl_user_get_'.$id);
 		$this->db->where('user_id', $id);
 		$query = $this->db->get($this->table);
-		//$this->cache->memcached->save('mdl_user_get_'.$id, $query->row());
+		//$this->cache->memcached->save('mdl_user_get_'.$id, $query->row());		
+		
 		return $query->row();
 	}
 
@@ -76,9 +77,10 @@ class Mdl_user extends CI_Model
 	{
 		$this->db->where('user_id', $id);
 		$this->db->update($this->table, $data);
-		$this->cache->memcached->delete('mdl_user_get');
+		
+		//$this->cache->memcached->delete('mdl_user_get');
 		$this->get();
-		$this->cache->memcached->delete('mdl_user_get_'.$id);
+		//$this->cache->memcached->delete('mdl_user_get_'.$id);
 		$this->get_id($id);
 	}
 
