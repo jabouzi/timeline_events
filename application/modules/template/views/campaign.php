@@ -138,12 +138,5 @@ Array
 			</footer>
 			<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
 			<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery.jqtransform.js"></script>
-			<script type="text/javascript">
-				$(document).ready(function(){
-					$(function(){
-						$('.wrapper-select-top').jqTransform({imgPath:'/images/'});
-					});
-				});
-			</script>
 		</body>
 	</html>
