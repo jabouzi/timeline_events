@@ -72,6 +72,10 @@ class Campaign extends MX_Controller
 		$this->mdl_campaign->set_table('campaigns_steps_types');
 		$campaign_steps_types = $this->mdl_campaign->get()->result();
 		
+		$this->mdl_campaign->set_table('campaigns_types');
+		$campaign_type = $this->mdl_campaign->get_where(array('campaign_type_id' => $campaign_data['campaign']->campaign_type_id))->row();
+		$campaign_data['campaign_type'] = $campaign_type->campaign_type_name;
+		
 		$this->mdl_campaign->set_table('campaigns_project_managers');
 		$campaign_data['campaign_manager_client'] = $this->mdl_campaign->get_id('campaign_manager_id', $campaign_data['campaign']->campaign_manager_client)->row();
 		$campaign_data['campaign_manager_tgi'] = $this->mdl_campaign->get_id('campaign_manager_id', $campaign_data['campaign']->campaign_manager_tgi)->row();
@@ -96,12 +100,16 @@ class Campaign extends MX_Controller
 	{
 		if (!$id) redirect('campaign');
 		$campaign_data['page_title'] = lang('dashboard.title3');
-		$campaign_data['campaign_id'] = $id;
 		$this->mdl_campaign->set_table('campaigns');
-		$campaign = $this->mdl_campaign->get_where(array('campaign_id' => $id));
+		$campaign = $this->mdl_campaign->get_where(array('campaign_id' => $id))->row();
 		
-		$campaign_data['campaign_name'] = $campaign->row()->campaign_title;
+		$campaign_data['campaign_name'] = $campaign->campaign_title;
 		$campaign_data['campaign_id'] = $id;
+		
+		$this->mdl_campaign->set_table('campaigns_types');
+		$campaign_type = $this->mdl_campaign->get_where(array('campaign_type_id' => $campaign->campaign_type_id))->row();
+		$campaign_data['campaign_type'] = $campaign_type->campaign_type_name;
+		
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
 		
 		$view_data['javascript'] = array('timeline.js');

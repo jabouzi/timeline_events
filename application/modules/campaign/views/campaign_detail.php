@@ -1,7 +1,7 @@
 <div class="container">
 	<ul class="breadcrumb">
 		<li><a href="">Calendrier annuel de campagnes </a></li>
-		<li><span>Arthur-Sauvé Réno. Mineures</span></li>
+		<li><span><?php echo $campaign_name; ?> <?php echo $campaign_type; ?></span></li>
 	</ul>
 	<div class="title-top">
 		<h1 class="title-icon-on-white">
