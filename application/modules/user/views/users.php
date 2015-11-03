@@ -26,8 +26,8 @@
 					<td><?php echo $item->user_email ?></td>
 					<td><?php echo lang(item(get_status_list(), ord($item->user_active))); ?></td>
 					<?php if ($this->session->userdata('user_permission') <= 2) : ?>
-					<td>
-						<?php echo anchor('user/edituser/'.$item->user_id, '<input type="image" src="'.site_url().'assets/images/icn_edit.png" title="'.lang('user.edit').'">'); ?>
+					<td>				
+						<a class="editbutton" id="edit_<?php echo $item->user_id; ?>" href="<?php echo site_url('user/edituser/'.$item->user_id); ?>"><?php echo '<img src="'.site_url().'assets/images/icn_edit.png" title="'.lang('user.edit').'">';?></a>						
 						<input class="trash" data-userid="<?php echo $item->user_id; ?>" type="image" src="<?php echo site_url(); ?>assets/images/icn_trash.png" title="<?php echo lang('user.delete'); ?>">
 						<a class="deletebutton" id="delete_<?php echo $item->user_id; ?>" href="<?php echo site_url('user/delete_user/'.$item->user_id); ?>"><?php echo lang('user.delete.confirm'); ?></a></span>
 					</td>
