@@ -58,7 +58,7 @@ class User extends MX_Controller
 	{
 		$this->load->helper('form');
 		$view_data['user'] = $user_data;
-		$view_data['status'] = array(0 => lang('user.inactive'), 1 => lang('user.active'));
+		$view_data['status'] = array('0' => lang('user.inactive'), '1' => lang('user.active'));
 		$view_data['clients'] = modules::run('client/get_clientlist_dropdown');
 		$view_data['permissions'] = modules::run('permission/get_permissions_dropdown');
 		return $this->load->view($view.'.php', $view_data, true);
@@ -146,8 +146,8 @@ class User extends MX_Controller
 		if ($this->input->post('user_id') == $this->session->userdata('user_id'))
 		{
 			$user_id = $this->input->post('user_id');
-			$profile_data = array('client_id' => $this->session->userdata('client_id'),'user_firstname' => $this->session->userdata('user_firstname'), 'user_lastname' => $this->session->userdata('user_lastname'), 'user_email' => $this->session->userdata('user_email'));
-			$user_data = array('client_id' => $this->input->post('client_id'),'user_firstname' => $this->input->post('user_firstname'), 'user_lastname' => $this->input->post('user_lastname'), 'user_email' => $this->input->post('user_email'));
+			$profile_data = array('user_active' => $this->session->userdata('user_active'), 'client_id' => $this->session->userdata('client_id'),'user_firstname' => $this->session->userdata('user_firstname'), 'user_lastname' => $this->session->userdata('user_lastname'), 'user_email' => $this->session->userdata('user_email'));
+			$user_data = array('user_active' => $this->input->post('user_active'), 'client_id' => $this->input->post('client_id'),'user_firstname' => $this->input->post('user_firstname'), 'user_lastname' => $this->input->post('user_lastname'), 'user_email' => $this->input->post('user_email'));
 			if (count(compare_profile($profile_data, $user_data)))
 			{
 				$this->update_profile($user_id, $user_data);

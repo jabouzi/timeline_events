@@ -119,7 +119,7 @@ margin-left: 6%;
 
 .user a {
 text-decoration: none;
-color: #666666}
+color: #E41B13}
 
 .user a:hover {
 color: #77BACE;
@@ -422,7 +422,7 @@ color: #666;}
 /* Module Widths */
 
 .width_full {
-width: 95%;
+width: 75%;
 }
 
 .width_half {

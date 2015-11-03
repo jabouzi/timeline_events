@@ -62,7 +62,7 @@ class Mdl_user extends CI_Model
 	{
 		$this->db->insert($this->table, $data);
 		$last_id = $this->db->insert_id();
-		$this->cache->memcached->delete('mdl_user_get');
+		//$this->cache->memcached->delete('mdl_user_get');
 		$this->get();
 		return $last_id;
 	}
@@ -77,6 +77,10 @@ class Mdl_user extends CI_Model
 	{
 		$this->db->where('user_id', $id);
 		$this->db->update($this->table, $data);
+		
+		
+		/*var_dump($data);
+		exit;*/
 		
 		//$this->cache->memcached->delete('mdl_user_get');
 		$this->get();
