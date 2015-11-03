@@ -1,0 +1,7 @@
+{
+	"name":"client.title",
+	"version":"0.1",
+	"permissions":["client.add","client.delete","client.update"],
+	"delete":"false",
+	"update":"true"
+}
