@@ -98,8 +98,8 @@ class CI_Cache_memcached extends CI_Driver {
 	 */
 	public function clean()
 	{
-		return true;
 		//return $this->_memcached->flush();
+		return true;
 	}
 
 	// ------------------------------------------------------------------------
@@ -163,7 +163,8 @@ class CI_Cache_memcached extends CI_Driver {
 			}			
 		}
 		
-		$this->_memcached = new Memcached();
+		//$this->_memcached = new Memcached();
+		$this->_memcached = new Memcache();
 
 		foreach ($this->_memcache_conf as $name => $cache_server)
 		{
