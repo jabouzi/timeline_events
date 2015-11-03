@@ -28,6 +28,7 @@
 <section>	
 	<div class="container">
 		<form id="campaign_edit" method="post" action="<?php echo site_url('campaign/process_edit_campaign'); ?>">
+		<input type="hidden" name="campaign_id" value="<?php echo $campaign->campaign_id; ?>">
 		<div class="row">
 			<div class="col-sm-6">
 				<h2 class="icon-label">
@@ -122,10 +123,10 @@
 					
 						<div class="row">
 							<div class="col-sm-6">
-								<input class="datechooser" type="text" name="campaign_step_date_start[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_start" value="<?php echo date('m/d/Y', strtotime($campaign_steps[$campaign_step_id]->campaign_step_date_start)); ?>"/>
+								<input class="datechooser" type="text" name="campaign_step_date_start[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_start<?php echo $campaign_step_id; ?>" value="<?php if (isset($campaign_steps[$campaign_step_id])) echo date('m/d/Y', strtotime($campaign_steps[$campaign_step_id]->campaign_step_date_start)); ?>"/>
 							</div>
 							<div class="col-sm-6 etapes-au">
-								<input class="datechooser" type="text" name="campaign_step_date_end[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_end" value="<?php echo date('m/d/Y', strtotime($campaign_steps[$campaign_step_id]->campaign_step_date_end)); ?>"/>
+								<input class="datechooser" type="text" name="campaign_step_date_end[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_end<?php echo $campaign_step_id; ?>" value="<?php if (isset($campaign_steps[$campaign_step_id])) echo date('m/d/Y', strtotime($campaign_steps[$campaign_step_id]->campaign_step_date_end)); ?>"/>
 							</div>
 						</div>
 					<?php endforeach; ?>

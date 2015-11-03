@@ -194,6 +194,9 @@ $lang['language.delete'] = "Delete Language";
 $lang['language.update'] = "Update Language";
 $lang['language.success'] = "Language saved successfully";
 
+$lang['campaign.add.success'] = "Campaign added successfully";
+$lang['campaign.edit.success'] = "Campaign updated successfully";
+
 $lang['content.title'] = "Content";
 
 $lang['mail.createuser'] = "Hello %s %s 

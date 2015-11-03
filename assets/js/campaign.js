@@ -17,7 +17,6 @@ $(document).ready(function() {
 	$('.timeline_0').show();
 	
 	$('.collapsious span').click(function() {
-		console.log($(this).attr('data-value'));
 		$('.campaign').hide(500).parent().removeClass('opened');
 		$('.timeline_'+$(this).attr('data-value')).show(500).parent().addClass('opened');
 	});

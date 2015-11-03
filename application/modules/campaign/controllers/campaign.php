@@ -19,7 +19,6 @@ class Campaign extends MX_Controller
 		$campaign_data['banners'] = $banners->result();
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
 		$view_data['javascript'] = array('timeline.js');
-		$view_data['stylesheet'] = array('timeline.css', 'campaign.css');
 		$view_data['json'] = array('data.json');
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -87,7 +86,7 @@ class Campaign extends MX_Controller
 		
 		$campaign_data['campaign_steps_types'] = array_for_dropdown($campaign_steps_types, 'campaign_step_type_id', 'campaign_step_type_name');
 		$campaign_data['campaign_steps'] = array_for_dropdown($campaign_steps, 'campaign_step_type');
-		
+		//var_dump($campaign_data['campaign_steps']);
 		//$view_data['page_title'] = lang('dashboard.title3');
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_edit.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
@@ -106,14 +105,12 @@ class Campaign extends MX_Controller
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
 		
 		$view_data['javascript'] = array('timeline.js');
-		$view_data['stylesheet'] = array('timeline.css', 'campaign.css');
 		$view_data['json'] = array('data_'.$id.'.json');
 		echo modules::run('template/campaign', $view_data);
 	}
 	
 	function process_add_campaign()
 	{
-		$this->process_add_campaign_steps();
 		$campaign_data = array(
 			'client_id' => $this->input->post('client_id'),
 			'campaign_banner_id' => $this->input->post('campaign_banner_id'),
@@ -133,112 +130,85 @@ class Campaign extends MX_Controller
 	
 	function process_edit_campaign()
 	{
-		var_dump($this->input->post());
-		$this->process_edit_campaign_steps();
 		$campaign_id = $this->input->post('campaign_id');
+		$this->mdl_campaign->set_table('campaigns');
 		$campaign_data = array(
-			'client_id' => $this->input->post('client_id'),
 			'campaign_banner_id' => $this->input->post('campaign_banner_id'),
 			'campaign_project_number' => $this->input->post('campaign_project_number'),
 			'campaign_store_number' => $this->input->post('campaign_store_number'),
 			'campaign_title' => $this->input->post('campaign_title') ,
-			'campaign_date_start' => $this->input->post('campaign_date_start'),
-			'campaign_date_end' => $this->input->post('campaign_date_end'),
+			'campaign_date_start' => date('Y-m-d', strtotime($this->input->post('campaign_date_start'))),
+			'campaign_date_end' => date('Y-m-d', strtotime($this->input->post('campaign_date_end'))),
+			'campaign_date_evenement' => date('Y-m-d', strtotime($this->input->post('campaign_date_evenement'))),
+			'campaign_date_media' => date('Y-m-d', strtotime($this->input->post('campaign_date_media'))),
 			'campaign_branch' => $this->input->post('campaign_branch'),
 			'campaign_address'=> $this->input->post('campaign_address'),
 			'campaign_manager_client'=> $this->input->post('campaign_manager_client'),
 			'campaign_manager_tgi'=> $this->input->post('campaign_manager_tgi'),
-			'campaign_active' => $this->input->post('campaign_active'),
+			'campaign_type_id'=> $this->input->post('campaign_type_id')
 		);
-		$campaign = $this->mdl_campaign->get_id('campaign_id', $campaign_id);
-		$campaign_old_data = array(
-			'client_id' => $campaign->client_id,
-			'campaign_banner_id' => $campaign->campaign_banner_id,
-			'campaign_project_number' => $campaign->campaign_project_number,
-			'campaign_store_number' => $campaign->campaign_store_number,
-			'campaign_title' => $campaign->campaign_title ,
-			'campaign_date_start' => $campaign->campaign_date_start,
-			'campaign_date_end' => $campaign->campaign_date_end,
-			'campaign_branch' => $campaign->campaign_branch,
-			'campaign_address'=> $campaign->campaign_address,
-			'campaign_manager_client'=> $campaign->campaign_manager_client,
-			'campaign_manager_tgi'=> $campaign->campaign_manager_tgi,
-			'campaign_active' => $campaign->campaign_active,
-		);
-
-		if (count(compare_profile($campaign_old_data, $campaign_data)))
-		{
-			$this->update_campaign($campaign_id, $campaign_data);
-		}
 		
-		redirect('campaign/editcampaign/'.$campaign_id);
+		$this->update_campaign($campaign_id, $campaign_data);
 	}
 	
-	function process_add_campaign_steps()
+	function process_add_campaign_steps($update = 0)
 	{
-		$campaign_step_data = array(
-			'campaign_id' => $this->input->post('campaign_id'),
-			'campaigns_step_type' => $this->input->post('campaigns_step_type'),
-			'campaigns_step_date_start' => $this->input->post('campaigns_step_date_start') ,
-			'campaigns_step_date_end' => $this->input->post('campaigns_step_date_end')
-		);
-		$this->add_campaign($campaign_step_data);
-	}
-	
-	function process_edit_campaign_steps()
-	{
-		$campaigns_step_id = $this->input->post('campaigns_step_id');
-		$campaign_step_data = array(
-			'campaign_id' => $this->input->post('campaign_id'),
-			'campaigns_step_type' => $this->input->post('campaigns_step_type'),
-			'campaigns_step_date_start' => $this->input->post('campaigns_step_date_start') ,
-			'campaigns_step_date_end' => $this->input->post('campaigns_step_date_end')
-		);
-		$campaign_step = $this->mdl_campaign->get_id('campaign_step_id', $campaign_step_id);
-		$campaign_step_old_data = array(
-			'client_id' => $campaign->client_id,
-			'campaign_project_number' => $campaign_step->campaign_project_number,
-			'campaign_store_number' => $campaign_step->campaign_store_number,
-			'campaign_title' => $campaign_step->campaign_title ,
-			'campaign_date_start' => $campaign_step->campaign_date_start,
-			'campaign_date_end' => $campaign_step->campaign_date_end,
-			'campaign_branch' => $campaign_step->campaign_branch,
-			'campaign_address'=> $campaign_step->campaign_address ,
-			'campaign_active' => $campaign_step->campaign_active,
-		);
-
-		if (count(compare_profile($campaign_step_old_data, $campaign_step_data)))
+		$this->mdl_campaign->set_table('campaigns_steps_types');
+		$campaign_steps_types = array_for_dropdown($this->mdl_campaign->get()->result(), 'campaign_step_type_id');
+		$this->mdl_campaign->set_table('campaigns_steps');
+		foreach($campaign_steps_types as $campaign_step_type_id => $campaign_step_type)
 		{
-			$this->update_campaign($campaign_step_id, $campaign_step_data);
+			if ($update)
+			{
+				$where = array('campaign_id' => $this->input->post('campaign_id'), 'campaign_step_type' => $campaign_step_type_id);
+				$this->mdl_campaign->delete($where);
+			}
+
+			if (!isempty(item($this->input->post('campaign_step_date_start'), $campaign_step_type_id)) && !isempty(item($this->input->post('campaign_step_date_end'), $campaign_step_type_id)))
+			{
+				$campaign_step_data = array(
+					'campaign_id' => $this->input->post('campaign_id'),
+					'campaign_step_type' => $campaign_step_type_id,
+					'campaign_step_date_start' => date('Y-m-d', strtotime(item($this->input->post('campaign_step_date_start'), $campaign_step_type_id))),
+					'campaign_step_date_end' => date('Y-m-d', strtotime(item($this->input->post('campaign_step_date_end'), $campaign_step_type_id)))
+				);
+				$this->add_campaign_step($campaign_step_data);
+			}
 		}
-		
-		redirect('campaign/editcampaign/'.$campaign_step_id);
 	}
 	
 	private function add_campaign($campaign_data)
 	{
+		$this->mdl_campaign->set_table('campaigns');
 		$campaign_id = $this->mdl_campaign->insert($campaign_data);
-		$this->session->set_campaigndata('success_message', lang('campaign.success'));
-		redirect('campaign/editcampaign/'.$campaign_id);
+		$this->process_add_campaign_steps($campaign_id);
+		$this->generate_campaign();
+		$this->generate_campaign_detail($campaign_id);
+		$this->session->set_userdata('success_message', lang('campaign.add.success'));
+		redirect('campaign/edit/'.$campaign_id);
 	}
 	
 	private function update_campaign($campaign_id, $campaign_data)
 	{
+		$this->mdl_campaign->set_table('campaigns');
 		$this->mdl_campaign->update('campaign_id', $campaign_id, $campaign_data);
-		$this->session->set_campaigndata('success_message', lang('campaign.success'));
-		redirect('campaign/editcampaign/'.$campaign_id);
+		$this->process_add_campaign_steps(1);
+		$this->generate_campaign();
+		$this->generate_campaign_detail($campaign_id);
+		$this->session->set_userdata('success_message', lang('campaign.edit.success'));
+		redirect('campaign/edit/'.$campaign_id);
 	}
 	
 	private function add_campaign_step($campaign_step_data)
 	{
+		$this->mdl_campaign->set_table('campaigns_steps');
 		$campaign_step_id = $this->mdl_campaign->insert($campaign_step_data);
-		$this->session->set_campaigndata('success_message', lang('campaign.success'));
 	}
 	
 	private function update_campaign_step($campaign_step_id, $campaign_step_data)
 	{
+		$this->mdl_campaign->set_table('campaigns_steps');
 		$this->mdl_campaign->update('campaign_step_id', $campaign_step_id, $campaign_step_data);
-		$this->session->set_campaigndata('success_message', lang('campaign.success'));
 	}
 	
 	function generate_campaign()
@@ -274,17 +244,19 @@ class Campaign extends MX_Controller
 	{
 		$json = array();
 		$this->mdl_campaign->set_table('campaigns_steps');
-		$campaigns = $this->mdl_campaign->get_where(array('campaign_id' => $id));
-		foreach($campaigns->result() as $key => $campaign)
+		$campaigns_steps = $this->mdl_campaign->get_where_order(array('campaign_id' => $id), 'campaign_step_type')->result();
+
+		$this->mdl_campaign->set_table('campaigns_steps_types');
+		$campaigns_steps_types = array_for_dropdown($this->mdl_campaign->get()->result(), 'campaign_step_type_id');
+
+		foreach($campaigns_steps as $key => $campaign_step)
 		{
-			$this->mdl_campaign->set_table('campaigns_types');
-			$campaign_step = $this->mdl_campaign->get_where(array('campaign_type_id' => $campaign->campaign_step_type));
             $json[] = array(
-					'start' =>  '__'.strtotime($campaign->campaign_step_date_start),
-					'end' =>  '__'.strtotime($campaign->campaign_step_date_end),
+					'start' =>  '__'.strtotime($campaign_step->campaign_step_date_start),
+					'end' =>  '__'.strtotime($campaign_step->campaign_step_date_end),
 					'content' =>  ' ',
-					'group' =>  $campaign_step->row()->campaign_type_name,
-					'id' =>  $campaign->campaign_step_id,
+					'group' =>  ($key+1).'. '.$campaigns_steps_types[$campaign_step->campaign_step_type]->campaign_step_type_name,
+					'id' =>  $campaign_step->campaign_step_id,
 					'className' =>  'red',
 					'editable' => false
 				);

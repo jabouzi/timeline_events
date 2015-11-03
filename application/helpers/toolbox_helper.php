@@ -45,6 +45,12 @@ function isempty($string)
 	return (empty($string)) ? true : false;
 }
 
+function isnull($string)
+{
+	if (isset($string)) return $string;
+	return '';
+}
+
 function item($array, $key)
 {
 	return (isset($array[$key])) ? $array[$key] : false;
