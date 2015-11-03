@@ -408,13 +408,10 @@ border-top-left-radius: 5px; border-top-right-radius: 5px;
 }
 
 .module footer {
-height: 32px;
-width: 100%;
-border-top: 1px solid #9CA1B0;
-background: #F1F1F4 url(../images/module_footer_bg.png) repeat-x;
--webkit-border-bottom-left-radius: 5px; -webkit-border-bottom-right-radius: 5px;
--moz-border-radius-bottomleft: 5px; -moz-border-radius-bottomright: 5px;
--webkit-border-bottom-left-radius: 5px; -webkit-border-bottom-right-radius: 5px;
+  background: #f1f1f4 none repeat scroll 0 0;
+  border-top: 1px solid #9ca1b0;
+  height: 52px;
+  width: 100%;
 }
 
 .module_content {
@@ -696,35 +693,46 @@ margin: 10px 0;
 }
 
 fieldset label {
-display: block;
-float: left;
-width: 200px;
-height: 25px;
-line-height: 25px;
-text-shadow: 0 1px 0 #fff;
-font-weight: bold;
-padding-left: 10px;
-margin: -5px 0 5px 0;
-text-transform: uppercase;
+  display: block;
+  float: left;
+  font-weight: bold;
+  line-height: 32px;
+  margin: 3px 0;
+  padding-left: 10px;
+  text-shadow: 0 1px 0 #fff;
+  text-transform: uppercase;
+  width: 200px;
 }
 
-fieldset input[type=text] {
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
-border: 1px solid #BBBBBB;
-height: 20px;
-color: #666666;
--webkit-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
--moz-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
-box-shadow: inset 0 2px 2px #ccc, 0 1px 0 #fff;
-padding-left: 10px;
-background-position: 10px 6px;
-margin: 0;
-display: block;
-float: left;
-width: 200px;
-margin: 0 10px;
+fieldset input[type="text"], fieldset input[type="password"], article select {
+  background-position: 10px 6px;
+  border: 1px solid #bbbbbb;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px #ccc inset, 0 1px 0 #fff;
+  color: #666666;
+  display: block;
+  float: left;
+  height: 38px !important;
+  margin: 0 10px;
+  padding-left: 10px;
+  width: 255px !important;
+}
+
+
+.submit_link input {
+ 
+  border-radius: 5px;
+ 
+  display: inline-block;
+  font-size: 15px;
+  height: 41px;
+  line-height: 41px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+  padding: 0 20px;
+  text-decoration: none;
+    border: 1px solid #e41b13;
+    color: #e41b13;
 }
 
 fieldset input[type=text]:focus {
@@ -736,7 +744,7 @@ box-shadow: inset 0 2px 2px #ccc, 0 0 10px #ADDCE6;
 }
 
 fieldset select {
-width: 200px!important;
+
 margin: 0 10px;
 border: 1px solid #bbb;
 height: 20px;
