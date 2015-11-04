@@ -150,7 +150,7 @@ $lang['tonik.delete.confirm'] = "Confirm deleting client";
 $lang['tonik.delete.success'] = "Client deleted successfully";
 $lang['tonik.campaignssteps'] = "Campaign steps";
 $lang['tonik.campaignstype'] = "Campaign types";
-$lang['tonik.newprojectmanager'] = "Add";
+$lang['tonik.newprojectmanager'] = "+Add";
 
 
 $lang['profile.update'] = "Your profile has been updated";

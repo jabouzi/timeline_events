@@ -66,7 +66,7 @@
 	<aside id="sidebar" class="column">
 		<h3><?php echo lang('tonik.title'); ?></h3>
 		<ul class="toggle">
-			<li class="icn_view_users"><?php echo anchor('tonik/projectmanagers', lang('tonik.projectmanagers')) ?> <?php echo anchor('tonik/newprojectmanager', lang('tonik.newprojectmanager')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('tonik/projectmanagers', lang('tonik.projectmanagers')) ?> <span class="add-manager"><?php echo anchor('tonik/newprojectmanager', lang('tonik.newprojectmanager')) ?></span></li>
 			<li class="icn_view_users"><?php echo anchor('tonik/campaignssteps', lang('tonik.campaignssteps')) ?></li>
 			<li class="icn_view_users"><?php echo anchor('tonik/campaignstype', lang('tonik.campaignstype')) ?></li>
 		</ul>		
