@@ -1,0 +1,7 @@
+{
+	"name":"tonik.title",
+	"version":"0.1",
+	"permissions":["tonik.add","tonik.delete","tonik.update"],
+	"delete":"false",
+	"update":"true"
+}
