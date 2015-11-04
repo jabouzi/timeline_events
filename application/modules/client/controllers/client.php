@@ -38,6 +38,17 @@ class Client extends MX_Controller
 		echo modules::run('template', $view_data);
 	}
 	
+	
+	function banners()
+	{
+		$view_data['page_title'] = lang('client.users');
+		//var_dump($this->session);
+		$users = $this->mdl_client->get_where(array(),"campaigns_banners");
+		$view_data['admin_widgets']['user'] = $this->show('banners', $users);
+		echo modules::run('template', $view_data);
+	}
+		
+	
 	function newclient()
 	{
 		if ($this->session->userdata('user_permission') > 2) redirect('dashboard');

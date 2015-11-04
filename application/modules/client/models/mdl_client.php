@@ -51,8 +51,12 @@ class Mdl_client extends CI_Model
 		return $query->row();
 	}
 
-	function get_where($where)
+	function get_where($where,$table_name = NULL )
 	{
+		
+		if (!is_null($table_name)){
+			$this->table = $table_name;
+		}
 		$query = $this->db->get_where($this->table, $where);
 		//var_dump($query);
 		

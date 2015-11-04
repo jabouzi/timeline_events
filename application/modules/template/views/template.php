@@ -76,7 +76,7 @@
 				<li class="icn_add_user"><?php echo anchor('client/newclient', lang('client.new')) ?></li>				
 			<?php endif; ?>
 			<li class="icn_view_users"><?php echo anchor('client/clients', lang('client.users')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('client/Banners', lang('client.banners')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('client/banners', lang('client.banners')) ?></li>
 			<li class="icn_view_users"><?php echo anchor('client/projectmanagers', lang('client.projectmanagers')) ?></li>
 			<li class="icn_view_users"><?php echo anchor('client/campaignssteps', lang('client.campaignssteps')) ?></li>
 			<li class="icn_view_users"><?php echo anchor('client/campaignstype', lang('client.campaignstype')) ?></li>
