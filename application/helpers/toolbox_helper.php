@@ -89,7 +89,21 @@ function array_for_dropdown($array, $value, $option = null)
 	foreach($array as $item)
 	{
 		$temp = (array)$item;
-		if ($option) $dropdown[$temp[$value]] = $temp[$option];
+		if ($option) 
+		{
+			if (is_array($option))
+			{
+				$dropdown[$temp[$value]] = '';
+				foreach($option as $op)
+				{
+					$dropdown[$temp[$value]] .= $temp[$op].' ';
+				}
+			}
+			else
+			{
+				$dropdown[$temp[$value]] = $temp[$option];
+			}
+		}
 		else $dropdown[$temp[$value]] = $item;
 	}
 	

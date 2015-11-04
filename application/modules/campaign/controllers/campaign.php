@@ -41,8 +41,8 @@ class Campaign extends MX_Controller
 		$campaign_data['campaign_banners'] = array_for_dropdown($campaign_banners, 'campaign_banner_id', 'campaign_banner_name');
 		$campaign_data['campaign_types'] = array_for_dropdown($campaign_types, 'campaign_type_id', 'campaign_type_name');
 		
-		$campaign_data['campaign_managers_tgi'] = array_for_dropdown($campaign_managers_tgi, 'campaign_manager_id', 'campaign_manager_name');
-		$campaign_data['campaign_managers_client'] = array_for_dropdown($campaign_managers_client, 'campaign_manager_id', 'campaign_manager_name');
+		$campaign_data['campaign_managers_tgi'] = array_for_dropdown($campaign_managers_tgi, 'campaign_manager_id');
+		$campaign_data['campaign_managers_client'] = array_for_dropdown($campaign_managers_client, 'campaign_manager_id');
 		
 		$campaign_data['campaign_steps_types'] = array_for_dropdown($campaign_steps_types, 'campaign_step_type_id', 'campaign_step_type_name');
 		
@@ -74,7 +74,7 @@ class Campaign extends MX_Controller
 		
 		$this->mdl_campaign->set_table('campaigns_types');
 		$campaign_type = $this->mdl_campaign->get_where(array('campaign_type_id' => $campaign_data['campaign']->campaign_type_id))->row();
-		$campaign_data['campaign_type'] = $campaign_type->campaign_type_name;
+		$campaign_data['campaign_type'] = @$campaign_type->campaign_type_name;
 		
 		$this->mdl_campaign->set_table('campaigns_project_managers');
 		$campaign_data['campaign_manager_client'] = $this->mdl_campaign->get_id('campaign_manager_id', $campaign_data['campaign']->campaign_manager_client)->row();
@@ -85,8 +85,8 @@ class Campaign extends MX_Controller
 		$campaign_data['campaign_banners'] = array_for_dropdown($campaign_banners, 'campaign_banner_id', 'campaign_banner_name');
 		$campaign_data['campaign_types'] = array_for_dropdown($campaign_types, 'campaign_type_id', 'campaign_type_name');
 		
-		$campaign_data['campaign_managers_tgi'] = array_for_dropdown($campaign_managers_tgi, 'campaign_manager_id', 'campaign_manager_name');
-		$campaign_data['campaign_managers_client'] = array_for_dropdown($campaign_managers_client, 'campaign_manager_id', 'campaign_manager_name');
+		$campaign_data['campaign_managers_tgi'] = array_for_dropdown($campaign_managers_tgi, 'campaign_manager_id', array('campaign_manager_name', 'campaign_manager_lastname'));
+		$campaign_data['campaign_managers_client'] = array_for_dropdown($campaign_managers_client, 'campaign_manager_id', array('campaign_manager_name', 'campaign_manager_lastname'));
 		
 		$campaign_data['campaign_steps_types'] = array_for_dropdown($campaign_steps_types, 'campaign_step_type_id', 'campaign_step_type_name');
 		$campaign_data['campaign_steps'] = array_for_dropdown($campaign_steps, 'campaign_step_type');
@@ -108,7 +108,7 @@ class Campaign extends MX_Controller
 		
 		$this->mdl_campaign->set_table('campaigns_types');
 		$campaign_type = $this->mdl_campaign->get_where(array('campaign_type_id' => $campaign->campaign_type_id))->row();
-		$campaign_data['campaign_type'] = $campaign_type->campaign_type_name;
+		$campaign_data['campaign_type'] = @$campaign_type->campaign_type_name;
 		
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
 		
