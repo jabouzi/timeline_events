@@ -34,18 +34,35 @@
 		</div>
 	</div>
 	<div class="plan-campagne-wp">
-	<h2>plan de campagne</h2>
-	<div class="plan-campagne">
-		<a class="active" href="">Calendrier</a>
-		<a href="">Budget</a>
-	</div>
-	
+		<h2>plan de campagne</h2>
+		<div class="plan-campagne">
+			<a class="active" href="">Calendrier</a>
+			<a href="">Budget</a>
+		</div>
+		
 	</div>
 </div>
 <section>
 	<div class="container">
 		<input type="hidden" id="campaign_calendar" value="0">
-		<h3 class="time-line-table">Étapes de production</h3>
-		<div id="timeline"></div>
+		<div class="timeline-wrapper">
+			<h3 class="time-line-table">Étapes de production</h3>
+			<div id="timeline"></div>
+		</div>
+		<h3>Budget Global</h3>
+		<div class="budget-wp">
+			<div class="twovalues">
+				<span class="namebudget">Tonik Groupimage:</span>
+				<span class="bugetprice">15 000$</span>
+			</div>
+			<div class="twovalues">
+				<span class="namebudget">Autres:</span>
+				<span class="bugetprice">5 000$</span>
+			</div>
+			<div class="twovalues">
+				<span class="namebudget">Total:</span>
+				<span class="bugetprice">20 000$</span>
+			</div>
+		</div>
 	</div>
 </section>
