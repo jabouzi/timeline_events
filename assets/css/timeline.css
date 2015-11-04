@@ -41,6 +41,8 @@ div.timeline-axis-text {
 }
 
 div.timeline-axis-text-minor {
+	font-size:15px; color:#454545;font-family:'source_sans_prosemibold';
+	
 }
 
 div.timeline-axis-text-major {
@@ -126,6 +128,7 @@ div.timeline-groups-axis {
   border-color: #bebebe;
   border-width: 1px;
   box-sizing: border-box;
+  border-right:none!important
 }
 div.timeline-groups-axis-onleft {
     border-style: none solid none none;
