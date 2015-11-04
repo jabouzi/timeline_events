@@ -87,10 +87,10 @@ div.timeline-event-dot {
 }
 
 div.timeline-event-range {
-    -moz-border-radius: 2px; /* For Firefox 3.6 and older */
+  /*   -moz-border-radius: 2px; 
     border-radius: 2px;
     border-style: solid;
-    border-width: 1px;
+    border-width: 1px; */
 }
 
 div.timeline-event-range-drag-left {
@@ -110,10 +110,14 @@ div.timeline-event-line {
     box-sizing: border-box;
 }
 
+
 div.timeline-event-content {
-    margin: 5px;
     overflow: hidden;
     white-space: nowrap;
+    height: 22px;
+    line-height: 22px;
+    font-size: 13px;
+    text-align: center;
 }
 
 div.timeline-groups-axis {
