@@ -34,17 +34,7 @@
 				<script type="text/javascript" src="<?php echo site_url(); ?>assets/json/<?php echo $js; ?>"></script>
 			<?php } ?>
 		<?php } ?>
-		<script type="text/javascript">
-			$(function(){
-				
-				$.datepicker.setDefaults($.datepicker.regional[($('html').attr('lang') == 'en') ? '' : $('html').attr('lang')]);
-				$('.datechooser').datepicker();
-				
-				
-				
-			});
-		</script>
-		
+
 	</head>
 	<body>
 		<div class="header">

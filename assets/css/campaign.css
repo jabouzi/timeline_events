@@ -32,6 +32,48 @@ div.magenta {
 	cursor:pointer;
 }
 
+div.encarts-reguliers {
+	background-color: #3498db;
+	border-color: #008000;
+	cursor:pointer;
+}
+
+div.ouverture {
+	background-color: #1abc9c;
+	border-color: #A52A2A;
+	cursor:pointer;
+}
+
+div.relocalisation {
+	background-color: #9b59b6;
+	border-color: #0000FF;
+	cursor:pointer;
+}
+
+div.reno-transformations {
+	background-color: #e67e22;
+	border-color: #FF4600;
+	cursor:pointer;
+}
+
+div.reno-majeurs {
+	background-color: #e74c3c;
+	border-color: #800080;
+	cursor:pointer;
+}
+
+div.reno-mineurs {
+	background-color: #f1c40f;
+	border-color: #800080;
+	cursor:pointer;
+}
+
+div.default {
+	background-color: #BFBFBF;
+	border-color: #800080;
+	cursor:pointer;
+}
+
 h4.alert_info {
 display: block;
 margin-top: 20px;

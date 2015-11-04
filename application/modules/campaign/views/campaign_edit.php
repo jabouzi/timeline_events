@@ -15,7 +15,7 @@
 		</h1>
 		<div class="title-top-btns">
 			
-			<a href="" class="btn-icon-on-dark">
+			<a style="cursor:pointer;" class="btn-icon-on-dark submit" data-value="campaign_edit">
 			<svg class="icon-svg icon-sauvegarderBlanc" viewBox="0 0 31 32" x="1920">
 				<path fill="#FFF" d="M22.652.35v8.792H6.1V.352H0V32h30.493V5.95l-4.68-5.6h-3.16zM4.356 13.54h20.91v13.187H4.356v-13.19z"/>
 				<path fill="#FFF" d="M8.712 6.505h11.326V.35H8.712v6.155z"/>
@@ -48,7 +48,7 @@
 						<div class="col-sm-12 col-md-6">
 							<label for="campaign_type_id">Type de campagne</label>
 							<div class="wrapper-select-top">
-								<?php echo form_dropdown('campaign_type_id', $campaign_types, @$campaign_type->campaign_type_id); ?>
+								<?php echo form_dropdown('campaign_type_id', $campaign_types, @$campaign->campaign_type_id); ?>
 							</div>
 						</div>
 					</div>
