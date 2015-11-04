@@ -45,6 +45,7 @@
 <section>
 	<div class="container">
 		<input type="hidden" id="campaign_calendar" value="0">
+		<h3 class="time-line-table">Étapes de production</h3>
 		<div id="timeline"></div>
 	</div>
 </section>

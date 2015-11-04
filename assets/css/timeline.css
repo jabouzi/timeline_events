@@ -144,6 +144,10 @@ div.timeline-groups-text {
   padding-left: 10px;
   padding-right: 10px;
 }
+div.timeline-groups-text:before {
+	
+	content:"+";  color:#e41b13;font-family:'arial';padding-right:5px
+	}
 
 div.timeline-currenttime {
     -moz-box-sizing: border-box;
