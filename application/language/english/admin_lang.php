@@ -115,19 +115,19 @@ $lang['client.delete.success'] = "Client deleted successfully";
 $lang['client.campaignssteps'] = "Campaign steps";
 $lang['client.campaignstype'] = "Campaign types";
 
-
 $lang['tonik.title'] = "Tonik";
 $lang['tonik.add'] = "Add Client";
 $lang['tonik.delete'] = "Delete Client";
 $lang['tonik.update'] = "Update Client";
-$lang['tonik.users'] = "Clients list";
+$lang['tonik.users'] = "Tonik Projects Managers";
 $lang['tonik.banners'] = "Banners";
 $lang['tonik.projectmanagers'] = "Project Managers";
-$lang['tonik.profile'] = "My Profile";
-$lang['tonik.new'] = "New Client";
+$lang['tonik.profile'] = "Update Project Manager";
+$lang['tonik.new'] = "New Projects Manager";
 $lang['tonik.edit'] = "Edit Client";
 $lang['tonik.name'] = "Name";
 $lang['tonik.logo'] = "Logo";
+$lang['tonik.lastname'] = "Last Name";
 $lang['tonik.primary_color'] = "Primary Color";
 $lang['tonik.secondary_color'] = "Secondary Color";
 $lang['tonik.font_primary_color'] = "Font Primary Color";
@@ -150,6 +150,8 @@ $lang['tonik.delete.confirm'] = "Confirm deleting client";
 $lang['tonik.delete.success'] = "Client deleted successfully";
 $lang['tonik.campaignssteps'] = "Campaign steps";
 $lang['tonik.campaignstype'] = "Campaign types";
+$lang['tonik.newprojectmanager'] = "Add";
+
 
 $lang['profile.update'] = "Your profile has been updated";
 $lang['profile.password.update'] = "Your password has been updated";
