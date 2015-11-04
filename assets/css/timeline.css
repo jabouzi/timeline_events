@@ -1,6 +1,6 @@
 div.timeline-frame {
     -moz-box-sizing: border-box;
-    border: 1px solid #bebebe;
+    border-bottom: 1px solid #bebebe;
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
@@ -44,6 +44,7 @@ div.timeline-axis-text-minor {
 }
 
 div.timeline-axis-text-major {
+	font-size:13px; color:#e41b13; text-transform:uppercase;
 }
 
 div.timeline-event {
@@ -121,12 +122,11 @@ div.timeline-event-content {
 }
 
 div.timeline-groups-axis {
-    -moz-box-sizing: border-box;
-    border-color: #bebebe;
-    border-width: 1px;
-    box-sizing: border-box;
+  background: rgba(0, 0, 0, 0) url("/assets/images/toolbox/bg-lateral-timeline.jpg") no-repeat scroll 0 51px;
+  border-color: #bebebe;
+  border-width: 1px;
+  box-sizing: border-box;
 }
-
 div.timeline-groups-axis-onleft {
     border-style: none solid none none;
 }
@@ -136,9 +136,10 @@ div.timeline-groups-axis-onright {
 }
 
 div.timeline-groups-text {
-    color: #4d4d4d;
-    padding-left: 10px;
-    padding-right: 10px;
+  color: #444;
+  font-size: 13px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 div.timeline-currenttime {
