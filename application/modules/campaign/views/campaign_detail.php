@@ -59,7 +59,7 @@
 				<span class="namebudget">Autres:</span>
 				<span class="bugetprice">5 000$</span>
 			</div>
-			<div class="twovalues">
+			<div class="twovalues bg_right">
 				<span class="namebudget">Total:</span>
 				<span class="bugetprice">20 000$</span>
 			</div>
