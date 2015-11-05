@@ -1,13 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Mdl_campaign extends CI_Model
+class Mdl_campaigns_project_managers extends CI_Model
 {
 	private $table;
 	
 	function __construct()
 	{
 		parent::__construct();
-		$this->table = 'campaigns';
+		$this->table = 'campaigns_project_managers';
 	}
 	
 	function get()
