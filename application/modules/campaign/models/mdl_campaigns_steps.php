@@ -65,7 +65,7 @@ class Mdl_campaigns_steps extends CI_Model
 	
 	function delete($where)
 	{
-		$this->db->delete($where);
+		$this->db->delete($this->table, $where);
 	}
 	
 	function count_where($column, $value)
