@@ -7,28 +7,19 @@ class Mdl_campagne extends CI_Model
 	function __construct()
 	{
 		parent::__construct();
-	}
-	
-	function set_table($table)
-	{
-		$this->table = $table;
-	}
-	
-	function get_table()
-	{
-		return $this->table;
+		$this->table = 'campaigns';
 	}
 	
 	function get()
 	{
-		$query = $this->db->get($this->get_table());
+		$query = $this->db->get($this->table);
 		return $query;
 	}
 	
 	function get_order($order_by)
 	{
 		$this->db->order_by($order_by);
-		$query = $this->db->get($this->get_table());
+		$query = $this->db->get($this->table);
 		return $query;
 	}
 	
@@ -36,52 +27,59 @@ class Mdl_campagne extends CI_Model
 	{
 		$this->db->limit($limit, $offset);
 		$this->db->order_by($order_by);
-		$query = $this->db->get($this->get_table());
+		$query = $this->db->get($this->table);
 		return $query;
 	}
 	
 	function get_id($field_id, $id)
 	{
 		$this->db->where($field_id, $id);
-		$query = $this->db->get($this->get_table());
+		$query = $this->db->get($this->table);
 		return $query;
 	}
 	
 	function get_where($where)
 	{
-		$query = $this->db->get_where($this->get_table(), $where);
+		$query = $this->db->get_where($this->table, $where);
+		return $query;
+	}
+	
+	function get_where_order($where, $order_by)
+	{
+		$this->db->order_by($order_by);
+		$query = $this->db->get_where($this->table, $where);
 		return $query;
 	}
 	
 	function insert($data)
 	{
-		$this->db->insert($this->get_table(), $data);
+		$this->db->insert($this->table, $data);
 		$last_id = $this->db->insert_id();
 	}
 	
 	function update($field_id, $id, $data)
 	{
 		$this->db->where($field_id, $id);
-		$this->db->update($this->get_table(), $data);
+		$this->db->update($this->table, $data);
 	}
 	
 	function delete($field_id, $id)
 	{
 		$this->db->where($field_id, $id);
-		$this->db->delete($this->get_table());
+		$this->db->delete($this->table);
 	}
 	
 	function count_where($column, $value)
 	{
 		$this->db->where($column, $value);
-		$query	= $this->db->get($this->get_table());
+		$query	= $this->db->get($this->table);
 		$num_rows = $query->num_rows();
 		return $num_rows;
 	}
 	
 	function count_all()
 	{
-		$query	= $this->db->get($this->get_table());
+		$query	= $this->db->get($this->table);
 		$num_rows = $query->num_rows();
 		return $num_rows;
 	}
@@ -89,7 +87,7 @@ class Mdl_campagne extends CI_Model
 	function get_max($field_id)
 	{
 		$this->db->select_max($field_id);
-		$query = $this->db->get($this->get_table());
+		$query = $this->db->get($this->table);
 		$row   = $query->row();
 		$id	= $row->id;
 		return $id;
