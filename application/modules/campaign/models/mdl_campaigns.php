@@ -31,7 +31,7 @@ class Mdl_campaigns extends CI_Model
 		return $query;
 	}
 	
-	function get_id($field_id, $id)
+	function get_id( $field_id, $id)
 	{
 		$this->db->where($field_id, $id);
 		$query = $this->db->get($this->table);
@@ -53,7 +53,7 @@ class Mdl_campaigns extends CI_Model
 	
 	function insert($data)
 	{
-		$this->db->insert($this->table, $data);
+		$this->db->insert( $data);
 		$last_id = $this->db->insert_id();
 	}
 	
@@ -63,10 +63,9 @@ class Mdl_campaigns extends CI_Model
 		$this->db->update($this->table, $data);
 	}
 	
-	function delete($field_id, $id)
+	function delete($where)
 	{
-		$this->db->where($field_id, $id);
-		$this->db->delete($this->table);
+		$this->db->delete($where);
 	}
 	
 	function count_where($column, $value)

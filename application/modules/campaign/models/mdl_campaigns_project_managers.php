@@ -63,10 +63,9 @@ class Mdl_campaigns_project_managers extends CI_Model
 		$this->db->update($this->table, $data);
 	}
 	
-	function delete($field_id, $id)
+	function delete($where)
 	{
-		$this->db->where($field_id, $id);
-		$this->db->delete($this->table);
+		$this->db->delete($where);
 	}
 	
 	function count_where($column, $value)
