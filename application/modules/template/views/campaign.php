@@ -7,7 +7,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<? /* <meta name="viewport" content="width=device-width, initial-scale=1"> */ ?>
-		<meta name="viewport" content="width=1142" />
+		<meta name="viewport" content="width=900" />
 		<title>Édition de campagne</title>
 		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/bootstrap-3.3.5.min.css" type="text/css">
 		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/main.css">
