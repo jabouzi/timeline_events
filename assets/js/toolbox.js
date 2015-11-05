@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	 
-	$(".tablesorter").tablesorter();
+	//$(".tablesorter").tablesorter();
 	
 	//When page loads...
 	$(".tab_content").hide(); //Hide all content
@@ -27,7 +27,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$('.column').equalHeight();
+	//$('.column').equalHeight();
 
 	$('.submit_form').bind({
 		click: function() {

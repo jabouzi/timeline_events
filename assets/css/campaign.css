@@ -132,3 +132,8 @@ padding: 10px 0;
 text-indent: 40px;
 font-size: 14px;
 }
+
+.error-input
+{
+	color: #FF0000 !important;
+}

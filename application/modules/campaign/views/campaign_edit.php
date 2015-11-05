@@ -132,11 +132,11 @@
 					<?php endforeach; ?>
 					<div class="row">
 						<div class="col-sm-6">
-							<label for="date-event">Date de l’événement</label>
+							<label for="campaign_date_evenement">Date de l’événement</label>
 							<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_evenement)); ?>"/>
 						</div>
 						<div class="col-sm-6">
-							<label for="date-medias">Date médias</label>
+							<label for="campaign_date_media">Date médias</label>
 							<input class="datechooser" type="text" name="campaign_date_media" id="campaign_date_media" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_media)); ?>"/>
 						</div>
 					</div>
@@ -157,4 +157,5 @@
 		</div>
 		</form>
 	</div>
+	<input type="hidden" id="error_message" value="<?php echo lang('admin.error'); ?>">
 </section>

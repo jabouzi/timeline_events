@@ -53,7 +53,7 @@ class Mdl_campaigns extends CI_Model
 	
 	function insert($data)
 	{
-		$this->db->insert( $data);
+		$this->db->insert($this->table, $data);
 		$last_id = $this->db->insert_id();
 	}
 	

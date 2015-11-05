@@ -11,13 +11,13 @@
 			<div class="grayBox">
 				<div class="row">
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_banner_id">Bannière</label>
+						<label for="campaign_banner_id" id="label_campaign_banner_id">Bannière</label>
 						<div class="wrapper-select-top">
-							<?php echo form_dropdown('campaign_banner_id', $campaign_banners); ?>
+							<?php echo form_dropdown('campaign_banner_id', $campaign_banners, '', 'data-validate="required" data-type="option" id="campaign_banner_id"'); ?>
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_type_id">Type de campagne</label>
+						<label for="campaign_type_id" id="label_campaign_type_id">Type de campagne</label>
 						<div class="wrapper-select-top">
 							<?php echo form_dropdown('campaign_type_id', $campaign_types); ?>
 						</div>
@@ -25,52 +25,52 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<label for="tcampaign_title">Titre de la campagne</label>
-						<input  type="text" name="campaign_title" id="campaign_title" value=""/>
+						<label for="tcampaign_title" id="label_campaign_title">Titre de la campagne</label>
+						<input  type="text" name="campaign_title" id="campaign_title" value="" data-validate="required" data-type="text" />
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
-						<label for="campaign_date_start">Date de début</label>
-						<input class="datechooser" type="text" name="campaign_date_start" id="campaign_date_start" value=""/>
+						<label for="campaign_date_start" id="label_campaign_date_start">Date de début</label>
+						<input class="datechooser" type="text" name="campaign_date_start" id="campaign_date_start" value="" data-validate="required" data-type="text"/>
 					</div>
 					<div class="col-sm-6">
-						<label for="campaign_date_end">Date de fin</label>
-						<input class="datechooser" type="text" name="campaign_date_end" id="campaign_date_end" value=""/>
+						<label for="campaign_date_end" id="label_campaign_date_end">Date de fin</label>
+						<input class="datechooser" type="text" name="campaign_date_end" id="campaign_date_end" value="" data-validate="required" data-type="text"/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_branch">Nom de la succursale</label>
-						<input type="text" name="campaign_branch" id="campaign_branch" value=""/>
+						<label for="campaign_branch"id="label_campaign_branch">Nom de la succursale</label>
+						<input type="text" name="campaign_branch" id="campaign_branch" value="" data-validate="required" data-type="text"/>
 					</div>
 					<div class="col-sm-12 col-md-6">
-						<label for="adresse-succursale">Adresse de la succursale</label>
-						<input type="text" name="campaign_address" id="campaign_address" value=""/>
+						<label for="campaign_address" id="label_campaign_address">Adresse de la succursale</label>
+						<input type="text" name="campaign_address" id="campaign_address" value="" data-validate="required" data-type="text"/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_manager_tgi">Chargée de projet (Tonik Groupimage)</label>
+						<label for="campaign_manager_tgi" id="label_campaign_manager_tgi">Chargée de projet (Tonik Groupimage)</label>
 						<div class="wrapper-select-top">
-							<?php echo form_dropdown('campaign_manager_tgi', $campaign_managers_tgi); ?>
+							<?php echo form_dropdown('campaign_manager_tgi', $campaign_managers_tgi, '', 'data-validate="required" data-type="option" id="campaign_manager_tgi"'); ?>
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_manager_client">Coordonnateur (Metro)</label>
+						<label for="campaign_manager_client" id="label_campaign_manager_client">Coordonnateur (Metro)</label>
 						<div class="wrapper-select-top">
-							<?php echo form_dropdown('campaign_manager_client', $campaign_managers_client); ?>
+							<?php echo form_dropdown('campaign_manager_client', $campaign_managers_client, '', 'data-validate="required" data-type="option" id="campaign_manager_client"'); ?>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_project_number">Numéro de projet</label>
-						<input type="text" name="campaign_project_number" id="campaign_project_number" value=""/>
+						<label for="campaign_project_number" id="label_campaign_project_number">Numéro de projet</label>
+						<input type="text" name="campaign_project_number" id="campaign_project_number" value="" data-validate="required" data-type="text"/>
 					</div>
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_store_number">Numéro de magasin</label>
-						<input type="text" name="campaign_store_number" id="campaign_store_number" value=""/>
+						<label for="campaign_store_number" id="label_campaign_store_number">Numéro de magasin</label>
+						<input type="text" name="campaign_store_number" id="campaign_store_number" value="" data-validate="required" data-type="text"/>
 					</div>
 				</div>
 				
@@ -88,27 +88,27 @@
 				<?php foreach($campaign_steps_types as $campaign_step_id => $campaign_step_type) : ?>
 					<div class="row">
 						<div class="col-sm-12">
-							<label for="creation1"><?php echo $campaign_step_type; ?></label>
+							<label for="creation<?php echo $campaign_step_id; ?>" id="label_creation<?php echo $campaign_step_id; ?>"><?php echo $campaign_step_type; ?></label>
 						</div>
 					</div>
 				
 					<div class="row">
 						<div class="col-sm-6">
-							<input class="datechooser" type="text" name="creation1" id="creation1" value=""/>
+							<input class="datechooser" type="text" name="campaign_step_date_start[<?php echo $campaign_step_id; ?>]" id="creation<?php echo $campaign_step_id; ?>"/>
 						</div>
 						<div class="col-sm-6 etapes-au">
-							<input class="datechooser" type="text" name="creation2" id="creation2" value=""/>
+							<input class="datechooser" type="text" name="campaign_step_date_end[<?php echo $campaign_step_id; ?>]" id="creation<?php echo $campaign_step_id; ?>"/>
 						</div>
 					</div>
 				<?php endforeach; ?>
 				<div class="row">
 					<div class="col-sm-6">
-						<label for="date-event">Date de l’événement</label>
-						<input class="datechooser" type="text" name="date-event" id="date-event" value=""/>
+						<label for="campaign_date_evenement" id="label_campaign_date_evenement">Date de l’événement</label>
+						<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="" data-validate="required" data-type="text"/>
 					</div>
 					<div class="col-sm-6">
-						<label for="date-medias">Date médias</label>
-						<input class="datechooser" type="text" name="date-medias" id="date-medias" value=""/>
+						<label for="campaign_date_media" id="label_campaign_date_media">Date médias</label>
+						<input class="datechooser" type="text" name="campaign_date_media" id="campaign_date_media" value="" data-validate="required" data-type="text"/>
 					</div>
 				</div>
 				
@@ -118,7 +118,7 @@
 	</div>
 	<div class="btn-bottom-hr">
 	<hr />
-		<a style="cursor:pointer;" class="btn-icon-on-dark submit" data-value="campaign_edit">
+		<a style="cursor:pointer;" class="submit_form btn-icon-on-dark submit" data-value="campaign_edit">
 		<svg class="icon-svg icon-sauvegarderBlanc" viewBox="0 0 31 32" x="1920">
 			<path fill="#FFF" d="M22.652.35v8.792H6.1V.352H0V32h30.493V5.95l-4.68-5.6h-3.16zM4.356 13.54h20.91v13.187H4.356v-13.19z"/>
 			<path fill="#FFF" d="M8.712 6.505h11.326V.35H8.712v6.155z"/>
@@ -127,4 +127,5 @@
 		</a>
 	</div>
 	</form>
+	<input type="hidden" id="error_message" value="Please fill required data">
 </div>

@@ -74,7 +74,8 @@ class User extends MX_Controller
 			'user_email' => $db_result->user_email,
 			'user_permission' => $db_result->user_permission,
 			'browser' => $this->agent->browser(),
-			'validated' => true
+			'validated' => true,
+			'client_id' => $db_result->client_id,
 			);
 		$this->session->set_userdata($user_data);
 	}
