@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Mdl_campaign extends CI_Model
+class Mdl_campaigns extends CI_Model
 {
 	private $table;
 	
