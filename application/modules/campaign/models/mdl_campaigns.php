@@ -31,7 +31,7 @@ class Mdl_campaigns extends CI_Model
 		return $query;
 	}
 	
-	function get_id( $field_id, $id)
+	function get_id($field_id, $id)
 	{
 		$this->db->where($field_id, $id);
 		$query = $this->db->get($this->table);
@@ -40,32 +40,33 @@ class Mdl_campaigns extends CI_Model
 	
 	function get_where($where)
 	{
-		$query = $this->db->get_where( $where);
+		$query = $this->db->get_where($this->table, $where);
 		return $query;
 	}
 	
 	function get_where_order($where, $order_by)
 	{
 		$this->db->order_by($order_by);
-		$query = $this->db->get_where( $where);
+		$query = $this->db->get_where($this->table, $where);
 		return $query;
 	}
 	
 	function insert($data)
 	{
-		$this->db->insert( $data);
+		$this->db->insert($this->table, $data);
 		$last_id = $this->db->insert_id();
 	}
 	
 	function update($field_id, $id, $data)
 	{
 		$this->db->where($field_id, $id);
-		$this->db->update( $data);
+		$this->db->update($this->table, $data);
 	}
 	
-	function delete($where)
+	function delete($field_id, $id)
 	{
-		$this->db->delete($where);
+		$this->db->where($field_id, $id);
+		$this->db->delete($this->table);
 	}
 	
 	function count_where($column, $value)
@@ -76,7 +77,7 @@ class Mdl_campaigns extends CI_Model
 		return $num_rows;
 	}
 	
-	function count_all($this->table)
+	function count_all()
 	{
 		$query	= $this->db->get($this->table);
 		$num_rows = $query->num_rows();
