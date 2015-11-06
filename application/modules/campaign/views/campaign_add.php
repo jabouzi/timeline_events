@@ -25,7 +25,7 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<label for="tcampaign_title" id="label_campaign_title">Titre de la campagne</label>
+						<label for="campaign_title" id="label_campaign_title">Titre de la campagne</label>
 						<input  type="text" name="campaign_title" id="campaign_title" value="" data-validate="required" data-type="text" />
 					</div>
 				</div>
