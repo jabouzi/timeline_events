@@ -137,3 +137,7 @@ font-size: 14px;
 {
 	color: #FF0000 !important;
 }
+
+campaing_edit {
+	background: url(../images/icn_edit_campaign.png) no-repeat center right;
+}

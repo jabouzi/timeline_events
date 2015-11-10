@@ -1,5 +1,8 @@
 $(document).ready(function() {
-
+	
+	$('.campaign').hide(10).parent().removeClass('opened');
+	$('.timeline_'+$('#openedid').val()).show(10).parent().addClass('opened');
+	
 	$.datepicker.setDefaults($.datepicker.regional[($('html').attr('lang') == 'en') ? '' : $('html').attr('lang')]);
 	$('.datechooser').datepicker(
 		{
@@ -7,7 +10,7 @@ $(document).ready(function() {
 			changeYear: true
 		}
 	);
-
+	
 	$('.submit').click(function()
 	{
 		clear_messages();
@@ -61,6 +64,7 @@ function drawVisualization() {
 				 if (sel[i] != undefined && sel[i].row != undefined)
 				 {
 					console.log(sel[i].row);
+					console.log(timeline[campaigns].data[i]);
 					var url = window.location.href;
 					var redirect = 'detail/' + timeline[campaigns].getItem(sel[i].row).id;
 					if (url.substr(url.length - 1) != '/') redirect = '/'+redirect;
@@ -256,4 +260,14 @@ function clear_messages()
 	$('.alert_error').hide();
 	$('.alert_success').hide();
 	$('.alert_info').hide();
+}
+
+function edit(campaign_id)
+{
+	console.log('edit '+campaign_id);
+}
+
+function pop(campaign_id)
+{
+	console.log('pop '+campaign_id);
 }

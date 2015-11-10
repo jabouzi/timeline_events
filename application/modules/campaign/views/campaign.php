@@ -28,6 +28,7 @@
 				<div class="legende-orange"><span></span>Réno. Transformations</div>
 				<div class="legende-red"><span></span>Réno. Majeures</div>
 				<div class="legende-yellow"><span></span>Réno. Mineures</div>
+				<div class="legende-grey"><span></span>N/A</div>
 			</div>
 		</div>
 	</div>
@@ -36,35 +37,30 @@
 	<div class="container">
 		<input type="hidden" id="campaign_calendars" value="0">
 		<div class="collapsious-wrapper">
-			<?php foreach($banners as $key => $banner) : ?>
-				<div class="collapsious<?php if ($key == 0) echo ' opened'; ?>">
-					<span data-value="<?php echo $key; ?>"><?php echo $banner->campaign_banner_name; ?></span>
-					<div class="campaign timeline_<?php echo $key; ?>" id="<?php echo $banner->campaign_banner_name; ?>"></div>
+			<?php 
+			if (isset($this->session->userdata['campaign_banner_id']))
+			{
+				$openedid = $this->session->userdata['campaign_banner_id'];
+			}
+			else
+			{
+				$openedid = $banners[0]->campaign_banner_id;
+			}
+			?>
+			<?php foreach($banners as $key => $banner) {
+					$opened = '';
+					
+					if ($key == 0)
+					{
+						$opened = ' opened'; 
+					}
+				?>
+				<div class="collapsious<?php echo $opened; ?>">
+					<span data-value="<?php echo $banner->campaign_banner_id; ?>"><?php echo $banner->campaign_banner_name; ?></span>
+					<div class="campaign timeline_<?php echo $banner->campaign_banner_id; ?>" id="<?php echo $banner->campaign_banner_name; ?>"></div>
 				</div>
-			<?php endforeach; ?>
-<!--
-			<div class="collapsious">
-				<span>Metro Affiliés</span>
-				<div><p>Your content here</p>
-				</div>
-			</div>
-			<div class="collapsious">
-				<span>Super c</span>
-				<div><p>Your content here</p>
-				</div>
-			</div>
-			<div class="collapsious">
-				<span>Marché richelieu</span>
-				<div><p>Your content here</p>
-				</div>
-			</div>
-			<div class="collapsious">
-				<span>Brunet</span>
-				<div><p>Your content here</p>
-				</div>
-			</div>
--->
+			<?php }; ?>
 		</div>
 	</div>
-	
+	<input type="hidden" value="<?php echo $openedid; ?>" id="openedid">
 </section>

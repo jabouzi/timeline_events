@@ -14,7 +14,27 @@
 	<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/bootstrap-3.0.0.min.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/bootstrap-multiselect.css" type="text/css">
 	<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/admin.css" type="text/css" media="screen" />
+	<style>
+/*****************fadein fade out no funciona bien en ie con las imagenes png transparente, mejor poner show(); hide()**********/
+/*specifico para cada pagina*/
+/*poner .js delante asi aparece el pop up solo si jquery esta activado. Si esta desactivado aparece el texto normal sin pop up*/
+/*si quiero rounded corner entonces with fija? experimentar...*/
+ div.bubble {
+    background: url("images/bg-arrowbox-bottom.png") no-repeat scroll center bottom;
+    display: none;
+    padding: 0 0 17px;
+    position: absolute;
+    width: 181px;
+}
 
+ div.bubble div.cont {
+    background: -moz-linear-gradient(#3B3B3B, #212121) repeat scroll 0 0 transparent;
+    border: 1px solid #000000;
+    border-radius: 8px 8px 0 0;
+    padding: 10px 10px 0;
+}
+
+</style>
 	<?php if (isset($stylesheet)) { ?>
 		<?php foreach($stylesheet as $css) { ?>
 			<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/<?php echo $css; ?>" type="text/css" media="screen" />

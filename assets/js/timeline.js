@@ -2966,7 +2966,7 @@ links.Timeline.prototype.onMouseUp = function (event) {
         links.Timeline.removeEventListener(document, "mouseup",   params.onMouseUp);
         delete params.onMouseUp;
     }
-    //links.Timeline.preventDefault(event);
+    links.Timeline.preventDefault(event);
 
     if (params.customTime) {
         // fire a timechanged event
@@ -5574,6 +5574,7 @@ links.Timeline.prototype.collision = function(item1, item2, margin) {
  * @param {String} event   The name of an event, for example "rangechange" or "edit"
  */
 links.Timeline.prototype.trigger = function (event) {
+	//console.log(event);
     // built up properties
     var properties = null;
     switch (event) {
@@ -5948,6 +5949,7 @@ links.events = links.events || {
         var listeners = this.listeners;
         for (var i = 0, iMax = this.listeners.length; i < iMax; i++) {
             var listener = listeners[i];
+            //console.log(listener);
             if (listener && listener.object == object) {
                 return i;
             }

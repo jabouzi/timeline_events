@@ -5,6 +5,11 @@
 <!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8">
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+		<meta http-equiv="pragma" content="no-cache" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<? /* <meta name="viewport" content="width=device-width, initial-scale=1"> */ ?>
 		<meta name="viewport" content="width=1200" />
@@ -24,7 +29,8 @@
 		<![endif]-->
 		<script src="<?php echo site_url(); ?>assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="<?php echo site_url(); ?>assets/js/jquery-ui.min.js" type="text/javascript"></script>
-		<script src="<?php echo site_url(); ?>assets/js/campaign.js" type="text/javascript"></script>
+		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
+		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery.jqtransform.js"></script>
 		<?php if (isset($javascript)) { ?>
 		<?php foreach($javascript as $js) { ?>
 			<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/<?php echo $js; ?>"></script>
@@ -36,6 +42,7 @@
 				<script type="text/javascript" src="<?php echo site_url(); ?>assets/json/<?php echo $js; ?>"></script>
 			<?php } ?>
 		<?php } ?>
+		<script src="<?php echo site_url(); ?>assets/js/campaign.js" type="text/javascript"></script>
 
 	</head>
 	<body>
@@ -122,7 +129,5 @@
 					<div class="tgi-logo"><a href="" target="_black"><img src="/assets/images/toolbox/tgi-logo.png" alt="" /></a></div>
 				</div>
 			</footer>
-			<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
-			<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery.jqtransform.js"></script>
 		</body>
 	</html>

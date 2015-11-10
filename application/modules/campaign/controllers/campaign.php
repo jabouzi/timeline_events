@@ -21,17 +21,7 @@ class Campaign extends MX_Controller
 		$banners = $this->mdl_campaigns_banners->get();
 		$campaign_data['banners'] = $banners->result();
 		$campaing_steps_count = array();
-		//foreach($campaign_data['banners'] as $campaign_banner)
-		//{
-			//if (!isset($campaign_steps_count[$campaign_banner->campaign_banner_id])) $campaign_steps_count[$campaign_banner->campaign_banner_id] = 0;
-			//var_dump($campaign_banner);
-			//$campaigns = $this->mdl_campaigns->get_where(array('campaign_banner_id' => $campaign_banner->campaign_banner_id))->result();
-			//foreach($campaigns as $campaign)
-			//{
-				//$campaign_steps_count[$campaign_banner->campaign_banner_id] += $this->mdl_campaigns_steps->count_where('campaign_id', $campaign->campaign_id);
-			//}
-		//}
-		//var_dump($campaign_steps_count);
+
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
 		$view_data['javascript'] = array('timeline.js');
 		$view_data['json'] = array('data.json');
@@ -104,7 +94,8 @@ class Campaign extends MX_Controller
 		$campaign_data['campaign_steps_types'] = array_for_dropdown($campaign_steps_types, 'campaign_step_type_id', 'campaign_step_type_name');
 		$campaign_data['campaign_steps'] = array_for_dropdown($campaign_steps, 'campaign_step_type');
 		
-		//var_dump($campaign_data['campaign_steps']);
+		$this->session->userdata['campaign_banner_id'] = $campaign_data['campaign']->campaign_banner_id;
+		
 		//$view_data['page_title'] = lang('dashboard.title3');
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_edit.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
@@ -121,8 +112,9 @@ class Campaign extends MX_Controller
 		$campaign_type = $this->mdl_campaigns_types->get_where(array('campaign_type_id' => $campaign->campaign_type_id))->row();
 		$campaign_data['campaign_type'] = @$campaign_type->campaign_type_name;
 		
-		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
+		$this->session->userdata['campaign_banner_id'] = $campaign->campaign_banner_id;
 		
+		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
 		$view_data['javascript'] = array('timeline.js');
 		$view_data['json'] = array('data_'.$id.'.json');
 		echo modules::run('template/campaign', $view_data);
@@ -237,7 +229,7 @@ class Campaign extends MX_Controller
             $json[$banners->row()->campaign_banner_name][] = array(
 					'start' =>  '__'.strtotime($campaign->campaign_date_start),
 					'end' =>  '__'.strtotime($campaign->campaign_date_end),
-					'content' =>  $campaign->campaign_title,
+					'content' =>  '<input type="hidden" onclick=pop("'.$campaign->campaign_id.'") id="campaing_'.$campaign->campaign_id.'" value="'.$campaign->campaign_id.'">',
 					'group' =>  $campaign->campaign_title,
 					'id' =>  $campaign->campaign_id,
 					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
