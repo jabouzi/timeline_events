@@ -2966,7 +2966,7 @@ links.Timeline.prototype.onMouseUp = function (event) {
         links.Timeline.removeEventListener(document, "mouseup",   params.onMouseUp);
         delete params.onMouseUp;
     }
-    links.Timeline.preventDefault(event);
+    //links.Timeline.preventDefault(event);
 
     if (params.customTime) {
         // fire a timechanged event
@@ -5574,7 +5574,6 @@ links.Timeline.prototype.collision = function(item1, item2, margin) {
  * @param {String} event   The name of an event, for example "rangechange" or "edit"
  */
 links.Timeline.prototype.trigger = function (event) {
-	//console.log(event);
     // built up properties
     var properties = null;
     switch (event) {
@@ -5949,7 +5948,6 @@ links.events = links.events || {
         var listeners = this.listeners;
         for (var i = 0, iMax = this.listeners.length; i < iMax; i++) {
             var listener = listeners[i];
-            //console.log(listener);
             if (listener && listener.object == object) {
                 return i;
             }
@@ -6316,7 +6314,7 @@ links.Timeline.StepDate.prototype.setMinimumStep = function(minimumStep) {
     if (stepYear > minimumStep)             {this.scale = links.Timeline.StepDate.SCALE.YEAR;        this.step = 1;}
     if (stepMonth*3 > minimumStep)          {this.scale = links.Timeline.StepDate.SCALE.MONTH;       this.step = 3;}
     if (stepMonth > minimumStep)            {this.scale = links.Timeline.StepDate.SCALE.MONTH;       this.step = 1;}
-    if (stepDay*5 > minimumStep)            {this.scale = links.Timeline.StepDate.SCALE.DAY;         this.step = 7;}
+    if (stepDay*5 > minimumStep)            {this.scale = links.Timeline.StepDate.SCALE.DAY;         this.step = 5;}
     if (stepDay*2 > minimumStep)            {this.scale = links.Timeline.StepDate.SCALE.DAY;         this.step = 2;}
     if (stepDay > minimumStep)              {this.scale = links.Timeline.StepDate.SCALE.DAY;         this.step = 1;}
     if (stepDay/2 > minimumStep)            {this.scale = links.Timeline.StepDate.SCALE.WEEKDAY;     this.step = 1;}
