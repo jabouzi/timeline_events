@@ -229,8 +229,8 @@ class Campaign extends MX_Controller
             $json[$banners->row()->campaign_banner_name][] = array(
 					'start' =>  '__'.strtotime($campaign->campaign_date_start),
 					'end' =>  '__'.strtotime($campaign->campaign_date_end),
-					'content' =>  '<input type="hidden" onclick=pop("'.$campaign->campaign_id.'") id="campaing_'.$campaign->campaign_id.'" value="'.$campaign->campaign_id.'">',
-					'group' =>  $campaign->campaign_title,
+					'content' =>  '<a id="a_'.$campaign->campaign_id.'" class="a_popover" data-toggle="popover" title="Popover Header" data-placement="top" data-content="'.$campaign->campaign_title.'"></a>',
+					'group' =>  '<a href="'.site_url('campaign/edit/'.$campaign->campaign_id).'">'.$campaign->campaign_title.'</a>',
 					'id' =>  $campaign->campaign_id,
 					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
 					'editable' => false

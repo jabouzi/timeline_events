@@ -1,5 +1,16 @@
 $(document).ready(function() {
 	
+	$('#123').click(function (e) {
+    //var offset = $(this).offset();
+    //var left = e.pageX;
+    //var top = e.pageY;
+    //var theHeight = $('#popover').height();
+    $('#popover').show();
+    //$('#popover').css('left', (left+10) + 'px');
+    //$('#popover').css('top', (top-(theHeight/2)-10) + 'px');
+});
+	
+		
 	$('.campaign').hide(10).parent().removeClass('opened');
 	$('.timeline_'+$('#openedid').val()).show(10).parent().addClass('opened');
 	
@@ -63,12 +74,8 @@ function drawVisualization() {
 			{
 				 if (sel[i] != undefined && sel[i].row != undefined)
 				 {
-					console.log(sel[i].row);
-					console.log(timeline[campaigns].data[i]);
-					var url = window.location.href;
-					var redirect = 'detail/' + timeline[campaigns].getItem(sel[i].row).id;
-					if (url.substr(url.length - 1) != '/') redirect = '/'+redirect;
-					window.location.href = url + redirect;
+					$('.a_popover').popover('hide');
+					$('#a_'+timeline[campaigns].getItem(sel[i].row).id).popover('show');
 				}
 			}
 		}
