@@ -229,7 +229,7 @@ class Campaign extends MX_Controller
             $json[$banners->row()->campaign_banner_name][] = array(
 					'start' =>  '__'.strtotime($campaign->campaign_date_start),
 					'end' =>  '__'.strtotime($campaign->campaign_date_end),
-					'content' =>  '<a style="color:#ffffff:font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.$campaign->campaign_title.'</a>',
+					'content' =>  '<a style="color:#ffffff:font-weight:bold;!important" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.$campaign->campaign_title.'</a>',
 					'group' =>  '<a href="'.site_url('campaign/edit/'.$campaign->campaign_id).'">'.$campaign->campaign_title.'</a>',
 					'id' =>  $campaign->campaign_id,
 					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
