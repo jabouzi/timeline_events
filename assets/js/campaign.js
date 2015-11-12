@@ -1,16 +1,5 @@
 $(document).ready(function() {
 	
-	$('#123').click(function (e) {
-    //var offset = $(this).offset();
-    //var left = e.pageX;
-    //var top = e.pageY;
-    //var theHeight = $('#popover').height();
-    $('#popover').show();
-    //$('#popover').css('left', (left+10) + 'px');
-    //$('#popover').css('top', (top-(theHeight/2)-10) + 'px');
-});
-	
-		
 	$('.campaign').hide(10).parent().removeClass('opened');
 	$('.timeline_'+$('#openedid').val()).show(10).parent().addClass('opened');
 	
