@@ -1,3 +1,15 @@
+<style type="text/css">
+  div#ttdiv {
+     display: none; 
+	
+	width: 200px;
+	height: 100px;
+	border: 1px solid;
+	background-color: #ffa;
+	position: fixed;
+	z-index: 100000;
+  }
+</style>
 <div class="container">
 	<div class="title-top">
 		<h1 class="title-icon-on-white">

@@ -74,8 +74,10 @@ function drawVisualization() {
 			{
 				 if (sel[i] != undefined && sel[i].row != undefined)
 				 {
-					$('.a_popover').popover('hide');
-					$('#a_'+timeline[campaigns].getItem(sel[i].row).id).popover('show');
+					var url = window.location.href;
+					var redirect = 'detail/' + timeline[campaigns].getItem(sel[i].row).id;
+					if (url.substr(url.length - 1) != '/') redirect = '/'+redirect;
+					window.location.href = url + redirect;
 				}
 			}
 		}
