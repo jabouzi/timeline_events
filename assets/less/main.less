@@ -75,6 +75,9 @@ inputHeight:42px
 @darkBrandColor: #ac0700; 
 @baseOnBrandColor: #fff;
 
+
+@pptIconColor: #d95e28;
+
 /*****FONTS *****/
 
 /*****FORMS*****/
@@ -185,6 +188,8 @@ a.btn-icon-on-dark-header .icon-svg path {fill:@baseOnBrandColor;}
 .title-icon-on-white{border-bottom:medium none navy;color:@lightBrandColor;display:inline-block;font-size:30px; line-height:34px;margin:0 0 15px;padding:0;text-decoration:none;text-transform:uppercase}
 .title-icon-on-white:hover {}
 .title-icon-on-white .icon-svg{display:inline-block;margin-right:5px;vertical-align:middle;width:31px; height:22px;}
+.icon-svg.icon-documentsRouge {width:31px; height:36px;} 
+.icon-svg.icon-editionRouge {width:31px; height:22px;} 
 .title-icon-on-white .icon-svg path {fill:@lightBrandColor}
 
 
@@ -195,8 +200,18 @@ a.btn-icon-on-dark .icon-svg path {fill:@baseOnBrandColor;}
 
 a.btn-icon-on-dark.on-white{background:@baseOnBrandColor;color:@lightBrandColor;border:1px solid @lightBrandColor }
 a.btn-icon-on-dark.on-white .icon-svg path {fill:@lightBrandColor;} 
+
+.btn-icon-on-dark.btnPlus:before {
+  color: @baseOnBrandColor;
+  content: "+";
+  display: inline-block;
+  font-family: arial;
+  font-size: 15px;
+  font-weight: 700;
+  margin-right: 5px;
+}
 /*btns svg*/
-h1.title-icon-on-white,h1.title-icon-on-white .icon-editionRouge {position:relative;top:-2px}
+h1.title-icon-on-white,h1.title-icon-on-white svg{position:relative;top:-2px}
 h1.title-icon-on-white{margin-top:5px; padding-right:5px}
 /*btns*/
 /*table simulation*/
@@ -332,6 +347,65 @@ h3.time-line-table {font-size:15px; color:@lightBrandColor; line-height:18px; te
 .namebudget {color:@darkBaseColor}
 .bugetprice {font-family:'source_sans_probold';padding-left:5px}
 .budget-wp>.twovalues{margin-right:44px}
+/*documents*/
+ #icon-powerpoint path {fill:@pptIconColor;}
+ #icon-powerpoint {
+  height: 40px;
+  margin-right: 10px;
+  vertical-align: middle;
+  width: 40px;
+}
+.text-powerpoint {}
+ #icon-pdf path {fill:@lightBrandColor;}
+ #icon-pdf {
+  height: 40px;
+  margin-right: 10px;
+  vertical-align: middle;
+  width: 40px;
+}
+.text-pdf {}
+#icon-supprimer path.supprimer_bg {fill:#e5e5e5}
+#icon-supprimer {width:20px; height:20px}
+#icon-download path {fill:@baseOnBrandColor}
+#icon-download {
+  height: 10px;
+  margin-right: 4px;
+  vertical-align: middle;
+  width: 10px;
+}
+.text-icon-download{}
+/*tables*/
+table.toolboxTbDoc {
+  border-collapse: collapse;
+  border-left: 1px solid @lightBaseColor;
+  border-right: 1px solid @lightBaseColor;
+  border-spacing: 0;
+  border-top: 1px solid @lightBaseColor;
+  margin-bottom: 60px;
+  margin-top: 20px;
+  width: 100%;
+}
+table.toolboxTbDoc th, table.toolboxTbDoc td {
+  padding: 11px 18px;
+  text-align: center;
+  vertical-align: middle;
+  font-size:13px;
+  font-family:'source_sans_proregular';
+}
+
+table.toolboxTbDoc tbody td {border-bottom:1px solid @lightBaseColor;text-align:left}
+table.toolboxTbDoc tbody td.doc_file {font-size:15px;font-family:'source_sans_probold';}
+table.toolboxTbDoc tbody td.doc_date {}
+table.toolboxTbDoc tbody td.doc_weight {}
+table.toolboxTbDoc tbody td.doc_name_person {}
+table.toolboxTbDoc tbody td.doc_download {background:@lightBrandColor; text-align:center;}
+table.toolboxTbDoc tbody td.doc_download a {color:@baseOnBrandColor; text-decoration:none;font-family:'source_sans_probold';font-size:15px}
+table.toolboxTbDoc tbody td.doc_remove {text-align:center}
+table.toolboxTbDoc tbody td.item img {}
+
+
+table.toolboxTbDoc thead th {background:url(images/bg.jpg) repeat-x top left; padding:5px 0px!important; border:1px solid #3995ae; }
+/*tables*/
 /* Large desktop */
 @media (min-width: 1200px) {  }
 
