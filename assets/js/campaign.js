@@ -6,8 +6,13 @@ $(document).ready(function() {
 	$.datepicker.setDefaults($.datepicker.regional[($('html').attr('lang') == 'en') ? '' : $('html').attr('lang')]);
 	$('.datechooser').datepicker(
 		{
-			changeMonth: true,
-			changeYear: true
+	    changeMonth: true,
+	    changeYear: true,
+	    showAnim: 'slideDown',
+			onChangeMonthYear:function(y, m, i){                                
+        var d = i.selectedDay;
+        $(this).datepicker('setDate', new Date(y, m-1, d));
+    	}
 		}
 	);
 	
