@@ -150,7 +150,8 @@ class Campaign extends MX_Controller
 			'campaign_date_start' => date('Y-m-d', strtotime($this->input->post('campaign_date_start'))),
 			'campaign_date_end' => date('Y-m-d', strtotime($this->input->post('campaign_date_end'))),
 			'campaign_date_evenement' => date('Y-m-d', strtotime($this->input->post('campaign_date_evenement'))),
-			'campaign_date_media' => date('Y-m-d', strtotime($this->input->post('campaign_date_media'))),
+			'campaign_date_media_start' => date('Y-m-d', strtotime($this->input->post('campaign_date_media_start'))),
+			'campaign_date_media_end' => date('Y-m-d', strtotime($this->input->post('campaign_date_media_end'))),
 			'campaign_branch' => $this->input->post('campaign_branch'),
 			'campaign_address'=> $this->input->post('campaign_address'),
 			'campaign_manager_client'=> $this->input->post('campaign_manager_client'),
@@ -202,7 +203,7 @@ class Campaign extends MX_Controller
 		$this->generate_campaign();
 		$this->generate_campaign_detail($campaign_id);
 		$this->session->set_userdata('success_message', lang('campaign.edit.success'));
-		redirect('campaign/detail/'.$campaign_id);
+		redirect('campaign/edit/'.$campaign_id);
 	}
 	
 	private function add_campaign_step($campaign_step_data)

@@ -102,7 +102,12 @@
 							<input type="text" name="campaign_store_number" id="campaign_store_number" value="<?php echo $campaign->campaign_store_number; ?>"  data-validate="required" data-type="text"/>
 						</div>
 					</div>
-					
+					<div class="row">					
+						<div class="col-sm-6">
+							<label for="campaign_date_evenement" id="label_campaign_date_evenement">Date de l’événement</label>
+							<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_evenement)); ?>" data-validate="required" data-type="text"/>
+						</div>					
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-6">
@@ -132,13 +137,13 @@
 					<?php endforeach; ?>
 					<div class="row">
 						<div class="col-sm-6">
-							<label for="campaign_date_evenement" id="label_campaign_date_evenement">Date de l’événement</label>
-							<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_evenement)); ?>" data-validate="required" data-type="text"/>
+							<label for="campaign_date_media" id="label_campaign_date_media_start">Date de début médias</label>
+							<input class="datechooser" type="text" name="campaign_date_media_start" id="campaign_date_media_start" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_media_start)); ?>" data-type="text"/>
 						</div>
 						<div class="col-sm-6">
-							<label for="campaign_date_media" id="label_campaign_date_media">Date médias</label>
-							<input class="datechooser" type="text" name="campaign_date_media" id="campaign_date_media" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_media)); ?>" data-validate="required" data-type="text"/>
-						</div>
+							<label for="campaign_date_media" id="label_campaign_date_media_end">Date de fin médias</label>
+							<input class="datechooser" type="text" name="campaign_date_media_end" id="campaign_date_media_end" value="<?php if (isset($campaign->campaign_date_media_end) && $campaign->campaign_date_media_end != '0000-00-00' ) {echo date('m/d/Y', strtotime($campaign->campaign_date_media_end));} ?>" data-type="text"/>
+						</div>						
 					</div>
 					
 					
