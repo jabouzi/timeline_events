@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	
-	$('.campaign').hide(10).parent().removeClass('opened');
-	$('.timeline_'+$('#openedid').val()).show(10).parent().addClass('opened');
+	//$('.campaign').hide(10).parent().removeClass('opened');
+	//$('.timeline_'+$('#openedid').val()).show(10).parent().addClass('opened');
 	
 	$.datepicker.setDefaults($.datepicker.regional[($('html').attr('lang') == 'en') ? '' : $('html').attr('lang')]);
 	$('.datechooser').datepicker(
@@ -31,13 +31,13 @@ $(document).ready(function() {
 		drawVisualization();
 	}
 
-	$('.campaign').hide();
-	$('.timeline_0').show();
+	//$('.campaign').hide();
+	//$('.timeline_0').show();
 
-	$('.collapsious span').click(function() {
+	/*$('.collapsious span').click(function() {
 		$('.campaign').hide(500).parent().removeClass('opened');
 		$('.timeline_'+$(this).attr('data-value')).show(500).parent().addClass('opened');
-	});
+	});*/
 
 	$('.wrapper-select-top').jqTransform({imgPath:'/images/'});
 });

@@ -54,22 +54,22 @@
 		<input type="hidden" id="campaign_calendars" value="0">
 		<div class="collapsious-wrapper">
 			<?php 
-			if (isset($this->session->userdata['campaign_banner_id']))
+			/*if (isset($this->session->userdata['campaign_banner_id']))
 			{
 				$openedid = $this->session->userdata['campaign_banner_id'];
 			}
 			else
 			{
 				$openedid = $banners[0]->campaign_banner_id;
-			}
+			}*/
 			?>
 			<?php foreach($banners as $key => $banner) {
-					$opened = '';
+					$opened = ' opened';
 					
-					if ($key == 0)
+					/*if ($key == 0)
 					{
 						$opened = ' opened'; 
-					}
+					}*/
 				?>
 				<div class="collapsious<?php echo $opened; ?>">
 					<span data-value="<?php echo $banner->campaign_banner_id; ?>"><?php echo $banner->campaign_banner_name; ?></span>
@@ -78,5 +78,5 @@
 			<?php }; ?>
 		</div>
 	</div>
-	<input type="hidden" value="<?php echo $openedid; ?>" id="openedid">
+	<input type="hidden" value="<?php /*echo $openedid*/; ?>" id="openedid">
 </section>

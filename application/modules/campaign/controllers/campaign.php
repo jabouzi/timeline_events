@@ -236,6 +236,16 @@ class Campaign extends MX_Controller
 					'editable' => false
 				);
 		}
+		
+		//$json['----'][] = array(
+					//'start' => '',
+					//'end' =>  '',
+					//'content' =>  '',
+					//'group' =>  '----',
+					//'id' =>  0,
+					//'className' =>  'default',
+					//'editable' => false
+				//);
 
 		$json_data = json_encode($json);
 		$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
@@ -314,7 +324,7 @@ class Campaign extends MX_Controller
 		$banners = $this->mdl_campaigns_banners->get();
 		$campaign_data['banners'] = $banners->result();
 
-		$view_data['campaign_widgets']['campaign'] = $this->load->view('test.php', array(), true);
+		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_test.php', array(), true);
 		echo modules::run('template/campaign', $view_data);
 	}
 	
