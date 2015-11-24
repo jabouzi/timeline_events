@@ -73,6 +73,12 @@
 						<input type="text" name="campaign_store_number" id="campaign_store_number" value="" data-validate="required" data-type="text"/>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<label for="campaign_date_evenement" id="label_campaign_date_evenement">Date de l’événement</label>
+						<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="" data-validate="required" data-type="text"/>
+					</div>
+				</div>	
 				
 			</div>
 		</div>
@@ -103,13 +109,13 @@
 				<?php endforeach; ?>
 				<div class="row">
 					<div class="col-sm-6">
-						<label for="campaign_date_evenement" id="label_campaign_date_evenement">Date de l’événement</label>
-						<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="" data-validate="required" data-type="text"/>
+						<label for="campaign_date_media_start" id="label_campaign_date_media_start">Date de début médias</label>
+						<input class="datechooser" type="text" name="campaign_date_media_start" id="campaign_date_media_start" value=""  data-type="text"/>
 					</div>
 					<div class="col-sm-6">
-						<label for="campaign_date_media" id="label_campaign_date_media">Date médias</label>
-						<input class="datechooser" type="text" name="campaign_date_media" id="campaign_date_media" value="" data-validate="required" data-type="text"/>
-					</div>
+						<label for="campaign_date_media_end" id="label_campaign_date_media_end">Date de fin médias</label>
+						<input class="datechooser" type="text" name="campaign_date_media_end" id="campaign_date_media_end" value=""  data-type="text"/>
+					</div>					
 				</div>
 				
 				
