@@ -53,15 +53,15 @@
 		<div class="budget-wp">
 			<div class="twovalues">
 				<span class="namebudget">Tonik Groupimage:</span>
-				<span class="bugetprice">15 000$</span>
+				<span class="bugetprice">n/d</span>
 			</div>
 			<div class="twovalues">
 				<span class="namebudget">Autres:</span>
-				<span class="bugetprice">5 000$</span>
+				<span class="bugetprice">n/d</span>
 			</div>
 			<div class="twovalues bg_right">
 				<span class="namebudget">Total:</span>
-				<span class="bugetprice">20 000$</span>
+				<span class="bugetprice">n/d</span>
 			</div>
 		</div>
 	</div>
