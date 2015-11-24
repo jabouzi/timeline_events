@@ -162,5 +162,5 @@
 		</div>
 		</form>
 	</div>
-	<input type="hidden" id="error_message" value="Please fill required data">
+	<input type="hidden" id="error_message" value="Veuillez remplir tous les données requises">
 </section>
