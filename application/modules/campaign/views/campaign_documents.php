@@ -36,7 +36,7 @@
 							<?php echo $campaign_managers_tgi[$campaign_document->campaign_document_user]; ?>
 						</td>
 						<td class="doc_download"> 
-							<a href="<?php echo  base_url().'assets/docs/'.$campaign_document->campaign_document_name.'?lang='.$this->lang->lang(); ?>" target="_blank">
+							<a href="<?php echo  base_url().'assets/docs/'.$campaign_document->campaign_document_name.'?lang='.$this->lang->lang(); ?>">
 							<svg id="icon-download" viewBox="0 0 32 32" x="1392">
 								<path fill="#FFF" d="M8.282 0v11.87H0L16 32l16-20.13h-8.282V0H8.282z"/>
 							</svg>
