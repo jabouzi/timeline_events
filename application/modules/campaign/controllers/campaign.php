@@ -5,12 +5,14 @@ class Campaign extends MX_Controller
 	function __construct()
 	{
 		parent::__construct();
+		include APPPATH . 'helpers/DatabaseTrait.php';
 		$this->load->model('mdl_campaigns');
 		$this->load->model('mdl_campaigns_banners');
 		$this->load->model('mdl_campaigns_project_managers');
 		$this->load->model('mdl_campaigns_steps');
 		$this->load->model('mdl_campaigns_steps_types');
 		$this->load->model('mdl_campaigns_types');
+		$this->load->model('mdl_campaigns_documents');
 		$this->load->helper('form');
 	}
 	
@@ -110,9 +112,37 @@ class Campaign extends MX_Controller
 		$campaign_type = $this->mdl_campaigns_types->get_where(array('campaign_type_id' => $campaign->campaign_type_id))->row();
 		$campaign_data['campaign_type'] = @$campaign_type->campaign_type_name;
 		
+		$campaign_documents = 
+		
 		$this->session->userdata['campaign_banner_id'] = $campaign->campaign_banner_id;
 		
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
+		$view_data['javascript'] = array('timeline.js');
+		$view_data['json'] = array('data_'.$id.'.json');
+		echo modules::run('template/campaign', $view_data);
+	}
+	
+	function documents($id = null)
+	{
+		if (!$id) redirect('campaign');
+		
+		$campaign_data['campaign'] = $this->mdl_campaigns->get_id('campaign_id', $id)->row();
+		
+		$campaign_data['campaign_banner'] = $this->mdl_campaigns_banners->get_id('campaign_banner_id', $campaign_data['campaign']->campaign_banner_id)->row();
+		$campaign_banners = $this->mdl_campaigns_banners->get()->result();
+		
+		$campaign_steps = $this->mdl_campaigns_steps->get_id('campaign_id', $campaign_data['campaign']->campaign_id)->result();
+		$campaign_steps_types = $this->mdl_campaigns_steps_types->get()->result();
+		
+		$campaign_type = $this->mdl_campaigns_types->get_where(array('campaign_type_id' => $campaign_data['campaign']->campaign_type_id))->row();
+		$campaign_data['campaign_type'] = @$campaign_type->campaign_type_name;
+		
+		$campaign_data['campaign_documents'] = $this->mdl_campaigns_documents->get_where(array('campaign_id' => $campaign_data['campaign']->campaign_id))->result();
+		
+		$campaign_managers_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_tgi' => 1))->result();
+		$campaign_data['campaign_managers_tgi'] = array_for_dropdown($campaign_managers_tgi, 'campaign_manager_id', array('campaign_manager_name', 'campaign_manager_lastname'));
+		
+		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_documents.php', $campaign_data, true);
 		$view_data['javascript'] = array('timeline.js');
 		$view_data['json'] = array('data_'.$id.'.json');
 		echo modules::run('template/campaign', $view_data);
@@ -187,6 +217,20 @@ class Campaign extends MX_Controller
 		}
 	}
 	
+	function file($file)
+	{
+		if (!$this->session->userdata('user_email'))
+		{
+			redirect('login');
+		}
+
+		set_time_limit(0);
+		$file = FCPATH.'/assets/docs/'.$file;
+		ob_end_flush();
+		header('Content-type: application/octet-stream');
+		$this->readfile_chunked($file);
+	}
+	
 	private function add_campaign($campaign_data)
 	{
 		$campaign_id = $this->mdl_campaigns->insert($campaign_data);
@@ -217,6 +261,31 @@ class Campaign extends MX_Controller
 		$this->mdl_campaigns_steps->update('campaign_step_id', $campaign_step_id, $campaign_step_data);
 	}
 	
+	private function readfile_chunked($filename,$retbytes=true)
+	{
+		$chunksize = 1*(1024*1024); // how many bytes per chunk
+		$buffer = '';
+		$cnt =0;
+		// $handle = fopen($filename, 'rb');
+		$handle = fopen($filename, 'rb');
+		if ($handle === false) {
+			return false;
+		}
+		while (!feof($handle)) {
+			$buffer = fread($handle, $chunksize);
+			echo $buffer;
+			if ($retbytes) {
+				$cnt += strlen($buffer);
+			}
+		}
+			$status = fclose($handle);
+		if ($retbytes && $status) {
+			return $cnt; // return num. bytes delivered like readfile() does.
+		}
+		return $status;
+
+	}
+	
 	function generate_campaign()
 	{
 		$json = array();
@@ -236,16 +305,6 @@ class Campaign extends MX_Controller
 					'editable' => false
 				);
 		}
-		
-		//$json['----'][] = array(
-					//'start' => '',
-					//'end' =>  '',
-					//'content' =>  '',
-					//'group' =>  '----',
-					//'id' =>  0,
-					//'className' =>  'default',
-					//'editable' => false
-				//);
 
 		$json_data = json_encode($json);
 		$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {

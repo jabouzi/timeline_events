@@ -1,6 +1,6 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Mdl_campaigns extends CI_Model
+class Mdl_campaigns_documents extends CI_Model
 {
 	use DatabaseTrait;
 	
@@ -9,6 +9,6 @@ class Mdl_campaigns extends CI_Model
 	function __construct()
 	{
 		parent::__construct();
-		$this->table = 'campaigns';
+		$this->table = 'campaigns_documents';
 	}
 }

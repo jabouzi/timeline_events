@@ -15,7 +15,7 @@
 			</svg>
 			Imprimer
 			</a>
-			<a href="" class="btn-icon-on-dark on-white">
+			<a href="<?php echo site_url('campaign/documents/'.$campaign_id); ?>" class="btn-icon-on-dark on-white">
 			<svg class="icon-svg icon-documentsRouge" width="33" height="32" viewBox="0 0 33 32" x="288">
 				<path fill="#e41b13" d="M14.994.013v1.292h14.354V26.67h2.93V.012H14.995z"/>
 				<path fill="#e41b13" d="M6.652 5.317L.115 11.233v20.74h23.372V5.317H6.653zm.94 1.32v5.508H1.508l6.086-5.508z"/>
