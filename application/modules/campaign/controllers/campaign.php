@@ -261,10 +261,10 @@ class Campaign extends MX_Controller
 	
 	private function readfile_chunked($filename,$retbytes=true)
 	{
-		$chunksize = 1*(1024*1024); // how many bytes per chunk
+		$chunksize = 1*(1024*1024); 
 		$buffer = '';
 		$cnt =0;
-		// $handle = fopen($filename, 'rb');
+
 		$handle = fopen($filename, 'rb');
 		if ($handle === false) {
 			return false;
@@ -278,7 +278,7 @@ class Campaign extends MX_Controller
 		}
 			$status = fclose($handle);
 		if ($retbytes && $status) {
-			return $cnt; // return num. bytes delivered like readfile() does.
+			return $cnt; 
 		}
 		return $status;
 
