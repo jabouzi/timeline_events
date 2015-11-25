@@ -1,3 +1,6 @@
+<?
+//var_dump($this->session);
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -60,10 +63,18 @@
 						</div>
 						<ul class="menu-header">
 						<li>
-						<a href="" class="btn-icon-on-dark-header">
+						<?php
+						if (isset($this->session->userdata['user_permission']) && $this->session->userdata['user_permission'] == '1' )
+						{		
+						?>
+						<a href="/en/" class="btn-icon-on-dark-header">
 							<img style="margin-right:7px" src="/assets/images/toolbox/tools-icon.png" alt="" />
 						<span>Admin</span>
 						</a>
+						<?php
+							//$openedid = $this->session->userdata['campaign_banner_id'];
+						}
+						?>
 						</li>
 							<li>
 								<a href="<?php echo site_url('campaign'); ?>" class="btn-icon-on-dark-header">
