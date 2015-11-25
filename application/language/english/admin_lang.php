@@ -25,7 +25,7 @@ $lang['login.retrieve.password'] = "Retrieve password.";
 $lang['login.password.send'] = 'Your password has been send to your email';
 $lang['login.back.login'] = 'Back to login page';
 
-$lang['dashboard.title1'] = "Publiflex Toolbox v.1";
+$lang['dashboard.title1'] = "Publiflex - campagnes";
 $lang['dashboard.title2'] = "Website Admin";
 $lang['dashboard.title3'] = "Dashboard";
 $lang['dashboard.title'] = "Dashboard";

@@ -89,7 +89,9 @@
 		</div>
 	</section><!-- end of secondary bar -->
 	
+	
 	<aside id="sidebar" class="column">
+	<? /*
 		<h3><?php echo lang('tonik.title'); ?></h3>
 		<ul class="toggle">
 			<li class="icn_view_users"><?php echo anchor('tonik/projectmanagers', lang('tonik.projectmanagers')) ?> <span class="add-manager"><?php echo anchor('tonik/newprojectmanager', lang('tonik.newprojectmanager')) ?></span></li>
@@ -108,6 +110,8 @@
 			<li class="icn_view_users"><?php echo anchor('client/campaignstype', lang('client.campaignstype')) ?></li>
 			<!--<li class="icn_profile"><?php echo anchor('client', lang('client.profile')) ?></li>//-->
 		</ul>	
+	*/?>	
+		
 		<h3><?php echo lang('user.title'); ?></h3>
 		<ul class="toggle">
 			<?php if ($this->session->userdata('user_permission') <= 2) : ?>
@@ -117,14 +121,16 @@
 			<li class="icn_profile"><?php echo anchor('user', lang('user.profile')) ?></li>
 			<?/*<li class="icn_jump_back"><?php echo anchor('login/logout', lang('login.logout')) ?></li>*/?>
 		</ul>
+		<? /* 
 		<h3><?php echo lang('admin.title'); ?></h3>
 		<ul class="toggle">
 			<li class="icn_security"><?php echo anchor('permission', lang('permission.title')) ?></li>
 		</ul>
+		*/?>
 		
 		<footer>
 			<hr />
-			<p><strong>Copyright &copy; 2015 Admin Toolbox</strong></p>
+			<p><strong>Copyright &copy; 2015 Admin Toolbox v.1</strong></p>
 			<p><a href="<?php echo site_url();?>">Pupliflex</a></p>
 		</footer>
 	</aside><!-- end of sidebar -->
