@@ -217,12 +217,10 @@ class Campaign extends MX_Controller
 		}
 	}
 	
-	function file($file)
+	function file($file = null)
 	{
-		if (!$this->session->userdata('user_email'))
-		{
-			redirect('login');
-		}
+		if (!$file) redirect('campaign');
+		if (!$this->session->userdata('user_email')) redirect('login');
 
 		set_time_limit(0);
 		$file = FCPATH.'/assets/docs/'.$file;
