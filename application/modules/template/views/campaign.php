@@ -59,6 +59,12 @@
 							</div>
 						</div>
 						<ul class="menu-header">
+						<li>
+						<a href="" class="btn-icon-on-dark-header">
+							<img style="margin-right:7px" src="/assets/images/toolbox/tools-icon.png" alt="" />
+						<span>Admin</span>
+						</a>
+						</li>
 							<li>
 								<a href="<?php echo site_url('campaign'); ?>" class="btn-icon-on-dark-header">
 								<svg class="icon-svg calendrierRouge"  viewBox="0 0 32 32" x="48">
