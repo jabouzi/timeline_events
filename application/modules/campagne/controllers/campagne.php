@@ -38,6 +38,12 @@ class Campagne extends MX_Controller
 		$this->load->view('campagne_documents.php');
 	}
 	
+	function campagne_profil()
+	{
+		$view_data['page_title'] = lang('dashboard.title3');
+		$this->load->view('campagne_profil.php');
+	}
+	
 	
 	function detail($id = null)
 	{
