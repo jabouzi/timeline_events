@@ -102,6 +102,7 @@
 									<span>Déconnexion   </span>
 									</a>
 								</li>
+								<li><?php echo form_dropdown('lang', $languages, $lang, $redirect); ?></li>
 							</ul>
 						</div>
 					</div>

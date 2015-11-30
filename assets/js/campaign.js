@@ -50,6 +50,8 @@ function drawVisualization() {
 
 	var options = {
 		width:  "100%",
+		height: "auto",
+		showMajorLabels: false,
 		axisOnTop: true,
 		timeChangeable: false,
 		style: "box",
@@ -96,6 +98,8 @@ function drawVisualization2() {
 
 	var options = {
 		width:  "100%",
+		height: "auto",
+		showMajorLabels: false,
 		axisOnTop: true,
 		timeChangeable: false,
 		style: "box",

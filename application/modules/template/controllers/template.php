@@ -50,12 +50,12 @@ class Template extends MX_Controller
 			$view_data['error_message'] = $this->session->userdata('error_message');
 			$view_data['success_message'] = $this->session->userdata('success_message');
 			
-			//foreach($this->lang->languages as $key => $value)
-			//{
-				//$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
-			//}
-			//$view_data['lang'] = site_url().$this->lang->switch_uri($this->lang->lang());
-			//$view_data['redirect'] = 'onChange="window.document.location.href=this.options[this.selectedIndex].value;"';
+			foreach($this->lang->languages as $key => $value)
+			{
+				$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
+			}
+			$view_data['lang'] = site_url().$this->lang->switch_uri($this->lang->lang());
+			$view_data['redirect'] = 'onChange="window.document.location.href=this.options[this.selectedIndex].value;"';
 			$this->load->view('campaign', $view_data);
 			$this->session->unset_userdata('warning_message');
 			$this->session->unset_userdata('info_message');
