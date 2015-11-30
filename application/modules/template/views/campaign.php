@@ -146,5 +146,6 @@
 					<div class="tgi-logo"><a href="" target="_black"><img src="/assets/images/toolbox/tgi-logo.png" alt="" /></a></div>
 				</div>
 			</footer>
+			<input type="hidden" id="site_lang" value="<?php echo $this->lang->lang(); ?>">
 		</body>
 	</html>

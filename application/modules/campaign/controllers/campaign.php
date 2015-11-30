@@ -22,7 +22,7 @@ class Campaign extends MX_Controller
 
 		$banners = $this->mdl_campaigns_banners->get();
 		$campaign_data['banners'] = $banners->result();
-		$view_data['javascript'] = array('timeline.js');
+		$view_data['javascript'] = array('timeline.js','timeline-locales.js');
 		$view_data['json'] = array('data.json');
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
@@ -117,7 +117,7 @@ class Campaign extends MX_Controller
 		$this->session->userdata['campaign_banner_id'] = $campaign->campaign_banner_id;
 		
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
-		$view_data['javascript'] = array('timeline.js');
+		$view_data['javascript'] = array('timeline.js','timeline-locales.js');
 		$view_data['json'] = array('data_'.$id.'.json');
 		echo modules::run('template/campaign', $view_data);
 	}

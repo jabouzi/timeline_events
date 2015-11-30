@@ -49,12 +49,15 @@ function drawVisualization() {
 	var data;
 
 	var options = {
-		'width':  '100%',
-		"axisOnTop": true,
-		"timeChangeable": false,
-		'style': 'box'
+		width:  "100%",
+		axisOnTop: true,
+		timeChangeable: false,
+		style: "box",
+		cluster: true,
+		animate: false,
+		animateZoom: false
 	};
-
+	
 	function onselect() {
 
 		for (var campaigns in jsonData)
@@ -80,6 +83,8 @@ function drawVisualization() {
 	for (var campaigns in jsonData)
 	{
 		timeline[campaigns] = new links.Timeline(document.getElementById(campaigns), options);
+		options.locale = "fr";
+		console.log(options.locale);
 		links.events.addListener(timeline[campaigns], 'select', onselect);
 		timeline[campaigns].draw(jsonData[campaigns]);
 	}
@@ -91,15 +96,18 @@ function drawVisualization2() {
 	var data;
 
 	var options = {
-		'width':  '100%',
-		"axisOnTop": true,
-		"timeChangeable": false,
-		'style': 'box'
+		width:  "100%",
+		axisOnTop: true,
+		timeChangeable: false,
+		style: "box",
+		cluster: true,
+		animate: false,
+		animateZoom: false
 	};
 
 	// Instantiate our timeline object.
 	timeline = new links.Timeline(document.getElementById('timeline'), options);
-
+	options.locale = $("#site_lang").val();
 	timeline.draw(jsonData);
 }
 
