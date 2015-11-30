@@ -1,6 +1,6 @@
 <div class="container">
 	<ul class="breadcrumb">
-		<li><a href="">Calendrier annuel de campagnes </a></li>
+		<li><a href="<?php echo site_url('campaign'); ?>">Calendrier annuel de campagnes </a></li>
 		<li><span><?php echo $campaign_name; ?> <?php echo $campaign_type; ?></span></li>
 	</ul>
 	<div class="title-top">
@@ -8,6 +8,9 @@
 			<span><?php echo $campaign_name; ?></span>
 		</h1>
 		<div class="title-top-btns">
+			<a href="<?php echo site_url('campaign'); ?>" class="btn-icon-on-dark on-white">
+			Retour
+			</a>
 			<a href="" class="btn-icon-on-dark on-white">
 			<svg class="icon-svg icon-imprimerRouge" width="36" height="32" viewBox="0 0 36 32" x="720">
 				<path fill="#e41b13" d="M11.273 18.232H25.09v1.09H11.274v-1.09zm0 4H25.09v1.092H11.274v-1.092zm0 3.998H25.09v1.093H11.274V26.23z"/>

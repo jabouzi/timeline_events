@@ -14,7 +14,9 @@
 			<span><?php echo $campaign->campaign_title; ?> <?php echo $campaign_type; ?></span>
 		</h1>
 		<div class="title-top-btns">
-			
+			<a href="<?php echo site_url('campaign'); ?>" class="btn-icon-on-dark on-white">
+			Retour
+			</a>
 			<a style="cursor:pointer;" class="submit_form btn-icon-on-dark submit" data-value="campaign_edit">
 			<svg class="icon-svg icon-sauvegarderBlanc" viewBox="0 0 31 32" x="1920">
 				<path fill="#FFF" d="M22.652.35v8.792H6.1V.352H0V32h30.493V5.95l-4.68-5.6h-3.16zM4.356 13.54h20.91v13.187H4.356v-13.19z"/>

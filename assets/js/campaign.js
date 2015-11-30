@@ -34,10 +34,11 @@ $(document).ready(function() {
 	//$('.campaign').hide();
 	//$('.timeline_0').show();
 
-	/*$('.collapsious span').click(function() {
-		$('.campaign').hide(500).parent().removeClass('opened');
-		$('.timeline_'+$(this).attr('data-value')).show(500).parent().addClass('opened');
-	});*/
+	$('.collapsious span').click(function() {
+		console.log($(this));
+		//$('.campaign').hide(500).parent().removeClass('opened');
+		$('.timeline_'+$(this).attr('data-value')).toggle(500).parent().toggleClass('opened');
+	});
 
 	$('.wrapper-select-top').jqTransform({imgPath:'/images/'});
 });
