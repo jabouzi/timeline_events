@@ -34,20 +34,6 @@
 							<input type="text" name="email" value="<?php echo $this->input->post('email'); ?>" >
 							<label for="password"><?php echo lang('login.password'); ?></label>
 							<input type="password" name="password" value="<?php echo $this->input->post('password'); ?>" >
-							<?/*
-								<label>	<?php echo lang('login.lang'); ?></label>
-								<div class="wrapper-select-top">
-								<?php echo form_dropdown('lang', $languages, $lang, $redirect); ?>
-								</div>
-								<div class="remember_me">
-								<div class="checkbox">
-								<label>
-								<input type="checkbox" name="remember_me" id="remember_me" <?php echo $checked; ?> >
-								<?php echo lang('login.remember'); ?>
-								</label>
-								</div>
-								</div>
-							*/?>
 						</div>
 					</div>
 					<div class="loginBtnsBox">
