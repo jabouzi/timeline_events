@@ -289,21 +289,39 @@ class Campaign extends MX_Controller
 	
 	private function add_campaign($campaign_data)
 	{
+		$this->load->library('maildecorator');
+
 		$campaign_id = $this->mdl_campaigns->insert($campaign_data);
 		$this->process_add_campaign_steps($campaign_id);
 		$this->generate_campaign();
 		$this->generate_campaign_detail($campaign_id);
 		$this->session->set_userdata('success_message', lang('campaign.add.success'));
+
+		$campaign_manager_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_id' => $campaign_data['campaign_manager_tgi']))->row();
+		$messagedata = array($campaign_manager_tgi->campaign_manager_lastname, $campaign_manager_tgi->campaign_manager_name, $campaign_data['campaign_title'], site_url('campaign/detail/'.$campaign_id));
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', 'skander.jabouzi@tonikgroupimage.com,hugo.carranza@tonikgroupimage.com'/*$campaign_manager_tgi->campaign_manager_email*/, lang('campaign.add'));
+		$this->maildecorator->decorate($messagedata, lang('campaign.add.notification'));
+		$this->maildecorator->sendmail($maildata);
+		
 		redirect('campaign/detail/'.$campaign_id);
 	}
 	
 	private function update_campaign($campaign_id, $campaign_data)
 	{
+		$this->load->library('maildecorator');
+		
 		$this->mdl_campaigns->update('campaign_id', $campaign_id, $campaign_data);
 		$this->process_add_campaign_steps(1);
 		$this->generate_campaign();
 		$this->generate_campaign_detail($campaign_id);
 		$this->session->set_userdata('success_message', lang('campaign.edit.success'));
+		
+		$campaign_manager_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_id' => $campaign_data['campaign_manager_tgi']))->row();
+		$messagedata = array($campaign_manager_tgi->campaign_manager_lastname, $campaign_manager_tgi->campaign_manager_name, $campaign_data['campaign_title'], site_url('campaign/detail/'.$campaign_id));
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', 'skander.jabouzi@tonikgroupimage.com,hugo.carranza@tonikgroupimage.com'/*$campaign_manager_tgi->campaign_manager_email*/, lang('campaign.edit'));
+		$this->maildecorator->decorate($messagedata, lang('campaign.edit.notification'));
+		$this->maildecorator->sendmail($maildata);
+
 		redirect('campaign/edit/'.$campaign_id);
 	}
 	

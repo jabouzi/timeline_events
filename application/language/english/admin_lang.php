@@ -200,6 +200,8 @@ $lang['campaign.add.success'] = "Campaign added successfully";
 $lang['campaign.edit.success'] = "Campaign updated successfully";
 $lang['campaign.document.add.success'] = "Campaign document added successfully";
 $lang['campaign.document.delete.success'] = "Campaign document deleted successfully";
+$lang['campaign.add'] = "Campaign added.";
+$lang['campaign.edit'] = "Campaign updated.";
 
 $lang['content.title'] = "Content";
 
@@ -245,4 +247,16 @@ Your password is: %s
 For any other questions, contact your project manager at YOUR COMPANY NAME. 
 
 Thank you.
+";
+$lang['campaign.add.notification'] = "Hello %s %s,
+
+The campaign %s jas been added, click on this link %s to see it
+
+Merci.
+";
+$lang['campaign.edit.notification'] = "Bonjour %s %s,
+
+The campaign %s jas been updated, click on this link %s to see it
+
+Merci.
 ";

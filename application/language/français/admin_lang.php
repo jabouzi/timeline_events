@@ -123,6 +123,8 @@ $lang['campaign.add.success'] = "Campagne ajoutée avec succès";
 $lang['campaign.edit.success'] = "Campagne mise à jour avec succès";
 $lang['campaign.document.add.success'] = "Le document de la campagne a été ajouté avec succès";
 $lang['campaign.document.delete.success'] = "Le document de la campagne a été supprimé avec succès";
+$lang['campaign.add'] = "Campagne ajoutée.";
+$lang['campaign.edit'] = "Campagne mise à jour.";
 
 $lang['content.title'] = "Contenu";
 
@@ -166,6 +168,18 @@ Votre compte a été mis à jour.
 Votre identifiant est : %s
 Votre mot de passe est : %s
 Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE.
+
+Merci.
+";
+$lang['campaign.add.notification'] = "Bonjour %s %s,
+
+La campagne %s a été ajoutée, cliquez sur le lien suivant pour la revoir : %s
+
+Merci.
+";
+$lang['campaign.edit.notification'] = "Bonjour %s %s,
+
+La campagne %s a été mise à jour, cliquez sur le lien suivant pour la revoir : %s
 
 Merci.
 ";

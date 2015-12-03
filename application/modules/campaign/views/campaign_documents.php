@@ -24,6 +24,9 @@
 			</div>
 		</form>
 		<?php endif; ?>
+		<a href="<?php echo site_url('campaign'); ?>" class="btn-icon-on-dark on-white">
+			Retour
+		</a>
 	</div>
 </div>
 <section>	
