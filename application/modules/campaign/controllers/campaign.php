@@ -13,7 +13,7 @@ class Campaign extends MX_Controller
 		$this->load->model('mdl_campaigns_steps_types');
 		$this->load->model('mdl_campaigns_types');
 		$this->load->model('mdl_campaigns_documents');
-		$this->load->helper('form');
+		$this->load->helper(array('form', 'url'));
 	}
 	
 	function index()
@@ -142,6 +142,11 @@ class Campaign extends MX_Controller
 		$campaign_managers_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_tgi' => 1))->result();
 		$campaign_data['campaign_managers_tgi'] = array_for_dropdown($campaign_managers_tgi, 'campaign_manager_id', array('campaign_manager_name', 'campaign_manager_lastname'));
 		
+		$campaign_managers_client = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_tgi' => 0))->result();
+		$campaign_data['campaign_managers_client'] = array_for_dropdown($campaign_managers_client, 'campaign_manager_id', array('campaign_manager_name', 'campaign_manager_lastname'));
+		
+		$campaign_data['campaign_managers_is_tgi'] = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_email' => $this->session->userdata('user_email')))->row();
+		
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_documents.php', $campaign_data, true);
 		$view_data['javascript'] = array('timeline.js');
 		$view_data['json'] = array('data_'.$id.'.json');
@@ -214,6 +219,28 @@ class Campaign extends MX_Controller
 				);
 				$this->add_campaign_step($campaign_step_data);
 			}
+		}
+	}
+	
+	function process_document()
+	{
+		$config['upload_path'] = FCPATH.'/assets/docs/';
+		$config['allowed_types'] = 'pdf|doc|docx|ppt|pptx|xls|xlsx';
+		$config['max_size']	= '100000';
+
+		$this->load->library('upload', $config);
+		var_dump($this->upload->data());
+		if ( ! $this->upload->do_upload('upload_file'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+			var_dump($error);
+			//$this->session->set_userdata('error_message', $error);
+		}
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+			var_dump($data);
+			//$this->session->set_userdata('success_message', $data);
 		}
 	}
 	

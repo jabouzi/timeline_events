@@ -13,6 +13,16 @@
 			</svg>
 			<span><?php echo $campaign->campaign_title; ?> <?php echo $campaign_type; ?></span>
 		</h1>
+		<?php if (!empty($campaign_managers_is_tgi)) : ?>
+		<form enctype="multipart/form-data" id="campaign_document" method="post" action="<?php echo site_url('campaign/process_document'); ?>">
+			<div class="title-top-btns">
+				<a style="cursor:pointer;" class="submit_form btn-icon-on-dark btnPlus submit" data-value="campaign_document">
+				Ajouter un document
+				</a>
+				<input type="file" name="upload_file" value="Ajouter un document">
+			</div>
+		</form>
+		<?php endif; ?>
 	</div>
 </div>
 <section>	
@@ -33,7 +43,16 @@
 							<?php echo $campaign_document->campaign_document_size; ?>
 						</td>
 						<td class="doc_name_person"> 
-							<?php echo $campaign_managers_tgi[$campaign_document->campaign_document_user]; ?>
+							<?php
+							if ($campaign_document->campaign_document_user_tgi)
+							{
+								echo $campaign_managers_tgi[$campaign_document->campaign_document_user]; 
+							}
+							else
+							{
+								echo $campaign_managers_client[$campaign_document->campaign_document_user]; 
+							}
+							?>
 						</td>
 						<td class="doc_download"> 
 							<a href="<?php echo  base_url().'assets/docs/'.$campaign_document->campaign_document_name.'?lang='.$this->lang->lang(); ?>">
@@ -42,6 +61,16 @@
 							</svg>
 							<span class="text-icon-download">  Télécharger</span></a>
 						</td>
+						<?php if (!empty($campaign_managers_is_tgi)) : ?>
+							<td class="doc_remove"> 
+								<a href="">
+								<svg id="icon-supprimer" viewBox="0 0 32 32" x="960">
+									<path class="supprimer_bg" fill="#e41b13" d="M32 16c0 8.837-7.163 16-16 16S0 24.837 0 16 7.163 0 16 0s16 7.163 16 16z"/>
+									<path fill="#fff" d="M9.6 17.92h14.72v-3.84H7.68v3.84H9.6z"/>
+								</svg>
+								</a>
+							</td>
+						<?php endif; ?>
 					</tr>
 				<?php endforeach; ?>
 			</tbody>

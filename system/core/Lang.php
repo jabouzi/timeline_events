@@ -79,6 +79,8 @@ class CI_Lang {
 		}
 
 		$config =& get_config();
+		
+		$idiom = urlencode($idiom);
 
 		if ($idiom == '')
 		{
