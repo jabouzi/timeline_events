@@ -198,6 +198,8 @@ $lang['language.success'] = "Language saved successfully";
 
 $lang['campaign.add.success'] = "Campaign added successfully";
 $lang['campaign.edit.success'] = "Campaign updated successfully";
+$lang['campaign.document.add.success'] = "Campaign document added successfully";
+$lang['campaign.document.delete.success'] = "Campaign document deleted successfully";
 
 $lang['content.title'] = "Content";
 

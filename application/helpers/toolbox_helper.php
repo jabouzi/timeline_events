@@ -116,6 +116,13 @@ function get_client_status_list()
 	return array(48=>'client.inactive' , 49=>'client.active');
 }
 
+function sizeFilter( $bytes )
+{
+    $label = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB' );
+    for( $i = 0; $bytes >= 1024 && $i < ( count( $label ) -1 ); $bytes /= 1024, $i++ );
+    return( round( $bytes, 2 ) . " " . $label[$i] );
+}
+
 function documents_icons()
 {
 	return array('ppt' => '<svg id="icon-powerpoint"  viewBox="0 0 29 32" x="2160">

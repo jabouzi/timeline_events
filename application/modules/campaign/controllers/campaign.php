@@ -146,7 +146,7 @@ class Campaign extends MX_Controller
 		$campaign_data['campaign_managers_client'] = array_for_dropdown($campaign_managers_client, 'campaign_manager_id', array('campaign_manager_name', 'campaign_manager_lastname'));
 		
 		$campaign_data['campaign_managers_is_tgi'] = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_email' => $this->session->userdata('user_email')))->row();
-		
+
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_documents.php', $campaign_data, true);
 		$view_data['javascript'] = array('timeline.js');
 		$view_data['json'] = array('data_'.$id.'.json');
@@ -224,24 +224,55 @@ class Campaign extends MX_Controller
 	
 	function process_document()
 	{
-		$config['upload_path'] = FCPATH.'/assets/docs/';
+		$campaign_manager = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_email' => $this->session->userdata('user_email')))->row();
+		$campaign_id = $this->input->post('campaign_id');
+		
+		$config['upload_path'] = FCPATH.'assets/docs/';
+		$config['upload_url'] = base_url().'assets/docs/';
 		$config['allowed_types'] = 'pdf|doc|docx|ppt|pptx|xls|xlsx';
 		$config['max_size']	= '100000';
-
+		$config['overwrite'] = TRUE;
+		
 		$this->load->library('upload', $config);
-		var_dump($this->upload->data());
+
 		if ( ! $this->upload->do_upload('upload_file'))
 		{
 			$error = array('error' => $this->upload->display_errors());
-			var_dump($error);
-			//$this->session->set_userdata('error_message', $error);
+			$this->session->set_userdata('error_message', $error);
 		}
 		else
 		{
-			$data = array('upload_data' => $this->upload->data());
-			var_dump($data);
-			//$this->session->set_userdata('success_message', $data);
+			$document = array('upload_data' => $this->upload->data());
+			$campaign_document = array(
+				'campaign_id' => $campaign_id,
+				'campaign_document_name' => $document['upload_data']['file_name'],
+				'campaign_document_date' => date('Y-m-d'),
+				'campaign_document_size' => sizeFilter($document['upload_data']['file_size']),
+				'campaign_document_type' => str_replace('.', '', $document['upload_data']['file_ext']),
+				'campaign_document_user' => $campaign_manager->campaign_manager_id
+			);
+			
+			$db_document = $this->mdl_campaigns_documents->get_where(array('campaign_document_name' => $document['upload_data']['file_name']))->row();
+
+			if (empty($db_document))
+			{
+				$this->mdl_campaigns_documents->insert($campaign_document);
+			}
+			else
+			{
+				$this->mdl_campaigns_documents->update('campaign_document_id', $db_document->campaign_document_id, $campaign_document);
+			}
+			$this->session->set_userdata('success_message', lang('campaign.document.add.success'));
+			redirect('campaign/documents/'.$campaign_id);
 		}
+	}
+	
+	function delete_document($campaign_id, $document_id)
+	{
+		$this->mdl_campaigns_documents->delete(array('campaign_document_id' => $document_id));
+		
+		$this->session->set_userdata('success_message', lang('campaign.document.delete.success'));
+		redirect('campaign/documents/'.$campaign_id);
 	}
 	
 	function file($file = null)

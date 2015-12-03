@@ -19,7 +19,8 @@
 				<a style="cursor:pointer;" class="submit_form btn-icon-on-dark btnPlus submit" data-value="campaign_document">
 				Ajouter un document
 				</a>
-				<input type="file" name="upload_file" value="Ajouter un document">
+				<input type="file" name="upload_file">
+				<input type="hidden" name="campaign_id" value="<?php echo $campaign->campaign_id; ?>">
 			</div>
 		</form>
 		<?php endif; ?>
@@ -44,7 +45,7 @@
 						</td>
 						<td class="doc_name_person"> 
 							<?php
-							if ($campaign_document->campaign_document_user_tgi)
+							if (isset($campaign_managers_tgi[$campaign_document->campaign_document_user]))
 							{
 								echo $campaign_managers_tgi[$campaign_document->campaign_document_user]; 
 							}
@@ -63,7 +64,7 @@
 						</td>
 						<?php if (!empty($campaign_managers_is_tgi)) : ?>
 							<td class="doc_remove"> 
-								<a href="">
+								<a href="<?php echo site_url('campaign/delete_document/'.$campaign->campaign_id.'/'.$campaign_document->campaign_document_id); ?>">
 								<svg id="icon-supprimer" viewBox="0 0 32 32" x="960">
 									<path class="supprimer_bg" fill="#e41b13" d="M32 16c0 8.837-7.163 16-16 16S0 24.837 0 16 7.163 0 16 0s16 7.163 16 16z"/>
 									<path fill="#fff" d="M9.6 17.92h14.72v-3.84H7.68v3.84H9.6z"/>
