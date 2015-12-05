@@ -7,7 +7,7 @@ div.timeline-frame {
 }
 
 div.timeline-content {
-    overflow: hidden;
+    overflow: auto;
     position: relative;
 }
 

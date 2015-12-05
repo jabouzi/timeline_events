@@ -461,6 +461,28 @@ class Campaign extends MX_Controller
 		echo modules::run('template/campaign', $view_data);
 	}
 	
+	function test2()
+	{
+		$view_data['page_title'] = lang('dashboard.title3');
+
+		$banners = $this->mdl_campaigns_banners->get();
+		$campaign_data['banners'] = $banners->result();
+
+		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_test2.php', array(), true);
+		echo modules::run('template/campaign', $view_data);
+	}
+	
+	function test3()
+	{
+		$view_data['page_title'] = lang('dashboard.title3');
+
+		$banners = $this->mdl_campaigns_banners->get();
+		$campaign_data['banners'] = $banners->result();
+
+		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_test3.php', array(), true);
+		echo modules::run('template/campaign', $view_data);
+	}
+	
 	function generic()
 	{
 		$view_data['page_title'] = lang('dashboard.title3');
