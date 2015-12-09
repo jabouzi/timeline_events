@@ -22,8 +22,8 @@ class Campaign extends MX_Controller
 
 		$banners = $this->mdl_campaigns_banners->get();
 		$campaign_data['banners'] = $banners->result();
-		$view_data['javascript'] = array('vis.js','timeline-locales.js');
-		$view_data['json'] = array('data.json');
+		$view_data['javascript'] = array('vis.js','moment-with-locales.min.js');
+		$view_data['json'] = array('data.json', 'group.json');
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -117,7 +117,7 @@ class Campaign extends MX_Controller
 		$this->session->userdata['campaign_banner_id'] = $campaign->campaign_banner_id;
 		
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
-		$view_data['javascript'] = array('timeline.js','timeline-locales.js');
+		$view_data['javascript'] = array('vis.js','moment-with-locales.min.js');
 		$view_data['json'] = array('data_'.$id.'.json');
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -363,29 +363,48 @@ class Campaign extends MX_Controller
 	function generate_campaign()
 	{
 		$json = array();
+		
 		$campaign_types = array_for_dropdown($this->mdl_campaigns_types->get()->result(), 'campaign_type_id');
 		$campaigns = $this->mdl_campaigns->get_where(array('campaign_active' => 1))->result();
-		$colors = array('red', 'blue', 'green', 'orange', 'magenta','red', 'blue', 'green', 'orange', 'magenta','red', 'blue', 'green', 'orange', 'magenta','red', 'blue', 'green', 'orange', 'magenta');
 		foreach($campaigns as $key => $campaign)
 		{
+			$campaign_names = $this->mdl_campaigns->get_distinct('campaign_title', 'campaign_banner_id', $campaign->campaign_banner_id, 'campaign_title asc')->result();
+			$campaign_names = $this->mdl_campaigns->get_group('campaign_title', 'campaign_banner_id', $campaign->campaign_banner_id, 'campaign_title asc')->result();
+			//var_dump($campaign_names);exit;
+			foreach($campaign_names as $key => $campaign_name)
+			{
+				$campaign_groups[$key] = $campaign_name->campaign_title;
+			}
+			
+			$campaign_names_flipped = array_flip($campaign_groups);
 			$banners = $this->mdl_campaigns_banners->get_where(array('campaign_banner_id' => $campaign->campaign_banner_id));
             $json[$banners->row()->campaign_banner_name][] = array(
 					'start' =>  '__'.strtotime($campaign->campaign_date_start),
 					'end' =>  '__'.strtotime($campaign->campaign_date_end),
-					'content' =>  '<a style="color:#ffffff;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('m/d/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
-					'group' =>  '<a href="'.site_url('campaign/edit/'.$campaign->campaign_id).'">'.$campaign->campaign_title.'</a>',
+					'content' =>  '<a href="'.site_url('campaign/edit/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('m/d/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
+					'group' =>  $campaign_names_flipped[$campaign->campaign_title],
 					'id' =>  $campaign->campaign_id,
 					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
 					'editable' => false
 				);
+			foreach($campaign_names as $key => $campaign_name)
+			{
+				$campaign_groups[$key] = '<a href="'.site_url('campaign/edit/'.$campaign_name->campaign_id).'">'.$campaign_name->campaign_title.'</a>';
+			}
+			
+			$json2[$banners->row()->campaign_banner_name] = $campaign_groups;
 		}
-
+		
+		
+		
+		$json_names = json_encode($json2);
 		$json_data = json_encode($json);
 		$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
 			return 'new Date(' . ($e[1] * 1000) . ')';
 		}, $json_data);
 
 		file_put_contents(FCPATH.'/assets/json/data.json',  'var jsonData = '.$json_data);
+		file_put_contents(FCPATH.'/assets/json/group.json',  'var groupData = '.$json_names);
 	}
 	
 	function generate_campaign_detail($id)
@@ -414,41 +433,7 @@ class Campaign extends MX_Controller
 		file_put_contents(FCPATH.'/assets/json/data_'.$id.'.json',  'var jsonData = '.$json_data);
 	}
 	
-	function cache($campaign_id)
-	{
-		ob_start();
-		$banners = $this->mdl_campaigns_banners->get();
-		$view_data['banners'] = $banners->result();
-		$view_data['page_title'] = lang('dashboard.title3');
-		$view_data['json'] = 'data.json';
-		$view_data['filename'] = 'campaign.php';
-		$url = 'http://metro.toolbox/en/campaign/generic';
-		$agent= 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)';
-		$header = array();
-		$header[] = 'Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5';
-		$header[] = 'Cache-Control: max-age=0';
-		$header[] = 'Connection: keep-alive';
-		$header[] = 'Keep-Alive: 300';
-		$header[] = 'Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7';
-		$header[] = 'Accept-Language: en-us,en;q=0.5';
-		$header[] = 'Pragma: ';
-		$ch = curl_init(); 
-		curl_setopt($ch, CURLOPT_URL, $url);
-		//curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.11) Gecko/2009060215 Firefox/3.0.11 (.NET CLR 3.5.30729)');
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-		curl_setopt($ch, CURLOPT_AUTOREFERER, true); 
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-		curl_setopt($ch, CURLOPT_ENCODING, '');
-		curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-		$result = curl_exec($ch);
-		curl_close ($ch);
-		echo ($result);
-		redirect('campaign/detail/'.$campaign_id);
-		ob_clean();
-		//var_dump(file_get_contents('http://metro.toolbox/en/campaign/generic'));
-		//file_put_contents(FCPATH.'/assets/cache/campaign.php', $result);
-	}
+	
 	
 	function test()
 	{
@@ -481,24 +466,5 @@ class Campaign extends MX_Controller
 
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_test3.php', array(), true);
 		echo modules::run('template/campaign', $view_data);
-	}
-	
-	function generic()
-	{
-		$view_data['page_title'] = lang('dashboard.title3');
-
-		$banners = $this->mdl_campaigns_banners->get();
-		$view_data['banners'] = $banners->result();
-
-		$view_data['filename'] = 'campaign.php';
-		$view_data['json'] = 'data.json';
-		$this->load->view('campaign_generic', $view_data);
-		
-		//redirect('campaign/detail/'.$campaign_id);
-	}
-	
-	function ajax()
-	{
-		file_put_contents(FCPATH.'/assets/cache/campaign.php', $this->input->post('data'));
 	}
 }

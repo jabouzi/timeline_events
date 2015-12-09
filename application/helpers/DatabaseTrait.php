@@ -15,6 +15,15 @@ trait DatabaseTrait
 		return $query;
 	}
 	
+	function get_group($group_by, $where_field, $where_value,  $order_by)
+	{
+		$this->db->where($where_field, $where_value);
+		$this->db->group_by($group_by);
+		$this->db->order_by($order_by);
+		$query = $this->db->get($this->table);
+		return $query;
+	}
+	
 	function get_with_limit($limit, $offset, $order_by)
 	{
 		$this->db->limit($limit, $offset);
@@ -40,6 +49,16 @@ trait DatabaseTrait
 	{
 		$this->db->order_by($order_by);
 		$query = $this->db->get_where($this->table, $where);
+		return $query;
+	}
+	
+	function get_distinct($field, $where_field, $where_value, $order_by = null)
+	{
+		$this->db->distinct();
+		$this->db->select($field);
+		$this->db->where($where_field, $where_value); 
+		if ($order_by) $this->db->order_by($order_by);
+		$query = $this->db->get($this->table);
 		return $query;
 	}
 	

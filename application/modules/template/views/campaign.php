@@ -19,7 +19,7 @@
 		<title>Édition de campagne</title>
 		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/bootstrap-3.3.5.min.css" type="text/css">
 		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/main.css">
-		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/timeline.css">
+		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/vis.css">
 		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/campaign.css">
 		<?php if (isset($stylesheet)) { ?>
 			<?php foreach($stylesheet as $css) { ?>

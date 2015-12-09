@@ -1,8 +1,5 @@
 $(document).ready(function() {
-	
-	//$('.campaign').hide(10).parent().removeClass('opened');
-	//$('.timeline_'+$('#openedid').val()).show(10).parent().addClass('opened');
-	
+
 	$.datepicker.setDefaults($.datepicker.regional[($('html').attr('lang') == 'en') ? '' : $('html').attr('lang')]);
 	$('.datechooser').datepicker(
 		{
@@ -31,12 +28,8 @@ $(document).ready(function() {
 		drawVisualization();
 	}
 
-	//$('.campaign').hide();
-	//$('.timeline_0').show();
-
 	$('.collapsious span').click(function() {
 		console.log($(this));
-		//$('.campaign').hide(500).parent().removeClass('opened');
 		$('.timeline_'+$(this).attr('data-value')).toggle(500).parent().toggleClass('opened');
 	});
 
@@ -46,73 +39,103 @@ $(document).ready(function() {
 
 function drawVisualization() {
 
-	var timeline = [];
-	var data;
+	//var timeline = [];
+	//var data;
 
-	var options = {
-		width:  "100%",
-		height: "auto",
-		showMajorLabels: false,
-		axisOnTop: true,
-		timeChangeable: false,
-		style: "box",
-		cluster: true,
-		animate: false,
-		animateZoom: false,
-		locale: $("#site_lang").val()
-	};
+	//var options = {
+		//width:  "100%",
+		//height: "auto",
+		//showMajorLabels: false,
+		//axisOnTop: true,
+		//timeChangeable: false,
+		//style: "box",
+		//cluster: true,
+		//animate: false,
+		//animateZoom: false,
+		//locale: $("#site_lang").val()
+	//};
+	//
+	//function onselect() {
+//
+		//for (var campaigns in jsonData)
+		//{
+			//if (timeline[campaigns].getSelection() != undefined)
+			//{
+				//var sel = timeline[campaigns].getSelection();
+			//}
+//
+			//for(var i = 0; i < jsonData[campaigns].length; i++)
+			//{
+				 //if (sel[i] != undefined && sel[i].row != undefined)
+				 //{
+					//var url = window.location.href;
+					//var redirect = 'detail/' + timeline[campaigns].getItem(sel[i].row).id;
+					//if (url.substr(url.length - 1) != '/') redirect = '/'+redirect;
+					//window.location.href = url + redirect;
+				//}
+			//}
+		//}
+	//}
 	
-	function onselect() {
-
-		for (var campaigns in jsonData)
-		{
-			if (timeline[campaigns].getSelection() != undefined)
-			{
-				var sel = timeline[campaigns].getSelection();
-			}
-
-			for(var i = 0; i < jsonData[campaigns].length; i++)
-			{
-				 if (sel[i] != undefined && sel[i].row != undefined)
-				 {
-					var url = window.location.href;
-					var redirect = 'detail/' + timeline[campaigns].getItem(sel[i].row).id;
-					if (url.substr(url.length - 1) != '/') redirect = '/'+redirect;
-					window.location.href = url + redirect;
-				}
-			}
-		}
+	function onSelect (properties) {
+		console.log(timeline[campaigns].getItem(properties.items[0]).id);
+		console.log(properties.items);
 	}
 
+	
 	for (var campaigns in jsonData)
 	{
-		timeline[campaigns] = new links.Timeline(document.getElementById(campaigns), options);
-		links.events.addListener(timeline[campaigns], 'select', onselect);
-		timeline[campaigns].draw(jsonData[campaigns]);
+		var items = new vis.DataSet(jsonData[campaigns]);
+		var container = document.getElementById(campaigns);
+		var options = { orientation: {axis: 'both'}, locale: $("#site_lang").val() };
+		var timeline = new vis.Timeline(container, items, options);
+		var groups = new vis.DataSet();
+		for (var g = 0; g < groupData[campaigns].length; g++) {
+			groups.add({id: g, content: groupData[campaigns][g]});
+		}
+		timeline.setGroups(groups);
+		timeline.moveTo(new Date());
+		timeline.on('select', onSelect);
+		//timeline[campaigns] = new links.Timeline(document.getElementById(campaigns), options);
+		//links.events.addListener(timeline[campaigns], 'select', onselect);
+		//timeline[campaigns].draw(jsonData[campaigns]);
 	}
 }
 
 function drawVisualization2() {
 
-	var timeline = [];
-	var data;
+	//var timeline = [];
+	//var data;
+//
+	//var options = {
+		//width:  "100%",
+		//height: "auto",
+		//showMajorLabels: false,
+		//axisOnTop: true,
+		//timeChangeable: false,
+		//style: "box",
+		//cluster: true,
+		//animate: false,
+		//animateZoom: false,
+		//locale: $("#site_lang").val()
+	//};
 
-	var options = {
-		width:  "100%",
-		height: "auto",
-		showMajorLabels: false,
-		axisOnTop: true,
-		timeChangeable: false,
-		style: "box",
-		cluster: true,
-		animate: false,
-		animateZoom: false,
-		locale: $("#site_lang").val()
-	};
-
+	var container = null;
+	var names = ['1. Strategie', '2. Developpement du plan chiffre', '3. Creation', '4. Production', '5. Post-production', '6. Campagne'];
+	var groups = new vis.DataSet();
+	for (var g = 0; g < names.length; g++) {
+		groups.add({id: g, content: names[g]});
+	}
+	
+	container = document.getElementById('timeline');
+	var items = new vis.DataSet(jsonData);
+	var options = { orientation: {axis: 'both'}, locale: $("#site_lang").val() };
+	var timeline = new vis.Timeline(container, items, options);
+	timeline.setGroups(groups);
+	timeline.moveTo(new Date());
 	// Instantiate our timeline object.
-	timeline = new links.Timeline(document.getElementById('timeline'), options);
-	timeline.draw(jsonData);
+	//timeline = new links.Timeline(document.getElementById('timeline'), options);
+	//timeline.draw(jsonData);
 }
 
 function validate_from(form_id)

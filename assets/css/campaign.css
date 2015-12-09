@@ -1,6 +1,11 @@
-div.timeline-event {
-	border-radius:8px;}
+.vis-item {
+	border-radius:8px!important;
+	border:none!important;
+}
 
+.vis-item .vis-item-overflow {
+  overflow: visible;
+}
 
 div.green {
 	background-color: #90EE90;
