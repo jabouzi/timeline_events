@@ -17,7 +17,7 @@
 		</h1>
 		<div><?php
 					setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
-					echo strftime('%A %d %B %Y');
+					echo ucfirst(strftime('%A %d %B %Y'));
 			 ?></div>
 		<div class="title-top-btns">
 			<a href="" class="btn-icon-on-dark on-white">
