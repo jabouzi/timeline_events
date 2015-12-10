@@ -134,3 +134,43 @@ function documents_icons()
 									</svg>'
 			);
 }
+
+function get_holidays($year)
+{
+	$holidays = array();
+	
+	$d1 = new DateTime($year.'-03-21');
+	$d1->add(new DateInterval('P'.easter_days($year).'D'));
+	$d1->add(new DateInterval('P1D')); // lundi
+	$holidays['easter_monday'] = $d1->format('Y-m-d');
+	
+	$d1->sub(new DateInterval('P3D')); // vendredi
+	$holidays['good_friday'] = $d1->format('Y-m-d');
+	
+	$d1 = new DateTime($year.'-05-25');
+	$d1->modify('previous monday');
+	$holidays['queen-patriots'] = $d1->format('Y-m-d');
+	
+	$d1 = new DateTime($year.'-09-01');
+	$d1->modify('first monday');
+	$holidays['labor-day']  = $d1->format('Y-m-d');
+	
+	$d1 = new DateTime($year.'-10-01');
+	$d1->modify('second monday');
+	$holidays['thanks-giving'] = $d1->format('Y-m-d');
+	
+	$d1 = new DateTime($year.'-07-01');
+	if ($d1->format('N') == 7) $holidays['canada-day'] = $d1->add(new DateInterval('P1D'))->format('Y-m-d');
+	else $holidays['canada-day'] = $d1->format('Y-m-d');
+	
+	$d1 = new DateTime($year.'-05-24');
+	$holidays['saint-Jean'] = $d1->format('Y-m-d');
+	
+	$d1 = new DateTime($year.'-01-01');
+	$holidays['new_year'] = $d1->format('Y-m-d');
+	
+	$d1 = new DateTime($year.'-12-25');
+	$holidays['christmas'] = $d1->format('Y-m-d');
+	
+	return $holidays;
+}

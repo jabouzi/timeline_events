@@ -23,7 +23,7 @@ class Campaign extends MX_Controller
 		$banners = $this->mdl_campaigns_banners->get();
 		$campaign_data['banners'] = $banners->result();
 		$view_data['javascript'] = array('vis.js','moment-with-locales.min.js');
-		$view_data['json'] = array('data.json', 'group.json');
+		$view_data['json'] = array('data.json', 'group.json', 'holidays.json');
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -118,7 +118,7 @@ class Campaign extends MX_Controller
 		
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
 		$view_data['javascript'] = array('vis.js','moment-with-locales.min.js');
-		$view_data['json'] = array('data_'.$id.'.json');
+		$view_data['json'] = array('data_'.$id.'.json', 'data_group_'.$id.'.json');
 		echo modules::run('template/campaign', $view_data);
 	}
 	
@@ -295,6 +295,7 @@ class Campaign extends MX_Controller
 		$this->process_add_campaign_steps($campaign_id);
 		$this->generate_campaign();
 		$this->generate_campaign_detail($campaign_id);
+		$this->generate_holidays();
 		$this->session->set_userdata('success_message', lang('campaign.add.success'));
 
 		$campaign_manager_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_id' => $campaign_data['campaign_manager_tgi']))->row();
@@ -314,6 +315,7 @@ class Campaign extends MX_Controller
 		$this->process_add_campaign_steps(1);
 		$this->generate_campaign();
 		$this->generate_campaign_detail($campaign_id);
+		$this->generate_holidays();
 		$this->session->set_userdata('success_message', lang('campaign.edit.success'));
 		
 		$campaign_manager_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_id' => $campaign_data['campaign_manager_tgi']))->row();
@@ -381,7 +383,7 @@ class Campaign extends MX_Controller
             $json[$banners->row()->campaign_banner_name][] = array(
 					'start' =>  '__'.strtotime($campaign->campaign_date_start),
 					'end' =>  '__'.strtotime($campaign->campaign_date_end),
-					'content' =>  '<a href="'.site_url('campaign/edit/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('m/d/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
+					'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('m/d/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
 					'group' =>  $campaign_names_flipped[$campaign->campaign_title],
 					'id' =>  $campaign->campaign_id,
 					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
@@ -389,12 +391,11 @@ class Campaign extends MX_Controller
 				);
 			foreach($campaign_names as $key => $campaign_name)
 			{
-				$campaign_groups[$key] = '<a href="'.site_url('campaign/edit/'.$campaign_name->campaign_id).'">'.$campaign_name->campaign_title.'</a>';
+				$campaign_groups[$key] = '<a href="'.site_url('campaign/detail/'.$campaign_name->campaign_id).'">'.$campaign_name->campaign_title.'</a>';
 			}
-			
+			$campaign_groups[9] = 'Holidays';
 			$json2[$banners->row()->campaign_banner_name] = $campaign_groups;
 		}
-		
 		
 		
 		$json_names = json_encode($json2);
@@ -412,25 +413,51 @@ class Campaign extends MX_Controller
 		$json = array();
 		$campaigns_steps = $this->mdl_campaigns_steps->get_where_order(array('campaign_id' => $id), 'campaign_step_type')->result();
 		$campaigns_steps_types = array_for_dropdown($this->mdl_campaigns_steps_types->get()->result(), 'campaign_step_type_id');
+		$campaigns_steps_group = array();
+		$i = 0;
 		foreach($campaigns_steps as $key => $campaign_step)
 		{
+			$campaigns_steps_group [] = $campaigns_steps_types[$campaign_step->campaign_step_type]->campaign_step_type_name;
             $json[] = array(
 					'start' =>  '__'.strtotime($campaign_step->campaign_step_date_start),
 					'end' =>  '__'.strtotime($campaign_step->campaign_step_date_end),
 					'content' =>  ' ',
-					'group' =>  ($key+1).'. '.$campaigns_steps_types[$campaign_step->campaign_step_type]->campaign_step_type_name,
+					'group' =>  $i++,
 					'id' =>  $campaign_step->campaign_step_id,
 					'className' =>  'red',
 					'editable' => false
 				);
 		}
-
+		$json_names = json_encode($campaigns_steps_group);
 		$json_data = json_encode($json);
 		$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
 			return 'new Date(' . ($e[1] * 1000) . ')';
 		}, $json_data);
 
 		file_put_contents(FCPATH.'/assets/json/data_'.$id.'.json',  'var jsonData = '.$json_data);
+		file_put_contents(FCPATH.'/assets/json/data_group_'.$id.'.json',  'var groupData = '.$json_names);
+	}
+	
+	function generate_holidays()
+	{
+		$json = array();
+		$year = date('Y');
+		$id = 0;
+		for($y = $year - 2; $y <= $year + 2; $y++)
+		{
+			$holidays = get_holidays($y);
+			foreach($holidays as $key => $holiday)
+			{
+				$json[] = array(
+					'start' =>  $holiday,
+					'content' =>  $key,
+					'id' =>  (1000+($id++)),
+					'group' => 9
+				);
+			}
+		}
+		$json_data = json_encode($json);
+		file_put_contents(FCPATH.'/assets/json/holidays.json',  'var holidaysData = '.$json_data);
 	}
 	
 	

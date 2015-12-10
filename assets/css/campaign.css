@@ -1,3 +1,10 @@
+.vis-item.vis-background.negative {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+.vis-item.vis-background.positive {
+  background-color: rgba(255, 255, 0, 0.2);
+}
+
 .vis-item {
 	border-radius:8px!important;
 	border:none!important;

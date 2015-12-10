@@ -50,6 +50,7 @@
 		<input type="hidden" id="campaign_calendar" value="0">
 		<div class="timeline-wrapper">
 			<h3 class="time-line-table">Étapes de production</h3>
+			<br />
 			<div id="timeline"></div>
 		</div>
 		<h3>Budget Global</h3>
