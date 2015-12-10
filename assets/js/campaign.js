@@ -3,6 +3,7 @@ $(document).ready(function() {
 	$.datepicker.setDefaults($.datepicker.regional[($('html').attr('lang') == 'en') ? '' : $('html').attr('lang')]);
 	$('.datechooser').datepicker(
 		{
+		dateFormat: 'dd/mm/yy',
 	    changeMonth: true,
 	    changeYear: true,
 	    showAnim: 'slideDown',
@@ -87,6 +88,8 @@ function validate_from(form_id)
 		required += validate_element($(this));
 	});
 	
+	required += validateDates()
+	
 	if (required)
 	{
 		$('.alert_error').html($('#error_message').val());
@@ -111,7 +114,7 @@ function validate_from(form_id)
 		}
 		else
 		{
-			$("#" + form_id).submit();
+			//$("#" + form_id).submit();
 		}
 		
 	}
@@ -158,6 +161,63 @@ function validate_element(element)
 	}
 	
 	return required;
+}
+
+function validateDates()
+{
+	var error = 0;
+	var start = $('#campaign_date_start').val();
+	var event = $('#campaign_date_evenement').val();
+	if (reformateDate(start) > reformateDate(event)) 
+	{
+		error++;
+		$("#label_campaign_date_evenement").addClass('error-input');
+		$("#label_campaign_date_start").addClass('error-input');
+	}
+	
+	for(var i = 1; i < 6; i++)
+	{
+		var _start = $('#campaign_step_date_start'+i).val();
+		var _end = $('#campaign_step_date_end'+i).val();
+		if (reformateDate(start) > reformateDate(_start))
+		{
+			error++;
+			$("#label_creation"+i).addClass('error-input');
+			$("#label_campaign_date_start").addClass('error-input');
+		}
+		
+		if (reformateDate(_start) > reformateDate(_end))
+		{
+			error++;
+			$("#label_creation"+i).addClass('error-input');
+		}
+		
+		if (reformateDate(_end) > reformateDate($('#campaign_step_date_end6').val()))
+		{
+			error++;
+			$("#label_creation"+i).addClass('error-input');
+			$("#label_campaign_step_date_end6").addClass('error-input');
+		}
+	}
+	
+	var _start = $('#campaign_date_media_start').val();
+	var _end = $('#campaign_date_media_end').val();
+	
+	if (reformateDate(_start) > reformateDate(_end)) 
+	{
+		error++;
+		$("#label_campaign_date_media_start").addClass('error-input');
+		$("#label_campaign_date_media_end").addClass('error-input');
+	}
+	
+	if (reformateDate(_end) > reformateDate($('#campaign_step_date_end6').val()))
+	{
+		error++;
+		$("#label_campaign_date_media_end").addClass('error-input');
+		$("#label_campaign_step_date_end6").addClass('error-input');
+	}
+
+	return error;
 }
 
 function isValidEmailAddress(element) 
@@ -241,12 +301,43 @@ function clear_messages()
 	$('.alert_info').hide();
 }
 
-function edit(campaign_id)
+function reformateDate(date)
 {
-	console.log('edit '+campaign_id);
+	var dates = date.split('/');
+	var day = parseInt(dates[0]);
+	var month = parseInt(dates[1]);
+	var year = parseInt(dates[2]);
+	var date = new Date(year, month-1, day);
+	return date
 }
 
-function pop(campaign_id)
+function isValidDate(date)
 {
-	console.log('pop '+campaign_id);
+	var isValid = false;
+	var dates = date.split('/');
+	var day = parseInt(dates[0]);
+	var month = parseInt(dates[1]);
+	var year = parseInt(dates[2]);
+	if (day <= 0) return false;
+	if (month <= 0) return false;
+	if (year <= 0) return false;
+	return (FeatureDateCheck(day,month,year));
+}
+
+function FeatureDateCheck(dt,mon,yr)
+{
+	var Joindate = new Date(yr, mon-1, dt);
+	var Currentdate = new Date();
+	if (isNaN(Joindate.getTime()) == true)
+	{
+		return false;
+	}
+	else if (Joindate.getTime() > Currentdate.getTime())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }

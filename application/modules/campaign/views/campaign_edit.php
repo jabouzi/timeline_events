@@ -63,11 +63,11 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<label for="campaign_date_start" id="label_campaign_date_start">Date de début</label>
-							<input class="datechooser" type="text" name="campaign_date_start" id="campaign_date_start" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_start)); ?>"  data-validate="required" data-type="text"/>
+							<input class="datechooser" type="text" name="campaign_date_start" id="campaign_date_start" value="<?php echo date('d/m/Y', strtotime($campaign->campaign_date_start)); ?>"  data-validate="required" data-type="text"/>
 						</div>
 						<div class="col-sm-6">
-							<label for="campaign_date_end" id="label_campaign_date_end">Date de fin</label>
-							<input class="datechooser" type="text" name="campaign_date_end" id="campaign_date_end" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_end)); ?>"  data-validate="required" data-type="text"/>
+							<label for="campaign_date_evenement" id="label_campaign_date_evenement">Date de l’événement</label>
+							<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="<?php echo date('d/m/Y', strtotime($campaign->campaign_date_evenement)); ?>" data-validate="required" data-type="text"/>
 						</div>
 					</div>
 					<div class="row">
@@ -104,12 +104,6 @@
 							<input type="text" name="campaign_store_number" id="campaign_store_number" value="<?php echo $campaign->campaign_store_number; ?>"  data-validate="required" data-type="text"/>
 						</div>
 					</div>
-					<div class="row">					
-						<div class="col-sm-6">
-							<label for="campaign_date_evenement" id="label_campaign_date_evenement">Date de l’événement</label>
-							<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_evenement)); ?>" data-validate="required" data-type="text"/>
-						</div>					
-					</div>
 				</div>
 			</div>
 			<div class="col-sm-6">
@@ -130,21 +124,21 @@
 					
 						<div class="row">
 							<div class="col-sm-6">
-								<input class="datechooser" type="text" name="campaign_step_date_start[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_start<?php echo $campaign_step_id; ?>" value="<?php if (isset($campaign_steps[$campaign_step_id])) echo date('m/d/Y', strtotime($campaign_steps[$campaign_step_id]->campaign_step_date_start)); ?>"/>
+								<input class="datechooser" type="text" name="campaign_step_date_start[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_start<?php echo $campaign_step_id; ?>" value="<?php if (isset($campaign_steps[$campaign_step_id])) echo date('d/m/Y', strtotime($campaign_steps[$campaign_step_id]->campaign_step_date_start)); ?>"/>
 							</div>
 							<div class="col-sm-6 etapes-au">
-								<input class="datechooser" type="text" name="campaign_step_date_end[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_end<?php echo $campaign_step_id; ?>" value="<?php if (isset($campaign_steps[$campaign_step_id])) echo date('m/d/Y', strtotime($campaign_steps[$campaign_step_id]->campaign_step_date_end)); ?>"/>
+								<input class="datechooser" type="text" name="campaign_step_date_end[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_end<?php echo $campaign_step_id; ?>" value="<?php if (isset($campaign_steps[$campaign_step_id])) echo date('d/m/Y', strtotime($campaign_steps[$campaign_step_id]->campaign_step_date_end)); ?>"/>
 							</div>
 						</div>
 					<?php endforeach; ?>
 					<div class="row">
 						<div class="col-sm-6">
 							<label for="campaign_date_media" id="label_campaign_date_media_start">Date de début médias</label>
-							<input class="datechooser" type="text" name="campaign_date_media_start" id="campaign_date_media_start" value="<?php echo date('m/d/Y', strtotime($campaign->campaign_date_media_start)); ?>" data-type="text"/>
+							<input class="datechooser" type="text" name="campaign_date_media_start" id="campaign_date_media_start" value="<?php echo date('d/m/Y', strtotime($campaign->campaign_date_media_start)); ?>" data-type="text"/>
 						</div>
 						<div class="col-sm-6">
 							<label for="campaign_date_media" id="label_campaign_date_media_end">Date de fin médias</label>
-							<input class="datechooser" type="text" name="campaign_date_media_end" id="campaign_date_media_end" value="<?php if (isset($campaign->campaign_date_media_end) && $campaign->campaign_date_media_end != '0000-00-00' ) {echo date('m/d/Y', strtotime($campaign->campaign_date_media_end));} ?>" data-type="text"/>
+							<input class="datechooser" type="text" name="campaign_date_media_end" id="campaign_date_media_end" value="<?php if (isset($campaign->campaign_date_media_end) && $campaign->campaign_date_media_end != '0000-00-00' ) {echo date('d/m/Y', strtotime($campaign->campaign_date_media_end));} ?>" data-type="text"/>
 						</div>						
 					</div>
 					
