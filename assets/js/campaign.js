@@ -40,23 +40,32 @@ $(document).ready(function() {
 
 function drawVisualization() {
 
+	var items = {};
+	var timeline = {};
 	for (var campaigns in jsonData)
 	{
-		var items = new vis.DataSet(jsonData[campaigns]);
-		items.add(holidaysData);
-		items.add([{id: 'A', content: '<i>Vacances 1</i>', start: '2015-10-16', end: '2015-10-31', type: 'background', className: 'positive'},
+		items[campaigns] = new vis.DataSet(jsonData[campaigns]);
+		items[campaigns].add(holidaysData);
+		items[campaigns].add([{id: 'A', content: '<i>Vacances 1</i>', start: '2015-10-16', end: '2015-10-31', type: 'background', className: 'positive'},
     {id: 'B', content: '<i>Vacances 2</i>', start: '2015-12-21', end: '2016-01-30', type: 'background', className: 'negative'}]);
 		var container = document.getElementById(campaigns);
 		var options = { orientation: {axis: 'both'}, locale: $("#site_lang").val(), start: addMonths(new Date(), -6), end: addMonths(new Date(), +6)};
-		var timeline = new vis.Timeline(container, items, options);
+		timeline[campaigns] = new vis.Timeline(container, items[campaigns], options);
 		var groups = new vis.DataSet();
 		for (var g = 0; g < groupData[campaigns].length; g++) {
 			groups.add({id: g, content: groupData[campaigns][g]});
 		}
-		timeline.setGroups(groups);
-		timeline.moveTo(new Date());
+		timeline[campaigns].setGroups(groups);
+		timeline[campaigns].moveTo(new Date());
 	}
 	
+	$('.goto').click(function()
+	{
+		var id = $(this).attr('data-id');
+		console.log(id.replace(' ', '_'), $('#move_to_'+id.replace(' ', '_')).val());
+		timeline[id].moveTo(reformateDate($('#move_to_'+id.replace(' ', '_')).val()));
+	});
+		
 }
 
 function drawVisualization2() {
