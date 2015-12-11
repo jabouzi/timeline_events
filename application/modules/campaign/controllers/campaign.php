@@ -382,7 +382,7 @@ class Campaign extends MX_Controller
             $json[$banners->row()->campaign_banner_name][] = array(
 					'start' =>  '__'.strtotime($campaign->campaign_date_start),
 					'end' =>  '__'.strtotime($campaign->campaign_date_end),
-					'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('m/d/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
+					'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
 					'group' =>  $campaign_names_flipped[$campaign->campaign_title],
 					'id' =>  $campaign->campaign_id,
 					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
@@ -391,7 +391,7 @@ class Campaign extends MX_Controller
 			$json[$banners->row()->campaign_banner_name][] = array(
 				'start' =>  '__'.strtotime($campaign->campaign_date_media_start),
 				'end' =>  '__'.strtotime($campaign->campaign_date_media_end),
-				'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('m/d/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
+				'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
 				'group' =>  9,
 				'id' =>  (100000+$campaign->campaign_id),
 				'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
