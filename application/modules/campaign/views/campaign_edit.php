@@ -158,5 +158,5 @@
 		</div>
 		</form>
 	</div>
-	<input type="hidden" id="error_message" value="Veuillez remplir tous les données requises">
+	<input type="hidden" id="error_message" value="<?php echo lang('campaign.edit.error'); ?>">
 </section>

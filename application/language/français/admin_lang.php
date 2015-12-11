@@ -125,6 +125,7 @@ $lang['campaign.document.add.success'] = "Le document de la campagne a été ajo
 $lang['campaign.document.delete.success'] = "Le document de la campagne a été supprimé avec succès";
 $lang['campaign.add'] = "Campagne ajoutée.";
 $lang['campaign.edit'] = "Campagne mise à jour.";
+$lang['campaign.edit.error'] = "Veuillez remplir tous les données requises ou valider la logique des dates.";
 
 $lang['content.title'] = "Contenu";
 

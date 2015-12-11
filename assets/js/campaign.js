@@ -83,6 +83,7 @@ function addMonths(date, months) {
 function validate_from(form_id)
 {
 	var required = 0;
+	$('.error-input').removeClass('error-input');
 	$('.alert_error').html('');
 	$("#" + form_id).find('[data-validate]').each(function() {
 		required += validate_element($(this));
@@ -114,7 +115,7 @@ function validate_from(form_id)
 		}
 		else
 		{
-			//$("#" + form_id).submit();
+			$("#" + form_id).submit();
 		}
 		
 	}
