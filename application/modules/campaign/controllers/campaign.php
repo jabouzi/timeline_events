@@ -51,7 +51,6 @@ class Campaign extends MX_Controller
 		
 		$campaign_data['campaign_steps_types'] = array_for_dropdown($campaign_steps_types, 'campaign_step_type_id', 'campaign_step_type_name');
 		
-		//$view_data['page_title'] = lang('dashboard.title3');
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_add.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -96,7 +95,6 @@ class Campaign extends MX_Controller
 		
 		$this->session->userdata['campaign_banner_id'] = $campaign_data['campaign']->campaign_banner_id;
 		
-		//$view_data['page_title'] = lang('dashboard.title3');
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_edit.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -161,11 +159,11 @@ class Campaign extends MX_Controller
 			'campaign_project_number' => $this->input->post('campaign_project_number'),
 			'campaign_store_number' => $this->input->post('campaign_store_number'),
 			'campaign_title' => $this->input->post('campaign_title') ,
-			'campaign_date_start' => date('Y-m-d', strtotime($this->input->post('campaign_date_start'))),
-			'campaign_date_end' => date('Y-m-d', strtotime($this->input->post('campaign_date_end'))),
-			'campaign_date_evenement' => date('Y-m-d', strtotime($this->input->post('campaign_date_evenement'))),
-			'campaign_date_media_start' => date('Y-m-d', strtotime($this->input->post('campaign_date_media_start'))),
-			'campaign_date_media_end' => date('Y-m-d', strtotime($this->input->post('campaign_date_media_end'))),
+			'campaign_date_start' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->format('Y-m-d'),
+			'campaign_date_end' => DateTime::createFromFormat('d/m/Y', item($this->input->post('campaign_step_date_end'), 6))->format('Y-m-d'),
+			'campaign_date_evenement' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_evenement'))->format('Y-m-d'),
+			'campaign_date_media_start' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_start'))->format('Y-m-d'),
+			'campaign_date_media_end' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_end'))->format('Y-m-d'),
 			'campaign_branch' => $this->input->post('campaign_branch'),
 			'campaign_address'=> $this->input->post('campaign_address'),
 			'campaign_manager_client'=> $this->input->post('campaign_manager_client'),
@@ -183,11 +181,11 @@ class Campaign extends MX_Controller
 			'campaign_project_number' => $this->input->post('campaign_project_number'),
 			'campaign_store_number' => $this->input->post('campaign_store_number'),
 			'campaign_title' => $this->input->post('campaign_title') ,
-			'campaign_date_start' => date('Y-m-d', strtotime($this->input->post('campaign_date_start'))),
-			'campaign_date_end' => date('Y-m-d', strtotime($this->input->post('campaign_date_end'))),
-			'campaign_date_evenement' => date('Y-m-d', strtotime($this->input->post('campaign_date_evenement'))),
-			'campaign_date_media_start' => date('Y-m-d', strtotime($this->input->post('campaign_date_media_start'))),
-			'campaign_date_media_end' => date('Y-m-d', strtotime($this->input->post('campaign_date_media_end'))),
+			'campaign_date_start' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->format('Y-m-d'),
+			'campaign_date_end' => DateTime::createFromFormat('d/m/Y', item($this->input->post('campaign_step_date_end'), 6))->format('Y-m-d'),
+			'campaign_date_evenement' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_evenement'))->format('Y-m-d'),
+			'campaign_date_media_start' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_start'))->format('Y-m-d'),
+			'campaign_date_media_end' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_end'))->format('Y-m-d'),
 			'campaign_branch' => $this->input->post('campaign_branch'),
 			'campaign_address'=> $this->input->post('campaign_address'),
 			'campaign_manager_client'=> $this->input->post('campaign_manager_client'),
@@ -214,8 +212,8 @@ class Campaign extends MX_Controller
 				$campaign_step_data = array(
 					'campaign_id' => $this->input->post('campaign_id'),
 					'campaign_step_type' => $campaign_step_type_id,
-					'campaign_step_date_start' => date('Y-m-d', strtotime(item($this->input->post('campaign_step_date_start'), $campaign_step_type_id))),
-					'campaign_step_date_end' => date('Y-m-d', strtotime(item($this->input->post('campaign_step_date_end'), $campaign_step_type_id)))
+					'campaign_step_date_start' => DateTime::createFromFormat('d/m/Y', item($this->input->post('campaign_step_date_start'), $campaign_step_type_id))->format('Y-m-d'),
+					'campaign_step_date_end' => DateTime::createFromFormat('d/m/Y', item($this->input->post('campaign_step_date_end'), $campaign_step_type_id))->format('Y-m-d')
 				);
 				$this->add_campaign_step($campaign_step_data);
 			}
@@ -368,11 +366,12 @@ class Campaign extends MX_Controller
 		
 		$campaign_types = array_for_dropdown($this->mdl_campaigns_types->get()->result(), 'campaign_type_id');
 		$campaigns = $this->mdl_campaigns->get_where(array('campaign_active' => 1))->result();
+
 		foreach($campaigns as $key => $campaign)
 		{
 			$campaign_names = $this->mdl_campaigns->get_distinct('campaign_title', 'campaign_banner_id', $campaign->campaign_banner_id, 'campaign_title asc')->result();
 			$campaign_names = $this->mdl_campaigns->get_group('campaign_title', 'campaign_banner_id', $campaign->campaign_banner_id, 'campaign_title asc')->result();
-			//var_dump($campaign_names);exit;
+
 			foreach($campaign_names as $key => $campaign_name)
 			{
 				$campaign_groups[$key] = $campaign_name->campaign_title;
@@ -389,11 +388,22 @@ class Campaign extends MX_Controller
 					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
 					'editable' => false
 				);
+			$json[$banners->row()->campaign_banner_name][] = array(
+				'start' =>  '__'.strtotime($campaign->campaign_date_media_start),
+				'end' =>  '__'.strtotime($campaign->campaign_date_media_end),
+				'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('m/d/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
+				'group' =>  9,
+				'id' =>  (100000+$campaign->campaign_id),
+				'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
+				'editable' => false
+			);
 			foreach($campaign_names as $key => $campaign_name)
 			{
 				$campaign_groups[$key] = '<a href="'.site_url('campaign/detail/'.$campaign_name->campaign_id).'">'.$campaign_name->campaign_title.'</a>';
 			}
-			$campaign_groups[9] = 'Holidays';
+
+			$campaign_groups[9] = 'Médias';
+			$campaign_groups[10] = 'Holidays';
 			$json2[$banners->row()->campaign_banner_name] = $campaign_groups;
 		}
 		
@@ -452,7 +462,7 @@ class Campaign extends MX_Controller
 					'start' =>  $holiday,
 					'content' =>  $key,
 					'id' =>  (1000+($id++)),
-					'group' => 9
+					'group' => 10
 				);
 			}
 		}
