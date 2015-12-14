@@ -368,20 +368,9 @@ class Campaign extends MX_Controller
 		$campaign_names_flipped = array();
 		$campaign_types = array_for_dropdown($this->mdl_campaigns_types->get()->result(), 'campaign_type_id');
 		$campaigns = $this->mdl_campaigns->get_where(array('campaign_active' => 1))->result();
-		//var_dump($campaigns);
+
 		foreach($campaigns as $key => $campaign)
 		{
-			//$campaign_names = $this->mdl_campaigns->get_distinct('campaign_title', 'campaign_banner_id', $campaign->campaign_banner_id, 'campaign_title asc')->result();
-			//$campaign_names = $this->mdl_campaigns->get_group('campaign_title', 'campaign_banner_id', $campaign->campaign_banner_id, 'campaign_title asc')->result();
-		
-			//foreach($campaign_names as $key => $campaign_name)
-			//{
-				
-			//}
-			//var_dump($campaign_groups);
-			
-			//$campaign_names_flipped = array_flip($campaign_groups);
-			
 			$banners = $this->mdl_campaigns_banners->get_where(array('campaign_banner_id' => $campaign->campaign_banner_id));
 			$campaign_groups[$banners->row()->campaign_banner_name][] = $campaign->campaign_title;
             $json[$banners->row()->campaign_banner_name][] = array(
@@ -404,7 +393,6 @@ class Campaign extends MX_Controller
 			);
 		}
 		
-		//var_dump($json, $campaign_groups);exit;
 		foreach($campaign_groups as $key1 => $campaign_group)
 		{
 			foreach($campaign_group as $key2 => $campaign_name)
@@ -412,14 +400,8 @@ class Campaign extends MX_Controller
 				$groups[$key2] = '<a>'.$campaign_name.'</a>';
 			}
 			$groups[9] = '<a>Holidays</a>';
-			//var_dump($campaign_groups);
 			$json2[$key1] = $groups;
 		}
-
-		//$campaign_groups[9] = 'Médias';
-		
-		//var_dump($json2);exit;
-			
 		
 		$json_names = json_encode($json2);
 		$json_data = json_encode($json);
