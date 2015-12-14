@@ -363,27 +363,32 @@ class Campaign extends MX_Controller
 	function generate_campaign()
 	{
 		$json = array();
-		
+		$json2 = array();
+		$campaign_groups = array();
+		$campaign_names_flipped = array();
 		$campaign_types = array_for_dropdown($this->mdl_campaigns_types->get()->result(), 'campaign_type_id');
 		$campaigns = $this->mdl_campaigns->get_where(array('campaign_active' => 1))->result();
-
+		//var_dump($campaigns);
 		foreach($campaigns as $key => $campaign)
 		{
-			$campaign_names = $this->mdl_campaigns->get_distinct('campaign_title', 'campaign_banner_id', $campaign->campaign_banner_id, 'campaign_title asc')->result();
-			$campaign_names = $this->mdl_campaigns->get_group('campaign_title', 'campaign_banner_id', $campaign->campaign_banner_id, 'campaign_title asc')->result();
-
-			foreach($campaign_names as $key => $campaign_name)
-			{
-				$campaign_groups[$key] = $campaign_name->campaign_title;
-			}
+			//$campaign_names = $this->mdl_campaigns->get_distinct('campaign_title', 'campaign_banner_id', $campaign->campaign_banner_id, 'campaign_title asc')->result();
+			//$campaign_names = $this->mdl_campaigns->get_group('campaign_title', 'campaign_banner_id', $campaign->campaign_banner_id, 'campaign_title asc')->result();
+		
+			//foreach($campaign_names as $key => $campaign_name)
+			//{
+				
+			//}
+			//var_dump($campaign_groups);
 			
-			$campaign_names_flipped = array_flip($campaign_groups);
+			//$campaign_names_flipped = array_flip($campaign_groups);
+			
 			$banners = $this->mdl_campaigns_banners->get_where(array('campaign_banner_id' => $campaign->campaign_banner_id));
+			$campaign_groups[$banners->row()->campaign_banner_name][] = $campaign->campaign_title;
             $json[$banners->row()->campaign_banner_name][] = array(
 					'start' =>  '__'.strtotime($campaign->campaign_date_start),
 					'end' =>  '__'.strtotime($campaign->campaign_date_end),
 					'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
-					'group' =>  $campaign_names_flipped[$campaign->campaign_title],
+					'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
 					'id' =>  $campaign->campaign_id,
 					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
 					'editable' => false
@@ -391,28 +396,39 @@ class Campaign extends MX_Controller
 			$json[$banners->row()->campaign_banner_name][] = array(
 				'start' =>  '__'.strtotime($campaign->campaign_date_media_start),
 				'end' =>  '__'.strtotime($campaign->campaign_date_media_end),
-				'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
-				'group' =>  9,
-				'id' =>  (100000+$campaign->campaign_id),
-				'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
+				'content' =>  'Media : ' . date('d/m/Y', strtotime($campaign->campaign_date_media_end)),
+				'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
+				'id' =>  2000+$campaign->campaign_id,
+				'className' => 'media',
 				'editable' => false
 			);
-			foreach($campaign_names as $key => $campaign_name)
-			{
-				$campaign_groups[$key] = '<a href="'.site_url('campaign/detail/'.$campaign_name->campaign_id).'">'.$campaign_name->campaign_title.'</a>';
-			}
-
-			$campaign_groups[9] = 'Médias';
-			$campaign_groups[10] = 'Holidays';
-			$json2[$banners->row()->campaign_banner_name] = $campaign_groups;
 		}
 		
+		//var_dump($json, $campaign_groups);exit;
+		foreach($campaign_groups as $key1 => $campaign_group)
+		{
+			foreach($campaign_group as $key2 => $campaign_name)
+			{
+				$groups[$key2] = '<a>'.$campaign_name.'</a>';
+			}
+			$groups[9] = '<a>Holidays</a>';
+			//var_dump($campaign_groups);
+			$json2[$key1] = $groups;
+		}
+
+		//$campaign_groups[9] = 'Médias';
+		
+		//var_dump($json2);exit;
+			
 		
 		$json_names = json_encode($json2);
 		$json_data = json_encode($json);
 		$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
 			return 'new Date(' . ($e[1] * 1000) . ')';
 		}, $json_data);
+		$json_names = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+			return 'new Date(' . ($e[1] * 1000) . ')';
+		}, $json_names);
 
 		file_put_contents(FCPATH.'/assets/json/data.json',  'var jsonData = '.$json_data);
 		file_put_contents(FCPATH.'/assets/json/group.json',  'var groupData = '.$json_names);
@@ -462,7 +478,7 @@ class Campaign extends MX_Controller
 					'start' =>  $holiday,
 					'content' =>  $key,
 					'id' =>  (1000+($id++)),
-					'group' => 10
+					'group' => 9
 				);
 			}
 		}
