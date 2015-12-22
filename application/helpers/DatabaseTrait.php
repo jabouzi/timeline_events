@@ -21,7 +21,6 @@ trait DatabaseTrait
 		$this->db->group_by($group_by);
 		$this->db->order_by($order_by);
 		$query = $this->db->get($this->table);
-		var_dump($query);
 		return $query;
 	}
 	

@@ -22,7 +22,8 @@ class Campaign extends MX_Controller
 
 		$banners = $this->mdl_campaigns_banners->get();
 		$campaign_data['banners'] = $banners->result();
-		$view_data['javascript'] = array('vis.js','moment-with-locales.min.js');
+		$view_data['stylesheet'] = array('jquery.qtip.min.css');
+		$view_data['javascript'] = array('vis.js','moment-with-locales.min.js','jquery.qtip.min.js');
 		$view_data['json'] = array('data.json', 'group.json', 'holidays.json');
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
@@ -376,21 +377,12 @@ class Campaign extends MX_Controller
             $json[$banners->row()->campaign_banner_name][] = array(
 					'start' =>  '__'.strtotime($campaign->campaign_date_start),
 					'end' =>  '__'.strtotime($campaign->campaign_date_end),
-					'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="'.$campaign->campaign_title.'">'.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'</a>',
+					'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campage : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">>></a>',
 					'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
 					'id' =>  $campaign->campaign_id,
 					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
 					'editable' => false
 				);
-			$json[$banners->row()->campaign_banner_name][] = array(
-				'start' =>  '__'.strtotime($campaign->campaign_date_media_start),
-				'end' =>  '__'.strtotime($campaign->campaign_date_media_end),
-				'content' =>  'Media : ' . date('d/m/Y', strtotime($campaign->campaign_date_media_end)),
-				'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
-				'id' =>  2000+$campaign->campaign_id,
-				'className' => 'media',
-				'editable' => false
-			);
 		}
 		
 		foreach($campaign_groups as $key1 => $campaign_group)
@@ -436,6 +428,19 @@ class Campaign extends MX_Controller
 					'editable' => false
 				);
 		}
+		
+		$campaigns_steps_group [] = 'Média';
+		$campaign = $this->mdl_campaigns->get_id('campaign_id', $id)->row();
+		$json[] = array(
+			'start' =>  '__'.strtotime($campaign->campaign_date_media_start),
+			'end' =>  '__'.strtotime($campaign->campaign_date_media_end),
+			'content' =>  ' ',
+			'group' =>  $i++,
+			'id' =>  'M'.$campaign->campaign_id,
+			'className' => 'red',
+			'editable' => false
+		);
+		
 		$json_names = json_encode($campaigns_steps_group);
 		$json_data = json_encode($json);
 		$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
@@ -451,16 +456,17 @@ class Campaign extends MX_Controller
 		$json = array();
 		$year = date('Y');
 		$id = 0;
-		for($y = $year - 2; $y <= $year + 2; $y++)
+		for($y = $year - 5; $y <= $year + 5; $y++)
 		{
 			$holidays = get_holidays($y);
 			foreach($holidays as $key => $holiday)
 			{
 				$json[] = array(
 					'start' =>  $holiday,
-					'content' =>  $key,
-					'id' =>  (1000+($id++)),
-					'group' => 9
+					'content' =>  '<span class="holidays" id="'.$y.'_'.$key.'" title="'.$key.'"></span> ',
+					'id' =>  $y.'_'.$key,
+					'group' => 9,
+					'className' => 'media',
 				);
 			}
 		}

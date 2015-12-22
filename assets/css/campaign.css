@@ -12,12 +12,14 @@
 
 .vis-item .vis-item-overflow {
   overflow: visible;
+  text-align:center
 }
 
 div.pink {
 	background-color: #C776B4;
 	border-color: #008000;
 	cursor:pointer;
+	text-align:center
 }
 
 div.green {
@@ -36,6 +38,7 @@ div.blue {
 	background-color: #1E90FF;
 	border-color: #0000FF;
 	cursor:pointer;
+	text-align:center
 }
 
 div.orange {

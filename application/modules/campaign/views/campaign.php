@@ -53,30 +53,16 @@
 	<div class="container">
 		<input type="hidden" id="campaign_calendars" value="0">
 		<div class="collapsious-wrapper">
-			<?php 
-			/*if (isset($this->session->userdata['campaign_banner_id']))
-			{
-				$openedid = $this->session->userdata['campaign_banner_id'];
-			}
-			else
-			{
-				$openedid = $banners[0]->campaign_banner_id;
-			}*/
-			?>
 			<?php foreach($banners as $key => $banner) {
 					$opened = ' opened';
-					
-					/*if ($key == 0)
-					{
-						$opened = ' opened'; 
-					}*/
 				?>
 				<div class="collapsious<?php echo $opened; ?>">
-					<label>Date:</label>
-					<input class="datechooser" type="text" id="move_to_<?php echo str_replace(' ', '_', $banner->campaign_banner_name); ?>" value="" style="border:solid;1px;width:120px;" />
-					<button class="goto" id="goto_<?php echo $banner->campaign_banner_name; ?>" data-id="<?php echo $banner->campaign_banner_name; ?>">Goto</button>
 					<span data-value="<?php echo $banner->campaign_banner_id; ?>"><?php echo $banner->campaign_banner_name; ?></span>
-					<div class="campaign timeline_<?php echo $banner->campaign_banner_id; ?>" id="<?php echo $banner->campaign_banner_name; ?>"></div>
+					<div class="campaign timeline_<?php echo $banner->campaign_banner_id; ?>" id="<?php echo $banner->campaign_banner_name; ?>">
+						<label>Date:</label>
+						<input class="datechooser" type="text" id="move_to_<?php echo str_replace(' ', '_', $banner->campaign_banner_name); ?>" value="" style="border:solid;1px;width:120px;" />
+						<button class="goto" id="goto_<?php echo $banner->campaign_banner_name; ?>" data-id="<?php echo $banner->campaign_banner_name; ?>">Goto</button>
+					</div>
 				</div>
 			<?php }; ?>
 		</div>

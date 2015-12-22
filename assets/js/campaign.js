@@ -19,6 +19,11 @@ $(document).ready(function() {
 		clear_messages();
 		validate_from($(this).attr('data-value'));
 	});
+	
+	//$('.vis-item-content').mouseover(function()
+	//{
+		//console.log($(this).attr('data-value'));
+	//});
 
 	if ($('#campaign_calendar').length)
 	{
@@ -35,21 +40,41 @@ $(document).ready(function() {
 	});
 
 	$('.wrapper-select-top').jqTransform({imgPath:'/images/'});
+	
+	$(document).on("mouseenter", '.vis-item-content', function ($e) {
+		//console.log($(this).children().attr('id'));
+        $(this).qtip({
+            overwrite: false,
+            hide: 'unfocus',
+            show: 'click',
+            content: {text: $(this).children().attr('id')},
+            style: {classes: 'qtip-default qtip qtip-youtube qtip-shadow qtip-rounded'}
+        });
+    });
+    
+	$(document).on("mouseenter", '.vis-item-overflow', function ($e) {
+		//console.log($(this).attr('id'));
+        $(this).qtip({
+            overwrite: false,
+            hide: 'unfocus',
+            show: 'click',
+            content: {text: '<div style="font-size:15px;">'+$(this).children().children().attr('data-content')+'</div>'},
+            style: {classes: 'qtip-default qtip qtip-youtube qtip-shadow qtip-rounded'}
+        });
+    });
 });
 
 
 function drawVisualization() {
-
+	
 	var items = {};
 	var timeline = {};
 	for (var campaigns in jsonData)
 	{
 		items[campaigns] = new vis.DataSet(jsonData[campaigns]);
 		items[campaigns].add(holidaysData);
-		items[campaigns].add([{id: 'A', content: '<i>Vacances 1</i>', start: '2015-10-16', end: '2015-10-31', type: 'background', className: 'positive'},
-    {id: 'B', content: '<i>Vacances 2</i>', start: '2015-12-21', end: '2016-01-30', type: 'background', className: 'negative'}]);
 		var container = document.getElementById(campaigns);
-		var options = { orientation: {axis: 'both'}, locale: $("#site_lang").val(), start: addMonths(new Date(), -6), end: addMonths(new Date(), +6)};
+		var options = {orientation: {axis: 'both'}, locale: $("#site_lang").val(), start: addMonths(new Date(), -6), end: addMonths(new Date(), +6)};
 		timeline[campaigns] = new vis.Timeline(container, items[campaigns], options);
 		var groups = new vis.DataSet();
 		for (var g = 0; g < groupData[campaigns].length; g++) {
@@ -57,13 +82,24 @@ function drawVisualization() {
 		}
 		timeline[campaigns].setGroups(groups);
 		timeline[campaigns].moveTo(new Date());
+		timeline[campaigns].on('select', function (properties) {
+			//console.log(properties['items'][0]);
+			 //$(this).qtip({
+				//overwrite: false,
+				//hide: 'unfocus',
+				//show: 'click',
+				//content: {text: 'My common piece of text here'}
+			//});
+		});
 	}
 	
 	$('.goto').click(function()
 	{
 		var id = $(this).attr('data-id');
-		console.log(id.replace(' ', '_'), $('#move_to_'+id.replace(' ', '_')).val());
-		timeline[id].moveTo(reformateDate($('#move_to_'+id.replace(' ', '_')).val()));
+		if ($('#move_to_'+id.replace(' ', '_')).val() != '')
+		{
+			timeline[id].moveTo(reformateDate($('#move_to_'+id.replace(' ', '_')).val()));
+		}
 	});
 		
 }
