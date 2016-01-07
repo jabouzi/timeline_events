@@ -104,6 +104,12 @@
 							<input type="text" name="campaign_store_number" id="campaign_store_number" value="<?php echo $campaign->campaign_store_number; ?>"  data-validate="required" data-type="text"/>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-sm-12 col-md-6">
+							<label for="campaign_status" id="label_campaign_status"><?php echo lang('campaign.status'); ?></label>
+							<?php echo form_dropdown('campaign_status', $campaign_status, $campaign->campaign_status, 'id="campaign_status"'); ?>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-sm-6">

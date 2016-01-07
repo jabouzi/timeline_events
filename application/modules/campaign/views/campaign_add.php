@@ -62,8 +62,8 @@
 						<input class="datechooser" type="text" name="campaign_date_start" id="campaign_date_start" value="" data-validate="required" data-type="text"/>
 					</div>
 					<div class="col-sm-6">
-						<label for="campaign_date_end" id="label_campaign_date_end">Date de fin</label>
-						<input class="datechooser" type="text" name="campaign_date_end" id="campaign_date_end" value="" data-validate="required" data-type="text"/>
+						<label for="campaign_date_evenement" id="label_campaign_date_evenement">Date de l’événement</label>
+						<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="" data-validate="required" data-type="text"/>
 					</div>
 				</div>
 				<div class="row">
@@ -101,12 +101,11 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-6">
-						<label for="campaign_date_evenement" id="label_campaign_date_evenement">Date de l’événement</label>
-						<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="" data-validate="required" data-type="text"/>
+					<div class="col-sm-12 col-md-6">
+						<label for="campaign_status" id="label_campaign_status"><?php echo lang('campaign.status'); ?></label>
+						<?php echo form_dropdown('campaign_status', $campaign_status); ?>
 					</div>
-				</div>	
-				
+				</div>
 			</div>
 		</div>
 		<div class="col-sm-6">

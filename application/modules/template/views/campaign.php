@@ -140,7 +140,7 @@
 						<li> <a href="">Mes paramètres </a></li>
 						<li> <a href="">F.A.Q   </a></li>
 						<li> <a href=""> Déconnexion </a></li>
-						<li> <a href=""> Conditions d’utilisation </a></li>
+						<li> <a href=""> Conditions d'utilisation </a></li>
 					</ul>
 					<div class="tgi-logo"><a href="" target="_black"><img src="/assets/images/toolbox/tgi-logo.png" alt="" /></a></div>
 				</div>

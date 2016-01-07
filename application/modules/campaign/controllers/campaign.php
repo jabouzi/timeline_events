@@ -96,6 +96,8 @@ class Campaign extends MX_Controller
 		
 		$this->session->userdata['campaign_banner_id'] = $campaign_data['campaign']->campaign_banner_id;
 		
+		$campaign_data['campaign_status'] = array(0 => lang('campaign.status.standby'), 1 => lang('campaign.status.active'), 2 => lang('campaign.status.closed'));
+		
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_edit.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -170,6 +172,7 @@ class Campaign extends MX_Controller
 			'campaign_manager_client'=> $this->input->post('campaign_manager_client'),
 			'campaign_manager_tgi'=> $this->input->post('campaign_manager_tgi'),
 			'campaign_active' => 1,
+			'campaign_status' => 1,
 		);
 		$this->add_campaign($campaign_data);
 	}
@@ -191,7 +194,8 @@ class Campaign extends MX_Controller
 			'campaign_address'=> $this->input->post('campaign_address'),
 			'campaign_manager_client'=> $this->input->post('campaign_manager_client'),
 			'campaign_manager_tgi'=> $this->input->post('campaign_manager_tgi'),
-			'campaign_type_id'=> $this->input->post('campaign_type_id')
+			'campaign_type_id'=> $this->input->post('campaign_type_id'),
+			'campaign_status' => $this->input->post('campaign_status'),
 		);
 		
 		$this->update_campaign($campaign_id, $campaign_data);
@@ -366,6 +370,7 @@ class Campaign extends MX_Controller
 		$json = array();
 		$json2 = array();
 		$campaign_groups = array();
+		$campaign_ids = array();
 		$campaign_names_flipped = array();
 		$campaign_types = array_for_dropdown($this->mdl_campaigns_types->get()->result(), 'campaign_type_id');
 		$campaigns = $this->mdl_campaigns->get_where(array('campaign_active' => 1))->result();
@@ -374,22 +379,31 @@ class Campaign extends MX_Controller
 		{
 			$banners = $this->mdl_campaigns_banners->get_where(array('campaign_banner_id' => $campaign->campaign_banner_id));
 			$campaign_groups[$banners->row()->campaign_banner_name][] = $campaign->campaign_title;
+			$campaign_ids[$banners->row()->campaign_banner_name][$campaign->campaign_title] = $campaign->campaign_id;
             $json[$banners->row()->campaign_banner_name][] = array(
 					'start' =>  '__'.strtotime($campaign->campaign_date_start),
 					'end' =>  '__'.strtotime($campaign->campaign_date_end),
-					'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campage : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">>></a>',
+					'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" data-id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campage : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">'.$campaign->campaign_title.'</a>',
 					'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
 					'id' =>  $campaign->campaign_id,
 					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
 					'editable' => false
 				);
+				
+			$json[$banners->row()->campaign_banner_name][] = array(
+				'start' =>  '__'.strtotime($campaign->campaign_date_evenement),
+				'content' =>  ' ',
+				'id' =>  'event_'.$key,
+				'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
+				'className' => 'event',
+			);
 		}
 		
 		foreach($campaign_groups as $key1 => $campaign_group)
 		{
 			foreach($campaign_group as $key2 => $campaign_name)
 			{
-				$groups[$key2] = '<a>'.$campaign_name.'</a>';
+				$groups[$key2] = '<a href="'.site_url('campaign/detail/'.$campaign_ids[$key1][$campaign_name]).'">'.$campaign_name.'</a>';
 			}
 			$groups[9] = '<a>Holidays</a>';
 			$json2[$key1] = $groups;
@@ -463,7 +477,7 @@ class Campaign extends MX_Controller
 			{
 				$json[] = array(
 					'start' =>  $holiday,
-					'content' =>  '<span class="holidays" id="'.$y.'_'.$key.'" title="'.$key.'"></span> ',
+					'content' =>  '<span class="holidays" data-id="'.$y.'_'.$key.'"data-content="'.$y.'_'.$key.'" title="'.$key.'"></span> ',
 					'id' =>  $y.'_'.$key,
 					'group' => 9,
 					'className' => 'media',

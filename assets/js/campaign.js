@@ -43,24 +43,30 @@ $(document).ready(function() {
 	
 	$(document).on("mouseenter", '.vis-item-content', function ($e) {
 		//console.log($(this).children().attr('id'));
-        $(this).qtip({
-            overwrite: false,
-            hide: 'unfocus',
-            show: 'click',
-            content: {text: $(this).children().attr('id')},
-            style: {classes: 'qtip-default qtip qtip-youtube qtip-shadow qtip-rounded'}
-        });
+		if ($(this).children().hasClass( "holidays" ))
+		{
+			$(this).qtip({
+				overwrite: false,
+				hide: 'unfocus',
+				show: 'click',
+				content: {text: $(this).children().attr('data-content')},
+				style: {classes: 'qtip-default qtip qtip-youtube qtip-shadow qtip-rounded'}
+			});
+		}
     });
     
 	$(document).on("mouseenter", '.vis-item-overflow', function ($e) {
 		//console.log($(this).attr('id'));
-        $(this).qtip({
-            overwrite: false,
-            hide: 'unfocus',
-            show: 'click',
-            content: {text: '<div style="font-size:15px;">'+$(this).children().children().attr('data-content')+'</div>'},
-            style: {classes: 'qtip-default qtip qtip-youtube qtip-shadow qtip-rounded'}
-        });
+		if (!$(this).children().hasClass( "holidays" ))
+		{
+			$(this).qtip({
+				overwrite: false,
+				hide: 'unfocus',
+				show: 'click',
+				content: {text: '<div style="font-size:15px;">'+$(this).children().children().attr('data-content')+'</div>'},
+				style: {classes: 'qtip-default qtip qtip-youtube qtip-shadow qtip-rounded'}
+			});
+		}
     });
 });
 
@@ -82,15 +88,6 @@ function drawVisualization() {
 		}
 		timeline[campaigns].setGroups(groups);
 		timeline[campaigns].moveTo(new Date());
-		timeline[campaigns].on('select', function (properties) {
-			//console.log(properties['items'][0]);
-			 //$(this).qtip({
-				//overwrite: false,
-				//hide: 'unfocus',
-				//show: 'click',
-				//content: {text: 'My common piece of text here'}
-			//});
-		});
 	}
 	
 	$('.goto').click(function()

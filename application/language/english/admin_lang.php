@@ -203,6 +203,10 @@ $lang['campaign.document.delete.success'] = "Campaign document deleted successfu
 $lang['campaign.add'] = "Campaign added.";
 $lang['campaign.edit'] = "Campaign updated.";
 $lang['campaign.edit.error'] = "Please complete all required data or validate dates logic.";
+$lang['campaign.status'] = "Status";
+$lang['campaign.status.standby'] = "Stand By";
+$lang['campaign.status.active'] = "Actif";
+$lang['campaign.status.closed'] = "Closed";
 
 $lang['content.title'] = "Content";
 
