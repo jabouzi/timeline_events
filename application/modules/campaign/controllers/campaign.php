@@ -52,6 +52,8 @@ class Campaign extends MX_Controller
 		
 		$campaign_data['campaign_steps_types'] = array_for_dropdown($campaign_steps_types, 'campaign_step_type_id', 'campaign_step_type_name');
 		
+		$campaign_data['campaign_status'] = array(0 => lang('campaign.status.standby'), 1 => lang('campaign.status.active'), 2 => lang('campaign.status.closed'));
+		
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_add.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -163,10 +165,10 @@ class Campaign extends MX_Controller
 			'campaign_store_number' => $this->input->post('campaign_store_number'),
 			'campaign_title' => $this->input->post('campaign_title') ,
 			'campaign_date_start' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->format('Y-m-d'),
-			'campaign_date_end' => DateTime::createFromFormat('d/m/Y', item($this->input->post('campaign_step_date_end'), 6))->format('Y-m-d'),
+			//'campaign_date_end' => DateTime::createFromFormat('d/m/Y', item($this->input->post('campaign_step_date_end'), 6))->format('Y-m-d'),
 			'campaign_date_evenement' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_evenement'))->format('Y-m-d'),
-			'campaign_date_media_start' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_start'))->format('Y-m-d'),
-			'campaign_date_media_end' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_end'))->format('Y-m-d'),
+			//'campaign_date_media_start' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_start'))->format('Y-m-d'),
+			//'campaign_date_media_end' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_end'))->format('Y-m-d'),
 			'campaign_branch' => $this->input->post('campaign_branch'),
 			'campaign_address'=> $this->input->post('campaign_address'),
 			'campaign_manager_client'=> $this->input->post('campaign_manager_client'),

@@ -61,6 +61,12 @@
 						</div>
 					</div>
 					<div class="row">
+						<div class="col-sm-12">
+							<label for="campaign_city" id="label_campaign_city">Ville de la campagne</label>
+							<input  type="text" name="campaign_city" id="campaign_city" value="<?php echo $campaign->campaign_city; ?>"  data-validate="required" data-type="text"/>
+						</div>
+					</div>
+					<div class="row">
 						<div class="col-sm-6">
 							<label for="campaign_date_start" id="label_campaign_date_start">Date de début</label>
 							<input class="datechooser" type="text" name="campaign_date_start" id="campaign_date_start" value="<?php echo date('d/m/Y', strtotime($campaign->campaign_date_start)); ?>"  data-validate="required" data-type="text"/>
@@ -107,7 +113,9 @@
 					<div class="row">
 						<div class="col-sm-12 col-md-6">
 							<label for="campaign_status" id="label_campaign_status"><?php echo lang('campaign.status'); ?></label>
-							<?php echo form_dropdown('campaign_status', $campaign_status, $campaign->campaign_status, 'id="campaign_status"'); ?>
+							<div class="wrapper-select-top">
+								<?php echo form_dropdown('campaign_status', $campaign_status, $campaign->campaign_status, 'id="campaign_status"'); ?>
+							</div>
 						</div>
 					</div>
 				</div>

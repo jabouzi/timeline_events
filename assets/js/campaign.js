@@ -130,8 +130,15 @@ function validate_from(form_id)
 	$("#" + form_id).find('[data-validate]').each(function() {
 		required += validate_element($(this));
 	});
-	
-	required += validateDates()
+	console.log(form_id);
+	if ('campaign_add' == form_id)
+	{
+		validateCreateDates();
+	}
+	else
+	{
+		required += validateDates()
+	}
 	
 	if (required)
 	{
@@ -209,6 +216,7 @@ function validate_element(element)
 function validateDates()
 {
 	var error = 0;
+	
 	var start = $('#campaign_date_start').val();
 	var event = $('#campaign_date_evenement').val();
 	if (reformateDate(start) > reformateDate(event)) 
@@ -258,6 +266,38 @@ function validateDates()
 		error++;
 		$("#label_campaign_date_media_end").addClass('error-input');
 		$("#label_campaign_step_date_end6").addClass('error-input');
+	}
+
+	return error;
+}
+
+function validateCreateDates()
+{
+	var error = 0;
+	
+	var start = $('#campaign_date_start').val();
+	var event = $('#campaign_date_evenement').val();
+	
+	if ('' != start && !isValidDate(start))
+	{
+		error++;
+		$("#label_campaign_date_start").addClass('error-input');
+	}
+	
+	if ('' != event && !isValidDate(event))
+	{
+		error++;
+		$("#label_campaign_date_evenement").addClass('error-input');
+	}
+	
+	if ('' != start && '' != event)
+	{
+		if (reformateDate(start) > reformateDate(event)) 
+		{
+			error++;
+			$("#label_campaign_date_evenement").addClass('error-input');
+			$("#label_campaign_date_start").addClass('error-input');
+		}
 	}
 
 	return error;
