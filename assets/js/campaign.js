@@ -75,6 +75,7 @@ function drawVisualization() {
 	
 	var items = {};
 	var timeline = {};
+	console.log(groupData);
 	for (var campaigns in jsonData)
 	{
 		items[campaigns] = new vis.DataSet(jsonData[campaigns]);
@@ -130,7 +131,7 @@ function validate_from(form_id)
 	$("#" + form_id).find('[data-validate]').each(function() {
 		required += validate_element($(this));
 	});
-	console.log(form_id);
+	//console.log(form_id);
 	if ('campaign_add' == form_id)
 	{
 		validateCreateDates();
@@ -230,6 +231,7 @@ function validateDates()
 	{
 		var _start = $('#campaign_step_date_start'+i).val();
 		var _end = $('#campaign_step_date_end'+i).val();
+		//console.log(reformateDate(start), reformateDate(_start), reformateDate(_end));
 		if (reformateDate(start) > reformateDate(_start))
 		{
 			error++;

@@ -69,45 +69,45 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<label for="campaign_date_start" id="label_campaign_date_start">Date de début</label>
-							<input class="datechooser" type="text" name="campaign_date_start" id="campaign_date_start" value="<?php echo date('d/m/Y', strtotime($campaign->campaign_date_start)); ?>"  data-validate="required" data-type="text"/>
+							<input class="datechooser" type="text" name="campaign_date_start" id="campaign_date_start" value="<?php if (isset($campaign->campaign_date_start) && $campaign->campaign_date_start != '0000-00-00' ) { echo date('d/m/Y', strtotime($campaign->campaign_date_start)); } ?>" data-type="text"/>
 						</div>
 						<div class="col-sm-6">
 							<label for="campaign_date_evenement" id="label_campaign_date_evenement">Date de l’événement</label>
-							<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="<?php echo date('d/m/Y', strtotime($campaign->campaign_date_evenement)); ?>" data-validate="required" data-type="text"/>
+							<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="<?php if (isset($campaign->campaign_date_evenement) && $campaign->campaign_date_evenement != '0000-00-00' ) { echo date('d/m/Y', strtotime($campaign->campaign_date_evenement)); } ?>" data-type="text"/>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-12 col-md-6">
 							<label for="campaign_branch"id="label_campaign_branch">Nom de la succursale</label>
-							<input type="text" name="campaign_branch" id="campaign_branch" value="<?php echo $campaign->campaign_branch; ?>"  data-validate="required" data-type="text"/>
+							<input type="text" name="campaign_branch" id="campaign_branch" value="<?php echo $campaign->campaign_branch; ?>" data-type="text"/>
 						</div>
 						<div class="col-sm-12 col-md-6">
 							<label for="campaign_address" id="label_campaign_address">Adresse de la succursale</label>
-							<input type="text" name="campaign_address" id="campaign_address" value="<?php echo $campaign->campaign_address; ?>"  data-validate="required" data-type="text"/>
+							<input type="text" name="campaign_address" id="campaign_address" value="<?php echo $campaign->campaign_address; ?>" data-type="text"/>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-12 col-md-6">
 							<label for="campaign_manager_tgi" id="label_campaign_manager_tgi">Chargée de projet (Tonik Groupimage)</label>
 							<div class="wrapper-select-top">
-								<?php echo form_dropdown('campaign_manager_tgi', $campaign_managers_tgi, $campaign->campaign_manager_tgi, 'data-validate="required" data-type="option" id="campaign_manager_tgi"'); ?>
+								<?php echo form_dropdown('campaign_manager_tgi', $campaign_managers_tgi, $campaign->campaign_manager_tgi, 'id="campaign_manager_tgi"'); ?>
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-6">
 							<label for="campaign_manager_client" id="label_campaign_manager_client">Coordonnateur (Metro)</label>
 							<div class="wrapper-select-top">
-								<?php echo form_dropdown('campaign_manager_client', $campaign_managers_client, $campaign->campaign_manager_client, 'data-validate="required" data-type="option" id="campaign_manager_client"'); ?>
+								<?php echo form_dropdown('campaign_manager_client', $campaign_managers_client, $campaign->campaign_manager_client, 'id="campaign_manager_client"'); ?>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-12 col-md-6">
 							<label for="campaign_project_number" id="label_campaign_project_number">Numéro de projet</label>
-							<input type="text" name="campaign_project_number" id="campaign_project_number" value="<?php echo $campaign->campaign_project_number; ?>"  data-validate="required" data-type="text"/>
+							<input type="text" name="campaign_project_number" id="campaign_project_number" value="<?php echo $campaign->campaign_project_number; ?>" data-type="text"/>
 						</div>
 						<div class="col-sm-12 col-md-6">
 							<label for="campaign_store_number" id="label_campaign_store_number">Numéro de magasin</label>
-							<input type="text" name="campaign_store_number" id="campaign_store_number" value="<?php echo $campaign->campaign_store_number; ?>"  data-validate="required" data-type="text"/>
+							<input type="text" name="campaign_store_number" id="campaign_store_number" value="<?php echo $campaign->campaign_store_number; ?>" data-type="text"/>
 						</div>
 					</div>
 					<div class="row">
@@ -148,11 +148,11 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<label for="campaign_date_media" id="label_campaign_date_media_start">Date de début médias</label>
-							<input class="datechooser" type="text" name="campaign_date_media_start" id="campaign_date_media_start" value="<?php echo date('d/m/Y', strtotime($campaign->campaign_date_media_start)); ?>" data-type="text"/>
+							<input class="datechooser" type="text" name="campaign_date_media_start" id="campaign_date_media_start" value="<?php if (isset($campaign->campaign_date_media_start) && $campaign->campaign_date_media_start != '0000-00-00' ) { echo date('d/m/Y', strtotime($campaign->campaign_date_media_start)); } ?>" data-type="text"/>
 						</div>
 						<div class="col-sm-6">
 							<label for="campaign_date_media" id="label_campaign_date_media_end">Date de fin médias</label>
-							<input class="datechooser" type="text" name="campaign_date_media_end" id="campaign_date_media_end" value="<?php if (isset($campaign->campaign_date_media_end) && $campaign->campaign_date_media_end != '0000-00-00' ) {echo date('d/m/Y', strtotime($campaign->campaign_date_media_end));} ?>" data-type="text"/>
+							<input class="datechooser" type="text" name="campaign_date_media_end" id="campaign_date_media_end" value="<?php if (isset($campaign->campaign_date_media_end) && $campaign->campaign_date_media_end != '0000-00-00' ) { echo date('d/m/Y', strtotime($campaign->campaign_date_media_end)); } ?>" data-type="text"/>
 						</div>						
 					</div>
 					
