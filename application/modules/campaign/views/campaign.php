@@ -40,9 +40,9 @@
 			<div class="legende-colors">
 				
 				<div class="legende-green"><span></span>Ouverture</div>
-				<div class="legende-red"><span></span>Ren</div>
-				<div class="legende-yellow"><span></span>Ren</div>				
-				<div class="legende-orange"><span></span>Ren</div>
+				<div class="legende-red"><span></span>Ren majeurs</div>
+				<div class="legende-yellow"><span></span>Ren Mineurs</div>				
+				<div class="legende-orange"><span></span>Ren transformations</div>
 				<div class="legende-blue"><span></span>Loc modernisation</div>
 				<div class="legende-bleu-marine"><span></span>Loc transformation</div>
 				<div class="legende-violet"><span></span>Relance</div>
