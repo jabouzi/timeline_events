@@ -160,6 +160,7 @@ class Campaign extends MX_Controller
 	{
 		$campaign_data = array(
 			'client_id' => $this->session->userdata('client_id'),
+			'campaign_type_id'=> $this->input->post('campaign_type_id'),
 			'campaign_banner_id' => $this->input->post('campaign_banner_id'),
 			'campaign_project_number' => $this->input->post('campaign_project_number'),
 			'campaign_store_number' => $this->input->post('campaign_store_number'),
