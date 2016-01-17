@@ -391,7 +391,7 @@ class Campaign extends MX_Controller
 					'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" data-id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campage : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">'.$campaign->campaign_title.'</a>',
 					'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
 					'id' =>  $campaign->campaign_id,
-					//'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
+					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
 					'editable' => false
 				);
 
