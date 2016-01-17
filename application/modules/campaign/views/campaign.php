@@ -44,7 +44,7 @@
 				<div class="legende-orange"><span></span>Réno. Transformations</div>
 				<div class="legende-red"><span></span>Réno. Majeures</div>
 				<div class="legende-yellow"><span></span>Réno. Mineures</div>
-				<div class="legende-grey"><span></span>N/A</div>
+				<div class="legende-gris-light"><span></span>N/D</div>
 				
 				<div class="legende-bleu-marine"><span></span>label</div>
 				<div class="legende-bleu-ciel"><span></span>label</div>
