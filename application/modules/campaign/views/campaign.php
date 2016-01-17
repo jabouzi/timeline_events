@@ -38,7 +38,6 @@
 		<div class="legendes">
 			<p class="lendende-text">Légende</p>
 			<div class="legende-colors">
-				
 				<div class="legende-green"><span></span>Ouverture</div>
 				<div class="legende-red"><span></span>Ren majeurs</div>
 				<div class="legende-yellow"><span></span>Ren Mineurs</div>				
@@ -49,7 +48,6 @@
 				<div class="legende-gris-light"><span></span>N/D</div>
 				<div class="legende-bleu-ciel"><span></span>Non active</div>
 				<div class="legende-gris-dark"><span></span>Férmée</div>
-				
 			</div>
 		</div>
 	</div>
