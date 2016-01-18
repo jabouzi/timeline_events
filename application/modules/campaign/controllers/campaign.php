@@ -383,6 +383,13 @@ class Campaign extends MX_Controller
 
 		foreach($campaigns as $key => $campaign)
 		{
+			if ($campaign->campaign_status == 0) $classname = 'inactive';
+			else if ($campaign->campaign_status == 2) $classname = 'closed';
+			else 
+			{
+				if ($campaign->campaign_type_id == 0) $classname = 'default';
+				else $classname = friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name);
+			}
 			$banners = $this->mdl_campaigns_banners->get_where(array('campaign_banner_id' => $campaign->campaign_banner_id));
 			$campaign_groups[$banners->row()->campaign_banner_name][] = $campaign->campaign_city;
 			$campaign_ids[$banners->row()->campaign_banner_name][$campaign->campaign_city] = $campaign->campaign_id;
@@ -392,7 +399,7 @@ class Campaign extends MX_Controller
 					'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" data-id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campage : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">'.$campaign->campaign_title.'</a>',
 					'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
 					'id' =>  $campaign->campaign_id,
-					'className' =>  ($campaign->campaign_type_id == 0) ? 'default' : friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name),
+					'className' => $classname;
 					'editable' => false
 				);
 
