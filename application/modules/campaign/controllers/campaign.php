@@ -158,7 +158,7 @@ class Campaign extends MX_Controller
 
 	function process_add_campaign()
 	{
-		$campaign_date_end = DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->add(new DateInterval('P28D'))->format('Y-m-d');
+		$campaign_date_end = DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->add(new DateInterval('P56D'))->format('Y-m-d');
 		var_dump($campaign_date_end);
 		$campaign_data = array(
 			'client_id' => $this->session->userdata('client_id'),
@@ -188,7 +188,7 @@ class Campaign extends MX_Controller
 	{
 		if (isempty($this->input->post('campaign_date_media_end')) && isempty(item($this->input->post('campaign_step_date_end'), 6)))
 		{
-			$campaign_date_end = DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->add(new DateInterval('P28D'))->format('Y-m-d');
+			$campaign_date_end = DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->add(new DateInterval('P56D'))->format('Y-m-d');
 		}
 		else
 		{
