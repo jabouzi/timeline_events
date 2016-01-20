@@ -15,10 +15,20 @@
 		<h1 class="title-icon-on-white">
 			<span>Calendrier annuel des campagnes</span>
 		</h1>
-		<div><?php
-					setlocale (LC_TIME, 'fr_CA.utf8','ca'); 
-					echo ucfirst(strftime('%A %d %B %Y'));
-			 ?></div>
+		<div>
+		<?php
+			if ($this->lang->lang() == 'fr')
+			{
+				setlocale (LC_TIME, 'fr_CA.utf8','ca'); 
+				echo ucfirst(strftime('%A %d %B %Y'));
+			}
+			else
+			{
+				setlocale (LC_TIME, 'en_CA.utf8','ca'); 
+				echo ucfirst(strftime('%A %d %B %Y'));
+			}
+			 ?>
+		</div>
 		<div class="title-top-btns">
 			<a href="" class="btn-icon-on-dark on-white">
 			<svg class="icon-svg icon-imprimerRouge" width="36" height="32" viewBox="0 0 36 32" x="720">
