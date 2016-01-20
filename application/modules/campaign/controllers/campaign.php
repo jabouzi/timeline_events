@@ -23,7 +23,7 @@ class Campaign extends MX_Controller
 		$banners = $this->mdl_campaigns_banners->get();
 		$campaign_data['banners'] = $banners->result();
 		$view_data['stylesheet'] = array('jquery.qtip.min.css');
-		$view_data['javascript'] = array('vis.js','moment-with-locales.min.js','jquery.qtip.min.js');
+		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
 		$view_data['json'] = array('data.json', 'group.json', 'holidays.json');
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
@@ -120,7 +120,7 @@ class Campaign extends MX_Controller
 		$this->session->userdata['campaign_banner_id'] = $campaign->campaign_banner_id;
 
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
-		$view_data['javascript'] = array('vis.js','moment-with-locales.min.js');
+		$view_data['javascript'] = array('moment-with-locales.min.js', 'vis.js', 'moment-with-locales.min.js');
 		$view_data['json'] = array('data_'.$id.'.json', 'data_group_'.$id.'.json');
 		echo modules::run('template/campaign', $view_data);
 	}
