@@ -75,7 +75,7 @@ function drawVisualization() {
 	
 	var items = {};
 	var timeline = {};
-	console.log(groupData);
+
 	for (var campaigns in jsonData)
 	{
 		items[campaigns] = new vis.DataSet(jsonData[campaigns]);
