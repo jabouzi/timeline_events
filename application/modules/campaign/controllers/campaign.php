@@ -158,6 +158,8 @@ class Campaign extends MX_Controller
 
 	function process_add_campaign()
 	{
+		$campaign_date_end = DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->add(new DateInterval('P28D'))->format('Y-m-d');
+		var_dump($campaign_date_end);
 		$campaign_data = array(
 			'client_id' => $this->session->userdata('client_id'),
 			'campaign_type_id'=> $this->input->post('campaign_type_id'),
@@ -178,12 +180,28 @@ class Campaign extends MX_Controller
 			'campaign_active' => 1,
 			'campaign_status' => 1,
 		);
+		exit;
 		$this->add_campaign($campaign_data);
 	}
 
 	function process_edit_campaign()
 	{
-		//var_dump($this->input->post());exit;
+		if (isempty($this->input->post('campaign_date_media_end')) && isempty(item($this->input->post('campaign_step_date_end'), 6)))
+		{
+			$campaign_date_end = DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->add(new DateInterval('P28D'))->format('Y-m-d');
+		}
+		else
+		{
+			if (DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_end')) > DateTime::createFromFormat('d/m/Y', item($this->input->post('campaign_step_date_end'), 6)))
+			{
+				$campaign_date_end = DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_end'))->format('Y-m-d');
+			}
+			else
+			{
+				$campaign_date_end = DateTime::createFromFormat('d/m/Y', item($this->input->post('campaign_step_date_end'), 6))->format('Y-m-d');
+			}
+		}
+
 		$campaign_id = $this->input->post('campaign_id');
 		$campaign_data = array(
 			'campaign_banner_id' => $this->input->post('campaign_banner_id'),
@@ -192,7 +210,7 @@ class Campaign extends MX_Controller
 			'campaign_title' => $this->input->post('campaign_title'),
 			'campaign_city' => $this->input->post('campaign_city'),
 			'campaign_date_start' => ((isempty($this->input->post('campaign_date_start'))) ? '0000-00-00' : DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->format('Y-m-d')),
-			//'campaign_date_end' => ((empty($this->input->post('campaign_step_date_end'))) ? '0000-00-00' : DateTime::createFromFormat('d/m/Y', item($this->input->post('campaign_step_date_end'))->format('Y-m-d')),
+			'campaign_date_end' => $campaign_date_end,
 			'campaign_date_evenement' => ((isempty($this->input->post('campaign_date_evenement'))) ? '0000-00-00' : DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_evenement'))->format('Y-m-d')),
 			'campaign_date_media_start' => ((isempty($this->input->post('campaign_date_media_start'))) ? '0000-00-00' : DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_start'))->format('Y-m-d')),
 			'campaign_date_media_end' => ((isempty($this->input->post('campaign_date_media_end'))) ? '0000-00-00' : DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_end'))->format('Y-m-d')),
