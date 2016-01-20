@@ -16,7 +16,7 @@
 			<span>Calendrier annuel des campagnes</span>
 		</h1>
 		<div><?php
-					setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
+					setlocale (LC_TIME, 'fr_CA.utf8','ca'); 
 					echo ucfirst(strftime('%A %d %B %Y'));
 			 ?></div>
 		<div class="title-top-btns">
