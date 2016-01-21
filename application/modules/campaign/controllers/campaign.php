@@ -466,23 +466,18 @@ class Campaign extends MX_Controller
 	function generate_campaign_detail($id)
 	{
 		$json = array();
-		$campaigns_steps_group = array();
 		$campaigns_steps = $this->mdl_campaigns_steps->get_where_order(array('campaign_id' => $id), 'campaign_step_type')->result();
 		$campaigns_steps_types = array_for_dropdown($this->mdl_campaigns_steps_types->get()->result(), 'campaign_step_type_id');
-		
-		foreach($campaigns_steps_types as $campaigns_steps_type_id => $campaigns_steps_type)
-		{
-			$campaigns_steps_group[$campaigns_steps_type_id] = $campaigns_steps_type->campaign_step_type_name;
-		}
-		
+		$campaigns_steps_group = array();
 		$i = 0;
 		foreach($campaigns_steps as $key => $campaign_step)
 		{
+			$campaigns_steps_group [] = $campaigns_steps_types[$campaign_step->campaign_step_type]->campaign_step_type_name;
             $json[] = array(
 					'start' =>  '__'.strtotime($campaign_step->campaign_step_date_start),
 					'end' =>  '__'.strtotime($campaign_step->campaign_step_date_end),
 					'content' =>  ' ',
-					'group' =>  $campaign_step->campaign_step_type,
+					'group' =>  $i++,
 					'id' =>  $campaign_step->campaign_step_id,
 					'className' =>  'red',
 					'editable' => false
@@ -490,14 +485,15 @@ class Campaign extends MX_Controller
 		}
 		
 		$campaign = $this->mdl_campaigns->get_id('campaign_id', $id)->row();
-		$campaigns_steps_group[] = 'Média';
 		if ($campaign->campaign_date_media_start > 0 ||  $campaign->campaign_date_media_end > 0)
 		{
+			$campaigns_steps_group [] = 'Média';
+			
 			$json[] = array(
 				'start' =>  '__'.strtotime($campaign->campaign_date_media_start),
 				'end' =>  '__'.strtotime($campaign->campaign_date_media_end),
 				'content' =>  ' ',
-				'group' =>  count($campaigns_steps_group),
+				'group' =>  $i++,
 				'id' =>  'M'.$campaign->campaign_id,
 				'className' => 'red',
 				'editable' => false
