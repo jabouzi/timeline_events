@@ -263,12 +263,12 @@ function validateDates()
 		$("#label_campaign_date_media_end").addClass('error-input');
 	}
 	
-	if (reformateDate(_end) > reformateDate($('#campaign_step_date_end6').val()))
-	{
-		error++;
-		$("#label_campaign_date_media_end").addClass('error-input');
-		$("#label_campaign_step_date_end6").addClass('error-input');
-	}
+	//if (reformateDate(_end) > reformateDate($('#campaign_step_date_end6').val()))
+	//{
+		//error++;
+		//$("#label_campaign_date_media_end").addClass('error-input');
+		//$("#label_campaign_step_date_end6").addClass('error-input');
+	//}
 
 	return error;
 }
