@@ -207,6 +207,7 @@ $lang['campaign.status'] = "Status";
 $lang['campaign.status.standby'] = "Stand By";
 $lang['campaign.status.active'] = "Actif";
 $lang['campaign.status.closed'] = "Closed";
+$lang['campaign.goto'] = "Goto";
 
 $lang['content.title'] = "Content";
 
