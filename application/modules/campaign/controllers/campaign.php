@@ -24,7 +24,7 @@ class Campaign extends MX_Controller
 		$campaign_data['banners'] = $banners->result();
 		$view_data['stylesheet'] = array('jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
-		$view_data['json'] = array('data.json', 'group.json', 'holidays.json');
+		$view_data['json'] = array('data_'.$this->lang->lang().'.json', 'group_'.$this->lang->lang().'.json', 'holidays.json');
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -409,48 +409,58 @@ class Campaign extends MX_Controller
 			$banners = $this->mdl_campaigns_banners->get_where(array('campaign_banner_id' => $campaign->campaign_banner_id));
 			$campaign_groups[$banners->row()->campaign_banner_name][] = $campaign->campaign_city;
 			$campaign_ids[$banners->row()->campaign_banner_name][$campaign->campaign_city] = $campaign->campaign_id;
-            $json[$banners->row()->campaign_banner_name][] = array(
-					'start' =>  '__'.strtotime($campaign->campaign_date_start),
-					'end' =>  '__'.strtotime($campaign->campaign_date_end),
-					'content' =>  '<a href="'.site_url('campaign/detail/'.$campaign->campaign_id).'" style="color:#555;font-weight:bold;" data-id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campage : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">'.$campaign->campaign_title.'</a>',
-					'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
-					'id' =>  $campaign->campaign_id,
-					'className' => $classname,
-					'editable' => false
-				);
-
-			$json[$banners->row()->campaign_banner_name][] = array(
-				'start' =>  '__'.strtotime($campaign->campaign_date_evenement),
-				'content' =>  ' ',
-				'id' =>  'event_'.$key,
-				'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
-				'className' => 'event',
-			);
-		}
-
-		foreach($campaign_groups as $key1 => $campaign_group)
-		{
-			$groups = array();
-			foreach($campaign_group as $key2 => $campaign_name)
+			foreach($this->lang->languages as $lang => $value)
 			{
-				$groups[$key2] = '<a href="'.site_url('campaign/detail/'.$campaign_ids[$key1][$campaign_name]).'">'.$campaign_name.'</a>';
+				$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
+			
+				$json[$lang][$banners->row()->campaign_banner_name][] = array(
+						'start' =>  '__'.strtotime($campaign->campaign_date_start),
+						'end' =>  '__'.strtotime($campaign->campaign_date_end),
+						'content' =>  '<a href="/'.$lang.'/campaign/detail/'.$campaign->campaign_id.'" style="color:#555;font-weight:bold;" data-id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campage : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">'.$campaign->campaign_title.'</a>',
+						'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
+						'id' =>  $campaign->campaign_id,
+						'className' => $classname,
+						'editable' => false
+					);
+
+				$json[$lang][$banners->row()->campaign_banner_name][] = array(
+					'start' =>  '__'.strtotime($campaign->campaign_date_evenement),
+					'content' =>  ' ',
+					'id' =>  'event_'.$key,
+					'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
+					'className' => 'event',
+				);
 			}
-			$json2[$key1][9] = '<a>Holidays</a>';
-			$json2[$key1] = $groups;
+		}
+		foreach($this->lang->languages as $lang => $value)
+		{
+			foreach($campaign_groups as $key1 => $campaign_group)
+			{
+				$groups = array();
+				foreach($campaign_group as $key2 => $campaign_name)
+				{
+					$groups[$key2] = '<a href="'.$lang.'/campaign/detail/'.$campaign_ids[$key1][$campaign_name].'">'.$campaign_name.'</a>';
+				}
+				$json2[$lang][$key1][9] = '<a>Holidays</a>';
+				$json2[$lang][$key1] = $groups;
+			}
 		}
 
-		$json_names = json_encode($json2);
+		foreach($this->lang->languages as $lang => $value)
+		{
+			$json_names = json_encode($json2[$lang]);
 
-		$json_data = json_encode($json);
-		$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
-			return 'new Date(' . ($e[1] * 1000) . ')';
-		}, $json_data);
-		$json_names = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
-			return 'new Date(' . ($e[1] * 1000) . ')';
-		}, $json_names);
+			$json_data = json_encode($json[$lang]);
+			$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+				return 'new Date(' . ($e[1] * 1000) . ')';
+			}, $json_data);
+			$json_names = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+				return 'new Date(' . ($e[1] * 1000) . ')';
+			}, $json_names);
 
-		file_put_contents(FCPATH.'/assets/json/data.json',  'var jsonData = '.$json_data);
-		file_put_contents(FCPATH.'/assets/json/group.json',  'var groupData = '.$json_names);
+			file_put_contents(FCPATH.'/assets/json/data_'.$lang.'.json',  'var jsonData = '.$json_data);
+			file_put_contents(FCPATH.'/assets/json/group_'.$lang.'.json',  'var groupData = '.$json_names);
+		}
 	}
 
 	function generate_campaign_detail($id)
@@ -473,25 +483,29 @@ class Campaign extends MX_Controller
 					'editable' => false
 				);
 		}
-
-		$campaigns_steps_group [] = 'Média';
+		
 		$campaign = $this->mdl_campaigns->get_id('campaign_id', $id)->row();
-		$json[] = array(
-			'start' =>  '__'.strtotime($campaign->campaign_date_media_start),
-			'end' =>  '__'.strtotime($campaign->campaign_date_media_end),
-			'content' =>  ' ',
-			'group' =>  $i++,
-			'id' =>  'M'.$campaign->campaign_id,
-			'className' => 'red',
-			'editable' => false
-		);
-
+		if ($campaign->campaign_date_media_start > 0 ||  $campaign->campaign_date_media_end > 0)
+		{
+			$campaigns_steps_group [] = 'Média';
+			
+			$json[] = array(
+				'start' =>  '__'.strtotime($campaign->campaign_date_media_start),
+				'end' =>  '__'.strtotime($campaign->campaign_date_media_end),
+				'content' =>  ' ',
+				'group' =>  $i++,
+				'id' =>  'M'.$campaign->campaign_id,
+				'className' => 'red',
+				'editable' => false
+			);
+		}
+		//var_dump($campaigns_steps_group);
 		$json_names = json_encode($campaigns_steps_group);
 		$json_data = json_encode($json);
 		$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
 			return 'new Date(' . ($e[1] * 1000) . ')';
 		}, $json_data);
-
+		//exit;
 		file_put_contents(FCPATH.'/assets/json/data_'.$id.'.json',  'var jsonData = '.$json_data);
 		file_put_contents(FCPATH.'/assets/json/data_group_'.$id.'.json',  'var groupData = '.$json_names);
 	}

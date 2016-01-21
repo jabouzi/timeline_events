@@ -75,7 +75,7 @@
 	<header id="header">
 		<hgroup>
 			<h1 class="site_title"><?php echo lang('dashboard.title1'); ?></h1>
-			<h1 class="site_title"><a href="/en/campaign"><?php echo 'Voir le site'; ?></h1>
+			<h1 class="site_title"><a href="/<?php echo $this->lang->lang(); ?>/campaign"><?php echo 'Voir le site'; ?></h1>
 		</hgroup>
 	</header> <!-- end of header bar -->
 	
