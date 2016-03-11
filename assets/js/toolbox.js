@@ -152,6 +152,20 @@ function validate_from(form_id)
 				}
 			});
 		}
+		else if ($('#campaign_banner_name').length > 0)
+		{
+			if ($('#campaign_banner_id').length == 0) var banner_id = 0;
+			else var banner_id = $('#campaign_banner_id').val();
+			$.post( $('#banner_exists_url').val()+'/'+encodeURIComponent($('#campaign_banner_name').val())+'/'+user_id, function( response ) {
+				if (response == '0') $("#" + form_id).submit();
+				else
+				{
+					$('.alert_warning').html(response);
+					$('.alert_warning').show();  
+					blinkit('alert_warning');
+				}
+			});
+		}
 		else
 		{
 			$("#" + form_id).submit();

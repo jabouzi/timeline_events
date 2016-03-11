@@ -396,6 +396,9 @@ class Campaign extends MX_Controller
 		$campaign_names_flipped = array();
 		$campaign_types = array_for_dropdown($this->mdl_campaigns_types->get()->result(), 'campaign_type_id');
 		$campaigns = $this->mdl_campaigns->get_where(array('campaign_active' => 1))->result();
+		$longest_campaing = $this->mdl_campaigns->custom_query("select campaign_city from campaigns where 1 ORDER BY LENGTH(campaign_city) DESC LIMIT 1")->row();
+		//$longest_campaing->campaign_city;
+		//var_dump(strlen($longest_campaing->campaign_city), $longest_campaing->campaign_city);
 
 		foreach($campaigns as $key => $campaign)
 		{
@@ -406,9 +409,11 @@ class Campaign extends MX_Controller
 				if ($campaign->campaign_type_id == 0) $classname = 'default';
 				else $classname = friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name);
 			}
+
 			$banners = $this->mdl_campaigns_banners->get_where(array('campaign_banner_id' => $campaign->campaign_banner_id));
-			$campaign_groups[$banners->row()->campaign_banner_name][] = $campaign->campaign_city;
-			$campaign_ids[$banners->row()->campaign_banner_name][$campaign->campaign_city] = $campaign->campaign_id;
+			$campaign_groups[$banners->row()->campaign_banner_name][] = str_pad($campaign->campaign_city, strlen($longest_campaing->campaign_city), ".");
+			$campaign_ids[$banners->row()->campaign_banner_name][str_pad($campaign->campaign_city, strlen($longest_campaing->campaign_city), ".")] = $campaign->campaign_id;
+			
 			foreach($this->lang->languages as $lang => $value)
 			{
 				$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
@@ -432,6 +437,7 @@ class Campaign extends MX_Controller
 				);
 			}
 		}
+		
 		foreach($this->lang->languages as $lang => $value)
 		{
 			foreach($campaign_groups as $key1 => $campaign_group)
@@ -439,12 +445,16 @@ class Campaign extends MX_Controller
 				$groups = array();
 				foreach($campaign_group as $key2 => $campaign_name)
 				{
-					$groups[$key2] = '<a href="'.$lang.'/campaign/detail/'.$campaign_ids[$key1][$campaign_name].'">'.$campaign_name.'</a>';
+					$groups[$key2] = '<a href="/'.$lang.'/campaign/detail/'.$campaign_ids[$key1][str_pad($campaign_name, strlen($longest_campaing->campaign_city), ".")].'">'.$campaign_name.'</a>';
 				}
 				$json2[$lang][$key1][9] = '<a>Holidays</a>';
 				$json2[$lang][$key1] = $groups;
 			}
 		}
+		
+		//var_dump($json2);
+		//exit;
+		
 
 		foreach($this->lang->languages as $lang => $value)
 		{

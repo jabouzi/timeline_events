@@ -65,7 +65,7 @@ trait DatabaseTrait
 	function insert($data)
 	{
 		$this->db->insert($this->table, $data);
-		$last_id = $this->db->insert_id();
+		return $this->db->insert_id();
 	}
 	
 	function update($field_id, $id, $data)
@@ -83,6 +83,13 @@ trait DatabaseTrait
 	{
 		$this->db->where($column, $value);
 		$query	= $this->db->get($this->table);
+		$num_rows = $query->num_rows();
+		return $num_rows;
+	}
+	
+	function count($where)
+	{
+		$query = $this->db->get_where($this->table, $where);
 		$num_rows = $query->num_rows();
 		return $num_rows;
 	}

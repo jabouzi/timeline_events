@@ -17,7 +17,7 @@ class Mdl_client extends CI_Model
 		$this->db->order_by('client_id');
 		$query = $this->db->get($this->table);
 		//$this->cache->memcached->save('mdl_client_get', $query->row());
-		return $query->row();
+		return $query->result();
 	}
 
 	function get_order($order_by)

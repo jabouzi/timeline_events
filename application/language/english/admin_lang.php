@@ -53,7 +53,6 @@ $lang['permission.success'] = "Permission saved successfully";
 
 $lang['template.title'] = "Templates";
 
-
 $lang['user.client'] = "Client";
 $lang['user.title'] = "Users";
 $lang['user.add'] = "Add User";
@@ -150,8 +149,17 @@ $lang['tonik.delete.confirm'] = "Confirm deleting client";
 $lang['tonik.delete.success'] = "Client deleted successfully";
 $lang['tonik.campaignssteps'] = "Campaign steps";
 $lang['tonik.campaignstype'] = "Campaign types";
-$lang['tonik.newprojectmanager'] = "+Add";
+$lang['tonik.newprojectmanager'] = "Add project manager";
 
+$lang['banner.name'] = "Banner name";
+$lang['banner.client'] = "Banner client";
+$lang['banner.list'] = "Banners list";
+$lang['banner.edit'] = "Edit Banner";
+$lang['banner.add'] = "Add Banner";
+$lang['banner.delete'] = "Delete Banner";
+$lang['banner.delete.confirm'] = "Confirm deleting Banner";
+$lang['banner.success'] = "Banner saved successfully";
+$lang['banner.exists'] = "Banner already exists";
 
 $lang['profile.update'] = "Your profile has been updated";
 $lang['profile.password.update'] = "Your password has been updated";

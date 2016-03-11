@@ -1,4 +1,4 @@
-<?php  //if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Tonik extends MX_Controller
 {
@@ -25,7 +25,6 @@ class Tonik extends MX_Controller
 	function projectmanagers()
 	{
 		$view_data['page_title'] = lang('tonik.users');
-		//var_dump($this->session);
 		$users = $this->mdl_tonik->get_where(array());
 		
 		
@@ -44,13 +43,9 @@ class Tonik extends MX_Controller
 	
 	function editprojectmanager($pm_id = 0)
 	{
-		//if ($this->session->userdata('user_permission') > 2) redirect('dashboard');
 		if (!$pm_id) redirect('dashboard');
 		$pm_id_profile = $this->mdl_tonik->get_id($pm_id);
-		//var_dump($pm_id_profile);
 		$view_data['page_title'] = lang('tonik.edit');
-		//if ($pm_id_profile->client_id == $this->session->userdata('user_id'))  redirect('user');
-		//if ($pm_id_profile->user_permission <= $this->session->userdata('user_permission')) redirect('dashboard');
 		$view_data['admin_widgets']['user'] = $this->show('projectmanager', $pm_id_profile);
 		echo modules::run('template', $view_data);
 	}
@@ -166,22 +161,14 @@ class Tonik extends MX_Controller
 	
 	function process_projectmanager()
 	{
-		/*if ($this->input->post('client_id') == $this->session->userdata('client_id'))
-		{*/
-			$pm_id = $this->input->post('campaign_manager_id');
-			$profile_data = array('campaign_manager_name' => $this->session->userdata('campaign_manager_name'), 'campaign_manager_lastname' => $this->session->userdata('campaign_manager_lastname'), 'campaign_manager_email' => $this->session->userdata('campaign_manager_email'),  'campaign_manager_active' => (int)$this->session->userdata('campaign_manager_active'));
-			$pm_id_data = array('campaign_manager_name' => $this->input->post('campaign_manager_name'), 'campaign_manager_lastname' => $this->input->post('campaign_manager_lastname'), 'campaign_manager_email' => $this->input->post('campaign_manager_email'),'campaign_manager_active' => (int)$this->input->post('campaign_manager_active'));
-			if (count(compare_profile($profile_data, $pm_id_data)))
-			{
-				$this->update_projectmanager($pm_id, $pm_id_data);
-			}
-			redirect('tonik');
-		/*}
-		else
+		$pm_id = $this->input->post('campaign_manager_id');
+		$profile_data = array('campaign_manager_name' => $this->session->userdata('campaign_manager_name'), 'campaign_manager_lastname' => $this->session->userdata('campaign_manager_lastname'), 'campaign_manager_email' => $this->session->userdata('campaign_manager_email'),  'campaign_manager_active' => (int)$this->session->userdata('campaign_manager_active'));
+		$pm_id_data = array('campaign_manager_name' => $this->input->post('campaign_manager_name'), 'campaign_manager_lastname' => $this->input->post('campaign_manager_lastname'), 'campaign_manager_email' => $this->input->post('campaign_manager_email'),'campaign_manager_active' => (int)$this->input->post('campaign_manager_active'));
+		if (count(compare_profile($profile_data, $pm_id_data)))
 		{
-			$this->session->set_userdata('warning_message', lang('tonik.error'));
-			redirect('client/editclient/'.$this->input->post('client_id'));
-		}*/
+			$this->update_projectmanager($pm_id, $pm_id_data);
+		}
+		redirect('tonik');
 	}
 	
 	function process_password()
@@ -209,10 +196,10 @@ class Tonik extends MX_Controller
 		$pm_id = $this->mdl_tonik->insert($pm_id_data);
 		$this->session->set_userdata('success_message', lang('tonik.success'));
 		$client = $this->mdl_tonik->get_id($pm_id);
-		//$messagedata = array($client->client_name, $client->client_logo, site_url(), $client->client_primary_color,$client->client_secondary_color,$client->client_font_primary_color,$client->client_font_secondary_color );
-		/*$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox',$user->user_email, lang('tonik.add'));
+		$messagedata = array($client->client_name, $client->client_logo, site_url(), $client->client_primary_color,$client->client_secondary_color,$client->client_font_primary_color,$client->client_font_secondary_color );
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox',$user->user_email, lang('tonik.add'));
 		$this->maildecorator->decorate($messagedata, lang('mail.createuser'));
-		$this->maildecorator->sendmail($maildata);*/
+		$this->maildecorator->sendmail($maildata);
 		redirect('tonik/editprojectmanager/'.$pm_id);
 	}
 	
@@ -234,9 +221,9 @@ class Tonik extends MX_Controller
 		$this->mdl_tonik->update($pm_id, $pm_id_data);
 		$this->session->set_userdata('success_message', lang('tonik.success'));
 		$client = $this->mdl_tonik->get_id($pm_id);
-		//$this->save_session_data($client);
-		//$messagedata = array($this->session->userdata('user_firstname'), $this->session->userdata('user_lastname'));
-		/*if (isset($pm_id_data['user_password']))
+		$this->save_session_data($client);
+		$messagedata = array($this->session->userdata('user_firstname'), $this->session->userdata('user_lastname'));
+		if (isset($pm_id_data['user_password']))
 		{
 			$this->maildecorator->decorate($messagedata, lang('mail.updatepassword'));
 			$subject = lang('profile.password.update');
@@ -245,9 +232,9 @@ class Tonik extends MX_Controller
 		{
 			$this->maildecorator->decorate($messagedata, lang('mail.updateprofile'));
 			$subject = lang('profile.update');
-		}*/
-		//$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $this->session->userdata('user_email'), $subject);
-		//$this->maildecorator->sendmail($maildata);
+		}
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $this->session->userdata('user_email'), $subject);
+		$this->maildecorator->sendmail($maildata);
 
 		redirect('tonik/editprojectmanager/'.$pm_id);
 	}
