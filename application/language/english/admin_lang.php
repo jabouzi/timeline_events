@@ -158,6 +158,7 @@ $lang['banner.edit'] = "Edit Banner";
 $lang['banner.add'] = "Add Banner";
 $lang['banner.delete'] = "Delete Banner";
 $lang['banner.delete.confirm'] = "Confirm deleting Banner";
+$lang['banner.delete.success'] = "Banner deleted successfully";
 $lang['banner.success'] = "Banner saved successfully";
 $lang['banner.exists'] = "Banner already exists";
 

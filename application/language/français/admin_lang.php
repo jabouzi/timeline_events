@@ -158,6 +158,7 @@ $lang['banner.edit'] = "Editer une bannière";
 $lang['banner.add'] = "Ajouter une bannière";
 $lang['banner.delete'] = "Supprimer une bannière";
 $lang['banner.delete.confirm'] = "Confirmer la suppression de la bannière";
+$lang['banner.delete.success'] = "La bannière a été supprimée avec succès";
 $lang['banner.success'] = "La bannière a été sauvegardée avec succès";
 $lang['banner.exists'] = "La bannière existe déjà";
 

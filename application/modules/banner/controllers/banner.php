@@ -47,7 +47,8 @@ class Banner extends MX_Controller
 	function delete_banner($banner_id)
 	{
 		if (!$banner_id) redirect('dashboard');
-		$this->mdl_campaigns_banners->delete($banner_id);
+		$where = array('campaign_banner_id' => $banner_id);
+		$this->mdl_campaigns_banners->delete($where);
 		$this->session->set_userdata('success_message', lang('banner.delete.success'));
 		redirect('banner/banners');
 	}
