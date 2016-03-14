@@ -12,7 +12,7 @@
 			</fieldset>
 			<fieldset>
 				<label><?php echo lang('manager.email'); ?></label>				
-				<input type="text" name="campaign_manager_email" id="campaign_manager_email" value="<?php echo $this->input->post('campaign_manager_email'); ?>" data-validate="required" data-type="text" title="<?php echo lang('manager.email'); ?>">
+				<input type="text" name="campaign_manager_email" id="user_email" value="<?php echo $this->input->post('campaign_manager_email'); ?>" data-validate="required" data-type="text" title="<?php echo lang('manager.email'); ?>">
 			</fieldset>
 			<fieldset style="width:48%; float:left; margin-right: 3%;">
 				<label><?php echo lang('manager.tgi'); ?></label>
@@ -28,7 +28,8 @@
 			<div class="submit_link">
 				<input type="button" id="save_user_profile" value="<?php echo lang('admin.save'); ?>" class="submit_form alt_btn">
 				<input type="hidden" id="admin_error" value="<?php echo lang('admin.error'); ?>">
-				<input type="hidden" id="error_message" value="">				
+				<input type="hidden" id="error_message" value="">
+				<input type="hidden" id="email_exists_url" value="<?php echo site_url('manager/email_exists'); ?>">
 			</div>
 		</footer>
 	</form>

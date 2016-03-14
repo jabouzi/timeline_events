@@ -144,16 +144,16 @@ class Manager extends MX_Controller
 			$subject = lang('profile.update');
 		}
 		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $manager->campaign_manager_email, $subject);
-		//$this->maildecorator->sendmail($maildata);
+		$this->maildecorator->sendmail($maildata);
 
 		redirect('manager/editprojectmanager/'.$pm_id);
 	}
 
-	function email_exists($email, $user_id = 0)
+	function email_exists($email, $pm_id = 0)
 	{
 		if ($this->input->is_ajax_request())
 		{
-			if ($this->mdl_manager->count_where(array('user_email' => urldecode($email), 'user_id != ' => $user_id))) echo lang('manager.exists');
+			if ($this->mdl_manager->count(array('campaign_manager_email' => urldecode($email), 'campaign_manager_id != ' => $pm_id))) echo lang('manager.exists');
 			else echo 0;
 		}
 	}
