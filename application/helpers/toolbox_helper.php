@@ -80,7 +80,7 @@ function set_maildata($from, $name, $to, $subject)
 
 function get_status_list()
 {
-	return array(48=>'user.inactive' , 49=>'user.active');
+	return array(0 => 'user.inactive' , 1 => 'user.active');
 }
 
 function array_for_dropdown($array, $value, $option = null)
@@ -113,7 +113,7 @@ function array_for_dropdown($array, $value, $option = null)
 
 function get_client_status_list()
 {
-	return array(48=>'client.inactive' , 49=>'client.active');
+	return array(0 => 'client.inactive' , 1 => 'client.active');
 }
 
 function sizeFilter( $bytes )
@@ -173,4 +173,10 @@ function get_holidays($year)
 	$holidays['christmas'] = $d1->format('Y-m-d');
 	
 	return $holidays;
+}
+
+function get_manager_type()
+{
+	return array(0 => '<input class="trash" type="image" src="'.site_url().'assets/images/icn_alert_error.png">',
+	1 => '<input class="trash" type="image" src="'.site_url().'assets/images/icn_alert_success.png">');
 }

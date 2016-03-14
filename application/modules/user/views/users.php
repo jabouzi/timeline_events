@@ -19,7 +19,7 @@
 					<td><?php echo $item->user_firstname ?></td>
 					<td><?php echo $item->user_lastname ?></td>
 					<td><?php echo $item->user_email ?></td>
-					<td><?php echo lang(item(get_status_list(), ord($item->user_active))); ?></td>
+					<td><?php echo lang(item(get_status_list(), $item->user_active)); ?></td>
 					<?php if ($this->session->userdata('user_permission') <= 2) : ?>
 					<td>				
 						<a class="editbutton" id="edit_<?php echo $item->user_id; ?>" href="<?php echo site_url('user/edituser/'.$item->user_id); ?>"><?php echo '<img src="'.site_url().'assets/images/icn_edit.png" title="'.lang('user.edit').'">';?></a>						

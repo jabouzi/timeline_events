@@ -1,22 +1,25 @@
 <article class="module width_full">
-	<header><h3><?php echo lang('tonik.new'); ?></h3></header>
-	<form id="user_profile" method="post" enctype="multipart/form-data" action="<?php echo site_url('tonik/process_newprojectmanager'); ?>">
+	<header><h3><?php echo lang('manager.new'); ?></h3></header>
+	<form id="user_profile" method="post" enctype="multipart/form-data" action="<?php echo site_url('manager/process_newprojectmanager'); ?>">
 		<div class="module_content">			
 			<fieldset>
-				<label><?php echo lang('tonik.name'); ?></label>
-				<input type="text" name="campaign_manager_name" id="campaign_manager_name" value="<?php echo $this->input->post('campaign_manager_name'); ?>" data-validate="required" data-type="text" title="<?php echo lang('tonik.name'); ?>">
+				<label><?php echo lang('manager.name'); ?></label>
+				<input type="text" name="campaign_manager_name" id="campaign_manager_name" value="<?php echo $this->input->post('campaign_manager_name'); ?>" data-validate="required" data-type="text" title="<?php echo lang('manager.name'); ?>">
 			</fieldset>
 			<fieldset>
-				<label><?php echo lang('tonik.lastname'); ?></label>
-				<input type="text" name="campaign_manager_lastname" id="campaign_manager_lastname" value="<?php echo $this->input->post('campaign_manager_lastname'); ?>" data-validate="required" data-type="text" title="<?php echo lang('tonik.lastname'); ?>">
+				<label><?php echo lang('manager.lastname'); ?></label>
+				<input type="text" name="campaign_manager_lastname" id="campaign_manager_lastname" value="<?php echo $this->input->post('campaign_manager_lastname'); ?>" data-validate="required" data-type="text" title="<?php echo lang('manager.lastname'); ?>">
 			</fieldset>
 			<fieldset>
-				<label><?php echo lang('tonik.email'); ?></label>				
-				<input type="text" name="campaign_manager_email" id="campaign_manager_email" value="<?php echo $this->input->post('campaign_manager_email'); ?>" data-validate="required" data-type="text" title="<?php echo lang('tonik.email'); ?>">
+				<label><?php echo lang('manager.email'); ?></label>				
+				<input type="text" name="campaign_manager_email" id="campaign_manager_email" value="<?php echo $this->input->post('campaign_manager_email'); ?>" data-validate="required" data-type="text" title="<?php echo lang('manager.email'); ?>">
 			</fieldset>
-					
+			<fieldset style="width:48%; float:left; margin-right: 3%;">
+				<label><?php echo lang('manager.tgi'); ?></label>
+				<?php echo form_dropdown('campaign_manager_tgi', $tgi, $this->input->post('campaign_manager_tgi')); ?>
+			</fieldset>
 			<fieldset style="width:48%; float:left;">
-				<label><?php echo lang('tonik.status'); ?></label>
+				<label><?php echo lang('manager.status'); ?></label>
 				<?php echo form_dropdown('campaign_manager_active', $status, $this->input->post('campaign_manager_active')); ?>
 			</fieldset>
 			<div class="clear"></div>

@@ -92,10 +92,10 @@
 
 	<aside id="sidebar" class="column">
 
-		<h3><?php echo lang('tonik.title'); ?></h3>
+		<h3><?php echo lang('manager.title'); ?></h3>
 		<ul class="toggle">
-			<li class="icn_view_users"><?php echo anchor('tonik/projectmanagers', lang('tonik.projectmanagers')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('tonik/newprojectmanager', lang('tonik.newprojectmanager')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('manager/projectmanagers', lang('manager.projectmanagers')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('manager/newprojectmanager', lang('manager.newprojectmanager')) ?></li>
 		</ul>
 		<h3><?php echo lang('client.title'); ?></h3>
 		<ul class="toggle">
