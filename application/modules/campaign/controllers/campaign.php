@@ -25,8 +25,36 @@ class Campaign extends MX_Controller
 		$view_data['stylesheet'] = array('jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
 		$view_data['json'] = array('data_'.$this->lang->lang().'.json', 'group_'.$this->lang->lang().'.json', 'holidays.json');
-		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
+		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_steps.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
+	}
+	
+	function steps()
+	{
+		$view_data['page_title'] = lang('campaign.steps');
+
+		$steps = $this->mdl_campaigns_steps_types->get();
+		$campaign_data['steps'] = $steps->result();
+		$view_data['admin_widgets']['steps'] = $this->show('campaign_steps', $campaign_data);
+		echo modules::run('template', $view_data);
+	}
+	
+	function types()
+	{
+		$view_data['page_title'] = lang('campaign.types');
+
+		$types = $this->mdl_campaigns_types->get();
+		$campaign_data['types'] = $types->result();
+		$view_data['admin_widgets']['types'] = $this->show('campaign_types', $campaign_data);
+		echo modules::run('template', $view_data);
+	}
+	
+	private function show($view, $banner_data)
+	{
+		$this->load->helper('form');
+		$view_data = $banner_data;
+
+		return $this->load->view($view.'.php', $view_data, true);
 	}
 
 	function add()
@@ -312,81 +340,6 @@ class Campaign extends MX_Controller
 		$this->readfile_chunked($file);
 	}
 
-	private function add_campaign($campaign_data)
-	{
-		$this->load->library('maildecorator');
-
-		$campaign_id = $this->mdl_campaigns->insert($campaign_data);
-		$this->process_add_campaign_steps($campaign_id);
-		$this->generate_campaign();
-		$this->generate_campaign_detail($campaign_id);
-		$this->generate_holidays();
-		$this->session->set_userdata('success_message', lang('campaign.add.success'));
-
-		$campaign_manager_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_id' => $campaign_data['campaign_manager_tgi']))->row();
-		$messagedata = array($campaign_manager_tgi->campaign_manager_lastname, $campaign_manager_tgi->campaign_manager_name, $campaign_data['campaign_title'], site_url('campaign/detail/'.$campaign_id));
-		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', 'skander.jabouzi@tonikgroupimage.com,hugo.carranza@tonikgroupimage.com'/*$campaign_manager_tgi->campaign_manager_email*/, lang('campaign.add'));
-		$this->maildecorator->decorate($messagedata, lang('campaign.add.notification'));
-		$this->maildecorator->sendmail($maildata);
-
-		redirect('campaign/detail/'.$campaign_id);
-	}
-
-	private function update_campaign($campaign_id, $campaign_data)
-	{
-		$this->load->library('maildecorator');
-
-		$this->mdl_campaigns->update('campaign_id', $campaign_id, $campaign_data);
-		$this->process_add_campaign_steps(1);
-		$this->generate_campaign();
-		$this->generate_campaign_detail($campaign_id);
-		$this->generate_holidays();
-		$this->session->set_userdata('success_message', lang('campaign.edit.success'));
-
-		$campaign_manager_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_id' => $campaign_data['campaign_manager_tgi']))->row();
-		$messagedata = array($campaign_manager_tgi->campaign_manager_lastname, $campaign_manager_tgi->campaign_manager_name, $campaign_data['campaign_title'], site_url('campaign/detail/'.$campaign_id));
-		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', 'skander.jabouzi@tonikgroupimage.com,hugo.carranza@tonikgroupimage.com'/*$campaign_manager_tgi->campaign_manager_email*/, lang('campaign.edit'));
-		$this->maildecorator->decorate($messagedata, lang('campaign.edit.notification'));
-		$this->maildecorator->sendmail($maildata);
-
-		redirect('campaign/edit/'.$campaign_id);
-	}
-
-	private function add_campaign_step($campaign_step_data)
-	{
-		$campaign_step_id = $this->mdl_campaigns_steps->insert($campaign_step_data);
-	}
-
-	private function update_campaign_step($campaign_step_id, $campaign_step_data)
-	{
-		$this->mdl_campaigns_steps->update('campaign_step_id', $campaign_step_id, $campaign_step_data);
-	}
-
-	private function readfile_chunked($filename,$retbytes=true)
-	{
-		$chunksize = 1*(1024*1024);
-		$buffer = '';
-		$cnt =0;
-
-		$handle = fopen($filename, 'rb');
-		if ($handle === false) {
-			return false;
-		}
-		while (!feof($handle)) {
-			$buffer = fread($handle, $chunksize);
-			echo $buffer;
-			if ($retbytes) {
-				$cnt += strlen($buffer);
-			}
-		}
-			$status = fclose($handle);
-		if ($retbytes && $status) {
-			return $cnt;
-		}
-		return $status;
-
-	}
-
 	function generate_campaign()
 	{
 		$json = array();
@@ -543,38 +496,78 @@ class Campaign extends MX_Controller
 		file_put_contents(FCPATH.'/assets/json/holidays.json',  'var holidaysData = '.$json_data);
 	}
 
-
-
-	function test()
+	private function add_campaign($campaign_data)
 	{
-		$view_data['page_title'] = lang('dashboard.title3');
+		$this->load->library('maildecorator');
 
-		$banners = $this->mdl_campaigns_banners->get();
-		$campaign_data['banners'] = $banners->result();
+		$campaign_id = $this->mdl_campaigns->insert($campaign_data);
+		$this->process_add_campaign_steps($campaign_id);
+		$this->generate_campaign();
+		$this->generate_campaign_detail($campaign_id);
+		$this->generate_holidays();
+		$this->session->set_userdata('success_message', lang('campaign.add.success'));
 
-		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_test.php', array(), true);
-		echo modules::run('template/campaign', $view_data);
+		$campaign_manager_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_id' => $campaign_data['campaign_manager_tgi']))->row();
+		$messagedata = array($campaign_manager_tgi->campaign_manager_lastname, $campaign_manager_tgi->campaign_manager_name, $campaign_data['campaign_title'], site_url('campaign/detail/'.$campaign_id));
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', 'skander.jabouzi@tonikgroupimage.com,hugo.carranza@tonikgroupimage.com'/*$campaign_manager_tgi->campaign_manager_email*/, lang('campaign.add'));
+		$this->maildecorator->decorate($messagedata, lang('campaign.add.notification'));
+		$this->maildecorator->sendmail($maildata);
+
+		redirect('campaign/detail/'.$campaign_id);
 	}
 
-	function test2()
+	private function update_campaign($campaign_id, $campaign_data)
 	{
-		$view_data['page_title'] = lang('dashboard.title3');
+		$this->load->library('maildecorator');
 
-		$banners = $this->mdl_campaigns_banners->get();
-		$campaign_data['banners'] = $banners->result();
+		$this->mdl_campaigns->update('campaign_id', $campaign_id, $campaign_data);
+		$this->process_add_campaign_steps(1);
+		$this->generate_campaign();
+		$this->generate_campaign_detail($campaign_id);
+		$this->generate_holidays();
+		$this->session->set_userdata('success_message', lang('campaign.edit.success'));
 
-		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_test2.php', array(), true);
-		echo modules::run('template/campaign', $view_data);
+		$campaign_manager_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_id' => $campaign_data['campaign_manager_tgi']))->row();
+		$messagedata = array($campaign_manager_tgi->campaign_manager_lastname, $campaign_manager_tgi->campaign_manager_name, $campaign_data['campaign_title'], site_url('campaign/detail/'.$campaign_id));
+		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', 'skander.jabouzi@tonikgroupimage.com,hugo.carranza@tonikgroupimage.com'/*$campaign_manager_tgi->campaign_manager_email*/, lang('campaign.edit'));
+		$this->maildecorator->decorate($messagedata, lang('campaign.edit.notification'));
+		$this->maildecorator->sendmail($maildata);
+
+		redirect('campaign/edit/'.$campaign_id);
 	}
 
-	function test3()
+	private function add_campaign_step($campaign_step_data)
 	{
-		$view_data['page_title'] = lang('dashboard.title3');
+		$campaign_step_id = $this->mdl_campaigns_steps->insert($campaign_step_data);
+	}
 
-		$banners = $this->mdl_campaigns_banners->get();
-		$campaign_data['banners'] = $banners->result();
+	private function update_campaign_step($campaign_step_id, $campaign_step_data)
+	{
+		$this->mdl_campaigns_steps->update('campaign_step_id', $campaign_step_id, $campaign_step_data);
+	}
 
-		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_test3.php', array(), true);
-		echo modules::run('template/campaign', $view_data);
+	private function readfile_chunked($filename,$retbytes=true)
+	{
+		$chunksize = 1*(1024*1024);
+		$buffer = '';
+		$cnt =0;
+
+		$handle = fopen($filename, 'rb');
+		if ($handle === false) {
+			return false;
+		}
+		while (!feof($handle)) {
+			$buffer = fread($handle, $chunksize);
+			echo $buffer;
+			if ($retbytes) {
+				$cnt += strlen($buffer);
+			}
+		}
+			$status = fclose($handle);
+		if ($retbytes && $status) {
+			return $cnt;
+		}
+		return $status;
+
 	}
 }

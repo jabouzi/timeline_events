@@ -24,7 +24,7 @@
 					<td>				
 						<a class="editbutton" id="edit_<?php echo $item->user_id; ?>" href="<?php echo site_url('user/edituser/'.$item->user_id); ?>"><?php echo '<img src="'.site_url().'assets/images/icn_edit.png" title="'.lang('user.edit').'">';?></a>						
 						<input class="trash" data-userid="<?php echo $item->user_id; ?>" type="image" src="<?php echo site_url(); ?>assets/images/icn_trash.png" title="<?php echo lang('user.delete'); ?>">
-						<a class="deletebutton" id="delete_<?php echo $item->user_id; ?>" href="<?php echo site_url('user/delete_user/'.$item->user_id); ?>"><?php echo lang('user.delete.confirm'); ?></a></span>
+						<a class="deletebutton" id="delete_<?php echo $item->user_id; ?>" href="<?php echo site_url('user/delete_user/'.$item->user_id); ?>"><?php echo lang('general.delete.confirm'); ?></a></span>
 					</td>
 					<?php endif; ?>
 				</tr>

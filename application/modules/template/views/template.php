@@ -105,9 +105,8 @@
 			<li class="icn_view_users"><?php echo anchor('client/clients', lang('client.users')) ?></li>
 			<li class="icn_view_users"><?php echo anchor('banner/banners', lang('banner.list')) ?></li>
 			<li class="icn_view_users"><?php echo anchor('banner/newbanner', lang('banner.add')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('client/projectmanagers', lang('client.projectmanagers')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('client/campaignssteps', lang('client.campaignssteps')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('client/campaignstype', lang('client.campaignstype')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('campaign/steps', lang('client.campaignssteps')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('campaign/types', lang('client.campaignstype')) ?></li>
 			<!--<li class="icn_profile"><?php echo anchor('client', lang('client.profile')) ?></li>//-->
 		</ul>
 		<h3><?php echo lang('user.title'); ?></h3>

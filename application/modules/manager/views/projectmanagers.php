@@ -27,7 +27,7 @@
 					<td>						
 					<?php echo anchor('manager/editprojectmanager/'.$item->campaign_manager_id, '<img  src="'.site_url().'assets/images/icn_edit.png" title="'.lang('manager.edit').'">'); ?>						
 						<input class="trash" data-userid="<?php echo $item->campaign_manager_id; ?>" type="image" src="<?php echo site_url(); ?>assets/images/icn_trash.png" title="<?php echo lang('manager.delete'); ?>">
-						<a class="deletebutton" id="delete_<?php echo $item->campaign_manager_id; ?>" href="<?php echo site_url('manager/delete_manager/'.$item->campaign_manager_id); ?>"><?php echo lang('manager.delete.confirm'); ?></a>
+						<a class="deletebutton" id="delete_<?php echo $item->campaign_manager_id; ?>" href="<?php echo site_url('manager/delete_manager/'.$item->campaign_manager_id); ?>"><?php echo lang('general.delete.confirm'); ?></a>
 					</td>
 					<?php endif; 
 					?>

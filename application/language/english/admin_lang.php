@@ -2,6 +2,8 @@
 
 $lang['general.yes'] = "Yes";
 $lang['general.no'] = "No";
+$lang['general.color'] = "Choose a color";
+$lang['general.delete.confirm'] = "Confirm delete";
 
 $lang['admin.title'] = "Administration";
 $lang['admin.delete'] = "Delete";
@@ -221,6 +223,8 @@ $lang['campaign.status.standby'] = "Stand By";
 $lang['campaign.status.active'] = "Actif";
 $lang['campaign.status.closed'] = "Closed";
 $lang['campaign.goto'] = "Goto";
+$lang['campaign.steps'] = "Campaign Steps";
+$lang['campaign.types'] = "Campaign Types";
 
 $lang['content.title'] = "Content";
 
