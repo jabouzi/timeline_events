@@ -33,7 +33,7 @@ class Campaign extends MX_Controller
 	{
 		$view_data['page_title'] = lang('campaign.steps');
 
-		$steps = $this->mdl_campaigns_steps_types->get();
+		$steps = $this->mdl_campaigns_steps->get();
 		$campaign_data['steps'] = $steps->result();
 		$view_data['admin_widgets']['steps'] = $this->show('campaign_steps', $campaign_data);
 		echo modules::run('template', $view_data);
