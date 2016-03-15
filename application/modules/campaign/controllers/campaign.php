@@ -25,7 +25,7 @@ class Campaign extends MX_Controller
 		$view_data['stylesheet'] = array('jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
 		$view_data['json'] = array('data_'.$this->lang->lang().'.json', 'group_'.$this->lang->lang().'.json', 'holidays.json');
-		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_steps.php', $campaign_data, true);
+		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
 	

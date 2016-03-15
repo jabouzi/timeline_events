@@ -129,10 +129,10 @@
 					<span>Étapes</span>
 				</h2>
 				<div class="grayBox">
-					<?php foreach($campaign_steps_types as $campaign_step_id => $campaign_step_type) : ?>
+					<?php foreach($campaign_steps as $campaign_step_id => $campaign_step) : ?>
 						<div class="row">
 							<div class="col-sm-12">
-								<label for="creation<?php echo $campaign_step_id; ?>" id="label_creation<?php echo $campaign_step_id; ?>"><?php echo $campaign_step_type; ?></label>
+								<label for="creation<?php echo $campaign_step_id; ?>" id="label_creation<?php echo $campaign_step_id; ?>"><?php echo $campaign_step; ?></label>
 							</div>
 						</div>
 					
