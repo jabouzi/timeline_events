@@ -21,9 +21,10 @@ $(document).ready(function() {
 
 	$('.trash').bind({
 		click: function() {
-			console.log($(this).attr('data-userid'));
+			//console.log($(this).attr('data-userid'));
 			var id = $(this).attr('data-userid');
 			$('#delete_'+id).show();
+			return false;
 		}
 	});
 

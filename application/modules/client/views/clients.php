@@ -18,9 +18,9 @@
 			?>
 			<?php foreach ($user->result() as $item) : ?>
 				<tr>
-					<td><?php echo $item->client_name ?></td>
-					<td><img src="/uploads/<?php echo $item->client_logo ?>" ></td>
-					<td><?php echo lang(item(get_client_status_list(), ord($item->client_active))); ?></td>
+					<td style="width:30%"><?php echo $item->client_name ?></td>
+					<td style="width:30%"><img src="/uploads/<?php echo $item->client_logo ?>" ></td>
+					<td style="width:20%"><?php echo lang(item(get_client_status_list(), $item->client_active)); ?></td>
 					<?php if ($this->session->userdata('user_permission') <= 2) : ?>
 					<td>						
 					<?php echo anchor('client/editclient/'.$item->client_id, '<img  src="'.site_url().'assets/images/icn_edit.png" title="'.lang('client.edit').'">'); ?>						

@@ -14,25 +14,25 @@
 				<label><?php echo lang('client.primary_color'); ?></label>
 				<input type="text" name="client_primary_color" id="client_primary_color"  class="color" value="<?php echo $user->client_primary_color; ?>" data-validate="required" data-type="text" title="<?php echo lang('client.primary_color'); ?>">
 				<label for="background-color"><label><?php echo lang('general.color'); ?></label></label>
-				<input type="color" onchange="javascript:document.getElementById('client_primary_color').value = document.getElementById('client_primary_background_color').value;" value="#<?php echo $user->client_primary_color; ?>" id="client_primary_background_color">
+				<input type="color" onchange="javascript:document.getElementById('client_primary_color').value = document.getElementById('client_primary_background_color').value;" value="<?php echo $user->client_primary_color; ?>" id="client_primary_background_color">
 			</fieldset>
 			<fieldset>
 				<label><?php echo lang('client.secondary_color'); ?></label>
 				<input type="text" name="client_secondary_color" id="client_secondary_color" class="color" value="<?php echo $user->client_secondary_color; ?>" data-validate="required" data-type="text" title="<?php echo lang('client.secondary_color'); ?>">
 				<label for="background-color"><label><?php echo lang('general.color'); ?></label></label>
-				<input type="color" onchange="javascript:document.getElementById('client_secondary_color').value = document.getElementById('client_secondary_background_color').value;" value="#<?php echo $user->client_secondary_color; ?>" id="client_secondary_background_color">
+				<input type="color" onchange="javascript:document.getElementById('client_secondary_color').value = document.getElementById('client_secondary_background_color').value;" value="<?php echo $user->client_secondary_color; ?>" id="client_secondary_background_color">
 			</fieldset>	
 			<fieldset>
 				<label><?php echo lang('client.font_primary_color'); ?></label>				
 				<input type="text" name="client_font_primary_color" id="client_font_primary_color" class="color" value="<?php echo $user->client_font_primary_color; ?>" data-validate="required" data-type="text" title="<?php echo lang('client.font_primary_color'); ?>">
 				<label for="background-color"><label><?php echo lang('general.color'); ?></label></label>
-				<input type="color" onchange="javascript:document.getElementById('client_font_primary_color').value = document.getElementById('client_font_primary_background_color').value;" value="#<?php echo $user->client_font_primary_color; ?>" id="client_font_primary_background_color">
+				<input type="color" onchange="javascript:document.getElementById('client_font_primary_color').value = document.getElementById('client_font_primary_background_color').value;" value="<?php echo $user->client_font_primary_color; ?>" id="client_font_primary_background_color">
 			</fieldset>
 			<fieldset>
 				<label><?php echo lang('client.font_secondary_color'); ?></label>
 				<input type="text" name="client_font_secondary_color" id="client_font_secondary_color" class="color" value="<?php echo $user->client_font_secondary_color; ?>" data-validate="required" data-type="text" title="<?php echo lang('client.font_secondary_color'); ?>">
 				<label for="background-color"><label><?php echo lang('general.color'); ?></label></label>
-				<input type="color" onchange="javascript:document.getElementById('client_font_secondary').value = document.getElementById('client_font_secondary_background_color').value;" value="#<?php echo $user->client_font_secondary_color; ?>" id="client_font_secondary_background_color">
+				<input type="color" onchange="javascript:document.getElementById('client_font_secondary_color').value = document.getElementById('client_font_secondary_background_color').value;" value="<?php echo $user->client_font_secondary_color; ?>" id="client_font_secondary_background_color">
 			</fieldset>		
 			<fieldset style="width:48%; float:left;">
 				<label><?php echo lang('client.status'); ?></label>		

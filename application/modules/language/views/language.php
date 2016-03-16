@@ -16,9 +16,10 @@
 					<tr>
 						<td><input type="text" name="language_name[<?php echo $language->language_id; ?>]" id="language_name_<?php echo $language->language_id; ?>" value="<?php echo $language->language_name; ?>" data-validate="required" data-type="text" title="<?php echo lang('language.name'); ?>"></td>
 						<td><input type="text" name="language_code[<?php echo $language->language_id; ?>]" id="language_code_<?php echo $language->language_id; ?>" value="<?php echo $language->language_code; ?>" data-validate="required" data-type="text" title="<?php echo lang('language.code'); ?>"></td>
-						<td><input type="radio" name="language_default" value="<?php echo $language->language_id; ?>" <?php if (ord($language->language_default)) echo 'checked'; ?> ></td>
+						<td><input type="radio" name="language_default" value="<?php echo $language->language_id; ?>" <?php if ($language->language_default) echo 'checked'; ?> ></td>
 						<td>
-							<input type="image" src="<?php echo site_url(); ?>assets/images/icn_trash.png" title="<?php echo lang('language.delete'); ?>">
+							<input class="trash" data-userid="<?php echo $language->language_id; ?>" type="image" src="<?php echo site_url(); ?>assets/images/icn_trash.png" title="<?php echo lang('campaign.delete'); ?>">
+							<a class="deletebutton" id="delete_<?php echo $language->language_id; ?>" href="<?php echo site_url('language/delete_language/'.$language->language_id); ?>"><?php echo lang('general.delete.confirm'); ?></a>
 						</td>
 					</tr>
 				<?php endforeach ?>

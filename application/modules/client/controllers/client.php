@@ -98,53 +98,6 @@ class Client extends MX_Controller
 		$this->session->set_userdata($user_data);
 	}
 
-	function save_user_activity($db_result)
-	{
-		$this->load->library('user_agent');
-		$activity_data = array(
-			'user_id' => $db_result->user_id,
-			'ip_address' => $this->session->userdata('ip_address'),
-			'user_agent' => $this->session->userdata('user_agent'),
-			'browser' => $this->agent->browser(),
-			'session_id' => $this->session->userdata('session_id'),
-			'activity_date' => date('Y-m-d H:i:s', $this->session->userdata('last_activity')));
-		$this->mdl_client->insert_activity($activity_data);
-	}
-
-	function process_edituser()
-	{
-		$user_id = $this->input->post('user_id');
-		$user_data = array(
-			'user_firstname' => $this->input->post('user_firstname'),
-			'user_lastname' => $this->input->post('user_lastname'),
-			'user_email' => $this->input->post('user_email'),
-			'user_permission' => $this->input->post('user_permission'),
-			'user_active' => (int)($this->input->post('user_active'))
-		);
-		$user = $this->mdl_client->get_id($user_id);
-		$user_old_data = array(
-			'user_firstname' => $user->user_firstname,
-			'user_lastname' => $user->user_lastname,
-			'user_email' => $user->user_email,
-			'user_permission' => $user->user_permission,
-			'user_active' => (int)(ord($user->user_active))
-		);
-
-		if (trim($this->input->post('user_password')) != '')
-		{
-			$user_data['user_password'] = $this->input->post('user_password');
-			$user_old_data['user_password'] = $this->encrypt->decode($user->user_password);
-		}
-
-		if (count(compare_profile($user_old_data, $user_data)))
-		{
-			$user_data['user_password'] = $this->encrypt->encode($user_data['user_password']);
-			$this->update_user($user_id, $user_data);
-		}
-
-		redirect('user/edituser/'.$user_id);
-	}
-
 	function process_newclient()
 	{
 		$this->upload->do_upload('client_logo');
@@ -167,33 +120,16 @@ class Client extends MX_Controller
 	function process_profile()
 	{
 		$client_id = $this->input->post('client_id');
-		$profile_data = array('client_name' => $this->session->userdata('client_name'), 'client_logo' => $this->session->userdata('client_logo'), 'client_primary_color' => $this->session->userdata('client_primary_color'), 'client_secondary_color' => $this->session->userdata('client_secondary_color'), 'client_font_primary_color' => $this->session->userdata('client_font_primary_color'), 'client_font_secondary_color' => $this->session->userdata('client_font_secondary_color'), 'client_active' => (int)$this->session->userdata('client_active'));
-		$client_data = array('client_name' => $this->input->post('client_name'), 'client_logo' => $this->input->post('client_logo'), 'client_primary_color' => $this->input->post('client_primary_color'), 'client_secondary_color' => $this->input->post('client_secondary_color'), 'client_font_primary_color' => $this->input->post('client_font_primary_color'), 'client_font_secondary_color' => $this->input->post('client_font_secondary_color'), 'client_active' => (int)$this->input->post('client_active'));
-		if (count(compare_profile($profile_data, $client_data)))
-		{
-			$this->update_profile($client_id, $client_data);
-		}
-		redirect('client');
-	}
-
-	function process_password()
-	{
-		if ($this->input->post('user_id') == $this->session->userdata('user_id'))
-		{
-			$user = $this->mdl_client->get_id($this->session->userdata('user_id'));
-			if ($this->encrypt->decode($user->user_password) != $this->input->post('user_newpassword'))
-			{
-				$user_id = $this->session->userdata('user_id');
-				$user_data = array('user_password' => $this->encrypt->encode($this->input->post('user_newpassword')));
-				$this->update_profile($user_id, $user_data);
-			}
-			redirect('user');
-		}
-		else
-		{
-			$this->session->set_userdata('warning_message', lang('client.error'));
-			redirect('user');
-		}
+		$client_data = array(
+			'client_name' => $this->input->post('client_name'), 
+			'client_logo' => $this->input->post('client_logo'), 
+			'client_primary_color' => $this->input->post('client_primary_color'), 
+			'client_secondary_color' => $this->input->post('client_secondary_color'), 
+			'client_font_primary_color' => $this->input->post('client_font_primary_color'), 
+			'client_font_secondary_color' => $this->input->post('client_font_secondary_color'), 
+			'client_active' => (int)$this->input->post('client_active'));
+		$this->update_profile($client_id, $client_data);
+		redirect('client/clients');
 	}
 
 	private function add_client($client_data)
@@ -207,40 +143,10 @@ class Client extends MX_Controller
 		$this->maildecorator->sendmail($maildata);
 		redirect('client/editclient/'.$client_id);
 	}
-
-	private function update_user($user_id, $user_data)
-	{
-		$this->mdl_client->update($user_id, $user_data);
-		$this->session->set_userdata('success_message', lang('client.success'));
-		$user = $this->mdl_client->get_id($user_id);
-		$messagedata = array($user->user_firstname, $user->user_lastname, $user->user_email, $this->encrypt->decode($user->user_password));
-		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $user->user_email, lang('client.update'));
-		$this->maildecorator->decorate($messagedata, lang('mail.updateuser'));
-		$this->maildecorator->sendmail($maildata);
-		$this->session->unset_userdata('user_'.$user_id);
-		redirect('user/edituser/'.$user_id);
-	}
-
+	
 	private function update_profile($client_id, $client_data)
 	{
 		$this->mdl_client->update($client_id, $client_data);
-		$this->session->set_userdata('success_message', lang('client.success'));
-		$client = $this->mdl_client->get_id($client_id);
-		$this->save_session_data($client);
-		$messagedata = array($this->session->userdata('user_firstname'), $this->session->userdata('user_lastname'));
-		if (isset($client_data['user_password']))
-		{
-			$this->maildecorator->decorate($messagedata, lang('mail.updatepassword'));
-			$subject = lang('profile.password.update');
-		}
-		else
-		{
-			$this->maildecorator->decorate($messagedata, lang('mail.updateprofile'));
-			$subject = lang('profile.update');
-		}
-		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $this->session->userdata('user_email'), $subject);
-		$this->maildecorator->sendmail($maildata);
-
 		redirect('client/editclient/'.$client_id);
 	}
 

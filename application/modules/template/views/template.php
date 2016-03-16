@@ -117,7 +117,11 @@
 			<li class="icn_view_users"><?php echo anchor('user/users', lang('user.users')) ?></li>
 			<li class="icn_profile"><?php echo anchor('user', lang('user.profile')) ?></li>
 		</ul>
-
+		<h3><?php echo lang('admin.title'); ?></h3>
+		<ul class="toggle">
+			<li class="icn_tags"><?php echo anchor('language', lang('language.title')) ?></li>
+		</ul>
+		
 		<footer>
 			<hr />
 			<p><strong>Copyright &copy; <?php echo date('Y'); ?> Admin Toolbox v.1</strong></p>

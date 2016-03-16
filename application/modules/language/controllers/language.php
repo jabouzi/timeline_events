@@ -42,11 +42,6 @@ class Language extends MX_Controller
 			}
 		}
 		
-		foreach($this->input->post('delete') as $id => $value)
-		{
-			$this->delete_language($id);
-		}
-		
 		$this->session->set_userdata('success_message', lang('language.success'));
 		redirect('language');
 	}
@@ -67,6 +62,13 @@ class Language extends MX_Controller
 		return $language->language_id;
 	}
 	
+	function delete_language($language_id)
+	{
+		$this->mdl_language->delete($language_id);
+		$this->session->set_userdata('success_message', lang('language.success'));
+		redirect('language');
+	}
+	
 	private function add_language($language_data)
 	{
 		$language_id = $this->mdl_language->insert($language_data);
@@ -76,10 +78,4 @@ class Language extends MX_Controller
 	{
 		$this->mdl_language->update($language_id, $language_data);
 	}
-	
-	private function delete_language($language_id)
-	{
-		$this->mdl_language->language($language_id);
-	}
-
 }

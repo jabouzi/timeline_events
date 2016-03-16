@@ -13,6 +13,7 @@ class Campaign extends MX_Controller
 		$this->load->model('mdl_campaigns_steps_types');
 		$this->load->model('mdl_campaigns_types');
 		$this->load->model('mdl_campaigns_documents');
+		$this->load->model('mdl_campaigns_i18n');
 		$this->load->helper(array('form', 'url'));
 	}
 
@@ -130,6 +131,26 @@ class Campaign extends MX_Controller
 
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_edit.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
+	}
+	
+	function editstep($step_id)
+	{
+		$view_data['page_title'] = lang('campaign.step');
+		$step = $this->mdl_campaigns_steps->get_id('campaign_step_id', $step_id);
+		$campaign_data['step'] = $step->row();
+		$campaign_data['step']->campaign_step_name = $this->mdl_campaigns_i18n->get_where(array('table_name' => 'campaigns_steps', 'table_id' => $step_id))->result();
+		var_dump($campaign_data['step']);
+		$view_data['admin_widgets']['step'] = $this->show('campaign_editsteps', $campaign_data);
+		echo modules::run('template', $view_data);
+	}
+	
+	function edittype($type_id)
+	{
+		$view_data['page_title'] = lang('campaign.type');
+		$steps = $this->mdl_campaigns_steps->get_id('campaign_type_id', $type_id);
+		$campaign_data['type'] = $steps->row();
+		$view_data['admin_widgets']['type'] = $this->show('campaign_edittype', $campaign_data);
+		echo modules::run('template', $view_data);
 	}
 
 	function detail($id = null)
