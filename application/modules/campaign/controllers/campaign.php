@@ -354,7 +354,7 @@ class Campaign extends MX_Controller
 		$this->update_campaign_step($this->input->post('campaign_step_id'),  $campaign_step_data);
 		foreach($this->input->post('campaign_step_name') as $language_id => $campaign_step_name)
 		{
-			$this->update_campaign_i18n('campaigns_steps', $this->input->post('campaign_step_name'), $language_id, $i18n_name)
+			$this->update_campaign_i18n('campaigns_steps', $this->input->post('campaign_step_id'), $language_id, $i18n_name)
 		}
 	}
 
