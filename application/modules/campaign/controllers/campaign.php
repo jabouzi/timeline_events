@@ -14,6 +14,7 @@ class Campaign extends MX_Controller
 		$this->load->model('mdl_campaigns_types');
 		$this->load->model('mdl_campaigns_documents');
 		$this->load->model('mdl_campaigns_i18n');
+		$this->load->model('language/mdl_language');
 		$this->load->helper(array('form', 'url'));
 	}
 
@@ -136,11 +137,14 @@ class Campaign extends MX_Controller
 	function editstep($step_id)
 	{
 		$view_data['page_title'] = lang('campaign.step');
+		$languages = $this->mdl_language->get()->result();
 		$step = $this->mdl_campaigns_steps->get_id('campaign_step_id', $step_id);
+		$campaign_data['languages'] = array_for_dropdown($languages, 'language_id', 'language_name');
 		$campaign_data['step'] = $step->row();
-		$campaign_data['step']->campaign_step_name = $this->mdl_campaigns_i18n->get_where(array('table_name' => 'campaigns_steps', 'table_id' => $step_id))->result();
-		var_dump($campaign_data['step']);
-		$view_data['admin_widgets']['step'] = $this->show('campaign_editsteps', $campaign_data);
+		$campaigns_i18n = $this->mdl_campaigns_i18n->get_where(array('table_name' => 'campaigns_steps', 'table_id' => $step_id))->result();
+		$campaign_data['step']->campaign_step_name = array_for_dropdown($campaigns_i18n, 'language_id', 'i18n_name');
+		$campaign_data['status'] = array('0' => lang('user.inactive'), '1' => lang('user.active'));
+		$view_data['admin_widgets']['step'] = $this->show('campaign_editstep', $campaign_data);
 		echo modules::run('template', $view_data);
 	}
 	
@@ -338,6 +342,19 @@ class Campaign extends MX_Controller
 			}
 			$this->session->set_userdata('success_message', lang('campaign.document.add.success'));
 			redirect('campaign/documents/'.$campaign_id);
+		}
+	}
+	
+	function process_step()
+	{
+		var_dump($this->input->post());
+		$campaign_step_data = array(
+			'campaign_step_active' => $this->input->post('campaign_step_active')
+		);
+		$this->update_campaign_step($this->input->post('campaign_step_id'),  $campaign_step_data);
+		foreach($this->input->post('campaign_step_name') as $language_id => $campaign_step_name)
+		{
+			$this->update_campaign_i18n('campaigns_steps', $this->input->post('campaign_step_name'), $language_id, $i18n_name)
 		}
 	}
 
@@ -565,6 +582,13 @@ class Campaign extends MX_Controller
 	private function update_campaign_step($campaign_step_id, $campaign_step_data)
 	{
 		$this->mdl_campaigns_steps->update('campaign_step_id', $campaign_step_id, $campaign_step_data);
+	}
+
+	private function update_campaign_i18n($table_name, $table_id, $language_id, $i18n_name)
+	{
+		$data = array('i18n_name' => $i18n_name);
+		$where = array('table_name' => $table_name, 'table_id' => $table_id, 'language_id' => $language_id);
+		$this->mdl_campaigns_steps->update_where($data, $where)
 	}
 
 	private function readfile_chunked($filename,$retbytes=true)

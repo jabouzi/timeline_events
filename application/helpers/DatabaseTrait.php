@@ -74,6 +74,11 @@ trait DatabaseTrait
 		$this->db->update($this->table, $data);
 	}
 	
+	function update_where($data, $where)
+	{
+		$this->db->update($this->table, $data, $where);
+	}
+	
 	function delete($where)
 	{
 		$this->db->delete($this->table, $where);
