@@ -347,15 +347,15 @@ class Campaign extends MX_Controller
 	
 	function process_step()
 	{
-		var_dump($this->input->post());
 		$campaign_step_data = array(
 			'campaign_step_active' => $this->input->post('campaign_step_active')
 		);
 		$this->update_campaign_step($this->input->post('campaign_step_id'),  $campaign_step_data);
 		foreach($this->input->post('campaign_step_name') as $language_id => $campaign_step_name)
 		{
-			$this->update_campaign_i18n('campaigns_steps', $this->input->post('campaign_step_id'), $language_id, $i18n_name)
+			$this->update_campaign_i18n('campaigns_steps', $this->input->post('campaign_step_id'), $language_id, $campaign_step_name);
 		}
+		redirect('campaign/editstep/'.$this->input->post('campaign_step_id'));
 	}
 
 	function delete_document($campaign_id, $document_id)
@@ -586,9 +586,9 @@ class Campaign extends MX_Controller
 
 	private function update_campaign_i18n($table_name, $table_id, $language_id, $i18n_name)
 	{
-		$data = array('i18n_name' => $i18n_name);
-		$where = array('table_name' => $table_name, 'table_id' => $table_id, 'language_id' => $language_id);
-		$this->mdl_campaigns_steps->update_where($data, $where)
+		$campain_step_data = array('table_name' => $table_name, 'table_id' => $table_id, 'language_id' => $language_id, 'i18n_name' => $i18n_name);
+		$this->mdl_campaigns_i18n->delete($campain_step_data);
+		$this->mdl_campaigns_i18n->insert($campain_step_data);
 	}
 
 	private function readfile_chunked($filename,$retbytes=true)
