@@ -31,22 +31,40 @@ class Campaign extends MX_Controller
 		echo modules::run('template/campaign', $view_data);
 	}
 	
-	function steps()
+	function steps($lang = 'fr')
 	{
 		$view_data['page_title'] = lang('campaign.steps');
-
-		$steps = $this->mdl_campaigns_steps->get();
-		$campaign_data['steps'] = $steps->result();
+		$query = "SELECT campaigns_steps.campaign_step_id, campaigns_steps.campaign_step_active, campaigns_i18n.i18n_name as campaign_step_name 
+		FROM campaigns_steps, campaigns_i18n, toolbox_languages
+		WHERE campaigns_i18n.table_name = 'campaigns_steps'
+		AND campaigns_i18n.table_id = campaigns_steps.campaign_step_id
+		AND campaigns_i18n.language_id = toolbox_languages.language_id
+		AND toolbox_languages.language_code = '{$lang}'";
+		$campaign_data['steps'] = $this->mdl_campaigns_steps->custom_query($query)->result();
+		$languages = $this->mdl_language->get()->result();
+		$campaign_data['languages'] = array_for_dropdown($languages, 'language_code', 'language_name');
+		//$language_id = $this->mdl_language->get()->result();
+		//$where = array('language_code = ' => $lang);
+		//$language_id = $this->mdl_language->get_other_where($where)->row();
+		$campaign_data['language_code'] = $lang;
 		$view_data['admin_widgets']['steps'] = $this->show('campaign_steps', $campaign_data);
 		echo modules::run('template', $view_data);
 	}
 	
-	function types()
+	function types($lang = 'fr')
 	{
 		$view_data['page_title'] = lang('campaign.types');
-
-		$types = $this->mdl_campaigns_types->get();
-		$campaign_data['types'] = $types->result();
+		$query = "SELECT campaigns_types.campaign_type_id, campaigns_types.campaign_type_active, 
+		campaigns_types.campaign_type_color, campaigns_i18n.i18n_name as campaign_type_name 
+		FROM campaigns_types, campaigns_i18n, toolbox_languages
+		WHERE campaigns_i18n.table_name = 'campaigns_types'
+		AND campaigns_i18n.table_id = campaigns_types.campaign_type_id
+		AND campaigns_i18n.language_id = toolbox_languages.language_id
+		AND toolbox_languages.language_code = '{$lang}'";
+		$campaign_data['types'] = $this->mdl_campaigns_types->custom_query($query)->result();
+		$languages = $this->mdl_language->get()->result();
+		$campaign_data['languages'] = array_for_dropdown($languages, 'language_code', 'language_name');
+		$campaign_data['language_code'] = $lang;
 		$view_data['admin_widgets']['types'] = $this->show('campaign_types', $campaign_data);
 		echo modules::run('template', $view_data);
 	}
@@ -356,6 +374,55 @@ class Campaign extends MX_Controller
 			$this->update_campaign_i18n('campaigns_steps', $this->input->post('campaign_step_id'), $language_id, $campaign_step_name);
 		}
 		redirect('campaign/editstep/'.$this->input->post('campaign_step_id'));
+	}
+	
+	function process_type()
+	{
+		$campaign_step_data = array(
+			'campaign_step_active' => $this->input->post('campaign_step_active')
+		);
+		$this->update_campaign_step($this->input->post('campaign_step_id'),  $campaign_step_data);
+		foreach($this->input->post('campaign_step_name') as $language_id => $campaign_step_name)
+		{
+			$this->update_campaign_i18n('campaigns_steps', $this->input->post('campaign_step_id'), $language_id, $campaign_step_name);
+		}
+		redirect('campaign/editstep/'.$this->input->post('campaign_step_id'));
+	}
+
+	function process_new_step()
+	{
+
+		foreach ($this->input->post('new') as $new)
+		{
+			$new = trim($new);
+			if (!empty($new))
+			{
+				$data = array('campaign_step_active' => 0);
+				$data_i18n = array('table_name' => 'campaigns_steps',
+								'table_id' => $this->mdl_campaigns_steps->insert($data),
+								'i18n_name' => $new);
+				$this->mdl_campaigns_i18n->insert($data);
+			}
+		}
+
+		$this->session->set_userdata('success_message', lang('language.success'));
+		redirect('campaign/steps');
+	}
+
+	function process_new_type()
+	{
+		foreach ($this->input->post('new') as $new)
+		{
+			$new = trim($new);
+			if (!empty($new))
+			{
+				$data = array('campaign_type_name' => $new);
+				$this->mdl_campaigns_types->insert($data);
+			}
+		}
+
+		$this->session->set_userdata('success_message', lang('language.success'));
+		redirect('campaign/types');
 	}
 
 	function delete_document($campaign_id, $document_id)

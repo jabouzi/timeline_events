@@ -51,17 +51,17 @@ $(document).ready(function() {
 		}
 	});
 	
-	$('#add_workflow').bind({
+	$('#add_step').bind({
 		click: function() {
 			clear_messages();
-			add_workflow();
+			add_step();
 		}
 	});
 	
-	$('#add_permission').bind({
+	$('#add_type').bind({
 		click: function() {
 			clear_messages();
-			add_permission();
+			add_type();
 		}
 	});
 	
@@ -111,16 +111,16 @@ function add_language()
 	$('#language_list').append('<tr><td>'+$('#new_language').html()+'</td></tr>');
 }
 
-function add_workflow()
+function add_step()
 {
-	$('#workflow_number').val(parseInt($('#workflow_number').val()) + 1);
-	$('#workflow_list').append('<tr><td>'+$('#new_workflow').html()+'</td></tr>');
+	$('#step_number').val(parseInt($('#step_number').val()) + 1);
+	$('#step_list').append('<tr><td>'+$('#new_step').html()+'</td></tr>');
 }
 
-function add_permission()
+function add_type()
 {
-	$('#permission_number').val(parseInt($('#permission_number').val()) + 1);
-	$('#permission_list').append('<tr><td>'+$('#new_permission').html()+'</td></tr>');
+	$('#type_number').val(parseInt($('#type_number').val()) + 1);
+	$('#type_list').append('<tr><td>'+$('#new_type').html()+'</td></tr>');
 }
 
 function validate_from(form_id)

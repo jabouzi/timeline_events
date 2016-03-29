@@ -8,7 +8,9 @@ class Banner extends MX_Controller
 		include APPPATH . 'helpers/DatabaseTrait.php';
 		$this->load->model('campaign/mdl_campaigns_banners');
 		$this->load->model('client/mdl_client');
+		$this->load->model('language/mdl_language');
 		$this->load->library('encrypt');
+		$this->load->helper(array('form', 'url'));
 	}
 
 	function index()
@@ -16,11 +18,20 @@ class Banner extends MX_Controller
 
 	}
 
-	function banners()
+	function banners($lang = 'fr')
 	{
 		$view_data['page_title'] = lang('banner.list');
-		$query = "SELECT campaigns_banners.*, toolbox_clients.client_name FROM campaigns_banners, toolbox_clients WHERE campaigns_banners.client_id = toolbox_clients.client_id";
+		$query = "SELECT campaigns_banners.campaign_banner_id, campaigns_i18n.i18n_name as campaign_banner_name, toolbox_clients.client_name 
+		FROM campaigns_banners, toolbox_clients, campaigns_i18n, toolbox_languages
+		WHERE campaigns_banners.client_id = toolbox_clients.client_id
+		AND campaigns_i18n.table_name = 'campaigns_banners'
+		AND campaigns_i18n.table_id = campaigns_banners.campaign_banner_id
+		AND campaigns_i18n.language_id = toolbox_languages.language_id
+		AND toolbox_languages.language_code = '{$lang}'";
 		$data['banners'] = $this->mdl_campaigns_banners->custom_query($query);
+		$languages = $this->mdl_language->get()->result();
+		$data['languages'] = array_for_dropdown($languages, 'language_code', 'language_name');
+		$data['language_code'] = $lang;
 		$view_data['admin_widgets']['banner'] = $this->show('banners_list', $data);
 		echo modules::run('template', $view_data);
 	}
@@ -30,6 +41,8 @@ class Banner extends MX_Controller
 		if ($this->session->userdata('user_permission') > 2) redirect('dashboard');
 		$view_data['page_title'] = lang('banner.new');
 		$data['clients'] = array_for_dropdown($this->mdl_client->get(), 'client_id', 'client_name');
+		$languages = $this->mdl_language->get()->result();
+		$data['languages'] = array_for_dropdown($languages, 'language_id', 'language_name');
 		$view_data['admin_widgets']['user'] = $this->show('newbanner', $data);
 		echo modules::run('template', $view_data);
 	}

@@ -62,9 +62,6 @@ class Login extends MX_Controller
 		$username = $this->security->xss_clean($this->input->post('email'));
 		$password = $this->security->xss_clean($this->input->post('password'));
 		$result = $this->mdl_login->validate_user($username, $password);
-		
-		
-		//var_dump($result);
 	
 		if(!$result)
 		{

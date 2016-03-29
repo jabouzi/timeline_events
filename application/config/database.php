@@ -75,6 +75,10 @@ else
 	$db['default']['username'] = 'metrotoolbox';
 	$db['default']['password'] = 'aythKoU9N2hob';
 	$db['default']['database'] = 'metrotoolbox';  
+ 	//$db['default']['hostname'] = 'mysql:host=localhost';
+	//$db['default']['username'] = 'root';
+	//$db['default']['password'] = '7024043';
+	//$db['default']['database'] = 'metrotoolbox';  
 }
 
 $db['default']['dbdriver'] = 'pdo';
