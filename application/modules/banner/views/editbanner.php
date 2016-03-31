@@ -1,3 +1,10 @@
+<header>
+	<ul>
+		<?php foreach($languages as $code => $language) : ?>
+			<li><?php echo anchor('banner/editbanner/'.$banner->campaign_banner_id.'/'.$code, $language); ?></li>
+		<? endforeach; ?>
+	</ul>
+</header>
 <article class="module width_full">
 	<header><h3><?php echo lang('banner.edit'); ?></h3></header>
 	<form id="banner_profile" method="post" action="<?php echo site_url('banner/process_editbanner'); ?>">
@@ -19,6 +26,7 @@
 				<input type="hidden" id="admin_error" value="<?php echo lang('admin.error'); ?>">
 				<input type="hidden" id="error_message" value="">
 				<input type="hidden" id="banner_exists_url" value="<?php echo site_url('banner/banner_exists'); ?>">
+				<input type="hidden" name="language_id" id="language_id" value="<?php echo $language_id; ?>">
 			</div>
 		</footer>
 	</form>

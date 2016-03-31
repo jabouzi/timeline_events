@@ -180,3 +180,24 @@ function get_manager_type()
 	return array(0 => '<input class="trash" type="image" src="'.site_url().'assets/images/icn_alert_error.png">',
 	1 => '<input class="trash" type="image" src="'.site_url().'assets/images/icn_alert_success.png">');
 }
+
+function get_sites_lang($uris, $langs)
+{
+	$lang_codes = array_keys($langs);
+	array_shift($uris);
+	$current_lang = 'fr';
+	if (in_array(end($uris), $lang_codes))
+	{
+		$current_lang = end($uris);
+		array_pop($uris);
+	}
+
+	$url = implode('/', $uris);
+	$return_array['current_uri'] = site_url($url.'/'.$current_lang);
+	foreach($lang_codes as $lang_code)
+	{
+		$return_array['uris'][site_url($url.'/'.$lang_code)] = $langs[$lang_code];
+	}
+
+	return $return_array;
+}

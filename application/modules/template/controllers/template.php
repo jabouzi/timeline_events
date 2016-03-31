@@ -6,6 +6,7 @@ class Template extends MX_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->model('language/mdl_language');
 	}
 	
 	function index($view_data = array())
@@ -19,7 +20,10 @@ class Template extends MX_Controller
 			$view_data['warning_message'] = $this->session->userdata('warning_message');
 			$view_data['error_message'] = $this->session->userdata('error_message');
 			$view_data['success_message'] = $this->session->userdata('success_message');
-			
+
+			$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
+			$view_data['site_languages'] = get_sites_lang($this->uri->segment_array(), $languages);
+
 			foreach($this->lang->languages as $key => $value)
 			{
 				$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));

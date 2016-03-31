@@ -149,9 +149,8 @@
 		<h4 <?php echo $display_success; ?> class="alert_success"><?php echo $success_message; ?></h4>
 
 		<?php
-
-		//var_dump($admin_widgets);
-
+		//var_dump($site_languages['current_lang']);
+		echo form_dropdown('site_language', $site_languages['uris'],  $site_languages['current_uri'], $redirect);
 
 		foreach($admin_widgets as $widget => $content)
 		{

@@ -34,6 +34,16 @@
 							<input type="text" name="email" value="<?php echo $this->input->post('email'); ?>" >
 							<label for="password"><?php echo lang('login.password'); ?></label>
 							<input type="password" name="password" value="<?php echo $this->input->post('password'); ?>" >
+							<p class="remember_me">
+								<label>
+								<input type="checkbox" name="remember_me" id="remember_me" <?php echo $checked; ?> >
+								<?php echo lang('login.remember'); ?>
+								</label>
+							</p>
+							<p>
+								<?php echo lang('login.lang'); ?>
+								<?php echo form_dropdown('lang', $languages, $lang, $redirect); ?>
+							</p>
 						</div>
 					</div>
 					<div class="loginBtnsBox">
