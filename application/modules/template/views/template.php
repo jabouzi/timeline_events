@@ -75,7 +75,7 @@
 	<header id="header">
 		<hgroup>
 			<h1 class="site_title"><?php echo lang('dashboard.title1'); ?></h1>
-			<h1 class="site_title"><a href="/<?php echo $this->lang->lang(); ?>/campaign"><?php echo 'Voir le site'; ?></h1>
+			<h1 class="site_title"><a href="/<?php echo $this->lang->lang(); ?>/campaign"><?php echo 'Voir le site'; ?></a></h1>
 		</hgroup>
 	</header> <!-- end of header bar -->
 
@@ -149,8 +149,13 @@
 		<h4 <?php echo $display_success; ?> class="alert_success"><?php echo $success_message; ?></h4>
 
 		<?php
-		//var_dump($site_languages['current_lang']);
-		echo form_dropdown('site_language', $site_languages['uris'],  $site_languages['current_uri'], $redirect);
+		
+		if (isset($site_languages))
+		{
+			echo '<p>'.lang('language.site'); 
+			echo form_dropdown('site_language', $site_languages['uris'],  $site_languages['current_uri'], $redirect);
+			echo '</p>';
+		}
 
 		foreach($admin_widgets as $widget => $content)
 		{

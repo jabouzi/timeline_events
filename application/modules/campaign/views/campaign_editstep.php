@@ -1,11 +1,5 @@
 <article class="module width_full">
-	<header><h3 class="tabs_involved"><?php echo lang('campaign.steps'); ?></h3>
-		<ul class="tabs">
-			<?php foreach($languages as $code => $language) : ?>
-				<li><a href="#<?php echo $code; ?>"><?php echo ucfirst(strtolower($language)); ?></a></li>
-			<? endforeach; ?>
-		</ul>
-	</header>
+	<header><h3><?php echo lang('user.edit'); ?></h3></header>
 	<form id="permissions_form" method="post" action="<?php echo site_url('campaign/process_step'); ?>">
 	<div class="module_content">
 		<?php $index = 0; ?>

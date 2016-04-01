@@ -34,18 +34,8 @@ class Campaign extends MX_Controller
 	function steps($lang = 'fr')
 	{
 		$view_data['page_title'] = lang('campaign.steps');
-		$query = "SELECT campaigns_steps.campaign_step_id, campaigns_steps.campaign_step_active, campaigns_i18n.i18n_name as campaign_step_name 
-		FROM campaigns_steps, campaigns_i18n, toolbox_languages
-		WHERE campaigns_i18n.table_name = 'campaigns_steps'
-		AND campaigns_i18n.table_id = campaigns_steps.campaign_step_id
-		AND campaigns_i18n.language_id = toolbox_languages.language_id
-		AND toolbox_languages.language_code = '{$lang}'";
-		$campaign_data['steps'] = $this->mdl_campaigns_steps->custom_query($query)->result();
-		$languages = $this->mdl_language->get()->result();
-		$campaign_data['languages'] = array_for_dropdown($languages, 'language_code', 'language_name');
-		//$language_id = $this->mdl_language->get()->result();
-		//$where = array('language_code = ' => $lang);
-		//$language_id = $this->mdl_language->get_other_where($where)->row();
+		
+		$campaign_data['steps'] = $this->mdl_campaigns_steps->i18n_query($lang)->result();
 		$campaign_data['language_code'] = $lang;
 		$view_data['admin_widgets']['steps'] = $this->show('campaign_steps', $campaign_data);
 		echo modules::run('template', $view_data);
@@ -54,16 +44,8 @@ class Campaign extends MX_Controller
 	function types($lang = 'fr')
 	{
 		$view_data['page_title'] = lang('campaign.types');
-		$query = "SELECT campaigns_types.campaign_type_id, campaigns_types.campaign_type_active, 
-		campaigns_types.campaign_type_color, campaigns_i18n.i18n_name as campaign_type_name 
-		FROM campaigns_types, campaigns_i18n, toolbox_languages
-		WHERE campaigns_i18n.table_name = 'campaigns_types'
-		AND campaigns_i18n.table_id = campaigns_types.campaign_type_id
-		AND campaigns_i18n.language_id = toolbox_languages.language_id
-		AND toolbox_languages.language_code = '{$lang}'";
-		$campaign_data['types'] = $this->mdl_campaigns_types->custom_query($query)->result();
-		$languages = $this->mdl_language->get()->result();
-		$campaign_data['languages'] = array_for_dropdown($languages, 'language_code', 'language_name');
+		
+		$campaign_data['types'] = $this->mdl_campaigns_types->i18n_query($lang)->result();
 		$campaign_data['language_code'] = $lang;
 		$view_data['admin_widgets']['types'] = $this->show('campaign_types', $campaign_data);
 		echo modules::run('template', $view_data);

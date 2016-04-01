@@ -1,10 +1,3 @@
-<header>
-	<ul>
-		<?php foreach($languages as $code => $language) : ?>
-			<li><?php echo anchor('campaign/steps/'.$code, $language); ?></li>
-		<? endforeach; ?>
-	</ul>
-</header>
 <article class="module width_full">
 	<header><h3 class="tabs_involved"><?php echo lang('campaign.steps'); ?></h3></header>
 	<form id="languages_form" method="post" action="<?php echo site_url('campaign/process_new_step'); ?>">

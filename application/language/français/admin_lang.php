@@ -208,6 +208,8 @@ $lang['language.add'] = "Ajouter une langue";
 $lang['language.delete'] = "Supprimer une langue";
 $lang['language.update'] = "Mettre à jour une langue";
 $lang['language.success'] = "Langue sauvegardée avec succès";
+$lang['language.site'] = "Langue du site";
+$lang['language.admin'] = "Langue du site de l'admin";
 
 $lang['campaign.add.success'] = "Campagne ajoutée avec succès";
 $lang['campaign.edit.success'] = "Campagne mise à jour avec succès";

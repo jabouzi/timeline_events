@@ -21,8 +21,11 @@ class Template extends MX_Controller
 			$view_data['error_message'] = $this->session->userdata('error_message');
 			$view_data['success_message'] = $this->session->userdata('success_message');
 
-			$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
-			$view_data['site_languages'] = get_sites_lang($this->uri->segment_array(), $languages);
+			if (!in_array(item($this->uri->segment_array(), 2), array('language','user','manager','client')))
+			{
+				$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
+				$view_data['site_languages'] = get_sites_lang($this->uri->segment_array(), $languages);
+			}
 
 			foreach($this->lang->languages as $key => $value)
 			{

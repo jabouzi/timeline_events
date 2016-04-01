@@ -1,10 +1,3 @@
-<header>
-	<ul>
-		<?php foreach($languages as $code => $language) : ?>
-			<li><?php echo anchor('banner/banners/'.$code, $language); ?></li>
-		<? endforeach; ?>
-	</ul>
-</header>
 <article class="module width_full">
 	<header><h3 class="tabs_involved"><?php echo lang('banner.list'); ?></h3></header>
 	<div class="tab_container">
