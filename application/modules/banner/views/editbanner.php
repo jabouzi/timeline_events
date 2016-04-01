@@ -1,10 +1,3 @@
-<header>
-	<ul>
-		<?php foreach($languages as $code => $language) : ?>
-			<li><?php echo anchor('banner/editbanner/'.$banner->campaign_banner_id.'/'.$code, $language); ?></li>
-		<? endforeach; ?>
-	</ul>
-</header>
 <article class="module width_full">
 	<header><h3><?php echo lang('banner.edit'); ?></h3></header>
 	<form id="banner_profile" method="post" action="<?php echo site_url('banner/process_editbanner'); ?>">

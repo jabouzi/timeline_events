@@ -8,7 +8,7 @@ class Language extends MX_Controller
 		$this->load->model('mdl_language');
 	}
 
-	function index()
+	function languages()
 	{
 		$view_data['page_title'] = lang('language.title');
 		$view_data['admin_widgets']['languages'] = $this->show();

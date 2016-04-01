@@ -194,9 +194,11 @@ function get_sites_lang($uris, $langs)
 
 	$url = implode('/', $uris);
 	$return_array['current_uri'] = site_url($url.'/'.$current_lang);
+	$return_array['current_lang'] = $current_lang;
+
 	foreach($lang_codes as $lang_code)
 	{
-		$return_array['uris'][site_url($url.'/'.$lang_code)] = $langs[$lang_code];
+		$return_array['uris'][$lang_code] = $langs[$lang_code];
 	}
 
 	return $return_array;

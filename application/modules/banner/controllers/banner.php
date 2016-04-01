@@ -43,10 +43,19 @@ class Banner extends MX_Controller
 	function editbanner($banner_id = 0, $lang = 'fr')
 	{
 		if (!$banner_id) redirect('dashboard');
-		$data['banner'] = $this->mdl_campaigns_banners->get_id('campaign_banner_id', $banner_id)->row();
-		$data['clients'] = array_for_dropdown($this->mdl_client->get(), 'client_id', 'client_name');
 		$languages = $this->mdl_language->get()->result();
-		$data['languages'] = array_for_dropdown($languages, 'language_code', 'language_name');
+		$data['language_id'] = item(array_for_dropdown($languages, 'language_code'), $lang)->language_id;
+		$data['banner'] = $this->mdl_campaigns_banners->get_id('campaign_banner_id', $banner_id)->row();
+		$banner_i18n = $this->mdl_campaigns_i18n->get_where(array('table_name' => 'campaigns_banners', 'table_id' => $banner_id, 'language_id' => $data['language_id']))->row();
+		if ($banner_i18n)
+		{
+			$data['banner']->campaign_banner_name = $banner_i18n->i18n_name;
+		}
+		else
+		{
+			$data['banner']->campaign_banner_name = '';
+		}
+		$data['clients'] = array_for_dropdown($this->mdl_client->get(), 'client_id', 'client_name');
 		$data['language_code'] = $lang;
 		$view_data['page_title'] = lang('banner.edit');
 		$view_data['admin_widgets']['banner'] = $this->show('editbanner', $data);
@@ -97,39 +106,53 @@ class Banner extends MX_Controller
 		$this->add_banner($banner_data, $banner_i18n_data);
 	}
 
-	function process_editbanner()
+	function process_editbanner($lang)
 	{
 		$banner_data = array(
+			'client_id' => $this->input->post('client_id'),
 			'campaign_banner_id' => $this->input->post('campaign_banner_id'),
-			'campaign_banner_name' => $this->input->post('campaign_banner_name'),
-			'client_id' => $this->input->post('client_id')
+		);
+		
+		$banner_i18n_data = array(
+			'table_name' => 'campaigns_banners',
+			'table_id' => $this->input->post('campaign_banner_id'),
+			'language_id' => $this->input->post('language_id')
 		);
 
-		$this->edit_banner($banner_data);
+		$this->edit_banner($banner_data, $banner_i18n_data, $this->input->post('campaign_banner_name'), $lang);
 	}
 
 	private function add_banner($banner_data, $banner_i18n_data)
 	{
 		$banner_i18n_data['table_id'] = $this->mdl_campaigns_banners->insert($banner_data);
-		var_dump($banner_i18n_data['table_id']);
 		$this->mdl_campaigns_i18n->insert($banner_i18n_data);
 		$this->session->set_userdata('success_message', lang('banner.success'));
 		redirect('banner/editbanner/'.$banner_i18n_data['table_id']);
 	}
 	
-	private function edit_banner($banner_data)
+	private function edit_banner($banner_data, $banner_i18n_data, $i18n_name, $lang)
 	{
 		$this->mdl_campaigns_banners->update('campaign_banner_id', $banner_data['campaign_banner_id'], $banner_data);
+		$this->update_campaign_i18n($banner_i18n_data, $i18n_name);
 		$this->session->set_userdata('success_message', lang('banner.success'));
-		redirect('banner/editbanner/'.$banner_data['campaign_banner_id']);
+		redirect('banner/editbanner/'.$banner_data['campaign_banner_id'].'/'.$lang);
 	}
 	
 	function banner_exists($banner_name, $banner_id = 0)
 	{
+		echo 0;
+		return;
 		if ($this->input->is_ajax_request())
 		{
 			if ($this->mdl_campaigns_banners->count(array('campaign_banner_name' => urldecode($banner_name), 'campaign_banner_id != ' => $banner_id))) echo lang('banner.exists');
 			else echo 0;
 		}
+	}
+	
+	private function update_campaign_i18n($banner_i18n_data, $i18n_name)
+	{
+		$this->mdl_campaigns_i18n->delete($banner_i18n_data);
+		$banner_i18n_data['i18n_name'] = $i18n_name;
+		$this->mdl_campaigns_i18n->insert($banner_i18n_data);
 	}
 }

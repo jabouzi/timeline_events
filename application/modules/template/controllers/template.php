@@ -24,8 +24,10 @@ class Template extends MX_Controller
 			if (!in_array(item($this->uri->segment_array(), 2), array('language','user','manager','client')))
 			{
 				$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
-				$view_data['site_languages'] = get_sites_lang($this->uri->segment_array(), $languages);
+				if (!$this->session->userdata('current_lang'))  modules::run('user/add_session_data', 'current_lang', 'fr');
 			}
+
+			$view_data['current_lang'] = $this->session->userdata('current_lang');
 
 			foreach($this->lang->languages as $key => $value)
 			{
@@ -33,6 +35,7 @@ class Template extends MX_Controller
 			}
 			$view_data['lang'] = site_url().$this->lang->switch_uri($this->lang->lang());
 			$view_data['redirect'] = 'onChange="window.document.location.href=this.options[this.selectedIndex].value;"';
+			$view_data['submit'] = 'onChange="$(\'#change_site_lang\').submit();"';
 			$this->load->view('template', $view_data);
 			$this->session->unset_userdata('warning_message');
 			$this->session->unset_userdata('info_message');
@@ -70,5 +73,11 @@ class Template extends MX_Controller
 		{
 			redirect('login');
 		}
+	}
+	
+	function change_site_language()
+	{
+		modules::run('user/add_session_data', 'current_lang' , $this->input->post('site_language'));
+		redirect($this->input->post('current_uri'));
 	}
 }

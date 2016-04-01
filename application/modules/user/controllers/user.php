@@ -10,7 +10,7 @@ class User extends MX_Controller
 		$this->load->library('maildecorator');
 	}
 	
-	function index()
+	function profile()
 	{
 		$view_data['page_title'] = lang('user.profile');
 		$user_profile = $this->mdl_user->get_id($this->session->userdata('user_id'));
@@ -40,7 +40,7 @@ class User extends MX_Controller
 		if (!$user_id) redirect('dashboard');
 		$user_profile = $this->mdl_user->get_id($user_id);
 		$view_data['page_title'] = lang('user.edit');
-		if ($user_profile->user_id == $this->session->userdata('user_id'))  redirect('user');
+		if ($user_profile->user_id == $this->session->userdata('user_id'))  redirect('user/profile');
 		if ($user_profile->user_permission <= $this->session->userdata('user_permission')) redirect('dashboard');
 		$view_data['admin_widgets']['user'] = $this->show('profile', $user_profile);
 		echo modules::run('template', $view_data);
@@ -78,6 +78,11 @@ class User extends MX_Controller
 			'client_id' => $db_result->client_id,
 			);
 		$this->session->set_userdata($user_data);
+	}
+	
+	function add_session_data($data, $value)
+	{
+		$this->session->set_userdata($data, $value);
 	}
 	
 	function save_user_activity($db_result)

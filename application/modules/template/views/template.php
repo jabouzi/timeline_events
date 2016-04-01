@@ -103,10 +103,10 @@
 				<li class="icn_add_user"><?php echo anchor('client/newclient', lang('client.new')) ?></li>
 			<?php endif; ?>
 			<li class="icn_view_users"><?php echo anchor('client/clients', lang('client.users')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('banner/banners', lang('banner.list')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('banner/newbanner', lang('banner.add')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('campaign/steps', lang('client.campaignssteps')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('campaign/types', lang('client.campaignstype')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('banner/banners/'.$site_languages['current_lang'], lang('banner.list')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('banner/newbanner/'.$site_languages['current_lang'], lang('banner.add')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('campaign/steps/'.$site_languages['current_lang'], lang('client.campaignssteps')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('campaign/types/'.$site_languages['current_lang'], lang('client.campaignstype')) ?></li>
 			<!--<li class="icn_profile"><?php echo anchor('client', lang('client.profile')) ?></li>//-->
 		</ul>
 		<h3><?php echo lang('user.title'); ?></h3>
@@ -115,11 +115,11 @@
 				<li class="icn_add_user"><?php echo anchor('user/newuser', lang('user.new')) ?></li>
 			<?php endif; ?>
 			<li class="icn_view_users"><?php echo anchor('user/users', lang('user.users')) ?></li>
-			<li class="icn_profile"><?php echo anchor('user', lang('user.profile')) ?></li>
+			<li class="icn_profile"><?php echo anchor('user/profile', lang('user.profile')) ?></li>
 		</ul>
 		<h3><?php echo lang('admin.title'); ?></h3>
 		<ul class="toggle">
-			<li class="icn_tags"><?php echo anchor('language', lang('language.title')) ?></li>
+			<li class="icn_tags"><?php echo anchor('language/languages', lang('language.title')) ?></li>
 		</ul>
 		
 		<footer>
@@ -147,16 +147,18 @@
 		<h4 <?php echo $display_warning; ?> class="alert_warning"><?php echo $warning_message; ?></h4>
 		<h4 <?php echo $display_error; ?> class="alert_error"><?php echo $error_message; ?></h4>
 		<h4 <?php echo $display_success; ?> class="alert_success"><?php echo $success_message; ?></h4>
-
+		
+		<form id="change_site_lang" action="<?php echo site_url('template/change_site_language'); ?>" method="post">
+			<input type="hidden" name="current_uri" value="<?php echo $site_languages['current_uri']; ?>">
+			<?php 
+				echo '<p>'.lang('language.site'); 
+				echo form_dropdown('site_language', $site_languages['uris'],  $current_lang, $submit);
+				echo '</p>';
+			?>
+		</form>
+		
 		<?php
 		
-		if (isset($site_languages))
-		{
-			echo '<p>'.lang('language.site'); 
-			echo form_dropdown('site_language', $site_languages['uris'],  $site_languages['current_uri'], $redirect);
-			echo '</p>';
-		}
-
 		foreach($admin_widgets as $widget => $content)
 		{
 			echo $content;
