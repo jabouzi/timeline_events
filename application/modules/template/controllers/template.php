@@ -21,15 +21,16 @@ class Template extends MX_Controller
 			$view_data['error_message'] = $this->session->userdata('error_message');
 			$view_data['success_message'] = $this->session->userdata('success_message');
 
-			//if (!in_array(item($this->uri->segment_array(), 2), array('language','user','manager','client')))
-			//{
-				$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
-				if (!$this->session->userdata('current_lang'))  modules::run('user/add_session_data', 'current_lang', 'fr');
-			//}
+			$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
+			if (!$this->session->userdata('current_lang'))
+			{
+				$language = $this->mdl_language->get_where("language_code = 'fr'")->row();
+				modules::run('user/add_session_data', 'current_lang' , $language->language_code);
+				modules::run('user/add_session_data', 'current_lang_id' , $language->language_id);
+			}
 
 			$view_data['current_lang'] = $this->session->userdata('current_lang');
 			$view_data['site_languages'] = $languages;
-			var_dump($view_data['current_lang']);
 
 			foreach($this->lang->languages as $key => $value)
 			{
@@ -79,7 +80,9 @@ class Template extends MX_Controller
 	
 	function change_site_language()
 	{
-		modules::run('user/add_session_data', 'current_lang' , $this->input->post('site_language'));
+		$language = $this->mdl_language->get_where("language_code = '".$this->input->post('site_language')."'")->row();
+		modules::run('user/add_session_data', 'current_lang' , $language->language_code);
+		modules::run('user/add_session_data', 'current_lang_id' , $language->language_id);
 		redirect($this->input->post('current_uri'));
 	}
 }

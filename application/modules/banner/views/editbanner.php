@@ -19,7 +19,6 @@
 				<input type="hidden" id="admin_error" value="<?php echo lang('admin.error'); ?>">
 				<input type="hidden" id="error_message" value="">
 				<input type="hidden" id="banner_exists_url" value="<?php echo site_url('banner/banner_exists'); ?>">
-				<input type="hidden" name="language_id" id="language_id" value="<?php echo $language_id; ?>">
 			</div>
 		</footer>
 	</form>

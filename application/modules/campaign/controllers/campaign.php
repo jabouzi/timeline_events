@@ -31,22 +31,18 @@ class Campaign extends MX_Controller
 		echo modules::run('template/campaign', $view_data);
 	}
 	
-	function steps($lang = 'fr')
+	function steps()
 	{
 		$view_data['page_title'] = lang('campaign.steps');
-		
 		$campaign_data['steps'] = $this->mdl_campaigns_steps->i18n_query($lang)->result();
-		$campaign_data['language_code'] = $lang;
 		$view_data['admin_widgets']['steps'] = $this->show('campaign_steps', $campaign_data);
 		echo modules::run('template', $view_data);
 	}
 	
-	function types($lang = 'fr')
+	function types()
 	{
 		$view_data['page_title'] = lang('campaign.types');
-		
 		$campaign_data['types'] = $this->mdl_campaigns_types->i18n_query($lang)->result();
-		$campaign_data['language_code'] = $lang;
 		$view_data['admin_widgets']['types'] = $this->show('campaign_types', $campaign_data);
 		echo modules::run('template', $view_data);
 	}
@@ -134,7 +130,7 @@ class Campaign extends MX_Controller
 		echo modules::run('template/campaign', $view_data);
 	}
 	
-	function editstep($step_id, $lang = 'fr')
+	function editstep($step_id)
 	{
 		$view_data['page_title'] = lang('campaign.step');
 		$languages = $this->mdl_language->get()->result();
@@ -350,7 +346,7 @@ class Campaign extends MX_Controller
 		}
 	}
 	
-	function process_step($lang = 'fr')
+	function process_step()
 	{
 		$campaign_step_data = array(
 			'campaign_step_active' => $this->input->post('campaign_step_active')

@@ -19,12 +19,10 @@ class Banner extends MX_Controller
 
 	}
 
-	function banners($lang = 'fr')
+	function banners()
 	{
 		$view_data['page_title'] = lang('banner.list');
-		$query = 
-		$data['banners'] = $this->mdl_campaigns_banners->i18n_query($lang);
-		$data['language_code'] = $lang;
+		$data['banners'] = $this->mdl_campaigns_banners->i18n_query($this->session->userdata('current_lang'));
 		$view_data['admin_widgets']['banner'] = $this->show('banners_list', $data);
 		echo modules::run('template', $view_data);
 	}
@@ -40,13 +38,11 @@ class Banner extends MX_Controller
 		echo modules::run('template', $view_data);
 	}
 
-	function editbanner($banner_id = 0, $lang = 'fr')
+	function editbanner($banner_id = 0)
 	{
 		if (!$banner_id) redirect('dashboard');
-		$languages = $this->mdl_language->get()->result();
-		$data['language_id'] = item(array_for_dropdown($languages, 'language_code'), $lang)->language_id;
 		$data['banner'] = $this->mdl_campaigns_banners->get_id('campaign_banner_id', $banner_id)->row();
-		$banner_i18n = $this->mdl_campaigns_i18n->get_where(array('table_name' => 'campaigns_banners', 'table_id' => $banner_id, 'language_id' => $data['language_id']))->row();
+		$banner_i18n = $this->mdl_campaigns_i18n->get_where(array('table_name' => 'campaigns_banners', 'table_id' => $banner_id, 'language_id' => $this->session->userdata('current_lang_id')))->row();
 		if ($banner_i18n)
 		{
 			$data['banner']->campaign_banner_name = $banner_i18n->i18n_name;
@@ -56,7 +52,6 @@ class Banner extends MX_Controller
 			$data['banner']->campaign_banner_name = '';
 		}
 		$data['clients'] = array_for_dropdown($this->mdl_client->get(), 'client_id', 'client_name');
-		$data['language_code'] = $lang;
 		$view_data['page_title'] = lang('banner.edit');
 		$view_data['admin_widgets']['banner'] = $this->show('editbanner', $data);
 		echo modules::run('template', $view_data);
@@ -100,7 +95,7 @@ class Banner extends MX_Controller
 		$banner_i18n_data = array(
 			'table_name' => 'campaigns_banners',
 			'i18n_name' => $this->input->post('campaign_banner_name'),
-			'language_id' => $this->input->post('language_id')
+			'language_id' => $this->session->userdata('current_lang_id')
 		);
 
 		$this->add_banner($banner_data, $banner_i18n_data);
@@ -116,7 +111,7 @@ class Banner extends MX_Controller
 		$banner_i18n_data = array(
 			'table_name' => 'campaigns_banners',
 			'table_id' => $this->input->post('campaign_banner_id'),
-			'language_id' => $this->input->post('language_id')
+			'language_id' => $this->session->userdata('current_lang_id')
 		);
 
 		$this->edit_banner($banner_data, $banner_i18n_data, $this->input->post('campaign_banner_name'), $lang);

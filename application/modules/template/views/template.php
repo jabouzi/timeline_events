@@ -103,10 +103,10 @@
 				<li class="icn_add_user"><?php echo anchor('client/newclient', lang('client.new')) ?></li>
 			<?php endif; ?>
 			<li class="icn_view_users"><?php echo anchor('client/clients', lang('client.users')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('banner/banners/'.$site_languages['current_lang'], lang('banner.list')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('banner/newbanner/'.$site_languages['current_lang'], lang('banner.add')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('campaign/steps/'.$site_languages['current_lang'], lang('client.campaignssteps')) ?></li>
-			<li class="icn_view_users"><?php echo anchor('campaign/types/'.$site_languages['current_lang'], lang('client.campaignstype')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('banner/banners', lang('banner.list')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('banner/newbanner', lang('banner.add')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('campaign/steps', lang('client.campaignssteps')) ?></li>
+			<li class="icn_view_users"><?php echo anchor('campaign/types', lang('client.campaignstype')) ?></li>
 			<!--<li class="icn_profile"><?php echo anchor('client', lang('client.profile')) ?></li>//-->
 		</ul>
 		<h3><?php echo lang('user.title'); ?></h3>

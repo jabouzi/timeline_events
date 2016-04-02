@@ -20,7 +20,7 @@
 						<?php
 						 if ($this->session->userdata('user_permission') < 2) : ?>
 						<td>
-						<?php echo anchor('campaign/editstep/'.$item->campaign_step_id.'/'.$language_code, '<img  src="'.site_url().'assets/images/icn_edit.png" title="'.lang('campaign.step.edit').'">'); ?>
+						<?php echo anchor('campaign/editstep/'.$item->campaign_step_id, '<img  src="'.site_url().'assets/images/icn_edit.png" title="'.lang('campaign.step.edit').'">'); ?>
 							<input class="trash" data-userid="<?php echo $item->campaign_step_id; ?>" type="image" src="<?php echo site_url(); ?>assets/images/icn_trash.png" title="<?php echo lang('campaign.step.delete'); ?>">
 							<a class="deletebutton" id="delete_<?php echo $item->campaign_step_id; ?>" href="<?php echo site_url('campaign/delete_step/'.$item->campaign_step_id); ?>"><?php echo lang('general.delete.confirm'); ?></a>
 						</td>

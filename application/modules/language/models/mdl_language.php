@@ -36,13 +36,6 @@ class Mdl_language extends CI_Model
 	function get_where($where)
 	{
 		$table = "toolbox_languages";
-		$query = $this->db->get_id($table, $where);
-		return $query;
-	}
-	
-	function get_other_where($where)
-	{
-		$table = "toolbox_languages";
 		$query = $this->db->get_where($table, $where);
 		return $query;
 	}
