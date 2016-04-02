@@ -10,10 +10,6 @@
 				<label><?php echo lang('banner.client'); ?></label>
 				<?php echo form_dropdown('client_id', $clients); ?>
 			</fieldset>
-			<fieldset>
-				<label><?php echo lang('language.title'); ?></label>
-				<?php echo form_dropdown('language_id', $languages); ?>
-			</fieldset>
 			<div class="clear"></div>
 		</div>
 		<footer>

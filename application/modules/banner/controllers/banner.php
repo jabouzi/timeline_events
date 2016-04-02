@@ -33,7 +33,6 @@ class Banner extends MX_Controller
 		$view_data['page_title'] = lang('banner.new');
 		$data['clients'] = array_for_dropdown($this->mdl_client->get(), 'client_id', 'client_name');
 		$languages = $this->mdl_language->get()->result();
-		$data['languages'] = array_for_dropdown($languages, 'language_id', 'language_name');
 		$view_data['admin_widgets']['user'] = $this->show('newbanner', $data);
 		echo modules::run('template', $view_data);
 	}

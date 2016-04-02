@@ -1,41 +1,31 @@
 <article class="module width_full">
 	<header><h3><?php echo lang('user.edit'); ?></h3></header>
-	<form id="user_profile" method="post" action="<?php echo site_url('user/process_edituser'); ?>">
-		<div class="module_content">
-			<fieldset>
-				<label><?php echo lang('user.firstname'); ?></label>
-				<input type="text" name="user_firstname" id="user_firstname" value="<?php echo $user->user_firstname; ?>" data-validate="required" data-type="text" title="<?php echo lang('user.firstname'); ?>">
-			</fieldset>
-			<fieldset>
-				<label><?php echo lang('user.lastname'); ?></label>
-				<input type="text" name="user_lastname" id="user_lastname" value="<?php echo $user->user_lastname; ?>" data-validate="required" data-type="text" title="<?php echo lang('user.lastname'); ?>">
-			</fieldset>
-			<fieldset>
-				<label><?php echo lang('user.email'); ?></label>
-				<input type="text" name="user_email" id="user_email" value="<?php echo $user->user_email; ?>" data-validate="required" data-type="email" title="<?php echo lang('user.email'); ?>">
-			</fieldset>
-			<fieldset>
-				<label><?php echo lang('user.password'); ?></label>
-				<input type="password" name="user_password" id="user_password" value="" title="<?php echo lang('user.password'); ?>">
-			</fieldset>
-			<fieldset style="width:48%; float:left; margin-right: 3%;">
-				<label><?php echo lang('user.permissions'); ?></label>
-				<?php echo form_dropdown('user_permission', $permissions, $user->user_permission, 'style="width:92%;"'); ?>
-			</fieldset>
-			<fieldset style="width:48%; float:left;">
-				<label><?php echo lang('user.status'); ?></label>
-				<?php echo form_dropdown('user_active', $status, ord($user->user_active)); ?>
-			</fieldset>
-			<div class="clear"></div>
-		</div>
+	<form id="permissions_form" method="post" action="<?php echo site_url('campaign/process_type'); ?>">
+	<div class="module_content">
+		<fieldset>
+			<label><?php echo lang('campaign.name'); ?></label>
+				<td><input type="text" id="campaign_type_name" name="campaign_type_name" value="<?php if (isset($type->campaign_type_name)) echo $type->campaign_type_name; ?>" data-validate="required" data-type="text" title="<?php echo lang('campaign.name'); ?>"></td>
+		</fieldset>
+		<fieldset>
+			<label><?php echo lang('campaign.color'); ?></label>
+				<td><input type="text" id="campaign_type_color" name="campaign_type_color" value="<?php if (isset($type->campaign_type_color)) echo $type->campaign_type_color; ?>" data-validate="required" data-type="text" title="<?php echo lang('campaign.color'); ?>"></td>
+				<label for="background-color"><label><?php echo lang('general.color'); ?></label></label>
+				<input type="color" onchange="javascript:document.getElementById('campaign_type_color').value = document.getElementById('campaign_type_background_color').value;" value="<?php echo $type->campaign_type_color; ?>" id="campaign_type_background_color">
+		</fieldset>
+		<fieldset>
+			<label><?php echo lang('user.status'); ?></label>
+			<?php echo form_dropdown('campaign_type_active', $status, $type->campaign_type_active); ?>
+		</fieldset>
+		<div class="clear"></div>
 		<footer>
 			<div class="submit_link">
-				<input type="button" id="save_user_profile" value="<?php echo lang('admin.save'); ?>" class="submit_form alt_btn">
-				<input type="hidden" name="user_id" id="user_id" value="<?php echo $user->user_id; ?>">
-				<input type="hidden" id="admin_error" value="<?php echo lang('admin.error'); ?>">
-				<input type="hidden" id="error_message" value="">
-				<input type="hidden" id="email_exists_url" value="<?php echo site_url('user/email_exists'); ?>">
+				<input type="button" id="save_permission" value="<?php echo lang('admin.save'); ?>" class="submit_form alt_btn">
+				<input type="hidden" id="active_lang" name="active_lang" value="en">
+				<input type="hidden" id="campaign_type_id" name="campaign_type_id" value="<?php echo $type->campaign_type_id; ?>">
 			</div>
 		</footer>
 	</form>
-</article><!-- end article -->
+	<input type="hidden" id="admin_error" value="<?php echo lang('admin.error'); ?>">
+	<input type="hidden" id="error_message" value="">
+	<input type="hidden" id="permission_number" value="0">
+</article><!-- end of article -->

@@ -34,7 +34,7 @@ class Campaign extends MX_Controller
 	function steps()
 	{
 		$view_data['page_title'] = lang('campaign.steps');
-		$campaign_data['steps'] = $this->mdl_campaigns_steps->i18n_query($lang)->result();
+		$campaign_data['steps'] = $this->mdl_campaigns_steps->i18n_query($this->session->userdata('current_lang'))->result();
 		$view_data['admin_widgets']['steps'] = $this->show('campaign_steps', $campaign_data);
 		echo modules::run('template', $view_data);
 	}
@@ -42,7 +42,7 @@ class Campaign extends MX_Controller
 	function types()
 	{
 		$view_data['page_title'] = lang('campaign.types');
-		$campaign_data['types'] = $this->mdl_campaigns_types->i18n_query($lang)->result();
+		$campaign_data['types'] = $this->mdl_campaigns_types->i18n_query($this->session->userdata('current_lang'))->result();
 		$view_data['admin_widgets']['types'] = $this->show('campaign_types', $campaign_data);
 		echo modules::run('template', $view_data);
 	}
@@ -133,15 +133,12 @@ class Campaign extends MX_Controller
 	function editstep($step_id)
 	{
 		$view_data['page_title'] = lang('campaign.step');
-		$languages = $this->mdl_language->get()->result();
-		$language_id = item(array_for_dropdown($languages, 'language_code'), $lang)->language_id;
 		$step = $this->mdl_campaigns_steps->get_id('campaign_step_id', $step_id);
 		$campaign_data['step'] = $step->row();
-		$campaigns_i18n = $this->mdl_campaigns_i18n->get_where(array('table_name' => 'campaigns_steps', 'table_id' => $step_id, 'language_id' => $language_id))->row();
+		$campaigns_i18n = $this->mdl_campaigns_i18n->get_where(array('table_name' => 'campaigns_steps', 'table_id' => $step_id, 'language_id' => $this->session->userdata('current_lang_id')))->row();
 		if ($campaigns_i18n) $campaign_data['step']->campaign_step_name = $campaigns_i18n->i18n_name;
 		else $campaign_data['step']->campaign_step_name =  '';
 		$campaign_data['status'] = array('0' => lang('user.inactive'), '1' => lang('user.active'));
-		$campaign_data['lang'] = $lang;
 		$view_data['admin_widgets']['step'] = $this->show('campaign_editstep', $campaign_data);
 		echo modules::run('template', $view_data);
 	}
@@ -149,10 +146,11 @@ class Campaign extends MX_Controller
 	function edittype($type_id)
 	{
 		$view_data['page_title'] = lang('campaign.type');
-		$types = $this->mdl_campaigns_types->get_id('campaign_type_id', $type_id);
+		$type = $this->mdl_campaigns_types->get_id('campaign_type_id', $type_id);
 		$campaign_data['type'] = $type->row();
-		$campaigns_i18n = $this->mdl_campaigns_i18n->get_where(array('table_name' => 'campaigns_types', 'table_id' => $type_id))->result();
-		$campaign_data['type']->campaign_type_name = array_for_dropdown($campaigns_i18n, 'language_id', 'i18n_name');
+		$campaigns_i18n = $this->mdl_campaigns_i18n->get_where(array('table_name' => 'campaigns_types', 'table_id' => $type_id, 'language_id' => $this->session->userdata('current_lang_id')))->row();
+		if ($campaigns_i18n) $campaign_data['type']->campaign_type_name = $campaigns_i18n->i18n_name;
+		else $campaign_data['type']->campaign_type_name =  '';
 		$campaign_data['status'] = array('0' => lang('user.inactive'), '1' => lang('user.active'));
 		$view_data['admin_widgets']['type'] = $this->show('campaign_edittype', $campaign_data);
 		echo modules::run('template', $view_data);
@@ -352,24 +350,19 @@ class Campaign extends MX_Controller
 			'campaign_step_active' => $this->input->post('campaign_step_active')
 		);
 		$this->update_campaign_step($this->input->post('campaign_step_id'),  $campaign_step_data);
-		foreach($this->input->post('campaign_step_name') as $language_id => $campaign_step_name)
-		{
-			$this->update_campaign_i18n('campaigns_steps', $this->input->post('campaign_step_id'), $language_id, $campaign_step_name);
-		}
+		$this->update_campaign_i18n('campaigns_steps', $this->input->post('campaign_step_id'), $this->session->userdata('current_lang_id'), $this->input->post('campaign_step_name'));
 		redirect('campaign/editstep/'.$this->input->post('campaign_step_id'));
 	}
 	
 	function process_type()
 	{
-		$campaign_step_data = array(
-			'campaign_step_active' => $this->input->post('campaign_step_active')
+		$campaign_type_data = array(
+			'campaign_type_active' => $this->input->post('campaign_type_active'),
+			'campaign_type_color' => $this->input->post('campaign_type_color')
 		);
-		$this->update_campaign_step($this->input->post('campaign_step_id'),  $campaign_step_data);
-		foreach($this->input->post('campaign_step_name') as $language_id => $campaign_step_name)
-		{
-			$this->update_campaign_i18n('campaigns_steps', $this->input->post('campaign_step_id'), $language_id, $campaign_step_name);
-		}
-		redirect('campaign/editstep/'.$this->input->post('campaign_step_id'));
+		$this->update_campaign_type($this->input->post('campaign_type_id'),  $campaign_type_data);
+		$this->update_campaign_i18n('campaigns_types', $this->input->post('campaign_type_id'), $this->session->userdata('current_lang_id'), $this->input->post('campaign_type_name'));
+		redirect('campaign/edittype/'.$this->input->post('campaign_type_id'));
 	}
 
 	function process_new_step()
@@ -383,8 +376,9 @@ class Campaign extends MX_Controller
 				$data = array('campaign_step_active' => 0);
 				$data_i18n = array('table_name' => 'campaigns_steps',
 								'table_id' => $this->mdl_campaigns_steps->insert($data),
+								'language_id' => $this->session->userdata('current_lang_id'),
 								'i18n_name' => $new);
-				$this->mdl_campaigns_i18n->insert($data);
+				$this->mdl_campaigns_i18n->insert($data_i18n);
 			}
 		}
 
@@ -399,11 +393,35 @@ class Campaign extends MX_Controller
 			$new = trim($new);
 			if (!empty($new))
 			{
-				$data = array('campaign_type_name' => $new);
-				$this->mdl_campaigns_types->insert($data);
+				$data = array('campaign_type_active' => 0);
+				$data_i18n = array('table_name' => 'campaigns_types',
+								'table_id' => $this->mdl_campaigns_types->insert($data),
+								'language_id' => $this->session->userdata('current_lang_id'),
+								'i18n_name' => $new);
+				$this->mdl_campaigns_i18n->insert($data_i18n);
 			}
 		}
 
+		$this->session->set_userdata('success_message', lang('language.success'));
+		redirect('campaign/types');
+	}
+	
+	function delete_step($step_id)
+	{
+		$data_i18n = array('table_name' => 'campaigns_steps',
+						'table_id' => $step_id,
+						'language_id' => $this->session->userdata('current_lang_id'));
+		$this->mdl_campaigns_i18n->delete($data_i18n);
+		$this->session->set_userdata('success_message', lang('language.success'));
+		redirect('campaign/steps');
+	}
+	
+	function delete_type($type_id)
+	{
+		$data_i18n = array('table_name' => 'campaigns_types',
+						'table_id' => $type_id,
+						'language_id' => $this->session->userdata('current_lang_id'));
+		$this->mdl_campaigns_i18n->delete($data_i18n);
 		$this->session->set_userdata('success_message', lang('language.success'));
 		redirect('campaign/types');
 	}
@@ -633,11 +651,17 @@ class Campaign extends MX_Controller
 	{
 		$this->mdl_campaigns_steps->update('campaign_step_id', $campaign_step_id, $campaign_step_data);
 	}
+	
+	private function update_campaign_type($campaign_type_id, $campaign_type_data)
+	{
+		$this->mdl_campaigns_types->update('campaign_type_id', $campaign_type_id, $campaign_type_data);
+	}
 
 	private function update_campaign_i18n($table_name, $table_id, $language_id, $i18n_name)
 	{
-		$campain_step_data = array('table_name' => $table_name, 'table_id' => $table_id, 'language_id' => $language_id, 'i18n_name' => $i18n_name);
+		$campain_step_data = array('table_name' => $table_name, 'table_id' => $table_id, 'language_id' => $language_id);
 		$this->mdl_campaigns_i18n->delete($campain_step_data);
+		$campain_step_data['i18n_name'] = $i18n_name;
 		$this->mdl_campaigns_i18n->insert($campain_step_data);
 	}
 

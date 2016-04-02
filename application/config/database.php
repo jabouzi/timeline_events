@@ -71,14 +71,14 @@ else if(strstr($_SERVER['HTTP_HOST'], "dev.tgiprojects.com"))
 }
 else 
 {
- 	$db['default']['hostname'] = 'mysql:host=209.104.115.222';
-	$db['default']['username'] = 'metrotoolbox';
-	$db['default']['password'] = 'aythKoU9N2hob';
-	$db['default']['database'] = 'metrotoolbox';  
- 	//$db['default']['hostname'] = 'mysql:host=localhost';
-	//$db['default']['username'] = 'root';
-	//$db['default']['password'] = '7024043';
+ 	//$db['default']['hostname'] = 'mysql:host=209.104.115.222';
+	//$db['default']['username'] = 'metrotoolbox';
+	//$db['default']['password'] = 'aythKoU9N2hob';
 	//$db['default']['database'] = 'metrotoolbox';  
+ 	$db['default']['hostname'] = 'mysql:host=localhost';
+	$db['default']['username'] = 'root';
+	$db['default']['password'] = '7024043';
+	$db['default']['database'] = 'metrotoolbox';  
 }
 
 $db['default']['dbdriver'] = 'pdo';
