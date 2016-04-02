@@ -21,13 +21,15 @@ class Template extends MX_Controller
 			$view_data['error_message'] = $this->session->userdata('error_message');
 			$view_data['success_message'] = $this->session->userdata('success_message');
 
-			if (!in_array(item($this->uri->segment_array(), 2), array('language','user','manager','client')))
-			{
+			//if (!in_array(item($this->uri->segment_array(), 2), array('language','user','manager','client')))
+			//{
 				$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
 				if (!$this->session->userdata('current_lang'))  modules::run('user/add_session_data', 'current_lang', 'fr');
-			}
+			//}
 
 			$view_data['current_lang'] = $this->session->userdata('current_lang');
+			$view_data['site_languages'] = $languages;
+			var_dump($view_data['current_lang']);
 
 			foreach($this->lang->languages as $key => $value)
 			{

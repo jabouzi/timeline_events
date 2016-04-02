@@ -149,10 +149,10 @@
 		<h4 <?php echo $display_success; ?> class="alert_success"><?php echo $success_message; ?></h4>
 		
 		<form id="change_site_lang" action="<?php echo site_url('template/change_site_language'); ?>" method="post">
-			<input type="hidden" name="current_uri" value="<?php echo $site_languages['current_uri']; ?>">
+			<input type="hidden" name="current_uri" value="<?php echo current_url(); ?>">
 			<?php 
 				echo '<p>'.lang('language.site'); 
-				echo form_dropdown('site_language', $site_languages['uris'],  $current_lang, $submit);
+				echo form_dropdown('site_language', $site_languages,  $current_lang, $submit);
 				echo '</p>';
 			?>
 		</form>
