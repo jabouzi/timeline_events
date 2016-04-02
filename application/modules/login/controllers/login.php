@@ -67,7 +67,7 @@ class Login extends MX_Controller
 		{
 			$this->show('login.failed');
 		}
-		else if(!ord($result->user_active))
+		else if(!$result->user_active)
 		{
 			$this->show('user.nonactive');
 		}
@@ -89,16 +89,8 @@ class Login extends MX_Controller
 				$hash = generate_random_string(26);
 				$this->setcookie($username, $hash);
 			}
-					
-			if ($result->user_permission == 1){
-				redirect('dashboard');
-			}
-			else
-			{
-				redirect('campaign');
-			}
 			
-			
+			redirect('campaign');
 		}
 	}
 	
@@ -147,7 +139,7 @@ class Login extends MX_Controller
 			modules::run('user/save_user_activity', $result);
 			$this->deletecookie($username, $old_hash);
 			$this->setcookie($username, $hash);
-			redirect('dashboard');
+			redirect('campaign');
 		}
 	}
 
@@ -159,7 +151,7 @@ class Login extends MX_Controller
 		if ($cookie)
 		{
 			$hash = $this->db->escape($cookie[1]);
-			$query = "UPDATE toolbox_cookies SET cookie_user_active = b'1' WHERE cookie_hash = {$hash}";
+			$query = "UPDATE toolbox_cookies SET cookie_user_active = '1' WHERE cookie_hash = {$hash}";
 			$result = $this->mdl_login->custom_query($query);
 		}
 		$this->session->sess_destroy();
@@ -170,7 +162,7 @@ class Login extends MX_Controller
 	{
 		if ($this->session->userdata('user_email'))
 		{
-			redirect('dashboard');
+			redirect('campaign');
 		}
 	}
 	
@@ -183,7 +175,7 @@ class Login extends MX_Controller
 		{
 			$hash = $cookie[1];
 			$result = $this->mdl_login->get_where('toolbox_cookies', 'cookie_hash', $hash);
-			if ($result) return ord($result->cookie_user_active);
+			if ($result) return $result->cookie_user_active;
 		}
 		
 		return false;

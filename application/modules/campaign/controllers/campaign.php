@@ -15,14 +15,19 @@ class Campaign extends MX_Controller
 		$this->load->model('mdl_campaigns_documents');
 		$this->load->model('mdl_campaigns_i18n');
 		$this->load->model('language/mdl_language');
+		$this->load->model('client/mdl_client');
 		$this->load->helper(array('form', 'url'));
+		if (!$this->session->userdata('site_client_id'))
+		{
+			$client = $this->mdl_client->get_where("client_name = 'Metro'")->row();
+			modules::run('user/add_session_data', 'site_client_id' , $client->client_id);
+		}
 	}
 
 	function index()
 	{
 		$view_data['page_title'] = lang('dashboard.title3');
-
-		$banners = $this->mdl_campaigns_banners->get();
+		$banners = $this->mdl_campaigns_banners->i18n_client_query('fr',9);
 		$campaign_data['banners'] = $banners->result();
 		$view_data['stylesheet'] = array('jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
