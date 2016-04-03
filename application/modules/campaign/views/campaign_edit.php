@@ -138,10 +138,10 @@
 					
 						<div class="row">
 							<div class="col-sm-6">
-								<input class="datechooser" type="text" name="campaign_step_date_start[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_start<?php echo $campaign_step_id; ?>" value="<?php if (isset($campaign_steps_types[$campaign_step_id])) echo date('d/m/Y', strtotime($campaign_steps_types[$campaign_step_id]->campaign_step_date_start)); ?>"/>
+								<input class="datechooser" type="text" name="campaign_step_date_start[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_start<?php echo $campaign_step_id; ?>" value="<?php if (isset($campaign_steps_data[$campaign_step_id])) echo date('d/m/Y', strtotime($campaign_steps_data[$campaign_step_id]->campaign_step_date_start)); ?>"/>
 							</div>
 							<div class="col-sm-6 etapes-au">
-								<input class="datechooser" type="text" name="campaign_step_date_end[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_end<?php echo $campaign_step_id; ?>" value="<?php if (isset($campaign_steps_types[$campaign_step_id])) echo date('d/m/Y', strtotime($campaign_steps_types[$campaign_step_id]->campaign_step_date_end)); ?>"/>
+								<input class="datechooser" type="text" name="campaign_step_date_end[<?php echo $campaign_step_id; ?>]" id="campaign_step_date_end<?php echo $campaign_step_id; ?>" value="<?php if (isset($campaign_steps_data[$campaign_step_id])) echo date('d/m/Y', strtotime($campaign_steps_data[$campaign_step_id]->campaign_step_date_end)); ?>"/>
 							</div>
 						</div>
 					<?php endforeach; ?>
