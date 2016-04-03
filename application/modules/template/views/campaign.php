@@ -67,7 +67,6 @@
 						<span>Admin</span>
 						</a>
 						<?php
-							//$openedid = $this->session->userdata['campaign_banner_id'];
 						}
 						?>
 						</li>
@@ -97,7 +96,14 @@
 									<span>Déconnexion   </span>
 									</a>
 								</li>
-								<li><?php echo form_dropdown('lang', $languages, $lang, $redirect); ?></li>
+								<li>
+									<form id="change_site_lang" action="<?php echo site_url('template/change_site_language'); ?>" method="post">
+										<input type="hidden" name="current_site_uri" value="<?php echo implode('/',$this->uri->segment_array()); ?>">
+										<?php 
+											echo form_dropdown('site_language', $site_languages,  $current_lang, $submit);
+										?>
+									</form>
+								</li>
 							</ul>
 						</div>
 					</div>

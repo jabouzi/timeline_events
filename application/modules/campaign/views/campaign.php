@@ -48,16 +48,9 @@
 		<div class="legendes">
 			<p class="lendende-text">Légende</p>
 			<div class="legende-colors">
-				<div class="legende-green"><span></span>Ouverture</div>
-				<div class="legende-red"><span></span>Ren majeurs</div>
-				<div class="legende-yellow"><span></span>Ren mineurs</div>				
-				<div class="legende-orange"><span></span>Ren transformations</div>
-				<div class="legende-blue"><span></span>Loc modernisation</div>
-				<div class="legende-bleu-marine"><span></span>Loc transformation</div>
-				<div class="legende-violet"><span></span>Relance</div>
-				<div class="legende-gris-light"><span></span>N/D</div>
-				<div class="legende-bleu-ciel"><span></span>Non active</div>
-				<div class="legende-gris-dark"><span></span>Fermée</div>
+				<?php foreach($campaing_types as $campaing_type) : ?>
+					<div><span style="background: <?php echo $campaing_type->campaign_type_color; ?>"></span><?php echo $campaing_type->campaign_type_name; ?></div>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>

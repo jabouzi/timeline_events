@@ -64,7 +64,6 @@ trait DatabaseTrait
 	
 	function insert($data)
 	{
-		var_dump($this->table, $data);
 		$this->db->insert($this->table, $data);
 		return $this->db->insert_id();
 	}

@@ -75,7 +75,7 @@
 	<header id="header">
 		<hgroup>
 			<h1 class="site_title"><?php echo lang('dashboard.title1'); ?></h1>
-			<h1 class="site_title"><a href="/<?php echo $this->lang->lang(); ?>/campaign"><?php echo 'Voir le site'; ?></a></h1>
+			<h1 class="site_title"><a href="<?php echo site_url(); ?><?php echo $default_lang; ?>/campaign"><?php echo 'Voir le site'; ?></a></h1>
 		</hgroup>
 	</header> <!-- end of header bar -->
 
@@ -148,7 +148,7 @@
 		<h4 <?php echo $display_error; ?> class="alert_error"><?php echo $error_message; ?></h4>
 		<h4 <?php echo $display_success; ?> class="alert_success"><?php echo $success_message; ?></h4>
 		
-		<form id="change_site_lang" action="<?php echo site_url('template/change_site_language'); ?>" method="post">
+		<form id="change_lang" action="<?php echo site_url('template/change_language'); ?>" method="post">
 			<input type="hidden" name="current_uri" value="<?php echo current_url(); ?>">
 			<?php 
 				echo '<p>'.lang('language.site'); 

@@ -27,8 +27,10 @@ class Campaign extends MX_Controller
 	function index()
 	{
 		$view_data['page_title'] = lang('dashboard.title3');
-		$banners = $this->mdl_campaigns_banners->i18n_client_query('fr',9);
+		$banners = $this->mdl_campaigns_banners->i18n_client_query($this->session->userdata('current_site_lang'),9);
 		$campaign_data['banners'] = $banners->result();
+		$campaing_types = $this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result();
+		$campaign_data['campaing_types'] = $campaing_types;
 		$view_data['stylesheet'] = array('jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
 		$view_data['json'] = array('data_'.$this->lang->lang().'.json', 'group_'.$this->lang->lang().'.json', 'holidays.json');
@@ -62,9 +64,10 @@ class Campaign extends MX_Controller
 
 	function add()
 	{
-		$campaign_banners = $this->mdl_campaigns_banners->get()->result();
-		$campaign_types = $this->mdl_campaigns_types->get()->result();
+		$campaign_banners = $this->mdl_campaigns_banners->i18n_client_query($this->session->userdata('current_site_lang'),9)->result();
+		//$campaign_types = $this->mdl_campaigns_types->get()->result();
 
+		$campaign_types = $this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result();
 		$campaign_steps_types = $this->mdl_campaigns_steps_types->get()->result();
 		$campaign_managers_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_tgi' => 1))->result();
 		$campaign_managers_client = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_tgi' => 0))->result();
@@ -95,17 +98,23 @@ class Campaign extends MX_Controller
 
 		$campaign_data['campaign'] = $this->mdl_campaigns->get_id('campaign_id', $id)->row();
 
-		$campaign_data['campaign_banner'] = $this->mdl_campaigns_banners->get_id('campaign_banner_id', $campaign_data['campaign']->campaign_banner_id)->row();
-		$campaign_banners = $this->mdl_campaigns_banners->get()->result();
+		$campaign_data['campaign_banner'] = $this->mdl_campaigns_banners->i18n_id_query($this->session->userdata('current_site_lang'), $campaign_data['campaign']->campaign_banner_id)->row();
+		$campaign_banners = $this->mdl_campaigns_banners->i18n_client_query($this->session->userdata('current_site_lang'), 9)->result();
 
-		$campaign_data['campaign_type'] = $this->mdl_campaigns_types->get_id('campaign_type_id', $campaign_data['campaign']->campaign_type_id)->row();
-		$campaign_types = $this->mdl_campaigns_types->get()->result();
+		$campaign_type = $this->mdl_campaigns_types->i18n_id_query($this->session->userdata('current_site_lang'), $campaign_data['campaign']->campaign_type_id)->row();
+		if($campaign_type)	$campaign_data['campaign_type'] = $campaign_type->campaign_type_name;
+		else $campaign_data['campaign_type'] = '';
 
+		$campaign_types = $this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result();
+
+		$campaign_steps = $this->mdl_campaigns_steps->i18n_site_query($this->session->userdata('current_site_lang'))->result();
+		
 		$campaign_steps_types = $this->mdl_campaigns_steps_types->get_id('campaign_id', $campaign_data['campaign']->campaign_id)->result();
-		$campaign_steps = $this->mdl_campaigns_steps->get()->result();
+		
+		
 
-		$campaign_type = $this->mdl_campaigns_types->get_where(array('campaign_type_id' => $campaign_data['campaign']->campaign_type_id))->row();
-		$campaign_data['campaign_type'] = @$campaign_type->campaign_type_name;
+		//$campaign_type = $this->mdl_campaigns_types->get_where(array('campaign_type_id' => $campaign_data['campaign']->campaign_type_id))->row();
+		//$campaign_data['campaign_type'] = $campaign_type->campaign_type_name;
 
 		$campaign_data['campaign_manager_client'] = $this->mdl_campaigns_project_managers->get_id('campaign_manager_id', $campaign_data['campaign']->campaign_manager_client)->row();
 		$campaign_data['campaign_manager_tgi'] = $this->mdl_campaigns_project_managers->get_id('campaign_manager_id', $campaign_data['campaign']->campaign_manager_tgi)->row();
@@ -125,7 +134,7 @@ class Campaign extends MX_Controller
 		array_unshift($campaign_data['campaign_managers_client'], '');
 
 		$campaign_data['campaign_steps_types'] = array_for_dropdown($campaign_steps_types, 'campaign_step_type_id', 'campaign_step_type_name');
-		$campaign_data['campaign_steps'] = array_for_dropdown($campaign_steps, 'campaign_step');
+		$campaign_data['campaign_steps'] = array_for_dropdown($campaign_steps, 'campaign_step_id', 'campaign_step_name');
 
 		$this->session->userdata['campaign_banner_id'] = $campaign_data['campaign']->campaign_banner_id;
 
@@ -224,9 +233,9 @@ class Campaign extends MX_Controller
 			'campaign_store_number' => $this->input->post('campaign_store_number'),
 			'campaign_title' => $this->input->post('campaign_title'),
 			'campaign_city' => $this->input->post('campaign_city'),
-			'campaign_date_start' => ((isempty($this->input->post('campaign_date_start'))) ? '0000-00-00' : DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->format('Y-m-d')),
+			'campaign_date_start' => ((isempty($this->input->post('campaign_date_start'))) ? null : DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->format('Y-m-d')),
 			//'campaign_date_end' => DateTime::createFromFormat('d/m/Y', item($this->input->post('campaign_step_date_end'), 6))->format('Y-m-d'),
-			'campaign_date_evenement' => ((isempty($this->input->post('campaign_date_evenement'))) ? '0000-00-00' : DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_evenement'))->format('Y-m-d')),
+			'campaign_date_evenement' => ((isempty($this->input->post('campaign_date_evenement'))) ? null : DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_evenement'))->format('Y-m-d')),
 			//'campaign_date_media_start' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_start'))->format('Y-m-d'),
 			//'campaign_date_media_end' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_end'))->format('Y-m-d'),
 			'campaign_branch' => $this->input->post('campaign_branch'),
@@ -474,7 +483,7 @@ class Campaign extends MX_Controller
 				else $classname = friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name);
 			}
 
-			$banners = $this->mdl_campaigns_banners->get_where(array('campaign_banner_id' => $campaign->campaign_banner_id));
+			$banners = $this->mdl_campaigns_banners->i18n_id_query($this->session->userdata('current_site_lang'), $campaign->campaign_banner_id);
 			$campaign_groups[$banners->row()->campaign_banner_name][] = str_pad($campaign->campaign_city, strlen($longest_campaing->campaign_city), ".");
 			$campaign_ids[$banners->row()->campaign_banner_name][str_pad($campaign->campaign_city, strlen($longest_campaing->campaign_city), ".")] = $campaign->campaign_id;
 			

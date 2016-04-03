@@ -17,7 +17,7 @@
 					<?php foreach ($types as $item) : ?>
 						<tr>
 							<td style="width:30%"><?php echo $item->campaign_type_name ?></td>
-							<td style="width:30%"><?php echo $item->campaign_type_color ?></td>
+							<td style="width:30%"><span style="padding:0 20px;background-color:<?php echo $item->campaign_type_color ?>">&nbsp;</span></td>
 							<td style="width:30%"><?php echo lang(item(get_client_status_list(), $item->campaign_type_active)); ?></td>
 							<?php
 							 if ($this->session->userdata('user_permission') < 2) : ?>
