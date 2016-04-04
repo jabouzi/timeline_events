@@ -27,7 +27,7 @@ class Login extends MX_Controller
 		
 		$this->load->helper('form');
 		$this->load->helper('cookie');
-		
+		$this->load->model('language/mdl_language');
 		$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
 		foreach($languages as $key => $value)
 		{
