@@ -42,7 +42,7 @@ class Template extends MX_Controller
 			}
 			$view_data['lang'] = site_url().$this->lang->switch_uri($this->lang->lang());
 			$view_data['redirect'] = 'onChange="window.document.location.href=this.options[this.selectedIndex].value;"';
-			$view_data['submit'] = 'onChange="$(\'#change_site_lang\').submit();"';
+			$view_data['submit'] = 'onChange="$(\'#change_lang\').submit();"';
 			$this->load->view('template', $view_data);
 			$this->session->unset_userdata('warning_message');
 			$this->session->unset_userdata('info_message');
