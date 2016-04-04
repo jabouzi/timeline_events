@@ -67,16 +67,13 @@ class Template extends MX_Controller
 			$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
 			$default_lang = $this->mdl_language->get_where("language_default = '1'")->row();
 			modules::run('user/add_session_data', 'default_lang' , $default_lang->language_code);
-			if (!$this->session->userdata('current_lang'))
+			if (!$this->session->userdata('current_site_lang'))
 			{
 				modules::run('user/add_session_data', 'current_site_lang' , $default_lang->language_code);
 				modules::run('user/add_session_data', 'current_site_lang_id' , $default_lang->language_id);
 			}
 			
-			//foreach($languages as $key => $value)
-			//{
-				//$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
-			//}
+			var_dump();
 			
 			$view_data['current_lang'] = $this->session->userdata('current_site_lang');
 			$view_data['site_languages'] = $languages;
