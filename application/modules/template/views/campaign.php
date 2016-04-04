@@ -87,7 +87,7 @@
 								<span><?php echo $this->session->userdata('user_firstname'); ?> <?php echo $this->session->userdata('user_lastname'); ?></span>
 								</a>
 								<li>
-									<a href="<?php site_url("login/logout"); ?>" class="btn-icon-on-dark-header">
+									<a href="<?php echo site_url("login/logout"); ?>" class="btn-icon-on-dark-header">
 									<svg class="icon-svg deconnexionBlanc"  viewBox="0 0 38 32" x="1200">
 										<path fill="#FFF" d="M37.234 16.57l.657-.663-7.79-7.655-1.3 1.326 7.13 7-.01-1.316-7.05 7.115 1.32 1.308 7.05-7.115z"/>
 										<path fill="#FFF" d="M34.918 16.75h.93v-1.86h-20.49v1.86h19.56z"/>

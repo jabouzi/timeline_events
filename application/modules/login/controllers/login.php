@@ -28,7 +28,8 @@ class Login extends MX_Controller
 		$this->load->helper('form');
 		$this->load->helper('cookie');
 		
-		foreach($this->lang->languages as $key => $value)
+		$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
+		foreach($languages as $key => $value)
 		{
 			$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
 		}
