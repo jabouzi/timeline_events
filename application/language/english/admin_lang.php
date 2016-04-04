@@ -118,6 +118,7 @@ $lang['client.delete.confirm'] = "Confirm deleting client";
 $lang['client.delete.success'] = "Client deleted successfully";
 $lang['client.campaignssteps'] = "Campaign steps";
 $lang['client.campaignstype'] = "Campaign types";
+$lang['client.campaignstatus'] = "Campaign status";
 
 $lang['manager.title'] = "Project Managers";
 $lang['manager.add'] = "Add Manager";
@@ -227,6 +228,7 @@ $lang['campaign.status.closed'] = "Closed";
 $lang['campaign.goto'] = "Goto";
 $lang['campaign.steps'] = "Campaign Steps";
 $lang['campaign.types'] = "Campaign Types";
+$lang['campaign.status'] = "Campaign Status";
 
 $lang['content.title'] = "Content";
 

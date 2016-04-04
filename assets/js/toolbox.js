@@ -65,6 +65,13 @@ $(document).ready(function() {
 		}
 	});
 	
+	$('#add_status').bind({
+		click: function() {
+			clear_messages();
+			add_status();
+		}
+	});
+	
 	$('.submit').click(function()
 	{
 		('#'+$(this).attr('data-value')).submit();
@@ -121,6 +128,12 @@ function add_type()
 {
 	$('#type_number').val(parseInt($('#type_number').val()) + 1);
 	$('#type_list').append('<tr><td>'+$('#new_type').html()+'</td></tr>');
+}
+
+function add_status()
+{
+	$('#status_number').val(parseInt($('#status_number').val()) + 1);
+	$('#status_list').append('<tr><td>'+$('#new_status').html()+'</td></tr>');
 }
 
 function validate_from(form_id)

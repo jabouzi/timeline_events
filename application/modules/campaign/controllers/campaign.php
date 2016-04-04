@@ -181,14 +181,14 @@ class Campaign extends MX_Controller
 		echo modules::run('template', $view_data);
 	}
 	
-	function editstatus($type_id)
+	function editstatus($status_id)
 	{
 		$view_data['page_title'] = lang('campaign.status');
 		$status = $this->mdl_campaigns_status->get_id('campaign_status_id', $status_id);
-		$campaign_data['status'] = $status->row();
+		$campaign_data['campaign_status'] = $status->row();
 		$campaigns_i18n = $this->mdl_campaigns_i18n->get_where(array('table_name' => 'campaigns_status', 'table_id' => $status_id, 'language_id' => $this->session->userdata('current_lang_id')))->row();
-		if ($campaigns_i18n) $campaign_data['status']->campaign_status_name = $campaigns_i18n->i18n_name;
-		else $campaign_data['status']->campaign_status_name =  '';
+		if ($campaigns_i18n) $campaign_data['campaign_status']->campaign_status_name = $campaigns_i18n->i18n_name;
+		else $campaign_data['campaign_status']->campaign_status_name =  '';
 		$campaign_data['status'] = array('0' => lang('user.inactive'), '1' => lang('user.active'));
 		$view_data['admin_widgets']['status'] = $this->show('campaign_editstatus', $campaign_data);
 		echo modules::run('template', $view_data);
@@ -411,8 +411,8 @@ class Campaign extends MX_Controller
 			'campaign_status_color' => $this->input->post('campaign_status_color')
 		);
 		$this->update_campaign_status($this->input->post('campaign_status_id'),  $campaign_status_data);
-		$this->update_campaign_i18n('campaigns_statuss', $this->input->post('campaign_status_id'), $this->session->userdata('current_lang_id'), $this->input->post('campaign_status_name'));
-		$this->create_statuss_css_file();
+		$this->update_campaign_i18n('campaigns_status', $this->input->post('campaign_status_id'), $this->session->userdata('current_lang_id'), $this->input->post('campaign_status_name'));
+		$this->create_types_css_file();
 		redirect('campaign/editstatus/'.$this->input->post('campaign_status_id'));
 	}
 
@@ -504,7 +504,7 @@ class Campaign extends MX_Controller
 						'language_id' => $this->session->userdata('current_lang_id'));
 		$this->mdl_campaigns_i18n->delete($data_i18n);
 		$this->session->set_userdata('success_message', lang('language.success'));
-		$this-­>create_status_css_file();
+		$this->create_types_css_file();
 		redirect('campaign/status');
 	}
 
@@ -738,6 +738,11 @@ class Campaign extends MX_Controller
 	private function update_campaign_type($campaign_type_id, $campaign_type_data)
 	{
 		$this->mdl_campaigns_types->update('campaign_type_id', $campaign_type_id, $campaign_type_data);
+	}
+	
+	private function update_campaign_status($campaign_status_id, $campaign_status_data)
+	{
+		$this->mdl_campaigns_status->update('campaign_status_id', $campaign_status_id, $campaign_status_data);
 	}
 
 	private function update_campaign_i18n($table_name, $table_id, $language_id, $i18n_name)
