@@ -12,6 +12,7 @@ class Campaign extends MX_Controller
 		$this->load->model('mdl_campaigns_steps');
 		$this->load->model('mdl_campaigns_steps_data');
 		$this->load->model('mdl_campaigns_types');
+		$this->load->model('mdl_campaigns_types_status');
 		$this->load->model('mdl_campaigns_documents');
 		$this->load->model('mdl_campaigns_i18n');
 		$this->load->model('language/mdl_language');
@@ -29,8 +30,11 @@ class Campaign extends MX_Controller
 		$view_data['page_title'] = lang('dashboard.title3');
 		$banners = $this->mdl_campaigns_banners->i18n_client_query($this->session->userdata('current_site_lang'),9);
 		$campaign_data['banners'] = $banners->result();
-		$campaing_types = $this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result();
-		$campaign_data['campaing_types'] = $campaing_types;
+		$campaign_types = $this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result();
+		$campaign_data['campaign_types'] = $campaign_types;
+		$campaign_types_status = $this->mdl_campaigns_types_status->i18n_site_query($this->session->userdata('current_site_lang'))->result();
+		var_dump($campaign_types_status);
+		$campaign_data['campaign_types_status'] = $campaign_types_status;
 		$view_data['stylesheet'] = array('jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
 		$view_data['json'] = array('data_'.$this->lang->lang().'.json', 'group_'.$this->lang->lang().'.json', 'holidays.json');
@@ -552,11 +556,11 @@ class Campaign extends MX_Controller
 		$campaigns_steps_data = $this->mdl_campaigns_steps_data->get_where_order(array('campaign_id' => $id), 'campaign_step_id')->result();
 		$campaigns_steps = array_for_dropdown($this->mdl_campaigns_steps->i18n_site_query($this->session->userdata('current_site_lang'))->result(), 'campaign_step_id');
 		$campaigns_steps_group = array();
-
+		var_dump($campaigns_steps);
 		$i = 0;
 		foreach($campaigns_steps_data as $key => $campaign_step_data)
 		{
-			$campaigns_steps_group [] = $campaigns_steps[$campaign_step_data->campaign_step_id]->campaign_step_type_name;
+			$campaigns_steps_group [] = $campaigns_steps[$campaign_step_data->campaign_step_id]->campaign_step_name;
             $json[] = array(
 					'start' =>  '__'.strtotime($campaign_step_data->campaign_step_date_start),
 					'end' =>  '__'.strtotime($campaign_step_data->campaign_step_date_end),
@@ -567,7 +571,7 @@ class Campaign extends MX_Controller
 					'editable' => false
 				);
 		}
-		
+
 		$campaign = $this->mdl_campaigns->get_id('campaign_id', $id)->row();
 		if ($campaign->campaign_date_media_start > 0 ||  $campaign->campaign_date_media_end > 0)
 		{

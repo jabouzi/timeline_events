@@ -48,8 +48,16 @@
 		<div class="legendes">
 			<p class="lendende-text">Légende</p>
 			<div class="legende-colors">
-				<?php foreach($campaing_types as $campaing_type) : ?>
-					<div><span style="background: <?php echo $campaing_type->campaign_type_color; ?>"></span><?php echo $campaing_type->campaign_type_name; ?></div>
+				<?php foreach($campaign_types as $campaign_type) : ?>
+					<div><span style="background: <?php echo $campaign_type->campaign_type_color; ?>"></span><?php echo $campaign_type->campaign_type_name; ?></div>
+				<?php endforeach; ?>
+			</div>
+		</div>
+		<div class="legendes">
+			<p class="lendende-text">État</p>
+			<div class="legende-colors">
+				<?php foreach($campaign_types_status as $campaign_type_status) : ?>
+					<div><span style="background: <?php echo $campaign_type_status->campaign_type_status_color; ?>"></span><?php echo $campaign_type_status->campaing_type_status_name; ?></div>
 				<?php endforeach; ?>
 			</div>
 		</div>

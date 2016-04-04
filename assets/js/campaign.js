@@ -110,7 +110,6 @@ function drawVisualization2() {
 	for (var g = 0; g < groupData.length; g++) {
 		groups.add({id: g, content: groupData[g]});
 	}
-
 	container = document.getElementById('timeline');
 	var items = new vis.DataSet(jsonData);
 	var options = { orientation: {axis: 'both'}, locale: $("#site_lang").val(), start: addMonths(new Date(), -2), end: addMonths(new Date(), +2) };
