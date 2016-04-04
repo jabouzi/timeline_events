@@ -357,6 +357,7 @@ class Campaign extends MX_Controller
 		}
 		else
 		{
+
 			$document = array('upload_data' => $this->upload->data());
 			$campaign_document = array(
 				'campaign_id' => $campaign_id,
