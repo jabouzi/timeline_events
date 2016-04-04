@@ -33,7 +33,7 @@ class Campaign extends MX_Controller
 		$campaign_types = $this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result();
 		$campaign_data['campaign_types'] = $campaign_types;
 		$campaign_status = $this->mdl_campaigns_status->i18n_site_query($this->session->userdata('current_site_lang'))->result();
-		$campaign_data['campaign_status'] = $campaign_status;
+		$campaign_data['campaigns_status'] = $campaign_status;
 		$view_data['stylesheet'] = array('campaign_types.css', 'jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
 		$view_data['json'] = array('data_'.$this->lang->lang().'.json', 'group_'.$this->lang->lang().'.json', 'holidays.json');
@@ -121,11 +121,8 @@ class Campaign extends MX_Controller
 		$campaign_steps = $this->mdl_campaigns_steps->i18n_site_query($this->session->userdata('current_site_lang'))->result();
 		
 		$campaign_steps_data = $this->mdl_campaigns_steps_data->get_id('campaign_id', $campaign_data['campaign']->campaign_id)->result();
-		
-		
 
-		//$campaign_type = $this->mdl_campaigns_types->get_where(array('campaign_type_id' => $campaign_data['campaign']->campaign_type_id))->row();
-		//$campaign_data['campaign_type'] = $campaign_type->campaign_type_name;
+		$campaign_status = $this->mdl_campaigns_status->i18n_site_query($this->session->userdata('current_site_lang'))->result();
 
 		$campaign_data['campaign_manager_client'] = $this->mdl_campaigns_project_managers->get_id('campaign_manager_id', $campaign_data['campaign']->campaign_manager_client)->row();
 		$campaign_data['campaign_manager_tgi'] = $this->mdl_campaigns_project_managers->get_id('campaign_manager_id', $campaign_data['campaign']->campaign_manager_tgi)->row();
@@ -137,6 +134,9 @@ class Campaign extends MX_Controller
 
 		$campaign_data['campaign_types'] = array_for_dropdown($campaign_types, 'campaign_type_id', 'campaign_type_name');
 		array_unshift($campaign_data['campaign_types'], '');
+		
+		$campaign_data['campaign_status'] = array_for_dropdown($campaign_status, 'campaign_status_id', 'campaign_status_name');
+		array_unshift($campaign_data['campaign_status'], '');
 
 		$campaign_data['campaign_managers_tgi'] = array_for_dropdown($campaign_managers_tgi, 'campaign_manager_id', array('campaign_manager_name', 'campaign_manager_lastname'));
 		array_unshift($campaign_data['campaign_managers_tgi'], '');
@@ -149,7 +149,7 @@ class Campaign extends MX_Controller
 
 		$this->session->userdata['campaign_banner_id'] = $campaign_data['campaign']->campaign_banner_id;
 
-		$campaign_data['campaign_status'] = array(0 => lang('campaign.status.standby'), 1 => lang('campaign.status.active'), 2 => lang('campaign.status.closed'));
+		//$campaign_data['campaign_status'] = array(0 => lang('campaign.status.standby'), 1 => lang('campaign.status.active'), 2 => lang('campaign.status.closed'));
 
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_edit.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
@@ -536,6 +536,7 @@ class Campaign extends MX_Controller
 		$campaign_ids = array();
 		$campaign_names_flipped = array();
 		$campaign_types = array_for_dropdown($this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result(), 'campaign_type_id');
+		$campaign_status = array_for_dropdown($this->mdl_campaigns_status->i18n_site_query($this->session->userdata('current_site_lang'))->result(), 'campaign_status_id');
 		$campaigns = $this->mdl_campaigns->get_where(array('campaign_active' => 1))->result();
 		$longest_campaing = $this->mdl_campaigns->custom_query("select campaign_city from campaigns where 1 ORDER BY LENGTH(campaign_city) DESC LIMIT 1")->row();
 		//$longest_campaing->campaign_city;
@@ -543,11 +544,13 @@ class Campaign extends MX_Controller
 
 		foreach($campaigns as $key => $campaign)
 		{
-			if ($campaign->campaign_status == 0) $classname = 'non-active';
-			else if ($campaign->campaign_status == 2) $classname = 'fermee';
+			if ($campaign->campaign_status > 0)
+			{
+				$classname = friendly_url($campaign_status[$campaign->campaign_status]->campaign_status_name);
+			}
 			else 
 			{
-				if ($campaign->campaign_type_id == 0) $classname = 'non-disponible';
+				if ($campaign->campaign_type_id == 0) $classname = '';
 				else $classname = friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name);
 			}
 
@@ -617,30 +620,32 @@ class Campaign extends MX_Controller
 	function generate_campaign_detail($id)
 	{
 		$json = array();
-		$campaigns_steps_data = $this->mdl_campaigns_steps_data->get_where_order(array('campaign_id' => $id), 'campaign_step_id')->result();
+		$campaigns_steps_data = array_for_dropdown($this->mdl_campaigns_steps_data->get_where_order(array('campaign_id' => $id), 'campaign_step_id')->result(), 'campaign_step_id');
 		$campaigns_steps = array_for_dropdown($this->mdl_campaigns_steps->i18n_site_query($this->session->userdata('current_site_lang'))->result(), 'campaign_step_id');
+
 		$campaigns_steps_group = array();
-		var_dump($campaigns_steps);
 		$i = 0;
-		foreach($campaigns_steps_data as $key => $campaign_step_data)
+		foreach($campaigns_steps as $key => $campaign_step)
 		{
-			$campaigns_steps_group [] = $campaigns_steps[$campaign_step_data->campaign_step_id]->campaign_step_name;
-            $json[] = array(
-					'start' =>  '__'.strtotime($campaign_step_data->campaign_step_date_start),
-					'end' =>  '__'.strtotime($campaign_step_data->campaign_step_date_end),
+			$campaigns_steps_group [] = $campaign_step->campaign_step_name;
+			if (isset($campaigns_steps_data[$key]))
+			{
+				$json[] = array(
+					'start' =>  '__'.strtotime($campaigns_steps_data[$key]->campaign_step_date_start),
+					'end' =>  '__'.strtotime($campaigns_steps_data[$key]->campaign_step_date_end),
 					'content' =>  ' ',
 					'group' =>  $i++,
-					'id' =>  $campaign_step_data->campaign_step_id,
+					'id' =>  $campaigns_steps_data[$key]->campaign_step_data_id,
 					'className' =>  'red',
 					'editable' => false
 				);
+			}
 		}
 
 		$campaign = $this->mdl_campaigns->get_id('campaign_id', $id)->row();
+		$campaigns_steps_group [] = 'Média';
 		if ($campaign->campaign_date_media_start > 0 ||  $campaign->campaign_date_media_end > 0)
 		{
-			$campaigns_steps_group [] = 'Média';
-			
 			$json[] = array(
 				'start' =>  '__'.strtotime($campaign->campaign_date_media_start),
 				'end' =>  '__'.strtotime($campaign->campaign_date_media_end),

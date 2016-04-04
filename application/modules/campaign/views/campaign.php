@@ -56,8 +56,8 @@
 		<div class="legendes">
 			<p class="lendende-text">État</p>
 			<div class="legende-colors">
-				<?php foreach($campaign_types_status as $campaign_type_status) : ?>
-					<div><span style="background: <?php echo $campaign_type_status->campaign_type_status_color; ?>"></span><?php echo $campaign_type_status->campaign_type_status_name; ?></div>
+				<?php foreach($campaigns_status as $campaign_status) : ?>
+					<div><span style="background: <?php echo $campaign_status->campaign_status_color; ?>"></span><?php echo $campaign_status->campaign_status_name; ?></div>
 				<?php endforeach; ?>
 			</div>
 		</div>
