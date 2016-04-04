@@ -33,7 +33,6 @@ class Campaign extends MX_Controller
 		$campaign_types = $this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result();
 		$campaign_data['campaign_types'] = $campaign_types;
 		$campaign_types_status = $this->mdl_campaigns_types_status->i18n_site_query($this->session->userdata('current_site_lang'))->result();
-		var_dump($campaign_types_status);
 		$campaign_data['campaign_types_status'] = $campaign_types_status;
 		$view_data['stylesheet'] = array('jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
