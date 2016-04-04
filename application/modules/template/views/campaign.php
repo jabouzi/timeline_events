@@ -12,6 +12,7 @@
 		<? /* <meta name="viewport" content="width=device-width, initial-scale=1"> */ ?>
 		<meta name="viewport" content="width=1200" />
 		<title>Édition de campagne</title>
+		<link rel="icon" href="<?php echo site_url(); ?>assets/images/favicon.ico">
 		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/bootstrap-3.3.5.min.css" type="text/css">
 		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/main.css">
 		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/vis.css">
