@@ -73,8 +73,6 @@ class Template extends MX_Controller
 				modules::run('user/add_session_data', 'current_site_lang_id' , $default_lang->language_id);
 			}
 			
-			var_dump();
-			
 			$view_data['current_lang'] = $this->session->userdata('current_site_lang');
 			$view_data['site_languages'] = $languages;
 			
