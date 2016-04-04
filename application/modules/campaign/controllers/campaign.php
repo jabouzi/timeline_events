@@ -571,7 +571,8 @@ class Campaign extends MX_Controller
 						'className' => $classname,
 						'editable' => false
 					);
-
+				
+				if (!$campaign->campaign_date_evenement) $campaign->campaign_date_evenement = $campaign->campaign_date_end;
 				$json[$lang][$banners->row()->campaign_banner_name][] = array(
 					'start' =>  '__'.strtotime($campaign->campaign_date_evenement),
 					'content' =>  ' ',
