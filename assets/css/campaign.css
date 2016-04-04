@@ -58,60 +58,6 @@ div.ouverture {
 	cursor:pointer;
 }
 
-div.ren-majeurs {
-	background-color: #e74c3c;
-	border-color: #e74c3c;
-	cursor:pointer;
-}
-
-div.ren-mineurs {
-	background-color: #f1c40f;
-	border-color: #f1c40f;
-	cursor:pointer;
-}
-
-div.ren-transformation {
-	background-color: #e67e22;
-	border-color: #e67e22;
-	cursor:pointer;
-}
-
-div.loc-modernisation {
-	background-color: #3498db;
-	border-color: #3498db;
-	cursor:pointer;
-}
-
-div.loc-transformation {
-	background-color: #1d506d;
-	border-color: #1d506d;
-	cursor:pointer;
-}
-
-div.relance {
-	background-color: #9b59b6;
-	border-color: #9b59b6;
-	cursor:pointer;
-}
-
-div.default {
-	background-color: #BFBFBF;
-	border-color: #800080;
-	cursor:pointer;
-}
-
-div.inactive {
-	background-color: #93caea;
-	border-color: #93caea;
-	cursor:pointer;
-}
-
-div.closed {
-	background-color: #464849;
-	border-color: #464849;
-	cursor:pointer;
-}
-
 div.media {
 	background-color: #C776B4;
 	border-color: #008000;
