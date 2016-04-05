@@ -1,7 +1,7 @@
 <div class="container">
 	<ul class="breadcrumb">
-		<li><a href="<?php echo site_url('campaign'); ?>">Calendrier annuel de campagnes</a></li>
-		<li><span>Créer une campagne</span></li>
+		<li><a href="<?php echo site_url('campaign'); ?>"><?= lang('calendar.title')?></a></li>
+		<li><span><?= lang('calendar.create_btn')?></span></li>
 	</ul>
 	<div class="title-top">
 		<h1 class="title-icon-on-white">
@@ -12,14 +12,14 @@
 		</h1>
 		<div class="title-top-btns">
 			<a href="<?php echo site_url('campaign'); ?>" class="btn-icon-on-dark on-white">
-			Retour
+			<?= lang('campaign.return_btn')?>
 			</a>
 			<a style="cursor:pointer;" class="submit_form btn-icon-on-dark submit" data-value="campaign_add">
 			<svg class="icon-svg icon-sauvegarderBlanc" viewBox="0 0 31 32" x="1920">
 				<path fill="#FFF" d="M22.652.35v8.792H6.1V.352H0V32h30.493V5.95l-4.68-5.6h-3.16zM4.356 13.54h20.91v13.187H4.356v-13.19z"/>
 				<path fill="#FFF" d="M8.712 6.505h11.326V.35H8.712v6.155z"/>
 			</svg>
-			Sauvegarder
+			<?= lang('form.save_btn')?>
 			</a>
 		</div>
 	</div>
@@ -33,18 +33,18 @@
 				<svg class="icon-svg icon-identificationRouge" width="50" height="32" viewBox="0 0 50 32" x="624">
 					<path fill="#e41b13" d="M0 0l.113 5.814H30.64L30.617 0H0zm.15 18.945l49.358.03V13.06L.15 12.965v5.98zM.15 32h21.756v-5.93H.15V32z"/>
 				</svg>
-				<span>Identification</span>
+				<span><?= lang('form.id_title')?></span>
 			</h2>
 			<div class="grayBox">
 				<div class="row">
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_banner_id" id="label_campaign_banner_id">Bannière</label>
+						<label for="campaign_banner_id" id="label_campaign_banner_id"><?= lang('form.banner_lbl')?></label>
 						<div class="wrapper-select-top">
 							<?php echo form_dropdown('campaign_banner_id', $campaign_banners, '', 'data-validate="required" data-type="option" id="campaign_banner_id"'); ?>
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_type_id" id="label_campaign_type_id">Type de campagne</label>
+						<label for="campaign_type_id" id="label_campaign_type_id"><?= lang('form.campaign_type_lbl')?></label>
 						<div class="wrapper-select-top">
 							<?php echo form_dropdown('campaign_type_id', $campaign_types); ?>
 						</div>
@@ -52,45 +52,45 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<label for="campaign_title" id="label_campaign_title">Titre de la campagne</label>
+						<label for="campaign_title" id="label_campaign_title"><?= lang('form.campaign_title_lbl')?></label>
 						<input  type="text" name="campaign_title" id="campaign_title" value="" data-validate="required" data-type="text" />
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<label for="campaign_city" id="label_campaign_city">Ville de la campagne</label>
+						<label for="campaign_city" id="label_campaign_city"><?= lang('form.campaign_city_lbl')?></label>
 						<input  type="text" name="campaign_city" id="campaign_city" value=""  data-validate="required" data-type="text"/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-6">
-						<label for="campaign_date_start" id="label_campaign_date_start">Date de début</label>
+						<label for="campaign_date_start" id="label_campaign_date_start"><?= lang('form.start_date_lbl')?></label>
 						<input class="datechooser" type="text" name="campaign_date_start" id="campaign_date_start" value="" data-type="text"/>
 					</div>
 					<div class="col-sm-6">
-						<label for="campaign_date_evenement" id="label_campaign_date_evenement">Date de l’événement</label>
+						<label for="campaign_date_evenement" id="label_campaign_date_evenement"><?= lang('form.event_date_lbl')?></label>
 						<input class="datechooser" type="text" name="campaign_date_evenement" id="campaign_date_evenement" value="" data-type="text"/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_branch"id="label_campaign_branch">Nom de la succursale</label>
+						<label for="campaign_branch"id="label_campaign_branch"><?= lang('form.shop_name_lbl')?></label>
 						<input type="text" name="campaign_branch" id="campaign_branch" value=""  data-type="text"/>
 					</div>
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_address" id="label_campaign_address">Adresse de la succursale</label>
+						<label for="campaign_address" id="label_campaign_address"><?= lang('form.shop_address_lbl')?></label>
 						<input type="text" name="campaign_address" id="campaign_address" value="" data-type="text"/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_manager_tgi" id="label_campaign_manager_tgi">Chargée de projet (Tonik Groupimage)</label>
+						<label for="campaign_manager_tgi" id="label_campaign_manager_tgi"><?= lang('form.shop_pm_lbl')?></label>
 						<div class="wrapper-select-top">
 							<?php echo form_dropdown('campaign_manager_tgi', $campaign_managers_tgi, '', 'id="campaign_manager_tgi"'); ?>
 						</div>
 					</div>
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_manager_client" id="label_campaign_manager_client">Coordonnateur (Metro)</label>
+						<label for="campaign_manager_client" id="label_campaign_manager_client"><?= lang('form.shop_coordonator_lbl')?></label>
 						<div class="wrapper-select-top">
 							<?php echo form_dropdown('campaign_manager_client', $campaign_managers_client, '', 'id="campaign_manager_client"'); ?>
 						</div>
@@ -98,11 +98,11 @@
 				</div>
 				<div class="row">
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_project_number" id="label_campaign_project_number">Numéro de projet</label>
+						<label for="campaign_project_number" id="label_campaign_project_number"><?= lang('form.shop_projectno_lbl')?></label>
 						<input type="text" name="campaign_project_number" id="campaign_project_number" value="" data-type="text"/>
 					</div>
 					<div class="col-sm-12 col-md-6">
-						<label for="campaign_store_number" id="label_campaign_store_number">Numéro de magasin</label>
+						<label for="campaign_store_number" id="label_campaign_store_number"><?= lang('form.shop_shopno_lbl')?></label>
 						<input type="text" name="campaign_store_number" id="campaign_store_number" value="" data-type="text"/>
 					</div>
 				</div>
@@ -116,7 +116,7 @@
 			<path fill="#FFF" d="M22.652.35v8.792H6.1V.352H0V32h30.493V5.95l-4.68-5.6h-3.16zM4.356 13.54h20.91v13.187H4.356v-13.19z"/>
 			<path fill="#FFF" d="M8.712 6.505h11.326V.35H8.712v6.155z"/>
 		</svg>
-		Sauvegarder
+		<?= lang('form.save_btn')?>
 		</a>
 	</div>
 	</form>

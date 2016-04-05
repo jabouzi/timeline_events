@@ -288,3 +288,59 @@ La campagne %s a été mise à jour, cliquez sur le lien suivant pour la revoir 
 
 Merci.
 ";
+
+
+//Menu
+$lang['menu.admin'] 				= "Admin"; 
+$lang['menu.calendar'] 				= "Calendrier"; 
+$lang['menu.logout'] 				= "Déconnexion"; 
+
+//Page: /campaign
+$lang['calendar.title'] 			= "CALENDRIER ANNUEL DES CAMPAGNES"; 
+$lang['calendar.print_btn'] 		= "Imprimer"; 
+$lang['calendar.create_btn'] 		= "Créer une campagne"; 
+$lang['calendar.legend_lbl'] 		= "Légende"; 
+$lang['calendar.state_lbl'] 		= "État"; 
+$lang['calendar.goto_btn'] 			= "Aller à"; 
+
+//Page: /campaign/detail
+$lang['campaign.edit_title'] 		= "Édition de campagne"; 
+$lang['campaign.return_btn'] 		= "Retour"; 
+$lang['campaign.doc_btn'] 			= "Documents"; 
+$lang['campaign.edit_btn'] 			= "Éditer la campagne"; 
+$lang['campaign.th.calendar'] 		= "Calendrier"; 
+$lang['campaign.th.budget'] 		= "Budget"; 
+$lang['campaign.plan_title'] 		= "PLAN DE CAMPAGNE"; 
+$lang['campaign.prod_step_lbl'] 	= "ÉTAPES DE PRODUCTION"; 
+$lang['campaign.budget_lbl'] 		= "BUDGET GLOBAL"; 
+$lang['campaign.budget_other_lbl'] 	= "Autres"; 
+$lang['campaign.budget_total_lbl'] 	= "Total"; 
+
+//Page: /campaign/documents
+$lang['doc.add_doc_btn'] 			= "Ajouter un document"; 
+$lang['doc.download_btn'] 			= "Télécharger"; 
+
+//Formulaire Campagne: /campaign/add || /campaign/edit
+$lang['form.save_btn']	 			= "Sauvegarder"; 
+$lang['form.id_title']	 			= "IDENTIFICATION"; 
+$lang['form.banner_lbl']			= "Bannière"; 
+$lang['form.campaign_type_lbl']		= "Type de campagne"; 
+$lang['form.campaign_title_lbl']	= "Titre de la campagne"; 
+$lang['form.campaign_city_lbl']		= "Ville de la campagne"; 
+$lang['form.start_date_lbl']		= "Date de début"; 
+$lang['form.event_date_lbl']		= "Date de l’événement"; 
+$lang['form.shop_name_lbl']			= "Nom de la succursale"; 
+$lang['form.shop_address_lbl']		= "Adresse de la succursale"; 
+$lang['form.shop_pm_lbl']			= "Chargée de projet (Tonik Groupimage)"; 
+$lang['form.shop_coordonator_lbl']	= "Coordonnateur (Metro)"; 
+$lang['form.shop_projectno_lbl']	= "Numéro de projet"; 
+$lang['form.shop_shopno_lbl']		= "Numéro de magasin"; 
+$lang['form.step_lbl']				= "Étapes"; 
+$lang['form.media_start_date_lbl']	= "Date de début médias"; 
+$lang['form.media_end_date_lbl']	= "Date de fin médias"; 
+
+//Footer
+$lang['footer.calendar']			= "Calendrier";
+$lang['footer.parameters']			= "Mes paramètres";
+$lang['footer.faq']					= "F.A.Q";
+$lang['footer.conditions']			= "Conditions d'utilisation";

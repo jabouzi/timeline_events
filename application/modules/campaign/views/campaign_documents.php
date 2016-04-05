@@ -1,8 +1,8 @@
 <div class="container">
 	<ul class="breadcrumb">
-		<li><a href="<?php echo site_url('campaign'); ?>">Calendrier annuel de campagnes</a></li>
+		<li><a href="<?php echo site_url('campaign'); ?>"><?= lang('calendar.title')?></a></li>
 		<li><a href="<?php echo site_url('campaign/edit/'.$campaign->campaign_id); ?>"><?php echo $campaign->campaign_title; ?> <?php echo $campaign_type; ?></a></li>
-		<li><span>Documents</span></li>
+		<li><span><?= lang('campaign.doc_btn')?></span></li>
 	</ul>
 	<div class="title-top">
 		<h1 class="title-icon-on-white">
@@ -20,7 +20,7 @@
 				<form enctype="multipart/form-data" id="campaign_document" method="post" action="<?php echo site_url('campaign/process_document'); ?>">
 					<div class="title-top-btns">
 						<a style="cursor:pointer;" class="submit_form btn-icon-on-dark btnPlus upload" data-value="campaign_document">
-						Ajouter un document
+						<?= lang('doc.add_doc_btn')?>
 						</a>
 						<input type="file" name="upload_file">
 						<input type="hidden" name="campaign_id" value="<?php echo $campaign->campaign_id; ?>">
@@ -31,7 +31,7 @@
 		?>
 		<?php //endif; ?>
 		<a href="<?php echo site_url('campaign'); ?>" class="btn-icon-on-dark on-white">
-			Retour
+			<?= lang('campaign.return_btn')?>
 		</a>
 	</div>
 </div>
@@ -69,7 +69,7 @@
 							<svg id="icon-download" viewBox="0 0 32 32" x="1392">
 								<path fill="#FFF" d="M8.282 0v11.87H0L16 32l16-20.13h-8.282V0H8.282z"/>
 							</svg>
-							<span class="text-icon-download">  Télécharger</span></a>
+							<span class="text-icon-download">  <?= lang('doc.download_btn')?></span></a>
 						</td>
 						<?php if (!empty($campaign_managers_is_tgi)) : ?>
 							<td class="doc_remove"> 

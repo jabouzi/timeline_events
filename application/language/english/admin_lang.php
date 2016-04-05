@@ -291,3 +291,58 @@ The campaign %s jas been updated, click on this link %s to see it
 
 Merci.
 ";
+
+//Menu
+$lang['menu.admin'] 				= "Admin"; 
+$lang['menu.calendar'] 				= "Calendar"; 
+$lang['menu.logout'] 				= "Logout"; 
+
+//Page: /campaign
+$lang['calendar.title'] 			= "CAMPAIGNS ANNUAL CALENDAR"; 
+$lang['calendar.print_btn'] 		= "Print"; 
+$lang['calendar.create_btn'] 		= "Create a campaign"; 
+$lang['calendar.legend_lbl'] 		= "Legend"; 
+$lang['calendar.state_lbl'] 		= "State"; 
+$lang['calendar.goto_btn'] 			= "Go to"; 
+
+//Page: /campaign/detail
+$lang['campaign.edit_title'] 		= "Edit a campaign"; 
+$lang['campaign.return_btn'] 		= "Return"; 
+$lang['campaign.doc_btn'] 			= "Documents"; 
+$lang['campaign.edit_btn'] 			= "Edit a campaign"; 
+$lang['campaign.th.calendar'] 		= "Calendar"; 
+$lang['campaign.th.budget'] 		= "Budget"; 
+$lang['campaign.plan_title'] 		= "CAMPAIGN PLAN"; 
+$lang['campaign.prod_step_lbl'] 	= "PRODUCTION STEPS"; 
+$lang['campaign.budget_lbl'] 		= "GLOBAL BUDGET"; 
+$lang['campaign.budget_other_lbl'] 	= "Others"; 
+$lang['campaign.budget_total_lbl'] 	= "Total"; 
+
+//Page: /campaign/documents
+$lang['doc.add_doc_btn'] 			= "Add a document"; 
+$lang['doc.download_btn'] 			= "Download"; 
+
+//Formulaire Campagne: /campaign/add || /campaign/edit
+$lang['form.save_btn']	 			= "Save"; 
+$lang['form.id_title']	 			= "IDENTIFICATION"; 
+$lang['form.banner_lbl']			= "Banner"; 
+$lang['form.campaign_type_lbl']		= "Campaign type"; 
+$lang['form.campaign_title_lbl']	= "Campaign title"; 
+$lang['form.campaign_city_lbl']		= "Campaign city"; 
+$lang['form.start_date_lbl']		= "Start date"; 
+$lang['form.event_date_lbl']		= "Event date"; 
+$lang['form.shop_name_lbl']			= "Division's name"; 
+$lang['form.shop_address_lbl']		= "Division's address"; 
+$lang['form.shop_pm_lbl']			= "Project Manager (Tonik Groupimage)"; 
+$lang['form.shop_coordonator_lbl']	= "Coordonator (Metro)"; 
+$lang['form.shop_projectno_lbl']	= "Project number"; 
+$lang['form.shop_shopno_lbl']		= "Division's number"; 
+$lang['form.step_lbl']				= "Steps"; 
+$lang['form.media_start_date_lbl']	= "Media's start date"; 
+$lang['form.media_end_date_lbl']	= "Media's end date"; 
+
+//Footer
+$lang['footer.calendar']			= "Calendar";
+$lang['footer.parameters']			= "My configurations";
+$lang['footer.faq']					= "F.A.Q";
+$lang['footer.conditions']			= "Conditions of use";
