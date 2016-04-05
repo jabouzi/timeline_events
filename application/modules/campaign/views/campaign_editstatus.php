@@ -1,5 +1,5 @@
 <article class="module width_full">
-	<header><h3><?php echo lang('user.edit'); ?></h3></header>
+	<header><h3><?php echo lang('campaign.edit.status'); ?></h3></header>
 	<form id="permissions_form" method="post" action="<?php echo site_url('campaign/process_status'); ?>">
 	<div class="module_content">
 		<fieldset>

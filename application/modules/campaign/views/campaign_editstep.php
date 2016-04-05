@@ -1,9 +1,9 @@
 <article class="module width_full">
-	<header><h3><?php echo lang('user.edit'); ?></h3></header>
+	<header><h3><?php echo lang('campaign.edit.step'); ?></h3></header>
 	<form id="permissions_form" method="post" action="<?php echo site_url('campaign/process_step'); ?>">
 	<div class="module_content">
 		<fieldset>
-			<label><?php echo lang('campaign.name'); ?></label>
+			<label><?php echo lang('campaign.step.name'); ?></label>
 				<td><input type="text" id="campaign_step_name" name="campaign_step_name" value="<?php if (isset($step->campaign_step_name)) echo $step->campaign_step_name; ?>" data-validate="required" data-type="text" title="<?php echo lang('campaign.name'); ?>"></td>
 			</fieldset>
 		<fieldset>

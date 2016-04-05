@@ -228,11 +228,12 @@ $lang['campaign.status.closed'] = "Closed";
 $lang['campaign.goto'] = "Goto";
 $lang['campaign.steps'] = "Campaign Steps";
 $lang['campaign.types'] = "Campaign Types";
-$lang['campaign.status'] = "Campaign Status";
-$lang['campaign.status'] = "Status";
 $lang['campaign.step.name'] = "Step name";
 $lang['campaign.type.name'] = "Type name";
 $lang['campaign.status.name'] = "Status name";
+$lang['campaign.edit.step'] = "Edit Campaign Steps";
+$lang['campaign.edit.type'] = "Edit Campaign Types";
+$lang['campaign.edit.status'] = "Edit Campaign Status";
 
 $lang['content.title'] = "Content";
 

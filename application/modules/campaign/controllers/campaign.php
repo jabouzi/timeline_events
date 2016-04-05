@@ -35,7 +35,7 @@ class Campaign extends MX_Controller
 			modules::run('user/add_session_data', 'current_site_lang' , $default_lang->language_code);
 			modules::run('user/add_session_data', 'current_site_lang_id' , $default_lang->language_id);
 		}
-			
+
 		$view_data['page_title'] = lang('dashboard.title3');
 		$banners = $this->mdl_campaigns_banners->i18n_client_query($this->session->userdata('current_site_lang'),9);
 		$campaign_data['banners'] = $banners->result();

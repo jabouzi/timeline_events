@@ -41,7 +41,7 @@ class User extends MX_Controller
 		$user_profile = $this->mdl_user->get_id($user_id);
 		$view_data['page_title'] = lang('user.edit');
 		if ($user_profile->user_id == $this->session->userdata('user_id'))  redirect('user/profile');
-		$view_data['admin_widgets']['user'] = $this->show('profile', $user_profile);
+		$view_data['admin_widgets']['user'] = $this->show('edituser', $user_profile);
 		echo modules::run('template', $view_data);
 	}
 	

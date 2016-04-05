@@ -1,5 +1,5 @@
 <article class="module width_full">
-	<header><h3><?php echo lang('banner.edit'); ?></h3></header>
+	<header><h3><?php echo lang('banner.add'); ?></h3></header>
 	<form id="banner_profile" method="post" action="<?php echo site_url('banner/process_newbanner'); ?>">
 		<div class="module_content">
 			<fieldset>
