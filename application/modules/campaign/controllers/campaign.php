@@ -85,7 +85,6 @@ class Campaign extends MX_Controller
 	function add()
 	{
 		$campaign_banners = $this->mdl_campaigns_banners->i18n_client_query($this->session->userdata('current_site_lang'),9)->result();
-		//$campaign_types = $this->mdl_campaigns_types->get()->result();
 
 		$campaign_types = $this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result();
 		$campaign_steps_data = $this->mdl_campaigns_steps_data->get()->result();
@@ -157,8 +156,6 @@ class Campaign extends MX_Controller
 		$campaign_data['campaign_steps'] = array_for_dropdown($campaign_steps, 'campaign_step_id', 'campaign_step_name');
 
 		$this->session->userdata['campaign_banner_id'] = $campaign_data['campaign']->campaign_banner_id;
-
-		//$campaign_data['campaign_status'] = array(0 => lang('campaign.status.standby'), 1 => lang('campaign.status.active'), 2 => lang('campaign.status.closed'));
 
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_edit.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
