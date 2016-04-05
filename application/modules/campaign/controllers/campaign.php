@@ -595,15 +595,15 @@ class Campaign extends MX_Controller
 				}
 				$groups[count($campaigns)] = '<a>Holidays</a>';
 				$json2[$lang][$key1] = $groups;
-				//var_dump($json2);
+				//var_dump($json2, $groups);
 			}
 		}
 		
-		//var_dump($json2, $groups);
+		//var_dump($campaign_groups);
 		//exit;
 		
 
-		foreach($this->lang->languages as $lang => $value)
+		foreach($languages as $lang => $value)
 		{
 			$json_names = json_encode($json2[$lang]);
 
@@ -703,7 +703,7 @@ class Campaign extends MX_Controller
 		$this->process_add_campaign_steps_data($campaign_id);
 		$this->generate_campaign();
 		$this->generate_campaign_detail($campaign_id);
-		$this->generate_holidays();
+		//$this->generate_holidays();
 		$this->session->set_userdata('success_message', lang('campaign.add.success'));
 
 		$campaign_manager_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_id' => $campaign_data['campaign_manager_tgi']))->row();
