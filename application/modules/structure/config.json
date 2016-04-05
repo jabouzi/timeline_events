@@ -1,7 +1,0 @@
-{
-	"name":"structure.title",
-	"version":"0.1",
-	"permissions":["structure.add","structure.delete","structure.update"],
-	"delete":"true",
-	"update":"true"
-}
