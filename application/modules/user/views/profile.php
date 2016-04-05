@@ -18,6 +18,17 @@
 				<label><?php echo lang('user.email'); ?></label>
 				<input type="text" name="user_email" id="user_email" value="<?php echo $user->user_email; ?>" data-validate="required" data-type="email" title="<?php echo lang('user.email'); ?>">
 			</fieldset>
+			<?php 
+				if ($this->session->userdata['user_permission'] == 1) 
+				{
+			?>
+					<fieldset style="width:48%; float:left; margin-right: 3%;">
+						<label><?php echo lang('user.permissions'); ?></label>
+						<?php echo form_dropdown('user_permission', $permissions, $user->user_permission, 'style="width:92%;"'); ?>
+					</fieldset>
+			<?php 
+				}
+			?>
 			<fieldset style="width:48%; float:left;">
 				<label><?php echo lang('user.status'); ?></label>
 				<?php echo form_dropdown('user_active', $status, $user->user_active); ?>

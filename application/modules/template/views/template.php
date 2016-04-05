@@ -99,7 +99,7 @@
 		</ul>
 		<h3><?php echo lang('client.title'); ?></h3>
 		<ul class="toggle">
-			<?php if ($this->session->userdata('user_permission') <= 2) : ?>
+			<?php if ($this->session->userdata('user_permission') == 1) : ?>
 				<li class="icn_add_user"><?php echo anchor('client/newclient', lang('client.new')) ?></li>
 			<?php endif; ?>
 			<li class="icn_view_users"><?php echo anchor('client/clients', lang('client.users')) ?></li>
@@ -112,7 +112,7 @@
 		</ul>
 		<h3><?php echo lang('user.title'); ?></h3>
 		<ul class="toggle">
-			<?php if ($this->session->userdata('user_permission') <= 2) : ?>
+			<?php if ($this->session->userdata('user_permission') == 1) : ?>
 				<li class="icn_add_user"><?php echo anchor('user/newuser', lang('user.new')) ?></li>
 			<?php endif; ?>
 			<li class="icn_view_users"><?php echo anchor('user/users', lang('user.users')) ?></li>

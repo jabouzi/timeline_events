@@ -92,7 +92,7 @@ class Permission extends MX_Controller
 	function get_permissions_dropdown()
 	{
 		$permissions = array();
-		$where = array('admin_language_code = ' => $this->lang->lang(), 'permission_id > ' => 1);
+		$where = array('admin_language_code = ' => $this->lang->lang());
 		$results = $this->mdl_permission->get_where('toolbox_permissions_i18n', $where);
 		foreach($results->result() as $permission)
 		{

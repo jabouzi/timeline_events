@@ -13,7 +13,7 @@ class Template extends MX_Controller
 	{
 		if ($this->session->userdata('user_email'))
 		{
-			if ($this->session->userdata['user_permission'] > 1) redirect('campaign');
+			if ($this->session->userdata['user_permission'] > 2) redirect('campaign');
 			
 			$this->load->helper('form');
 			$this->load->helper('array');

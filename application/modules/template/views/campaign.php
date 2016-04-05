@@ -140,10 +140,10 @@
 			<footer>
 				<div class="container">
 					<ul class="footer-menu">
-						<li> <a href="">Calendrier </a> </li>
+						<li> <a href="<?php echo site_url('campaign'); ?>">Calendrier </a> </li>
 						<li> <a href="">Mes paramètres </a></li>
 						<li> <a href="">F.A.Q   </a></li>
-						<li> <a href=""> Déconnexion </a></li>
+						<li> <a href="<?php echo site_url("login/logout"); ?>"> Déconnexion </a></li>
 						<li> <a href=""> Conditions d'utilisation </a></li>
 					</ul>
 					<div class="tgi-logo"><a href="" target="_black"><img src="/assets/images/toolbox/tgi-logo.png" alt="" /></a></div>

@@ -28,7 +28,7 @@ class User extends MX_Controller
 	
 	function newuser()
 	{
-		if ($this->session->userdata('user_permission') > 2) redirect('dashboard');
+		if ($this->session->userdata('user_permission') > 1) redirect('dashboard');
 		$view_data['page_title'] = lang('user.new');
 		$view_data['admin_widgets']['user'] = $this->show('newuser', array());
 		echo modules::run('template', $view_data);
@@ -36,7 +36,7 @@ class User extends MX_Controller
 	
 	function edituser($user_id = 0)
 	{
-		if ($this->session->userdata('user_permission') > 2) redirect('dashboard');
+		if ($this->session->userdata('user_permission') > 1) redirect('dashboard');
 		if (!$user_id) redirect('dashboard');
 		$user_profile = $this->mdl_user->get_id($user_id);
 		$view_data['page_title'] = lang('user.edit');
@@ -158,7 +158,7 @@ class User extends MX_Controller
 			{
 				$this->update_profile($user_id, $user_data);
 			}
-			redirect('user');
+			redirect('user/users');
 		}
 		else
 		{
@@ -178,12 +178,12 @@ class User extends MX_Controller
 				$user_data = array('user_password' => $this->encrypt->encode($this->input->post('user_newpassword')));
 				$this->update_profile($user_id, $user_data);
 			}
-			redirect('user');
+			redirect('user/users');
 		}
 		else
 		{
 			$this->session->set_userdata('warning_message', lang('user.error'));
-			redirect('user');
+			redirect('user/users');
 		}
 	}
 	
@@ -231,7 +231,7 @@ class User extends MX_Controller
 		}
 		$maildata = set_maildata('toolbox@tonikgroupimage.com', 'Toolbox', $this->session->userdata('user_email'), $subject);
 		$this->maildecorator->sendmail($maildata);
-		redirect('user');
+		redirect('user/users');
 	}
 	
 	function email_exists($email, $user_id = 0)
