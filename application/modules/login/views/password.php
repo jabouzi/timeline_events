@@ -47,10 +47,10 @@
 							<input type="text" name="email" value="<?php echo $this->input->post('email'); ?>" placeholder="<?php echo lang('login.email'); ?>">
 							
 							
-							<label>	<?php echo lang('login.lang'); ?></label>
+							<?/*<label>	<?php echo lang('login.lang'); ?></label>
 							<div class="wrapper-select-top">
 								<?php echo form_dropdown('lang', $languages, $lang, $redirect); ?>
-							</div>
+							</div>*/?>
 							
 						</div>
 					</div>
