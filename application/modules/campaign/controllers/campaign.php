@@ -95,7 +95,7 @@ class Campaign extends MX_Controller
 		$campaign_data['campaign_managers_client'] = array_for_dropdown($campaign_managers_client, 'campaign_manager_id', array('campaign_manager_name', 'campaign_manager_lastname'));
 		array_unshift($campaign_data['campaign_managers_client'], '');
 
-		$campaign_data['campaign_steps_data'] = array_for_dropdown($campaign_steps_data, 'campaign_step_type_id', 'campaign_step_type_name');
+		$campaign_data['campaign_steps_data'] = array_for_dropdown($campaign_steps_data, 'campaign_step_id');
 
 		$campaign_data['campaign_status'] = array(0 => lang('campaign.status.standby'), 1 => lang('campaign.status.active'), 2 => lang('campaign.status.closed'));
 
