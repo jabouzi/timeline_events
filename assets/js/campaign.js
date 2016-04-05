@@ -20,6 +20,12 @@ $(document).ready(function() {
 		validate_from($(this).attr('data-value'));
 	});
 	
+	$('.upload').click(function()
+	{
+		clear_messages();
+		$("#" + $(this).attr('data-value')).submit();
+	});
+	
 	//$('.vis-item-content').mouseover(function()
 	//{
 		//console.log($(this).attr('data-value'));
@@ -35,7 +41,7 @@ $(document).ready(function() {
 	}
 
 	$('.collapsious span').click(function() {
-		console.log($(this));
+		//console.log($(this));
 		$('.timeline_'+$(this).attr('data-value')).toggle(500).parent().toggleClass('opened');
 	});
 
@@ -85,7 +91,7 @@ function drawVisualization() {
 		timeline[campaigns] = new vis.Timeline(container, items[campaigns], options);
 		var groups = new vis.DataSet();
 		for (var g = 0; g < groupData[campaigns].length; g++) {
-			var padding = Array(23).join(' '); // make a string of 255 spaces
+			//var padding = Array(23).join(' '); // make a string of 255 spaces
 			groups.add({id: g, content: groupData[campaigns][g]});
 		}
 		timeline[campaigns].setGroups(groups);

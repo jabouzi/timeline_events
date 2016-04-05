@@ -13,17 +13,17 @@
 			</svg>
 			<span><?php echo $campaign->campaign_title; ?> <?php echo $campaign_type; ?></span>
 		</h1>
-		<?php if (!empty($campaign_managers_is_tgi)) : ?>
+		<?php //if (!empty($campaign_managers_is_tgi)) : ?>
 		<form enctype="multipart/form-data" id="campaign_document" method="post" action="<?php echo site_url('campaign/process_document'); ?>">
 			<div class="title-top-btns">
-				<a style="cursor:pointer;" class="submit_form btn-icon-on-dark btnPlus submit" data-value="campaign_document">
+				<a style="cursor:pointer;" class="submit_form btn-icon-on-dark btnPlus upload" data-value="campaign_document">
 				Ajouter un document
 				</a>
 				<input type="file" name="upload_file">
 				<input type="hidden" name="campaign_id" value="<?php echo $campaign->campaign_id; ?>">
 			</div>
 		</form>
-		<?php endif; ?>
+		<?php //endif; ?>
 		<a href="<?php echo site_url('campaign'); ?>" class="btn-icon-on-dark on-white">
 			Retour
 		</a>

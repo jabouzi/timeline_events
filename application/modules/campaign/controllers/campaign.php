@@ -352,12 +352,11 @@ class Campaign extends MX_Controller
 
 		if ( ! $this->upload->do_upload('upload_file'))
 		{
-			$error = array('error' => $this->upload->display_errors());
-			$this->session->set_userdata('error_message', $error);
+			$this->session->set_userdata('error_message', $this->upload->display_errors());
+			redirect('campaign/documents/'.$campaign_id);
 		}
 		else
 		{
-
 			$document = array('upload_data' => $this->upload->data());
 			$campaign_document = array(
 				'campaign_id' => $campaign_id,
@@ -540,6 +539,7 @@ class Campaign extends MX_Controller
 		$campaign_status = array_for_dropdown($this->mdl_campaigns_status->i18n_site_query($this->session->userdata('current_site_lang'))->result(), 'campaign_status_id');
 		$campaigns = $this->mdl_campaigns->get_where(array('campaign_active' => 1))->result();
 		$longest_campaing = $this->mdl_campaigns->custom_query("select campaign_city from campaigns where 1 ORDER BY LENGTH(campaign_city) DESC LIMIT 1")->row();
+		$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
 		//$longest_campaing->campaign_city;
 		//var_dump(strlen($longest_campaing->campaign_city), $longest_campaing->campaign_city);
 
@@ -584,7 +584,7 @@ class Campaign extends MX_Controller
 			}
 		}
 		
-		foreach($this->lang->languages as $lang => $value)
+		foreach($languages as $lang => $value)
 		{
 			foreach($campaign_groups as $key1 => $campaign_group)
 			{
@@ -593,12 +593,13 @@ class Campaign extends MX_Controller
 				{
 					$groups[$key2] = '<a href="/'.$lang.'/campaign/detail/'.$campaign_ids[$key1][str_pad($campaign_name, strlen($longest_campaing->campaign_city), ".")].'">'.$campaign_name.'</a>';
 				}
-				$json2[$lang][$key1][9] = '<a>Holidays</a>';
+				$groups[count($campaigns)] = '<a>Holidays</a>';
 				$json2[$lang][$key1] = $groups;
+				//var_dump($json2);
 			}
 		}
 		
-		//var_dump($json2);
+		//var_dump($json2, $groups);
 		//exit;
 		
 
@@ -617,6 +618,8 @@ class Campaign extends MX_Controller
 			file_put_contents(FCPATH.'/assets/json/data_'.$lang.'.json',  'var jsonData = '.$json_data);
 			file_put_contents(FCPATH.'/assets/json/group_'.$lang.'.json',  'var groupData = '.$json_names);
 		}
+		
+		$this->generate_holidays(count($campaigns));
 	}
 
 	function generate_campaign_detail($id)
@@ -669,7 +672,7 @@ class Campaign extends MX_Controller
 		file_put_contents(FCPATH.'/assets/json/data_group_'.$id.'.json',  'var groupData = '.$json_names);
 	}
 
-	function generate_holidays()
+	function generate_holidays($group_id)
 	{
 		$json = array();
 		$year = date('Y');
@@ -681,9 +684,9 @@ class Campaign extends MX_Controller
 			{
 				$json[] = array(
 					'start' =>  $holiday,
-					'content' =>  '<span class="holidays" data-id="'.$y.'_'.$key.'"data-content="'.$y.'_'.$key.'" title="'.$key.'"></span> ',
+					'content' =>  '<span class="holidays" data-id="'.$y.'_'.$key.'"data-content="'.$y.'_'.$key.'" title="'.$key.'"><img src="/assets/images/croix.png" style="width:10px; height:10px;"></span> ',
 					'id' =>  $y.'_'.$key,
-					'group' => 9,
+					'group' => $group_id,
 					'className' => 'media',
 				);
 			}
@@ -720,7 +723,6 @@ class Campaign extends MX_Controller
 		$this->process_add_campaign_steps_data(1);
 		$this->generate_campaign();
 		$this->generate_campaign_detail($campaign_id);
-		$this->generate_holidays();
 		$this->session->set_userdata('success_message', lang('campaign.edit.success'));
 
 		$campaign_manager_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_id' => $campaign_data['campaign_manager_tgi']))->row();
