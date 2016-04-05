@@ -14801,7 +14801,7 @@ return /******/ (function(modules) { // webpackBootstrap
     this.redrawCount = 0;
 
     // attach the root panel to the provided container
-    if (!container) location.reload(); 
+    //if (!container) location.reload(); 
     //throw new Error('No container provided');
     container.appendChild(this.dom.root);
   };

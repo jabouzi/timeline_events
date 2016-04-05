@@ -91,7 +91,7 @@ class Login extends MX_Controller
 				$this->setcookie($username, $hash);
 			}
 			
-			redirect('campaign');
+			redirect(site_url().'fr/campaign');
 		}
 	}
 	
@@ -140,7 +140,7 @@ class Login extends MX_Controller
 			modules::run('user/save_user_activity', $result);
 			$this->deletecookie($username, $old_hash);
 			$this->setcookie($username, $hash);
-			redirect('campaign');
+			redirect(site_url().'fr/campaign');
 		}
 	}
 
@@ -163,7 +163,7 @@ class Login extends MX_Controller
 	{
 		if ($this->session->userdata('user_email'))
 		{
-			redirect('campaign');
+			redirect(site_url().'fr/campaign');
 		}
 	}
 	

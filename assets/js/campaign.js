@@ -80,7 +80,7 @@ function drawVisualization() {
 	{
 		items[campaigns] = new vis.DataSet(jsonData[campaigns]);
 		items[campaigns].add(holidaysData);
-		var container = document.getElementById(campaigns);
+		container = document.getElementById(campaigns);
 		var options = {orientation: {axis: 'both'}, locale: $("#site_lang").val(), start: addMonths(new Date(), -6), end: addMonths(new Date(), +6)};
 		timeline[campaigns] = new vis.Timeline(container, items[campaigns], options);
 		var groups = new vis.DataSet();

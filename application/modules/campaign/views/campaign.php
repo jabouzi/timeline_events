@@ -74,10 +74,8 @@
 	<div class="container">
 		<input type="hidden" id="campaign_calendars" value="0">
 		<div class="collapsious-wrapper">
-			<?php foreach($banners as $key => $banner) {
-					$opened = ' opened';
-				?>
-				<div class="collapsious<?php echo $opened; ?>">
+			<?php foreach($banners as $key => $banner) { ?>
+				<div class="collapsious">
 					<span data-value="<?php echo $banner->campaign_banner_id; ?>"><?php echo $banner->campaign_banner_name; ?></span>
 					<div class="campaign timeline_<?php echo $banner->campaign_banner_id; ?>" id="<?php echo $banner->campaign_banner_name; ?>">
 						<label>Date:</label>

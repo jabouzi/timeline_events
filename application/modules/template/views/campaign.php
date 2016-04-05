@@ -17,6 +17,13 @@
 		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/main.css">
 		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/vis.css">
 		<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/campaign.css">
+		
+		<?php if (isset($json)) { ?>
+			<?php foreach($json as $js) { ?>
+				<script type="text/javascript" src="<?php echo site_url(); ?>assets/json/<?php echo $js; ?>?random=<?php echo uniqid(); ?>"></script>
+			<?php } ?>
+		<?php } ?>
+		
 		<?php if (isset($stylesheet)) { ?>
 			<?php foreach($stylesheet as $css) { ?>
 				<link rel="stylesheet" href="<?php echo site_url(); ?>assets/css/<?php echo $css; ?>" type="text/css" media="screen" />
@@ -36,11 +43,7 @@
 		<?php } ?>
 		<?php } ?>
 		
-		<?php if (isset($json)) { ?>
-			<?php foreach($json as $js) { ?>
-				<script type="text/javascript" src="<?php echo site_url(); ?>assets/json/<?php echo $js; ?>?random=<?php echo uniqid(); ?>"></script>
-			<?php } ?>
-		<?php } ?>
+		
 		<script src="<?php echo site_url(); ?>assets/js/campaign.js" type="text/javascript"></script>
 
 	</head>
