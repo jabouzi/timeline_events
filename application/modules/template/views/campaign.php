@@ -60,7 +60,7 @@
 						<ul class="menu-header">
 						<li>
 						<?php
-						if (isset($this->session->userdata['user_permission']) && $this->session->userdata['user_permission'] == '1' )
+						if (isset($this->session->userdata['user_permission']) && $this->session->userdata['user_permission'] <= 2 )
 						{		
 						?>
 						<a href="/en/" class="btn-icon-on-dark-header">

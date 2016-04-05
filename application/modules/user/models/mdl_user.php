@@ -98,7 +98,7 @@ class Mdl_user extends CI_Model
 	{
 		$this->db->where('user_id', $id);
 		$this->db->delete($this->table);
-		$this->cache->memcached->delete('mdl_user_get_'.$id);
+		//$this->cache->memcached->delete('mdl_user_get_'.$id);
 	}
 
 	function count_where($where)
