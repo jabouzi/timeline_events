@@ -5,7 +5,7 @@
 			<table class="tablesorter" cellspacing="0"> 
 				<thead> 
 					<tr> 
-						<th><?php echo lang('campaign.name'); ?></th>
+						<th><?php echo lang('campaign.type.name'); ?></th>
 						<th><?php echo lang('campaign.color'); ?></th>
 						<th><?php echo lang('campaign.status'); ?></th>
 						<?php if ($this->session->userdata('user_permission') < 2) : ?>

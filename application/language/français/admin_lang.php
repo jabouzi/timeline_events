@@ -226,7 +226,10 @@ $lang['campaign.status.closed'] = "Terminée";
 $lang['campaign.goto'] = "Aller à";
 $lang['campaign.steps'] = "Étapes de campagne";
 $lang['campaign.types'] = "Types de campagne";
-$lang['campaign.status'] = "Statuts de campagne";
+$lang['campaign.status'] = "Statuts";
+$lang['campaign.step.name'] = "Nom de l'étapes";
+$lang['campaign.type.name'] = "Nom de type";
+$lang['campaign.status.name'] = "Nom de l'état";
 
 $lang['content.title'] = "Contenu";
 

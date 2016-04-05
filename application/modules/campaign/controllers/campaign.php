@@ -34,7 +34,7 @@ class Campaign extends MX_Controller
 		$campaign_data['campaign_types'] = $campaign_types;
 		$campaign_status = $this->mdl_campaigns_status->i18n_site_query($this->session->userdata('current_site_lang'))->result();
 		$campaign_data['campaigns_status'] = $campaign_status;
-		$view_data['stylesheet'] = array('campaign_types.css', 'jquery.qtip.min.css');
+		$view_data['stylesheet'] = array('campaign_custom.css', 'campaign_types.css', 'jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
 		$view_data['json'] = array('data_'.$this->lang->lang().'.json', 'group_'.$this->lang->lang().'.json', 'holidays.json');
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
@@ -540,8 +540,15 @@ class Campaign extends MX_Controller
 		$campaigns = $this->mdl_campaigns->get_where(array('campaign_active' => 1))->result();
 		$longest_campaing = $this->mdl_campaigns->custom_query("select campaign_city from campaigns where 1 ORDER BY LENGTH(campaign_city) DESC LIMIT 1")->row();
 		$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
-		//$longest_campaing->campaign_city;
-		//var_dump(strlen($longest_campaing->campaign_city), $longest_campaing->campaign_city);
+		$width = strlen($longest_campaing->campaign_city)*8;
+		
+		$css_text = ".vis-timeline .vis-labelset .vis-label .vis-inner {
+			min-width: {$width}px!important;
+			max-width: {$width}px!important;
+			word-break:break-word!important;
+		}";
+		
+		file_put_contents(FCPATH.'/assets/css/campaign_custom.css', $css_text);
 
 		foreach($campaigns as $key => $campaign)
 		{
@@ -556,8 +563,8 @@ class Campaign extends MX_Controller
 			}
 
 			$banners = $this->mdl_campaigns_banners->i18n_id_query($this->session->userdata('current_site_lang'), $campaign->campaign_banner_id);
-			$campaign_groups[$banners->row()->campaign_banner_name][] = str_pad($campaign->campaign_city, strlen($longest_campaing->campaign_city), ".");
-			$campaign_ids[$banners->row()->campaign_banner_name][str_pad($campaign->campaign_city, strlen($longest_campaing->campaign_city), ".")] = $campaign->campaign_id;
+			$campaign_groups[$banners->row()->campaign_banner_name][] = $campaign->campaign_city;
+			$campaign_ids[$banners->row()->campaign_banner_name][$campaign->campaign_city] = $campaign->campaign_id;
 			
 			foreach($this->lang->languages as $lang => $value)
 			{
@@ -591,7 +598,7 @@ class Campaign extends MX_Controller
 				$groups = array();
 				foreach($campaign_group as $key2 => $campaign_name)
 				{
-					$groups[$key2] = '<a href="/'.$lang.'/campaign/detail/'.$campaign_ids[$key1][str_pad($campaign_name, strlen($longest_campaing->campaign_city), ".")].'">'.$campaign_name.'</a>';
+					$groups[$key2] = '<a href="/'.$lang.'/campaign/detail/'.$campaign_ids[$key1][$campaign_name].'">'.$campaign_name.'</a>';
 				}
 				$groups[count($campaigns)] = '<a>Holidays</a>';
 				$json2[$lang][$key1] = $groups;

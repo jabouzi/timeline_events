@@ -5,7 +5,7 @@
 			<table class="tablesorter" cellspacing="0"> 
 			<thead> 
 				<tr> 
-					<th><?php echo lang('campaign.name'); ?></th>
+					<th><?php echo lang('campaign.step.name'); ?></th>
 					<th><?php echo lang('campaign.status'); ?></th>
 					<?php if ($this->session->userdata('user_permission') < 2) : ?>
 						<th><?php echo lang('admin.action'); ?></th>

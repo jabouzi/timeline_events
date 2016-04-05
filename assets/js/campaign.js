@@ -73,7 +73,9 @@ function drawVisualization() {
 	
 	var items = {};
 	var timeline = {};
-
+	var options = {
+      groupOrder: 'content'  // groupOrder can be a property name or a sorting function
+    };
 	for (var campaigns in jsonData)
 	{
 		items[campaigns] = new vis.DataSet(jsonData[campaigns]);
@@ -87,6 +89,7 @@ function drawVisualization() {
 			groups.add({id: gr, content: groupData[campaigns][gr]});
 			i++;
 		}
+		timeline[campaigns].setOptions(options);
 		timeline[campaigns].setGroups(groups);
 		timeline[campaigns].moveTo(new Date());
 	}
