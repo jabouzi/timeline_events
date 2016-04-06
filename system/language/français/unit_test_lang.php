@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 $lang['ut_test_name']		= 'Test Name';
 $lang['ut_test_datatype']	= 'Test Datatype';
@@ -22,4 +22,4 @@ $lang['ut_notes']			= 'Notes';
 
 
 /* End of file unit_test_lang.php */
-/* Location: ./system/language/english/unit_test_lang.php */
+/* Location: ./system/language/french/unit_test_lang.php */
