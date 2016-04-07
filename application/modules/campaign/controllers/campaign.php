@@ -700,7 +700,7 @@ class Campaign extends MX_Controller
 					'content' =>  '<span class="holidays" data-id="'.$y.'_'.$key.'"data-content="'.$y.'_'.$key.'" title="'.$key.'"><img src="/assets/images/croix.png" style="width:10px; height:10px;"></span> ',
 					'id' =>  $y.'_'.$key,
 					'group' => $group_id,
-					'className' => 'media',
+					'className' => 'default',
 				);
 			}
 		}

@@ -7,7 +7,7 @@
 
 .vis-item {
 	border-radius:8px!important;
-	border:none!important;
+	/*border:none!important;*/
 }
 
 .vis-item .vis-item-overflow {
@@ -66,7 +66,7 @@ div.ouverture {
 
 div.media {
 	background-color: #FFFFFF;
-	border-color: #FFFFFF;
+	border-color: #FF0000;
 	cursor:pointer;
 }
 

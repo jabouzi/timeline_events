@@ -57,8 +57,8 @@ class Template extends MX_Controller
 	
 	function campaign($view_data = array())
 	{
-		if ($this->session->userdata('user_email'))
-		{
+		//if ($this->session->userdata('user_email'))
+		//{
 			$view_data['info_message'] = $this->session->userdata('info_message');
 			$view_data['warning_message'] = $this->session->userdata('warning_message');
 			$view_data['error_message'] = $this->session->userdata('error_message');
@@ -84,11 +84,11 @@ class Template extends MX_Controller
 			$this->session->unset_userdata('info_message');
 			$this->session->unset_userdata('error_message');
 			$this->session->unset_userdata('success_message');
-		}
-		else
-		{
-			redirect('login');
-		}
+		//}
+		//else
+		//{
+			//redirect('login');
+		//}
 	}
 	
 	function change_language()
