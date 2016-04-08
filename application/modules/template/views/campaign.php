@@ -53,10 +53,10 @@
 					<div class="col-sm-12">
 						<div class="table_wp">
 							<div class="table_cell toolboxLogo">
-								<a href="<?php site_url('campaign'); ?>"><img src="/assets/images/toolbox/toolbox.png" alt="" /></a>
+								<a href="<?php echo site_url('campaign'); ?>"><img src="/assets/images/toolbox/toolbox.png" alt="" /></a>
 							</div>
 							<div class="table_cell brandLogo">
-								<a href="<?php site_url('campaign'); ?>"><img src="/assets/images/toolbox/logoBrand.png" alt="" /></a>
+								<a href="<?php echo site_url('campaign'); ?>"><img src="/assets/images/toolbox/logoBrand.png" alt="" /></a>
 							</div>
 						</div>
 						<ul class="menu-header">
