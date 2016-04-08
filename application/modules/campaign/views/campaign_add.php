@@ -53,7 +53,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<label for="campaign_title" id="label_campaign_title"><?= lang('form.campaign_title_lbl')?></label>
-						<input  type="text" name="campaign_title" id="campaign_title" value="" data-validate="required" data-type="text" />
+						<input  type="text" name="campaign_title" id="campaign_title" value="" maxlength="20" data-validate="required" data-type="text" />
 					</div>
 				</div>
 				<div class="row">

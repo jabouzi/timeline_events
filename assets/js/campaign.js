@@ -138,7 +138,7 @@ function validate_from(form_id)
 	//console.log(form_id);
 	if ('campaign_add' == form_id)
 	{
-		validateCreateDates();
+		required += validateCreateDates();
 	}
 	else
 	{
@@ -218,7 +218,7 @@ function validate_element(element)
 	return required;
 }
 
-function validateDates()
+function validateDates(type)
 {
 	var error = 0;
 	
@@ -305,7 +305,7 @@ function validateCreateDates()
 			$("#label_campaign_date_start").addClass('error-input');
 		}
 	}
-
+	
 	return error;
 }
 
@@ -418,10 +418,6 @@ function FeatureDateCheck(dt,mon,yr)
 	var Joindate = new Date(yr, mon-1, dt);
 	var Currentdate = new Date();
 	if (isNaN(Joindate.getTime()) == true)
-	{
-		return false;
-	}
-	else if (Joindate.getTime() > Currentdate.getTime())
 	{
 		return false;
 	}

@@ -275,7 +275,7 @@ class Campaign extends MX_Controller
 			'campaign_manager_tgi'=> $this->input->post('campaign_manager_tgi'),
 			'campaign_budget'=> $this->input->post('campaign_budget'),
 			'campaign_active' => 1,
-			'campaign_status' => 1,
+			'campaign_status' => $this->input->post('campaign_status')
 		);
 		$this->add_campaign($campaign_data);
 	}
@@ -316,7 +316,7 @@ class Campaign extends MX_Controller
 			'campaign_manager_tgi'=> $this->input->post('campaign_manager_tgi'),
 			'campaign_budget'=> $this->input->post('campaign_budget'),
 			'campaign_type_id'=> $this->input->post('campaign_type_id'),
-			'campaign_status' => $this->input->post('campaign_status'),
+			'campaign_status' => $this->input->post('campaign_status')
 		);
 
 		$this->update_campaign($campaign_id, $campaign_data);
