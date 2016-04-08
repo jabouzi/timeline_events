@@ -4,6 +4,7 @@ $lang['general.yes'] = "Yes";
 $lang['general.no'] = "No";
 $lang['general.color'] = "Choose a color";
 $lang['general.delete.confirm'] = "Confirm delete";
+$lang['general.holidays'] = "Jours fériés";
 
 $lang['admin.title'] = "Administration";
 $lang['admin.delete'] = "Delete";

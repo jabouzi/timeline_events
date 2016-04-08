@@ -597,6 +597,7 @@ class Campaign extends MX_Controller
 			}
 		}
 		
+		$holidays_i18n = array('fr' => 'Jours fériés', 'en' => 'Holidays');
 		foreach($languages as $lang => $value)
 		{
 			foreach($campaign_groups as $key1 => $campaign_group)
@@ -606,13 +607,14 @@ class Campaign extends MX_Controller
 				{
 					$groups[$key2] = '<a href="/'.$lang.'/campaign/detail/'.$campaign_ids[$key1][$campaign_name].'">'.$campaign_name.'</a>';
 				}
-				$groups[count($campaigns)] = '<a>Holidays</a>';
+
+				$groups[count($campaigns)] = '<a>'.$holidays_i18n[$lang].'</a>';
 				$json2[$lang][$key1] = $groups;
 				//var_dump($json2, $groups);
 			}
 		}
 		
-		//var_dump($campaign_groups);
+		//var_dump($groups);
 		//exit;
 		
 
