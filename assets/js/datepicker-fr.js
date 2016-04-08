@@ -11,7 +11,7 @@
 	}
 }( function( datepicker ) {
 
-datepicker.regional[ "fr-CA" ] = {
+datepicker.regional[ "fr" ] = {
 	closeText: "Fermer",
 	prevText: "Précédent",
 	nextText: "Suivant",
@@ -30,8 +30,8 @@ datepicker.regional[ "fr-CA" ] = {
 	showMonthAfterYear: false,
 	yearSuffix: ""
 };
-datepicker.setDefaults( datepicker.regional[ "fr-CA" ] );
+datepicker.setDefaults( datepicker.regional[ "fr" ] );
 
-return datepicker.regional[ "fr-CA" ];
+return datepicker.regional[ "fr" ];
 
 } ) );

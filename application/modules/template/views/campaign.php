@@ -35,7 +35,6 @@
 		<![endif]-->
 		<script src="<?php echo site_url(); ?>assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="<?php echo site_url(); ?>assets/js/jquery-ui.min.js" type="text/javascript"></script>
-		<script src="<?php echo site_url(); ?>assets/js/datepicker-fr.js" type="text/javascript"></script>
 		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
 		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery.jqtransform.js"></script>
 		<?php if (isset($javascript)) { ?>

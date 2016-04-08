@@ -158,7 +158,8 @@ class Campaign extends MX_Controller
 		$campaign_data['campaign_steps'] = array_for_dropdown($campaign_steps, 'campaign_step_id', 'campaign_step_name');
 
 		$this->session->userdata['campaign_banner_id'] = $campaign_data['campaign']->campaign_banner_id;
-
+		
+		$view_data['javascript'] = array('datepicker-'.$this->session->userdata('current_site_lang').'.js');
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_edit.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -219,7 +220,7 @@ class Campaign extends MX_Controller
 		$this->session->userdata['campaign_banner_id'] = $campaign->campaign_banner_id;
 
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign_detail.php', $campaign_data, true);
-		$view_data['javascript'] = array('moment-with-locales.min.js', 'vis.js', 'moment-with-locales.min.js');
+		$view_data['javascript'] = array('datepicker-'.$this->session->userdata('current_site_lang').'.js', 'moment-with-locales.min.js', 'vis.js', 'moment-with-locales.min.js');
 		$view_data['json'] = array('data_'.$id.'.json', 'data_group_'.$id.'.json');
 		echo modules::run('template/campaign', $view_data);
 	}

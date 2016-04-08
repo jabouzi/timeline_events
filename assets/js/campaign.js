@@ -1,18 +1,19 @@
 $(document).ready(function() {
 
-	$.datepicker.setDefaults($.datepicker.regional[$("#site_lang").val()]);
-	console.log($("#site_lang").val());
+	//$.datepicker.setDefaults($.datepicker.regional[$("#site_lang").val()]);
+	if ($("#site_lang").val() != 'en') $( "#datepicker" ).datepicker( $.datepicker.regional[$("#site_lang").val()] );
 	$('.datechooser').datepicker(
 		{
-		dateFormat: 'dd/mm/yy',
-	    changeMonth: true,
-	    changeYear: true,
-	    showAnim: 'slideDown',
+			dateFormat: 'dd/mm/yy',
+			changeMonth: true,
+			changeYear: true,
+			showAnim: 'slideDown',
 			onChangeMonthYear:function(y, m, i){                                
-        var d = i.selectedDay;
-        $(this).datepicker('setDate', new Date(y, m-1, d));
-    	}
+				var d = i.selectedDay;
+				$(this).datepicker('setDate', new Date(y, m-1, d));
+			}
 		}
+		//$.datepicker.regional[$("#site_lang").val()]
 	);
 	
 	$('.submit').click(function()
