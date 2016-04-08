@@ -71,7 +71,8 @@
 			</div>
 			<div class="twovalues bg_right">
 				<span class="namebudget"><?= lang('campaign.budget_total_lbl')?>:</span>
-				<span class="bugetprice">n/d</span>
+				<?php setlocale(LC_MONETARY, $money_format); echo $money_format;?>
+				<span class="bugetprice"><?php echo money_format('%.2n', $campaign_budget); ?></span>
 			</div>
 		</div>
 	</div>

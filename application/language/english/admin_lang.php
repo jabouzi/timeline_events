@@ -235,6 +235,7 @@ $lang['campaign.status.name'] = "Status name";
 $lang['campaign.edit.step'] = "Edit Campaign Steps";
 $lang['campaign.edit.type'] = "Edit Campaign Types";
 $lang['campaign.edit.status'] = "Edit Campaign Status";
+$lang['campaign.budget'] = "Budget";
 
 $lang['content.title'] = "Content";
 

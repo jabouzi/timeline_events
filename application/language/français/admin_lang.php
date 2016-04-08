@@ -233,6 +233,7 @@ $lang['campaign.status.name'] = "Nom de l'état";
 $lang['campaign.edit.step'] = "Éditer l'tapes de campagne";
 $lang['campaign.edit.type'] = "Éditer le types de campagne";
 $lang['campaign.edit.status'] = "Éditer le statut de campagne";
+$lang['campaign.budget'] = "Budget";
 
 $lang['content.title'] = "Contenu";
 

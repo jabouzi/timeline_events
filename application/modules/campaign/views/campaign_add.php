@@ -106,6 +106,18 @@
 						<input type="text" name="campaign_store_number" id="campaign_store_number" value="" data-type="text"/>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-6">
+						<label for="campaign_budget" id="label_campaign_budget"><?php echo lang('campaign.budget'); ?></label>
+						<input type="text" name="campaign_budget" id="campaign_budget" value="" data-type="text"/>
+					</div>
+					<div class="col-sm-12 col-md-6">
+						<label for="campaign_status" id="label_campaign_status"><?php echo lang('campaign.status'); ?></label>
+						<div class="wrapper-select-top">
+							<?php echo form_dropdown('campaign_status', $campaign_status); ?>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

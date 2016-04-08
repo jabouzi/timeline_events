@@ -90,7 +90,8 @@ class Campaign extends MX_Controller
 		$campaign_steps_data = $this->mdl_campaigns_steps_data->get()->result();
 		$campaign_managers_tgi = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_tgi' => 1))->result();
 		$campaign_managers_client = $this->mdl_campaigns_project_managers->get_where(array('campaign_manager_tgi' => 0))->result();
-
+		$campaign_status = $this->mdl_campaigns_status->i18n_site_query($this->session->userdata('current_site_lang'))->result();
+		
 		$campaign_data['campaign_banners'] = array_for_dropdown($campaign_banners, 'campaign_banner_id', 'campaign_banner_name');
 		array_unshift($campaign_data['campaign_banners'], '');
 
@@ -104,8 +105,9 @@ class Campaign extends MX_Controller
 		array_unshift($campaign_data['campaign_managers_client'], '');
 
 		$campaign_data['campaign_steps_data'] = array_for_dropdown($campaign_steps_data, 'campaign_step_id');
-
-		$campaign_data['campaign_status'] = array(0 => lang('campaign.status.standby'), 1 => lang('campaign.status.active'), 2 => lang('campaign.status.closed'));
+		
+		$campaign_data['campaign_status'] = array_for_dropdown($campaign_status, 'campaign_status_id', 'campaign_status_name');
+		array_unshift($campaign_data['campaign_status'], '');
 
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_add.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
@@ -206,12 +208,13 @@ class Campaign extends MX_Controller
 		$campaign_data['page_title'] = lang('dashboard.title3');
 		$campaign = $this->mdl_campaigns->get_where(array('campaign_id' => $id))->row();
 		$campaign_data['campaign_name'] = $campaign->campaign_title;
+		$campaign_data['campaign_budget'] = $campaign->campaign_budget;
 		$campaign_data['campaign_id'] = $id;
+
+		$campaign_data['money_format'] = $this->session->userdata('current_site_lang')."_CA.UTF-8";
 
 		$campaign_type = $this->mdl_campaigns_types->get_where(array('campaign_type_id' => $campaign->campaign_type_id))->row();
 		$campaign_data['campaign_type'] = @$campaign_type->campaign_type_name;
-
-		$campaign_documents =
 
 		$this->session->userdata['campaign_banner_id'] = $campaign->campaign_banner_id;
 
@@ -264,14 +267,12 @@ class Campaign extends MX_Controller
 			'campaign_title' => $this->input->post('campaign_title'),
 			'campaign_city' => $this->input->post('campaign_city'),
 			'campaign_date_start' => ((isempty($this->input->post('campaign_date_start'))) ? null : DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->format('Y-m-d')),
-			//'campaign_date_end' => DateTime::createFromFormat('d/m/Y', item($this->input->post('campaign_step_date_end'), 6))->format('Y-m-d'),
 			'campaign_date_evenement' => ((isempty($this->input->post('campaign_date_evenement'))) ? null : DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_evenement'))->format('Y-m-d')),
-			//'campaign_date_media_start' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_start'))->format('Y-m-d'),
-			//'campaign_date_media_end' => DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_media_end'))->format('Y-m-d'),
 			'campaign_branch' => $this->input->post('campaign_branch'),
 			'campaign_address'=> $this->input->post('campaign_address'),
 			'campaign_manager_client'=> $this->input->post('campaign_manager_client'),
 			'campaign_manager_tgi'=> $this->input->post('campaign_manager_tgi'),
+			'campaign_budget'=> $this->input->post('campaign_budget'),
 			'campaign_active' => 1,
 			'campaign_status' => 1,
 		);
@@ -312,6 +313,7 @@ class Campaign extends MX_Controller
 			'campaign_address'=> $this->input->post('campaign_address'),
 			'campaign_manager_client'=> $this->input->post('campaign_manager_client'),
 			'campaign_manager_tgi'=> $this->input->post('campaign_manager_tgi'),
+			'campaign_budget'=> $this->input->post('campaign_budget'),
 			'campaign_type_id'=> $this->input->post('campaign_type_id'),
 			'campaign_status' => $this->input->post('campaign_status'),
 		);
