@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-	$.datepicker.setDefaults($.datepicker.regional[($('html').attr('lang') == 'en') ? '' : $('html').attr('lang')]);
+	$.datepicker.setDefaults($.datepicker.regional[$("#site_lang").val()]);
+	console.log($("#site_lang").val());
 	$('.datechooser').datepicker(
 		{
 		dateFormat: 'dd/mm/yy',

@@ -35,6 +35,7 @@
 		<![endif]-->
 		<script src="<?php echo site_url(); ?>assets/js/jquery.min.js" type="text/javascript"></script>
 		<script src="<?php echo site_url(); ?>assets/js/jquery-ui.min.js" type="text/javascript"></script>
+		<script src="<?php echo site_url(); ?>assets/js/datepicker-fr.js" type="text/javascript"></script>
 		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/bootstrap-3.0.0.min.js"></script>
 		<script type="text/javascript" src="<?php echo site_url(); ?>assets/js/jquery.jqtransform.js"></script>
 		<?php if (isset($javascript)) { ?>
@@ -151,6 +152,6 @@
 					<div class="tgi-logo"><a href="" target="_black"><img src="/assets/images/toolbox/tgi-logo.png" alt="" /></a></div>
 				</div>
 			</footer>
-			<input type="hidden" id="site_lang" value="<?php echo $this->lang->lang(); ?>">
+			<input type="hidden" id="site_lang" value="<?php echo $this->session->userdata('current_site_lang'); ?>">
 		</body>
 	</html>
