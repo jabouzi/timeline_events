@@ -538,6 +538,7 @@ class Campaign extends MX_Controller
 	{
 		$holidays_i18n = array('fr' => 'Jours fériés', 'en' => 'Holidays');
 		$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
+		var_dump($languages);exit;
 		foreach($languages as $lang => $value)
 		{
 			$json = array();
@@ -635,7 +636,7 @@ class Campaign extends MX_Controller
 
 				file_put_contents(FCPATH.'/assets/json/data_'.$lang.'.json',  'var jsonData = '.$json_data);
 				file_put_contents(FCPATH.'/assets/json/group_'.$lang.'.json',  'var groupData = '.$json_names);
-			}
+		}
 		//}
 		$this->generate_holidays(count($campaigns));
 	}
