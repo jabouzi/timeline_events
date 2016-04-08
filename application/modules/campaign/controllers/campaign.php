@@ -577,29 +577,26 @@ class Campaign extends MX_Controller
 				$campaign_groups[$banners->row()->campaign_banner_name][] = $campaign->campaign_city;
 				$campaign_ids[$banners->row()->campaign_banner_name][$campaign->campaign_city] = $campaign->campaign_id;
 				
-				foreach($this->lang->languages as $lang => $value)
-				{
-					$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
-				
-					$json[$lang][$banners->row()->campaign_banner_name][] = array(
-							'start' =>  '__'.strtotime($campaign->campaign_date_start),
-							'end' =>  '__'.strtotime($campaign->campaign_date_end),
-							'content' =>  '<a href="/'.$lang.'/campaign/detail/'.$campaign->campaign_id.'" style="color:#555;font-weight:bold;" data-id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campagne : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">'.$campaign->campaign_title.'</a>',
-							'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
-							'id' =>  $campaign->campaign_id,
-							'className' => $classname,
-							'editable' => false
-						);
-					
-					if (!$campaign->campaign_date_evenement) $campaign->campaign_date_evenement = $campaign->campaign_date_end;
-					$json[$lang][$banners->row()->campaign_banner_name][] = array(
-						'start' =>  '__'.strtotime($campaign->campaign_date_evenement),
-						'content' =>  ' ',
-						'id' =>  'event_'.$key,
+				$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
+			
+				$json[$lang][$banners->row()->campaign_banner_name][] = array(
+						'start' =>  '__'.strtotime($campaign->campaign_date_start),
+						'end' =>  '__'.strtotime($campaign->campaign_date_end),
+						'content' =>  '<a href="/'.$lang.'/campaign/detail/'.$campaign->campaign_id.'" style="color:#555;font-weight:bold;" data-id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campagne : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">'.$campaign->campaign_title.'</a>',
 						'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
-						'className' => 'event',
+						'id' =>  $campaign->campaign_id,
+						'className' => $classname,
+						'editable' => false
 					);
-				}
+				
+				if (!$campaign->campaign_date_evenement) $campaign->campaign_date_evenement = $campaign->campaign_date_end;
+				$json[$lang][$banners->row()->campaign_banner_name][] = array(
+					'start' =>  '__'.strtotime($campaign->campaign_date_evenement),
+					'content' =>  ' ',
+					'id' =>  'event_'.$key,
+					'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
+					'className' => 'event',
+				);
 			}
 			
 			
@@ -634,8 +631,8 @@ class Campaign extends MX_Controller
 					return 'new Date(' . ($e[1] * 1000) . ')';
 				}, $json_names);
 
-				var_dump($json_data, FCPATH.'/assets/json/data_'.$lang.'.json', FCPATH, file_put_contents(FCPATH.'/assets/json/data_'.$lang.'.json',  'var jsonData = '.$json_data));
-				var_dump($json_names, FCPATH.'/assets/json/data_'.$lang.'.json', FCPATH, file_put_contents(FCPATH.'/assets/json/group_'.$lang.'.json',  'var groupData = '.$json_names));
+				var_dump($lang, $json_data, FCPATH.'/assets/json/data_'.$lang.'.json', FCPATH, file_put_contents(FCPATH.'/assets/json/data_'.$lang.'.json',  'var jsonData = '.$json_data));
+				var_dump($lang, $json_names, FCPATH.'/assets/json/data_'.$lang.'.json', FCPATH, file_put_contents(FCPATH.'/assets/json/group_'.$lang.'.json',  'var groupData = '.$json_names));
 				exit;
 		}
 		//}
