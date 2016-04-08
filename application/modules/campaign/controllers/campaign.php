@@ -43,9 +43,9 @@ class Campaign extends MX_Controller
 		$campaign_data['campaign_types'] = $campaign_types;
 		$campaign_status = $this->mdl_campaigns_status->i18n_site_query($this->session->userdata('current_site_lang'))->result();
 		$campaign_data['campaigns_status'] = $campaign_status;
-		$view_data['stylesheet'] = array('campaign_custom.css', 'campaign_types.css', 'jquery.qtip.min.css');
+		$view_data['stylesheet'] = array('campaign_custom_'.$this->session->userdata('current_site_lang').'.css', 'campaign_types_'.$this->session->userdata('current_site_lang').'.css', 'jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
-		$view_data['json'] = array('data_'.$this->lang->lang().'.json', 'group_'.$this->lang->lang().'.json', 'holidays.json');
+		$view_data['json'] = array('data_'.$this->session->userdata('current_site_lang').'.json', 'group_'.$this->session->userdata('current_site_lang').'.json', 'holidays.json');
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -536,70 +536,73 @@ class Campaign extends MX_Controller
 
 	function generate_campaign()
 	{
-		$json = array();
-		$json2 = array();
-		$campaign_groups = array();
-		$campaign_ids = array();
-		$campaign_names_flipped = array();
-		$campaign_types = array_for_dropdown($this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result(), 'campaign_type_id');
-		$campaign_status = array_for_dropdown($this->mdl_campaigns_status->i18n_site_query($this->session->userdata('current_site_lang'))->result(), 'campaign_status_id');
-		$campaigns = $this->mdl_campaigns->get_where(array('campaign_active' => 1))->result();
-		$longest_campaing = $this->mdl_campaigns->custom_query("select campaign_city from campaigns where 1 ORDER BY LENGTH(campaign_city) DESC LIMIT 1")->row();
-		$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
-		$width = strlen($longest_campaing->campaign_city)*8;
-		
-		$css_text = ".vis-timeline .vis-labelset .vis-label .vis-inner {
-			min-width: {$width}px!important;
-			max-width: {$width}px!important;
-			word-break:break-word!important;
-		}";
-		
-		file_put_contents(FCPATH.'/assets/css/campaign_custom.css', $css_text);
-
-		foreach($campaigns as $key => $campaign)
-		{
-			if ($campaign->campaign_status > 0)
-			{
-				$classname = friendly_url($campaign_status[$campaign->campaign_status]->campaign_status_name);
-			}
-			else 
-			{
-				if ($campaign->campaign_type_id == 0) $classname = '';
-				else $classname = friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name);
-			}
-
-			$banners = $this->mdl_campaigns_banners->i18n_id_query($this->session->userdata('current_site_lang'), $campaign->campaign_banner_id);
-			$campaign_groups[$banners->row()->campaign_banner_name][] = $campaign->campaign_city;
-			$campaign_ids[$banners->row()->campaign_banner_name][$campaign->campaign_city] = $campaign->campaign_id;
-			
-			foreach($this->lang->languages as $lang => $value)
-			{
-				$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
-			
-				$json[$lang][$banners->row()->campaign_banner_name][] = array(
-						'start' =>  '__'.strtotime($campaign->campaign_date_start),
-						'end' =>  '__'.strtotime($campaign->campaign_date_end),
-						'content' =>  '<a href="/'.$lang.'/campaign/detail/'.$campaign->campaign_id.'" style="color:#555;font-weight:bold;" data-id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campagne : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">'.$campaign->campaign_title.'</a>',
-						'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
-						'id' =>  $campaign->campaign_id,
-						'className' => $classname,
-						'editable' => false
-					);
-				
-				if (!$campaign->campaign_date_evenement) $campaign->campaign_date_evenement = $campaign->campaign_date_end;
-				$json[$lang][$banners->row()->campaign_banner_name][] = array(
-					'start' =>  '__'.strtotime($campaign->campaign_date_evenement),
-					'content' =>  ' ',
-					'id' =>  'event_'.$key,
-					'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
-					'className' => 'event',
-				);
-			}
-		}
-		
 		$holidays_i18n = array('fr' => 'Jours fériés', 'en' => 'Holidays');
+		$languages = array_for_dropdown($this->mdl_language->get()->result(), 'language_code', 'language_name');
 		foreach($languages as $lang => $value)
 		{
+			$json = array();
+			$json2 = array();
+			$campaign_groups = array();
+			$campaign_ids = array();
+			$campaign_names_flipped = array();
+			$campaign_types = array_for_dropdown($this->mdl_campaigns_types->i18n_site_query($lang)->result(), 'campaign_type_id');
+			$campaign_status = array_for_dropdown($this->mdl_campaigns_status->i18n_site_query($lang)->result(), 'campaign_status_id');
+			$campaigns = $this->mdl_campaigns->get_where(array('campaign_active' => 1))->result();
+			$longest_campaing = $this->mdl_campaigns->custom_query("select campaign_city from campaigns where 1 ORDER BY LENGTH(campaign_city) DESC LIMIT 1")->row();
+			$width = strlen($longest_campaing->campaign_city)*8;
+			
+			$css_text = ".vis-timeline .vis-labelset .vis-label .vis-inner {
+				min-width: {$width}px!important;
+				max-width: {$width}px!important;
+				word-break:break-word!important;
+			}";
+			
+			file_put_contents(FCPATH.'/assets/css/campaign_custom_'.$lang.'.css', $css_text);
+
+
+			foreach($campaigns as $key => $campaign)
+			{
+				if ($campaign->campaign_status > 0)
+				{
+					$classname = friendly_url($campaign_status[$campaign->campaign_status]->campaign_status_name);
+				}
+				else 
+				{
+					if ($campaign->campaign_type_id == 0) $classname = '';
+					else $classname = friendly_url($campaign_types[$campaign->campaign_type_id]->campaign_type_name);
+				}
+
+				$banners = $this->mdl_campaigns_banners->i18n_id_query($lang, $campaign->campaign_banner_id);
+				$campaign_groups[$banners->row()->campaign_banner_name][] = $campaign->campaign_city;
+				$campaign_ids[$banners->row()->campaign_banner_name][$campaign->campaign_city] = $campaign->campaign_id;
+				
+				foreach($this->lang->languages as $lang => $value)
+				{
+					$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
+				
+					$json[$lang][$banners->row()->campaign_banner_name][] = array(
+							'start' =>  '__'.strtotime($campaign->campaign_date_start),
+							'end' =>  '__'.strtotime($campaign->campaign_date_end),
+							'content' =>  '<a href="/'.$lang.'/campaign/detail/'.$campaign->campaign_id.'" style="color:#555;font-weight:bold;" data-id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campagne : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">'.$campaign->campaign_title.'</a>',
+							'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
+							'id' =>  $campaign->campaign_id,
+							'className' => $classname,
+							'editable' => false
+						);
+					
+					if (!$campaign->campaign_date_evenement) $campaign->campaign_date_evenement = $campaign->campaign_date_end;
+					$json[$lang][$banners->row()->campaign_banner_name][] = array(
+						'start' =>  '__'.strtotime($campaign->campaign_date_evenement),
+						'content' =>  ' ',
+						'id' =>  'event_'.$key,
+						'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
+						'className' => 'event',
+					);
+				}
+			}
+			
+			
+
 			foreach($campaign_groups as $key1 => $campaign_group)
 			{
 				$groups = array();
@@ -612,28 +615,28 @@ class Campaign extends MX_Controller
 				$json2[$lang][$key1] = $groups;
 				//var_dump($json2, $groups);
 			}
-		}
-		
-		//var_dump($groups);
-		//exit;
-		
+			//}
+			
+			//var_dump($groups);
+			//exit;
+			
 
-		foreach($languages as $lang => $value)
-		{
-			$json_names = json_encode($json2[$lang]);
+			//foreach($languages as $lang => $value)
+			//{
+				$json_names = json_encode($json2[$lang]);
 
-			$json_data = json_encode($json[$lang]);
-			$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
-				return 'new Date(' . ($e[1] * 1000) . ')';
-			}, $json_data);
-			$json_names = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
-				return 'new Date(' . ($e[1] * 1000) . ')';
-			}, $json_names);
+				$json_data = json_encode($json[$lang]);
+				$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+					return 'new Date(' . ($e[1] * 1000) . ')';
+				}, $json_data);
+				$json_names = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+					return 'new Date(' . ($e[1] * 1000) . ')';
+				}, $json_names);
 
-			file_put_contents(FCPATH.'/assets/json/data_'.$lang.'.json',  'var jsonData = '.$json_data);
-			file_put_contents(FCPATH.'/assets/json/group_'.$lang.'.json',  'var groupData = '.$json_names);
-		}
-		
+				file_put_contents(FCPATH.'/assets/json/data_'.$lang.'.json',  'var jsonData = '.$json_data);
+				file_put_contents(FCPATH.'/assets/json/group_'.$lang.'.json',  'var groupData = '.$json_names);
+			}
+		//}
 		$this->generate_holidays(count($campaigns));
 	}
 
@@ -820,6 +823,6 @@ class Campaign extends MX_Controller
 			$classcolor = $campaign_status->campaign_status_color;
 			$css_text .= "div.{$classname} {\n background-color: {$classcolor};\n border-color: {$classcolor};\n cursor:pointer;\n }\n\n";
 		}
-		file_put_contents(FCPATH.'/assets/css/campaign_types.css', $css_text);
+		file_put_contents(FCPATH.'/assets/css/campaign_types_'.$this->session->userdata('current_lang').'.css', $css_text);
 	}
 }
