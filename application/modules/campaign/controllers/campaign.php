@@ -256,6 +256,22 @@ class Campaign extends MX_Controller
 		$view_data['json'] = array('data_'.$id.'.json');
 		echo modules::run('template/campaign', $view_data);
 	}
+	
+	function __print()
+	{
+		$view_data['page_title'] = lang('dashboard.title3');
+		$banners = $this->mdl_campaigns_banners->i18n_client_query($this->session->userdata('current_site_lang'),9);
+		$view_data['banners'] = $banners->result();
+		$campaign_types = $this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result();
+		$view_data['campaign_types'] = $campaign_types;
+		$campaign_status = $this->mdl_campaigns_status->i18n_site_query($this->session->userdata('current_site_lang'))->result();
+		$view_data['campaigns_status'] = $campaign_status;
+		$view_data['stylesheet'] = array('campaign_custom_'.$this->session->userdata('current_site_lang').'.css', 'campaign_types_'.$this->session->userdata('current_site_lang').'.css', 'jquery.qtip.min.css');
+		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
+		$view_data['json'] = array('data_'.$this->session->userdata('current_site_lang').'.json', 'group_'.$this->session->userdata('current_site_lang').'.json', 'holidays.json');
+		$this->load->view('campaign.php', $view_data);
+		echo modules::run('template/campaign', $view_data);
+	}
 
 	function process_add_campaign()
 	{
@@ -615,30 +631,21 @@ class Campaign extends MX_Controller
 
 				$groups[count($campaigns)] = '<a>'.$holidays_i18n[$lang].'</a>';
 				$json2[$lang][$key1] = $groups;
-				//var_dump($json2, $groups);
 			}
-			//}
-			
-			//var_dump($groups);
-			//exit;
-			
 
-			//foreach($languages as $lang => $value)
-			//{
-				$json_names = json_encode($json2[$lang]);
+			$json_names = json_encode($json2[$lang]);
 
-				$json_data = json_encode($json[$lang]);
-				$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
-					return 'new Date(' . ($e[1] * 1000) . ')';
-				}, $json_data);
-				$json_names = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
-					return 'new Date(' . ($e[1] * 1000) . ')';
-				}, $json_names);
+			$json_data = json_encode($json[$lang]);
+			$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+				return 'new Date(' . ($e[1] * 1000) . ')';
+			}, $json_data);
+			$json_names = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+				return 'new Date(' . ($e[1] * 1000) . ')';
+			}, $json_names);
 
-				file_put_contents(FCPATH.'/assets/json/data_'.$lang.'.json',  'var jsonData = '.$json_data);
-				file_put_contents(FCPATH.'/assets/json/group_'.$lang.'.json',  'var groupData = '.$json_names);
+			file_put_contents(FCPATH.'/assets/json/data_'.$lang.'.json',  'var jsonData = '.$json_data);
+			file_put_contents(FCPATH.'/assets/json/group_'.$lang.'.json',  'var groupData = '.$json_names);
 		}
-		//}
 		$this->generate_holidays(count($campaigns));
 	}
 

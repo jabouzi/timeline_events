@@ -75,15 +75,20 @@ function drawVisualization() {
 	
 	var items = {};
 	var timeline = {};
-	var options = {
-      groupOrder: 'content'  // groupOrder can be a property name or a sorting function
-    };
+	var options = {};
 	for (var campaigns in jsonData)
 	{
 		items[campaigns] = new vis.DataSet(jsonData[campaigns]);
 		items[campaigns].add(holidaysData);
 		container = document.getElementById(campaigns);
-		var options = {orientation: {axis: 'both'}, locale: $("#site_lang").val(), start: addMonths(new Date(), -6), end: addMonths(new Date(), +6)};
+		var options = {
+						orientation: {axis: 'both'}, 
+						locale: $("#site_lang").val(), 
+						start: addMonths(new Date(), -6), 
+						end: addMonths(new Date(), +6),
+						zoomMin: 1000 * 60 * 60 * 24,
+						zoomMax: 1000 * 60 * 60 * 24 * 31 * 12
+					};
 		timeline[campaigns] = new vis.Timeline(container, items[campaigns], options);
 		var groups = new vis.DataSet();
 		var i = 0;
