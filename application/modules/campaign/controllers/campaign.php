@@ -108,7 +108,8 @@ class Campaign extends MX_Controller
 		
 		$campaign_data['campaign_status'] = array_for_dropdown($campaign_status, 'campaign_status_id', 'campaign_status_name');
 		array_unshift($campaign_data['campaign_status'], '');
-
+		
+		$view_data['javascript'] = array('datepicker-'.$this->session->userdata('current_site_lang').'.js');
 		$view_data['campaign_widgets']['edit'] = $this->load->view('campaign_add.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
