@@ -144,3 +144,7 @@ font-size: 14px;
 campaing_edit {
 	background: url(../images/icn_edit_campaign.png) no-repeat center right;
 }
+
+@media print {
+  iframe {display:block!important;};
+}

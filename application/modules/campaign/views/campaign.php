@@ -90,5 +90,5 @@
 			<?php }; ?>
 		</div>
 	</div>
-	<iframe src="<?php echo site_url('campaign/campaign_print/'.$this->session->userdata('current_site_lang')); ?>" name="frame"></iframe>
+	<iframe src="<?php echo site_url('campaign/campaign_print/'.$this->session->userdata('current_site_lang')); ?>" style="position:absolute;left:-999999px;" frameBorder="0" width="100%" height="100%" name="frame"></iframe>
 </section>
