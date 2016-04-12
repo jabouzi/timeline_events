@@ -43,7 +43,6 @@
 		<?php } ?>
 		<?php } ?>
 		
-		
 		<script src="<?php echo site_url(); ?>assets/js/campaign.js" type="text/javascript"></script>
 	</head>
 	<body>

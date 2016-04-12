@@ -8,6 +8,8 @@ $(document).ready(function() {
 	{
 		drawVisualization();
 	}
+	
+	//$(".btnPrint").printPage();
 });
 
 
@@ -38,7 +40,7 @@ function drawVisualization() {
 		timeline[campaigns].setOptions(options);
 		timeline[campaigns].setGroups(groups);
 	}
-	setTimeout(window.print(), 5000);
+	//setTimeout(window.print(), 5000);
 	//window.print();
 }
 
@@ -60,7 +62,7 @@ function drawVisualization2() {
 				};
 	var timeline = new vis.Timeline(container, items, options);
 	timeline.setGroups(groups);
-	setTimeout(window.print(), 5000);
+	//setTimeout(window.print(), 5000);
 	//window.print();
 }
 
