@@ -45,7 +45,7 @@ class Campaign extends MX_Controller
 		$campaign_data['campaigns_status'] = $campaign_status;
 		$view_data['stylesheet'] = array('campaign_custom_'.$this->session->userdata('current_site_lang').'.css', 'campaign_types_'.$this->session->userdata('current_site_lang').'.css', 'jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
-		$view_data['json'] = array('data_'.$this->session->userdata('current_site_lang').'.json', 'group_'.$this->session->userdata('current_site_lang').'.json', 'holidays.json');
+		$view_data['json'] = array('data_'.$this->session->userdata('current_site_lang').'.json', 'group_'.$this->session->userdata('current_site_lang').'.json', 'holidays_'.$this->session->userdata('current_site_lang').'.json');
 		$view_data['campaign_widgets']['campaign'] = $this->load->view('campaign.php', $campaign_data, true);
 		echo modules::run('template/campaign', $view_data);
 	}
@@ -710,6 +710,8 @@ class Campaign extends MX_Controller
 			file_put_contents(FCPATH.'/assets/json/data_'.$lang.'_print.json',  'var jsonData = '.$json_data_print);
 			file_put_contents(FCPATH.'/assets/json/group_'.$lang.'.json',  'var groupData = '.$json_names);
 			file_put_contents(FCPATH.'/assets/json/group_'.$lang.'_print.json',  'var groupData = '.$json_names_print);
+			
+			$this->generate_holidays($lang, count($campaigns));
 		}
 		
 		$json_dates = json_encode($json_dates);
@@ -718,7 +720,7 @@ class Campaign extends MX_Controller
 		}, $json_dates);
 		file_put_contents(FCPATH.'/assets/json/dates.json',  'var dates = '.$json_dates);
 		
-		$this->generate_holidays(count($campaigns));
+		
 	}
 
 	function generate_campaign_detail($id)
@@ -771,11 +773,37 @@ class Campaign extends MX_Controller
 		file_put_contents(FCPATH.'/assets/json/data_group_'.$id.'.json',  'var groupData = '.$json_names);
 	}
 
-	function generate_holidays($group_id)
+	function generate_holidays($lang, $group_id)
 	{
 		$json = array();
 		$year = date('Y');
 		$id = 0;
+		
+		$lang_holidays = array(
+			'en' => array(
+				'easter_monday' => "Easter Monday",
+				'good_friday' => "Good Friday",
+				'queen_patriots' => "Victoria Day",
+				'labor_day' => "Labor Day",
+				'thanks_giving' => "Thanksgiving",
+				'saint_jean' => "Saint-Jean",
+				'new_year' => "New Year",
+				'christmas' => "Christmas",
+				'canada_day' => "Canada Day"
+			),
+			'fr' => array(
+				'easter_monday' => "Lundi de Pâques",
+				'good_friday' => "Vendredi saint",
+				'queen_patriots' => "Journée des patriotes",
+				'labor_day' => "Fête du travail",
+				'thanks_giving' => "Action de grâce",
+				'saint_jean' => "Saint-Jean",
+				'new_year' => "Jour de l'an",
+				'christmas' => "Noël",
+				'canada_day' => "Fête du Canada"
+			)
+		);
+			
 		for($y = $year - 5; $y <= $year + 5; $y++)
 		{
 			$holidays = get_holidays($y);
@@ -783,7 +811,7 @@ class Campaign extends MX_Controller
 			{
 				$json[] = array(
 					'start' =>  $holiday,
-					'content' =>  '<span class="holidays" data-id="'.$y.'_'.$key.'"data-content="'.$y.'_'.$key.'" title="'.$key.'"><img src="/assets/images/croix.png" style="width:10px; height:10px;"></span> ',
+					'content' =>  '<span class="holidays" data-id="'.$y.'_'.$key.'"data-content="'.$y.'_'.$key.'" title="'.$lang_holidays[$lang][$key].' '.$year.'"><img src="/assets/images/croix.png" style="width:10px; height:10px;"></span> ',
 					'id' =>  $y.'_'.$key,
 					'group' => $group_id,
 					'className' => 'default',
@@ -791,7 +819,7 @@ class Campaign extends MX_Controller
 			}
 		}
 		$json_data = json_encode($json);
-		file_put_contents(FCPATH.'/assets/json/holidays.json',  'var holidaysData = '.$json_data);
+		file_put_contents(FCPATH.'/assets/json/holidays_'.$lang.'.json',  'var holidaysData = '.$json_data);
 	}
 
 	private function add_campaign($campaign_data)

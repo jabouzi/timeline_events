@@ -4,7 +4,17 @@ $lang['general.yes'] = "Yes";
 $lang['general.no'] = "No";
 $lang['general.color'] = "Choose a color";
 $lang['general.delete.confirm'] = "Confirm delete";
-$lang['general.holidays'] = "Jours fériés";
+$lang['general.holidays'] = "Holidays";
+
+$lang['easter_monday'] = "Easter Monday";
+$lang['good_friday'] = "Good Friday";
+$lang['queen_patriots'] = "Victoria Day";
+$lang['labor_day'] = "Labor Day";
+$lang['thanks_giving'] = "Thanksgiving";
+$lang['saint_jean'] = "Saint-Jean";
+$lang['new_year'] = "New Year";
+$lang['christmas'] = "Christmas";
+$lang['canada_day'] = "Canada Day";
 
 $lang['admin.title'] = "Administration";
 $lang['admin.delete'] = "Delete";

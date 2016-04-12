@@ -149,22 +149,22 @@ function get_holidays($year)
 	
 	$d1 = new DateTime($year.'-05-25');
 	$d1->modify('previous monday');
-	$holidays['queen-patriots'] = $d1->format('Y-m-d');
+	$holidays['queen_patriots'] = $d1->format('Y-m-d');
 	
 	$d1 = new DateTime($year.'-09-01');
 	$d1->modify('first monday');
-	$holidays['labor-day']  = $d1->format('Y-m-d');
+	$holidays['labor_day']  = $d1->format('Y-m-d');
 	
 	$d1 = new DateTime($year.'-10-01');
 	$d1->modify('second monday');
-	$holidays['thanks-giving'] = $d1->format('Y-m-d');
+	$holidays['thanks_giving'] = $d1->format('Y-m-d');
 	
 	$d1 = new DateTime($year.'-07-01');
 	if ($d1->format('N') == 7) $holidays['canada-day'] = $d1->add(new DateInterval('P1D'))->format('Y-m-d');
-	else $holidays['canada-day'] = $d1->format('Y-m-d');
+	else $holidays['canada_day'] = $d1->format('Y-m-d');
 	
 	$d1 = new DateTime($year.'-05-24');
-	$holidays['saint-Jean'] = $d1->format('Y-m-d');
+	$holidays['saint_jean'] = $d1->format('Y-m-d');
 	
 	$d1 = new DateTime($year.'-01-01');
 	$holidays['new_year'] = $d1->format('Y-m-d');
