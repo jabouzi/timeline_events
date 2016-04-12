@@ -257,20 +257,41 @@ class Campaign extends MX_Controller
 		echo modules::run('template/campaign', $view_data);
 	}
 	
-	function __print()
+	function campaign_print($lang)
 	{
 		$view_data['page_title'] = lang('dashboard.title3');
-		$banners = $this->mdl_campaigns_banners->i18n_client_query($this->session->userdata('current_site_lang'),9);
+		$banners = $this->mdl_campaigns_banners->i18n_client_query($lang,9);
 		$view_data['banners'] = $banners->result();
-		$campaign_types = $this->mdl_campaigns_types->i18n_site_query($this->session->userdata('current_site_lang'))->result();
+		$campaign_types = $this->mdl_campaigns_types->i18n_site_query($lang)->result();
 		$view_data['campaign_types'] = $campaign_types;
-		$campaign_status = $this->mdl_campaigns_status->i18n_site_query($this->session->userdata('current_site_lang'))->result();
+		$campaign_status = $this->mdl_campaigns_status->i18n_site_query($lang)->result();
 		$view_data['campaigns_status'] = $campaign_status;
-		$view_data['stylesheet'] = array('campaign_custom_'.$this->session->userdata('current_site_lang').'.css', 'campaign_types_'.$this->session->userdata('current_site_lang').'.css', 'jquery.qtip.min.css');
 		$view_data['javascript'] = array('moment-with-locales.min.js','vis.js','jquery.qtip.min.js');
-		$view_data['json'] = array('data_'.$this->session->userdata('current_site_lang').'.json', 'group_'.$this->session->userdata('current_site_lang').'.json', 'holidays.json');
-		$this->load->view('campaign.php', $view_data);
-		echo modules::run('template/campaign', $view_data);
+		$view_data['json'] = array('data_'.$lang.'_print.json', 'group_'.$lang.'_print.json', 'dates.json');
+		$view_data['lang'] = $lang;
+		$this->load->view('campaign_print.php', $view_data);
+	}
+	
+	function campaign_detail_print($id, $lang)
+	{
+		$campaign = $this->mdl_campaigns->get_where(array('campaign_id' => $id))->row();
+		$view_data['campaign_name'] = $campaign->campaign_title;
+		$view_data['campaign_budget'] = $campaign->campaign_budget;
+		$view_data['campaign_id'] = $id;
+
+		$view_data['money_format'] = $lang."_CA.UTF-8";
+
+		$campaign_type = $this->mdl_campaigns_types->get_where(array('campaign_type_id' => $campaign->campaign_type_id))->row();
+		$view_data['campaign_type'] = @$campaign_type->campaign_type_name;
+
+		$this->session->userdata['campaign_banner_id'] = $campaign->campaign_banner_id;
+
+		$view_data['campaign_banner_name'] = $this->mdl_campaigns_banners->i18n_id_query($lang, $campaign->campaign_banner_id)->row();
+
+		$view_data['javascript'] = array('datepicker-'.$lang.'.js', 'moment-with-locales.min.js', 'vis.js', 'moment-with-locales.min.js');
+		$view_data['json'] = array('data_'.$id.'.json', 'data_group_'.$id.'.json', 'dates.json');
+		$view_data['lang'] = $lang;
+		$this->load->view('campaign_detail_print.php', $view_data);
 	}
 
 	function process_add_campaign()
@@ -563,6 +584,8 @@ class Campaign extends MX_Controller
 		{
 			$json = array();
 			$json2 = array();
+			$json_print = array();
+			$json2_print = array();
 			$campaign_groups = array();
 			$campaign_ids = array();
 			$campaign_names_flipped = array();
@@ -597,12 +620,30 @@ class Campaign extends MX_Controller
 				$campaign_groups[$banners->row()->campaign_banner_name][] = $campaign->campaign_city;
 				$campaign_ids[$banners->row()->campaign_banner_name][$campaign->campaign_city] = $campaign->campaign_id;
 				
+				$date_start = $this->mdl_campaigns->custom_query("select campaign_date_start from campaigns where campaign_banner_id = {$campaign->campaign_banner_id} order by campaign_date_start asc limit 1")->row();
+				$date_end = $this->mdl_campaigns->custom_query("select campaign_date_end from campaigns where campaign_banner_id = {$campaign->campaign_banner_id} order by campaign_date_start desc limit 1")->row();
+				
 				$view_data['languages'][site_url().$this->lang->switch_uri($key)] = ucfirst(strtolower($value));
 			
+				$json_dates[$banners->row()->campaign_banner_name] = array(
+					'start' =>  '__'.strtotime($date_start->campaign_date_start),
+					'end' =>  '__'.strtotime($date_end->campaign_date_end)
+				);
+				
 				$json[$lang][$banners->row()->campaign_banner_name][] = array(
 						'start' =>  '__'.strtotime($campaign->campaign_date_start),
 						'end' =>  '__'.strtotime($campaign->campaign_date_end),
 						'content' =>  '<a href="/'.$lang.'/campaign/detail/'.$campaign->campaign_id.'" style="color:#555;font-weight:bold;" data-id="a_'.$campaign->campaign_id.'" class="popups" data-content="Campagne : '.$campaign->campaign_title.'<br />Date évènement : '.date('d/m/Y', strtotime($campaign->campaign_date_evenement)).'">'.$campaign->campaign_title.'</a>',
+						'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
+						'id' =>  $campaign->campaign_id,
+						'className' => $classname,
+						'editable' => false
+					);
+					
+				$json_print[$lang][$banners->row()->campaign_banner_name][] = array(
+						'start' =>  '__'.strtotime($campaign->campaign_date_start),
+						'end' =>  '__'.strtotime($campaign->campaign_date_end),
+						'content' =>  $campaign->campaign_title,
 						'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
 						'id' =>  $campaign->campaign_id,
 						'className' => $classname,
@@ -617,6 +658,13 @@ class Campaign extends MX_Controller
 					'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
 					'className' => 'event',
 				);
+				$json_print[$lang][$banners->row()->campaign_banner_name][] = array(
+					'start' =>  '__'.strtotime($campaign->campaign_date_evenement),
+					'content' =>  ' ',
+					'id' =>  'event_'.$key,
+					'group' =>  (count($campaign_groups[$banners->row()->campaign_banner_name]) - 1),
+					'className' => 'event',
+				);
 			}
 			
 			
@@ -624,28 +672,52 @@ class Campaign extends MX_Controller
 			foreach($campaign_groups as $key1 => $campaign_group)
 			{
 				$groups = array();
+				$groups_print = array();
 				foreach($campaign_group as $key2 => $campaign_name)
 				{
 					$groups[$key2] = '<a href="/'.$lang.'/campaign/detail/'.$campaign_ids[$key1][$campaign_name].'">'.$campaign_name.'</a>';
+					$groups_print[$key2] = $campaign_name;
 				}
 
 				$groups[count($campaigns)] = '<a>'.$holidays_i18n[$lang].'</a>';
 				$json2[$lang][$key1] = $groups;
+				$json2_print[$lang][$key1] = $groups_print;
 			}
 
 			$json_names = json_encode($json2[$lang]);
+			$json_names_print = json_encode($json2_print[$lang]);
 
 			$json_data = json_encode($json[$lang]);
+			$json_data_print = json_encode($json_print[$lang]);
+			
 			$json_data = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
 				return 'new Date(' . ($e[1] * 1000) . ')';
 			}, $json_data);
+			
+			$json_data_print = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+				return 'new Date(' . ($e[1] * 1000) . ')';
+			}, $json_data_print);
+			
 			$json_names = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
 				return 'new Date(' . ($e[1] * 1000) . ')';
 			}, $json_names);
+			
+			$json_names_print = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+				return 'new Date(' . ($e[1] * 1000) . ')';
+			}, $json_names_print);
 
 			file_put_contents(FCPATH.'/assets/json/data_'.$lang.'.json',  'var jsonData = '.$json_data);
+			file_put_contents(FCPATH.'/assets/json/data_'.$lang.'_print.json',  'var jsonData = '.$json_data_print);
 			file_put_contents(FCPATH.'/assets/json/group_'.$lang.'.json',  'var groupData = '.$json_names);
+			file_put_contents(FCPATH.'/assets/json/group_'.$lang.'_print.json',  'var groupData = '.$json_names_print);
 		}
+		
+		$json_dates = json_encode($json_dates);
+		$json_dates = preg_replace_callback('/"__([0-9]{10})"/u', function ($e) {
+			return 'new Date(' . ($e[1] * 1000) . ')';
+		}, $json_dates);
+		file_put_contents(FCPATH.'/assets/json/dates.json',  'var dates = '.$json_dates);
+		
 		$this->generate_holidays(count($campaigns));
 	}
 
