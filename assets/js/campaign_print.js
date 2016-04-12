@@ -26,7 +26,7 @@ function drawVisualization() {
 						orientation: {axis: 'both'}, 
 						locale: $("#site_lang").val(), 
 						start: new Date(dates[campaigns]['start']), 
-						end: addMonths(dates[campaigns]['end'], +2),
+						end: addMonths(dates[campaigns]['end'], +3),
 						zoomMin: 1000 * 60 * 60 * 24,
 						zoomMax: 1000 * 60 * 60 * 24 * 31 * 12
 					};
