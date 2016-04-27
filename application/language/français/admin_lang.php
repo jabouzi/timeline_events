@@ -9,10 +9,10 @@ $lang['general.holidays'] = "Jours fériés";
 $lang['easter_monday'] = "Lundi de Pâques";
 $lang['good_friday'] = "Vendredi saint";
 $lang['queen_patriots'] = "Journée des patriotes";
-$lang['labor_day'] = "Fête du travail";
+$lang['labor_day'] = "Fête du Travail";
 $lang['thanks_giving'] = "Action de grâce";
 $lang['saint_jean'] = "Saint-Jean";
-$lang['new_year'] = "Jour de l'an";
+$lang['new_year'] = "Jour de l'An";
 $lang['christmas'] = "Noël";
 $lang['canada_day'] = "Fête du Canada";
 
@@ -23,7 +23,7 @@ $lang['admin.add'] = "Ajouter";
 $lang['admin.action'] = "Action";
 $lang['admin.show'] = "Afficher";
 $lang['admin.hide'] = "Cacher";
-$lang['admin.error'] = " ne peut être vide et doit être valide";
+$lang['admin.error'] = " Ne peut être vide et doit être valide";
 $lang['admin.status0'] = "Non active";
 $lang['admin.status1'] = "Active";
 
@@ -38,8 +38,8 @@ $lang['login.logout'] = "Se déconnecter";
 $lang['login.reset'] = "Cliquer ici pour un nouveau passe";
 $lang['login.failed'] = "L'Authentification a échouée.";
 $lang['login.retrieve.password'] = "Récuprer mot de passe.";
-$lang['login.password.send'] = 'Votre mot de passe a été envoyé à votre courriel';
-$lang['login.back.login'] = 'Retour à la page de connexion';
+$lang['login.password.send'] = "Votre mot de passe a été envoyé à votre courriel";
+$lang['login.back.login'] = "Retour à la page de connexion";
 
 $lang['dashboard.title1'] = "";
 $lang['dashboard.title2'] = "Admin du site";
@@ -70,102 +70,102 @@ $lang['permission.success'] = "Permission sauvegardée avec succès";
 $lang['template.title'] = "Templates";
 
 $lang['user.client'] = "Client";
-$lang['user.title'] = "Users";
-$lang['user.add'] = "Add User";
-$lang['user.delete'] = "Delete User";
-$lang['user.update'] = "Update User";
-$lang['user.users'] = "Users list";
-$lang['user.profile'] = "My Profile";
-$lang['user.new'] = "New User";
-$lang['user.edit'] = "Edit User";
-$lang['user.firstname'] = "Firstname";
-$lang['user.lastname'] = "Lastname";
-$lang['user.email'] = "Email";
-$lang['user.password'] = "Password";
+$lang['user.title'] = "Usagers";
+$lang['user.add'] = "Ajouter un usager";
+$lang['user.delete'] = "Supprimer un usager";
+$lang['user.update'] = "Mettre à jour un usager";
+$lang['user.users'] = "Liste des usagers";
+$lang['user.profile'] = "Mon profile";
+$lang['user.new'] = "Niuveau usager";
+$lang['user.edit'] = "Modifier User";
+$lang['user.firstname'] = "Prénom";
+$lang['user.lastname'] = "Nom";
+$lang['user.email'] = "Courriel";
+$lang['user.password'] = "Mot de passe";
 $lang['user.permissions'] = "Permissions";
-$lang['user.status'] = "Status";
-$lang['user.newpassword'] = "New Password";
-$lang['user.oldpassword'] = "Current Password";
-$lang['user.nonactive'] = "This account is non active";
-$lang['user.success'] = "User saved successfully";
-$lang['user.exists'] = "Email already exists";
-$lang['user.error'] = "An error has occured";
-$lang['user.active'] = "Active";
-$lang['user.inactive'] = "Not Active";
-$lang['user.delete.confirm'] = "Confirm deleting user";
-$lang['user.delete.success'] = "User deleted successfully";
+$lang['user.status'] = "État";
+$lang['user.newpassword'] = "Nouveau mot de passe";
+$lang['user.oldpassword'] = "Mot de passe actuel";
+$lang['user.nonactive'] = "Ce compte est inactif";
+$lang['user.success'] = "Usager sauvegardé avec succès";
+$lang['user.exists'] = "Le courriel existe déjà";
+$lang['user.error'] = "Une erreur est survenue";
+$lang['user.active'] = "Actif";
+$lang['user.inactive'] = "Inactif";
+$lang['user.delete.confirm'] = "Confirmer la suppression de l'usager";
+$lang['user.delete.success'] = "Usager supprimé avec succès";
 
 $lang['client.title'] = "Clients";
-$lang['client.add'] = "Add Client";
-$lang['client.delete'] = "Delete Client";
-$lang['client.update'] = "Update Client";
-$lang['client.users'] = "Clients list";
-$lang['client.banners'] = "Banners";
-$lang['client.projectmanagers'] = "Project Managers";
-$lang['client.profile'] = "My Profile";
-$lang['client.new'] = "New Client";
-$lang['client.edit'] = "Edit Client";
-$lang['client.name'] = "Name";
+$lang['client.add'] = "Ajouter un client";
+$lang['client.delete'] = "Supprimer un client";
+$lang['client.update'] = "Mettre à jour un client";
+$lang['client.users'] = "Liste des clients";
+$lang['client.banners'] = "Bannières";
+$lang['client.projectmanagers'] = "Gestionnaires de projets";
+$lang['client.profile'] = "Mon profile";
+$lang['client.new'] = "Nouveau client";
+$lang['client.edit'] = "Modifier un client";
+$lang['client.name'] = "Nom";
 $lang['client.logo'] = "Logo";
-$lang['client.primary_color'] = "Primary Color";
-$lang['client.secondary_color'] = "Secondary Color";
-$lang['client.font_primary_color'] = "Font Primary Color";
-$lang['client.font_secondary_color'] = "Font Secondary Color";
-$lang['client.firstname'] = "Firstname";
-$lang['client.lastname'] = "Lastname";
-$lang['client.email'] = "Email";
-$lang['client.password'] = "Password";
+$lang['client.primary_color'] = "Couleur primaire";
+$lang['client.secondary_color'] = "Couleur secondaire";
+$lang['client.font_primary_color'] = "Couleur primaire de la fonte";
+$lang['client.font_secondary_color'] = "Couleur secondaire de la fonte";
+$lang['client.firstname'] = "Prénom";
+$lang['client.lastname'] = "Nom";
+$lang['client.email'] = "Courriel";
+$lang['client.password'] = "Mot de passe";
 $lang['client.permissions'] = "Permissions";
-$lang['client.status'] = "Status";
-$lang['client.newpassword'] = "New Password";
-$lang['client.oldpassword'] = "Current Password";
-$lang['client.nonactive'] = "This account is non active";
-$lang['client.success'] = "Client saved successfully";
-$lang['client.exists'] = "Email already exists";
-$lang['client.error'] = "An error has occured";
-$lang['client.active'] = "Active";
-$lang['client.inactive'] = "Not Active";
-$lang['client.delete.confirm'] = "Confirm deleting client";
-$lang['client.delete.success'] = "Client deleted successfully";
-$lang['client.campaignssteps'] = "Campaign steps";
-$lang['client.campaignstype'] = "Campaign types";
-$lang['client.campaignstatus'] = "Campaign status";
+$lang['client.status'] = "État";
+$lang['client.newpassword'] = "Nouveau mot de passe";
+$lang['client.oldpassword'] = "Mot de passe actuel";
+$lang['client.nonactive'] = "Ce compte est inactif";
+$lang['client.success'] = "Client sauvegardé avec succès";
+$lang['client.exists'] = "Le courriel existe déjà";
+$lang['client.error'] = "Une erreur est survenue";
+$lang['client.active'] = "Actif";
+$lang['client.inactive'] = "Inactif";
+$lang['client.delete.confirm'] = "Confirmer la suppression du client";
+$lang['client.delete.success'] = "Client supprimé avec succès";
+$lang['client.campaignssteps'] = "Étapes de la campagne";
+$lang['client.campaignstype'] = "Types de la campagne";
+$lang['client.campaignstatus'] = "État de la campagne";
 
 $lang['manager.title'] = "Gestionnaires de projets";
 $lang['manager.add'] = "Ajouter un gestionnaire";
 $lang['manager.delete'] = "Supprimer un gestionnaire";
 $lang['manager.update'] = "Modifier un gestionnaire";
 $lang['manager.users'] = "Gestionnaires de projets";
-$lang['manager.banners'] = "Banners";
-$lang['manager.projectmanagers'] = "Project Managers";
-$lang['manager.profile'] = "Update Project Manager";
-$lang['manager.new'] = "New Projects Manager";
+$lang['manager.banners'] = "Bannières";
+$lang['manager.projectmanagers'] = "Gestionnaires de projets";
+$lang['manager.profile'] = "Mettre à jour un gestionnaire";
+$lang['manager.new'] = "Nouveau gestionnaire";
 $lang['manager.edit'] = "Modifier un gestionnaire";
-$lang['manager.name'] = "Name";
+$lang['manager.name'] = "Nom";
 $lang['manager.logo'] = "Logo";
-$lang['manager.lastname'] = "Last Name";
-$lang['manager.primary_color'] = "Primary Color";
-$lang['manager.secondary_color'] = "Secondary Color";
-$lang['manager.font_primary_color'] = "Font Primary Color";
-$lang['manager.font_secondary_color'] = "Font Secondary Color";
-$lang['manager.firstname'] = "Firstname";
-$lang['manager.lastname'] = "Lastname";
-$lang['manager.email'] = "Email";
-$lang['manager.password'] = "Password";
+$lang['manager.lastname'] = "Nom de famille";
+$lang['manager.primary_color'] = "Couleur primaire";
+$lang['manager.secondary_color'] = "Couleur secondaire";
+$lang['manager.font_primary_color'] = "Couleur primaire de la fonte";
+$lang['manager.font_secondary_color'] = "Couleur secondaire de la fonte";
+$lang['manager.firstname'] = "Prénom";
+$lang['manager.lastname'] = "Nom";
+$lang['manager.email'] = "Courriel";
+$lang['manager.password'] = "Mot de passe";
 $lang['manager.permissions'] = "Permissions";
-$lang['manager.status'] = "Status";
-$lang['manager.newpassword'] = "New Password";
-$lang['manager.oldpassword'] = "Current Password";
-$lang['manager.nonactive'] = "This account is non active";
+$lang['manager.status'] = "État";
+$lang['manager.newpassword'] = "Nouveau mot de passe";
+$lang['manager.oldpassword'] = "Mot de passe actuel";
+$lang['manager.nonactive'] = "Ce compte est inactif";
 $lang['manager.success'] = "Gestionnaire sauvegardé avec succès";
-$lang['manager.exists'] = "Email already exists";
-$lang['manager.error'] = "An error has occured";
-$lang['manager.active'] = "Active";
-$lang['manager.inactive'] = "Not Active";
+$lang['manager.exists'] = "Le courriel existe déjàs";
+$lang['manager.error'] = "Une erreur est survenue";
+$lang['manager.active'] = "Actif";
+$lang['manager.inactive'] = "Not Actif";
 $lang['manager.delete.confirm'] = "Confirmer suppression du gestionnaire";
 $lang['manager.delete.success'] = "Gestionnaire supprimé avec succès";
-$lang['manager.campaignssteps'] = "Campaign steps";
-$lang['manager.campaignstype'] = "Campaign types";
+$lang['manager.campaignssteps'] = "Étapes de la campagne";
+$lang['manager.campaignstype'] = "Types de la campagne";
 $lang['manager.newprojectmanager'] = "Ajouter un gestionnaire de projet";
 $lang['manager.tgi'] = "TGI";
 
@@ -184,9 +184,9 @@ $lang['profile.update'] = "Votre profile a été mis à jour";
 $lang['profile.password.update'] = "Votre mot de passe a été mis à jour";
 
 $lang['webpage.title'] = "Pages web";
-$lang['webpage.add'] = "Ajouter une pages web";
-$lang['webpage.delete'] = "Supprimer une pages web";
-$lang['webpage.update'] = "Mettre à jour une pages web";
+$lang['webpage.add'] = "Ajouter une page web";
+$lang['webpage.delete'] = "Supprimer une page web";
+$lang['webpage.update'] = "Mettre à jour une page web";
 
 $lang['wysisyg.title'] = "Wysisyg";
 $lang['wysisyg.add'] = "Ajouter un wysisyg";
@@ -206,13 +206,13 @@ $lang['structure.update'] = "Mettre à jour une Structure";
 $lang['category.title'] = "Catégories";
 $lang['category.name'] = "Nom de la catégorie";
 $lang['category.parent'] = "Parent de la categorie";
-$lang['category.status'] = "Status de la categorie";
+$lang['category.status'] = "État de la categorie";
 $lang['category.add'] = "Ajouter une catégorie";
 $lang['category.delete'] = "Supprimer une catégorie";
 $lang['category.update'] = "Mettre à jour une catégorie";
 $lang['category.success'] = "Categorie sauvegardée avec succès";
 
-$lang['language.title'] = "Langages";
+$lang['language.title'] = "Langues";
 $lang['language.name'] = "Nom de la langue";
 $lang['language.code'] = "Code de la langue";
 $lang['language.default'] = "Langue par défaut";
@@ -229,8 +229,8 @@ $lang['campaign.document.add.success'] = "Le document de la campagne a été ajo
 $lang['campaign.document.delete.success'] = "Le document de la campagne a été supprimé avec succès";
 $lang['campaign.add'] = "Campagne ajoutée.";
 $lang['campaign.edit'] = "Campagne mise à jour.";
-$lang['campaign.edit.error'] = "Veuillez remplir tous les données requises ou valider la logique des dates.";
-$lang['campaign.status'] = "Statut";
+$lang['campaign.edit.error'] = "Veuillez remplir toutes les données requises ou valider la logique des dates";
+$lang['campaign.status'] = "État";
 $lang['campaign.status.standby'] = "En attente";
 $lang['campaign.status.active'] = "Active";
 $lang['campaign.status.closed'] = "Terminée";
@@ -238,11 +238,11 @@ $lang['campaign.goto'] = "Aller à";
 $lang['campaign.steps'] = "Étapes de campagne";
 $lang['campaign.types'] = "Types de campagne";
 $lang['campaign.step.name'] = "Nom de l'étapes";
-$lang['campaign.type.name'] = "Nom de type";
+$lang['campaign.type.name'] = "Nom du type";
 $lang['campaign.status.name'] = "Nom de l'état";
-$lang['campaign.edit.step'] = "Éditer l'tapes de campagne";
-$lang['campaign.edit.type'] = "Éditer le types de campagne";
-$lang['campaign.edit.status'] = "Éditer le statut de campagne";
+$lang['campaign.edit.step'] = "Éditer l'étape de campagne";
+$lang['campaign.edit.type'] = "Éditer le type de campagne";
+$lang['campaign.edit.status'] = "Éditer le État de campagne";
 $lang['campaign.budget'] = "Budget";
 
 $lang['content.title'] = "Contenu";
@@ -252,7 +252,7 @@ $lang['mail.createuser'] = "Bonjour %s %s,
 Votre compte pour : %s a été créé
 Votre identifiant est : %s
 Votre mot de passe est : %s
-Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE.
+Pour tout autre question, contacter votre chef de projet.
 
 Merci.
 ";
@@ -261,7 +261,7 @@ $lang['mail.retrievepassword'] = "Bonjour %s %s
 Vous avez demandez votre mot de passe.
 Votre identifiant est : %s 
 Votre nouveau mot de passe est : %s 
-Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE. 
+Pour tout autre question, contacter votre chef de projet. 
 
 Merci.
 ";
@@ -269,7 +269,7 @@ $lang['mail.updatepassword'] = "Bonjour %s %s,
 
 Votre mot de passe a été mis à jour.
 
-Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE.
+Pour tout autre questions, contacter votre chef de projet.
 
 Merci.
 ";
@@ -277,7 +277,7 @@ $lang['mail.updateprofile'] = "Bonjour %s %s,
 
 Votre profile a été mis à jour.
 
-Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE.
+Pour tout autre question, contacter votre chef de projet.
 
 Merci.
 ";
@@ -286,7 +286,7 @@ $lang['mail.updateuser'] = "Bonjour %s %s,
 Votre compte a été mis à jour.
 Votre identifiant est : %s
 Votre mot de passe est : %s
-Pour tout autre questions, contacter votre chef de projet chez LE NOM DE VOTRE COMPANIE.
+Pour tout autre question, contacter votre chef de projet.
 
 Merci.
 ";
@@ -310,7 +310,7 @@ $lang['menu.calendar'] 				= "Calendrier";
 $lang['menu.logout'] 				= "Déconnexion"; 
 
 //Page: /campaign
-$lang['calendar.title'] 			= "CALENDRIER ANNUEL DES CAMPAGNES"; 
+$lang['calendar.title'] 			= "Calendrier annuel des campagnes"; 
 $lang['calendar.print_btn'] 		= "Imprimer"; 
 $lang['calendar.create_btn'] 		= "Créer une campagne"; 
 $lang['calendar.legend_lbl'] 		= "Légende"; 
@@ -324,9 +324,9 @@ $lang['campaign.doc_btn'] 			= "Documents";
 $lang['campaign.edit_btn'] 			= "Éditer la campagne"; 
 $lang['campaign.th.calendar'] 		= "Calendrier"; 
 $lang['campaign.th.budget'] 		= "Budget"; 
-$lang['campaign.plan_title'] 		= "PLAN DE CAMPAGNE"; 
-$lang['campaign.prod_step_lbl'] 	= "ÉTAPES DE PRODUCTION"; 
-$lang['campaign.budget_lbl'] 		= "BUDGET GLOBAL"; 
+$lang['campaign.plan_title'] 		= "Plan de campagne"; 
+$lang['campaign.prod_step_lbl'] 	= "Étapes de production"; 
+$lang['campaign.budget_lbl'] 		= "Budget global"; 
 $lang['campaign.budget_other_lbl'] 	= "Autres"; 
 $lang['campaign.budget_total_lbl'] 	= "Total"; 
 
@@ -336,7 +336,7 @@ $lang['doc.download_btn'] 			= "Télécharger";
 
 //Formulaire Campagne: /campaign/add || /campaign/edit
 $lang['form.save_btn']	 			= "Sauvegarder"; 
-$lang['form.id_title']	 			= "IDENTIFICATION"; 
+$lang['form.id_title']	 			= "Identification"; 
 $lang['form.banner_lbl']			= "Bannière"; 
 $lang['form.campaign_type_lbl']		= "Type de campagne"; 
 $lang['form.campaign_title_lbl']	= "Titre de la campagne"; 
