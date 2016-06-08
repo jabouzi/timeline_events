@@ -70,7 +70,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'français';
+$config['language']	= 'french';
 
 /* default language abbreviation */
 //$config['language_abbr'] = "en";
@@ -374,6 +374,8 @@ $config['modules_locations'] = array(
 
 //$config['app_key'] = str_rot13(str_replace('www.', '', strtolower($_SERVER['HTTP_HOST'])));
 $config['app_key'] = str_rot13('metro.toolbox');
+
+$config['client_name'] = 'Metro';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
