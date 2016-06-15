@@ -287,7 +287,7 @@ class Campaign extends MX_Controller
 
 	function process_add_campaign()
 	{
-		$campaign_date_end = DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->add(new DateInterval('P56D'))->format('Y-m-d');
+		$campaign_date_end = ((isempty($this->input->post('campaign_date_start'))) ? null : DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->add(new DateInterval('P56D'))->format('Y-m-d'));
 		$campaign_data = array(
 			'client_id' => $this->session->userdata('site_client_id'),
 			'campaign_type_id'=> $this->input->post('campaign_type_id'),
