@@ -313,7 +313,8 @@ class Campaign extends MX_Controller
 	{
 		if (isempty($this->input->post('campaign_date_media_end')) && isempty(item($this->input->post('campaign_step_date_end'), 6)))
 		{
-			$campaign_date_end = DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->add(new DateInterval('P56D'))->format('Y-m-d');
+			if (isempty($this->input->post('campaign_date_start'))) $campaign_date_end = null;
+			else $campaign_date_end = DateTime::createFromFormat('d/m/Y', $this->input->post('campaign_date_start'))->add(new DateInterval('P56D'))->format('Y-m-d');
 		}
 		else
 		{
